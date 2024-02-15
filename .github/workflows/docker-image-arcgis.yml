@@ -1,4 +1,4 @@
-name: Docker Image CI
+name: Docker Image CI arcgis
 on:
   workflow_dispatch: null
   push:
