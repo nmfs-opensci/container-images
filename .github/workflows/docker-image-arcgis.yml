@@ -3,7 +3,7 @@ on:
   workflow_dispatch: null
   push:
     paths: 
-      - .devcontainer/arcgis/**
+      - '.devcontainer/arcgis/**'
 jobs:
   build:
     runs-on: ubuntu-latest
