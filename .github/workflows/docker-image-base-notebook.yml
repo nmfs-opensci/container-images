@@ -4,6 +4,7 @@ on:
   push:
     paths: 
       - .devcontainer/jupyter-base-notebook/**
+      - .devcontainer/jupyter-base-notebook/Dockerfile
 jobs:
   build:
     runs-on: ubuntu-latest
