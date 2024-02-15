@@ -3,8 +3,8 @@ on:
   workflow_dispatch: null
   push:
     paths: 
-      - .devcontainer/jupyter-base-notebook/**
-      - .devcontainer/jupyter-base-notebook/Dockerfile
+      - '.devcontainer/jupyter-base-notebook/**'
+      - '.devcontainer/jupyter-base-notebook/Dockerfile'
 jobs:
   build:
     runs-on: ubuntu-latest
