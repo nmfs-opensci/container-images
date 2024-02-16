@@ -1,0 +1,21 @@
+name: basic
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+  - pip
+## ADD your packages here
+## ADD
+## These are needed for good jupyterhub functioning
+  - jupyter-server-proxy
+  - jupyter-vscode-proxy
+  - ipywidgets
+  - jupyterlab>4
+  - jupyterhub-singleuser
+  - jupyterlab-git
+  - conda-lock
+  - jupyter-server-proxy
+  - jupyter-vscode-proxy
+  - code-server >=3.2
+platforms:
+  - linux-64
