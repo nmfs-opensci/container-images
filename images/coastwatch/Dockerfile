@@ -6,7 +6,7 @@ RUN git config --system pull.rebase false && \
     git config --system credential.helper 'cache --timeout=36000'
 
 # Set up conda
-ENV NB_USER=jovyan
+ENV NB_USER=rstudio
 ENV CONDA_ENV=/opt/miniforge3
 ENV PATH=${CONDA_ENV}/bin:${PATH}
 RUN curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh" && \
