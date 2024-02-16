@@ -1,9 +1,9 @@
-name: Docker Image CI
+name: Docker Image CI py-rocket
 on:
   workflow_dispatch: null
   push:
     paths: 
-      - '.devcontainer/py-rocket/**'
+      - 'images/py-rocket/**'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,9 +20,11 @@ jobs:
       - name: Build the Docker image
         if: github.repository == 'nmfs-opensci/container-images'
         run: |
-          docker build .devcontainer/py-rocket -f .devcontainer/py-rocket/conda.Dockerfile  --tag ghcr.io/nmfs-opensci/container-images/py-rocket:conda
+          docker build images/py-rocket -f images/py-rocket/conda.Dockerfile  --tag ghcr.io/nmfs-opensci/container-images/py-rocket:conda
+          docker build images/py-rocket -f images/py-rocket/venv.Dockerfile  --tag ghcr.io/nmfs-opensci/container-images/py-rocket:venv
       - name: Publish
         if: github.repository == 'nmfs-opensci/container-images'
         run: |
           docker push ghcr.io/nmfs-opensci/container-images/py-rocket:conda
+          docker push ghcr.io/nmfs-opensci/container-images/py-rocket:venv
 

@@ -3,7 +3,7 @@ on:
   workflow_dispatch: null
   push:
     paths: 
-      - '.devcontainer/arcgis/**'
+      - 'images/arcgis/**'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -20,7 +20,7 @@ jobs:
       - name: Build the Docker image
         if: github.repository == 'nmfs-opensci/container-images'
         run: |
-          docker build .devcontainer/arcgis -f .devcontainer/arcgis/Dockerfile  --tag ghcr.io/nmfs-opensci/container-images/arcgis:latest
+          docker build images/arcgis -f images/arcgis/Dockerfile  --tag ghcr.io/nmfs-opensci/container-images/arcgis:latest
       - name: Publish
         if: github.repository == 'nmfs-opensci/container-images'
         run: |
