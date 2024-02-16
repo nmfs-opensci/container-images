@@ -20,7 +20,7 @@ jobs:
       - name: Build the Docker image
         if: github.repository == 'nmfs-opensci/container-images'
         run: |
-          docker build images/py-rocket -f images/coastwatch/Dockerfile  --tag ghcr.io/nmfs-opensci/container-images/coastwatch:2024-02
+          docker build images/coastwatch -f images/coastwatch/Dockerfile  --tag ghcr.io/nmfs-opensci/container-images/coastwatch:2024-02
       - name: Publish
         if: github.repository == 'nmfs-opensci/container-images'
         run: |
