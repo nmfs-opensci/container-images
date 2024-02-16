@@ -25,5 +25,5 @@ jobs:
       - name: Publish
         if: github.repository == 'nmfs-opensci/container-images'
         run: |
-          docker push ghcr.io/nmfs-opensci/container-images/coastwatch:2024-02
+          docker push ghcr.io/nmfs-opensci/container-images/coastwatch:latest
 
