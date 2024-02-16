@@ -1,6 +1,7 @@
 # devcontainer-focused Rocker
 FROM ghcr.io/rocker-org/devcontainer/tidyverse:4.3
-usermod -l rstudio jovyan
+# switch user to jovyan
+RUN usermod -l rstudio jovyan
 
 # some Git preferences
 RUN git config --system pull.rebase false && \
