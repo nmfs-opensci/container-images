@@ -2,9 +2,8 @@ name: basic
 channels:
   - conda-forge
 dependencies:
-  - python=3.10
-  - pip
 ## ADD your packages here
+## jupyter base notebook image will already have a vrs of Python
 ## ADD
 ## These are needed for good jupyterhub functioning
   - jupyter-server-proxy
