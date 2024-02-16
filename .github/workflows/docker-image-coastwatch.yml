@@ -4,6 +4,7 @@ on:
   push:
     paths: 
       - 'images/coastwatch/**'
+      - '.github/workflows/docker-image-coastwatch.yml'
 jobs:
   build:
     runs-on: ubuntu-latest
