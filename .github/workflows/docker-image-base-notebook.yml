@@ -2,6 +2,7 @@ name: Docker Image CI base notebook
 on:
   workflow_dispatch: null
   push:
+    branches: main
     paths: 
       - 'images/jupyter-base-notebook/**'
 jobs:
