@@ -10,7 +10,7 @@ RUN conda install --yes -c esri 'arcgis=2.0.0' && \
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@2 && \
     jupyter labextension install arcgis-map-ipywidget@2.0.0
 
-RUN conda install --yes 'git'
+RUN conda install --yes 'git=2.30.2'
 
 RUN fix-permissions "${CONDA_DIR}" && \
     fix-permissions "/home/${NB_USER}"
