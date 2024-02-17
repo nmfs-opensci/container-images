@@ -1,6 +1,8 @@
 # Still no map but does start up in the base environment and uses latest
 FROM jupyter/base-notebook:lab-2.2.9
 
+RUN conda install --yes 'git'
+
 RUN conda install --yes 'jupyter-server-proxy=3.2.2' && \
     conda clean --all -f -y
     
