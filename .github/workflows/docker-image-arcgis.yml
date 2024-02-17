@@ -2,6 +2,7 @@ name: Docker Image CI arcgis
 on:
   workflow_dispatch: null
   push:
+    branches: main
     paths: 
       - 'images/arcgis/**'
 jobs:
