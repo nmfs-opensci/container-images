@@ -2,6 +2,7 @@ name: Docker Image CI coastwatch
 on:
   workflow_dispatch: null
   push:
+    branches: main
     paths: 
       - 'images/coastwatch/**'
       - '.github/workflows/docker-image-coastwatch.yml'
