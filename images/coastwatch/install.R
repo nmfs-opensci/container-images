@@ -6,5 +6,5 @@ list.of.packages <- c("ncdf4", "httr","plyr","lubridate", "parsedate", "rerddap"
                       "ggplot2","scales","dplyr","utils","Rcurl","raster","colorRamps",
                       "parsedate","sp","sf","reshape2","jsonlite","rgdal",
                       "gridGraphics","grid","PBSmapping","date","viridis",
-                      "openair","cmocean")
+                      "openair","cmocean", "terra")
 install.packages(list.of.packages)

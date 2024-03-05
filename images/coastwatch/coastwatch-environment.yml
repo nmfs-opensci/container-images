@@ -21,5 +21,6 @@ dependencies:
   - scikit-learn
   - geopandas
   - regionmask
+  - erddapy
 platforms:
   - linux-64
