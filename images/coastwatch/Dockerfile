@@ -22,8 +22,8 @@ RUN echo "PATH=${PATH}" >>"${R_HOME}/etc/Renviron.site"
 RUN conda init --system
 
 # Standard user setup here
-USER ${NB_USER} 
 RUN usermod -d /home/jovyan rstudio
+USER ${NB_USER} 
 # WORKDIR /home/${NB_USER}
 WORKDIR ${HOME}
 RUN usermod -s /bin/bash ${NB_USER} 
