@@ -11,4 +11,3 @@ dependencies:
   - jupyterlab-favorites
   - jupyter-resource-usage
   - nb_conda_kernels
-  - ipykernel
