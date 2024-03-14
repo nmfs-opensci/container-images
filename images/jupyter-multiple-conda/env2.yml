@@ -1,0 +1,7 @@
+name: env1
+channels:
+  - conda-forge
+dependencies:
+## These are needed for jupyterhub functioning
+  - regionmask
+  - ipykernel
