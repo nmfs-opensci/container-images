@@ -2,8 +2,10 @@
 FROM quay.io/jupyter/base-notebook:2024-02-13
 
 # Add git
+USER root
 RUN apt-get -y update
 RUN apt-get -y install git
+USER ${NB_USER}
 
 # Add the packages needed for jupyterhub
 COPY jhub-environment.yml jhub-environment.yml
