@@ -9,7 +9,7 @@ USER ${NB_USER}
 
 # Add the packages needed for jupyterhub
 COPY jhub-environment.yml jhub-environment.yml
-RUN conda env update --name base -f environment.yml && conda clean --all
+RUN conda env update --name base -f jhub-environment.yml && conda clean --all
 RUN rm jhub-environment.yml
 
 # Create environment 1
