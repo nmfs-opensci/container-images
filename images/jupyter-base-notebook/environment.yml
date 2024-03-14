@@ -13,8 +13,6 @@ dependencies:
   - jupyterhub-singleuser
   - jupyterlab-git
   - conda-lock
-  - jupyter-server-proxy
-  - jupyter-vscode-proxy
   - code-server >=3.2
 platforms:
   - linux-64
