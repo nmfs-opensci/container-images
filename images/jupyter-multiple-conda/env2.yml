@@ -1,7 +1,6 @@
-name: envtwo
+name: jupyter
 channels:
   - conda-forge
 dependencies:
-## These are needed for jupyterhub functioning
   - regionmask
   - ipykernel
