@@ -24,8 +24,7 @@ RUN conda init --system
 # Standard user setup here
 RUN usermod -d /home/jovyan rstudio
 USER ${NB_USER} 
-# WORKDIR /home/${NB_USER}
-WORKDIR ${HOME}
+WORKDIR /home/jovyan
 RUN usermod -s /bin/bash ${NB_USER} 
 
 # install into the default environment
