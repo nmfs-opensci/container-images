@@ -1,4 +1,4 @@
-name: Docker Image CI coastwatch
+name: Docker Image CI jupyter-multiple-conda
 on:
   workflow_dispatch: null
   push:
