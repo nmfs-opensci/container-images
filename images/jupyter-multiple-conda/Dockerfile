@@ -22,6 +22,7 @@ COPY env2.yml env2.yml
 RUN conda env create --name env2 --file env2.yml
 RUN rm env2.yml
 
+# Register the kernels so you can open in notebooks
 USER root
 RUN python -m ipykernel install --prefix /srv/conda/envs/env1 --name env1 --display-name env1
 RUN python -m ipykernel install --prefix /srv/conda/envs/env2 --name env2 --display-name env2
