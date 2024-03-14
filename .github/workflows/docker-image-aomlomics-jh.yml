@@ -1,4 +1,4 @@
-name: Docker Image CI coastwatch
+name: Docker Image CI AOML-omics
 on:
   workflow_dispatch: null
   push:

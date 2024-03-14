@@ -18,8 +18,8 @@ COPY jhub-environment.yml jhub-environment.yml
 RUN conda env update --name base -f jhub-environment.yml && conda clean --all
 
 # add packages needed for extra kernels in the notebooks
-RUN conda env update --name snakemake ipykernel && conda clean --all
-RUN conda env update --name qiime2-2023.5 ipykernel && conda clean --all
+RUN conda install --name snakemake ipykernel && conda clean --all
+RUN conda install --name qiime2-2023.5 ipykernel && conda clean --all
 
 # Register the kernels so you can open in notebooks
 RUN python -m ipykernel install --prefix /srv/conda/envs/snakemake --name snakemake --display-name snakemake
