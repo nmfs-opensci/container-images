@@ -35,9 +35,12 @@ RUN Rscript install.R && rm install.R
 # make sure we install in the base environment
 COPY coastwatch-environment.yml coastwatch-environment.yml
 RUN conda env update --name base -f coastwatch-environment.yml && conda clean --all
+RUN rm coastwatch-environment.yml
 
 # add the packages needed for jupyterhubs
 # need the --name part so that this is put in the coastwatch env
 COPY jhub-environment.yml jhub-environment.yml
 RUN conda env update --name base -f jhub-environment.yml && conda clean --all
+RUN rm jhub-environment.yml
+
 
