@@ -1,4 +1,4 @@
-name: env1
+name: envone
 channels:
   - conda-forge
 dependencies:
