@@ -1,9 +1,18 @@
 FROM docker.io/aomlomics/tourmaline:latest
 
-ENV NB_USER=qiime2 \
+ENV NB_USER=jovyan \
     NB_UID=1000 \
     CONDA_DIR=/opt/conda
-ENV HOME=/home/${NB_USER}
+ENV HOME=/home/qiime2
+
+USER root
+RUN echo "Creating ${NB_USER} user..." \
+    # Create a group for the user to be part of, with gid same as uid
+    && groupadd --gid ${NB_UID} ${NB_USER}  \
+    # Create non-root user, with given gid, uid and create $HOME
+    && useradd --create-home --gid ${NB_UID} --no-log-init --uid ${NB_UID} ${NB_USER} \
+    # Make sure that /opt (where conda lives) is owned by non-root user, so we can install things there
+    && chown -R ${NB_USER}:${NB_USER} /opt
 
 USER ${NB_USER} 
 
@@ -19,4 +28,4 @@ RUN conda install --name qiime2-2023.5 ipykernel && conda clean --all
 RUN python -m ipykernel install --prefix ${CONDA_DIR}/envs/snakemake --name snakemake --display-name snakemake
 RUN python -m ipykernel install --prefix ${CONDA_DIR}/envs/qiime2-2023.5 --name qiime2-2023.5 --display-name qiime2
 
-WORKDIR /home/${NB_USER}
+WORKDIR ${HOME}
