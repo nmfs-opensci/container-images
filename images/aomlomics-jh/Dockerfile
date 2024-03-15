@@ -14,6 +14,12 @@ RUN echo "Creating ${NB_USER} user..." \
     # Make sure that /opt (where conda lives) is owned by non-root user, so we can install things there
     && chown -R ${NB_USER}:${NB_USER} /opt
 
+# Copy jupyter_notebook_config.py /etc/jupyter so
+# it will be read by jupyter processes when they start. This feature is
+# not available in repo2docker.
+RUN mkdir -p /etc/jupyter \
+    && cp jupyter_notebook_config.py /etc/jupyter
+
 USER ${NB_USER} 
 
 # add the packages needed for jupyterhubs to the base environment
