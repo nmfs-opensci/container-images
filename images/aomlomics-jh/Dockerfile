@@ -17,6 +17,7 @@ RUN echo "Creating ${NB_USER} user..." \
 # Copy jupyter_notebook_config.py /etc/jupyter so
 # it will be read by jupyter processes when they start. This feature is
 # not available in repo2docker.
+COPY jupyter_notebook_config.py jupyter_notebook_config.py
 RUN mkdir -p /etc/jupyter \
     && cp jupyter_notebook_config.py /etc/jupyter
 
