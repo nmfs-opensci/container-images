@@ -10,7 +10,6 @@ dependencies:
   - jupyterlab-git
   - jupyterlab-favorites
   - jupyter-resource-usage
-  - nb_conda_kernels
 #  - conda-lock
 ## VS code  
 #  - code-server >=3.2
