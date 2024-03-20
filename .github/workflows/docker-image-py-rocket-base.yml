@@ -5,6 +5,7 @@ on:
     branches: main
     paths: 
       - 'images/py-rocket-base/**'
+      - '.github/workflows/docker-image-py-rocket-base.yml'
 jobs:
   build:
     runs-on: ubuntu-latest
