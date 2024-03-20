@@ -4,7 +4,7 @@ on:
   push:
     branches: main
     paths: 
-      - 'images/test/**'
+      - 'images/py-rocket-base/**'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -21,9 +21,9 @@ jobs:
       - name: Build the Docker image
         if: github.repository == 'nmfs-opensci/container-images'
         run: |
-          docker build images/test -f images/test/Dockerfile  --tag ghcr.io/nmfs-opensci/container-images/test:latest
+          docker build images/test -f images/py-rocket-base/Dockerfile  --tag ghcr.io/nmfs-opensci/container-images/py-rocket-base:latest
       - name: Publish
         if: github.repository == 'nmfs-opensci/container-images'
         run: |
-          docker push ghcr.io/nmfs-opensci/container-images/test:latest
+          docker push ghcr.io/nmfs-opensci/container-images/py-rocket-base:latest
 
