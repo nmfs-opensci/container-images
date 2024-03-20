@@ -1,4 +1,4 @@
-name: Docker Image CI arcgis
+name: Docker Image CI py-rocket-base
 on:
   workflow_dispatch: null
   push:
@@ -21,7 +21,7 @@ jobs:
       - name: Build the Docker image
         if: github.repository == 'nmfs-opensci/container-images'
         run: |
-          docker build images/test -f images/py-rocket-base/Dockerfile  --tag ghcr.io/nmfs-opensci/container-images/py-rocket-base:latest
+          docker build images/py-rocket-base -f images/py-rocket-base/Dockerfile  --tag ghcr.io/nmfs-opensci/container-images/py-rocket-base:latest
       - name: Publish
         if: github.repository == 'nmfs-opensci/container-images'
         run: |
