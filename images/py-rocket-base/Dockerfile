@@ -11,13 +11,13 @@ RUN curl -fsSL https://code-server.dev/install.sh | sh
 RUN git config --system pull.rebase false && \
     git config --system credential.helper 'cache --timeout=36000'
 
-# Rename the rstudio user as jovyan
-RUN usermod -l jovyan rstudio && \
-    usermod -d /home/jovyan -m jovyan && \
-    groupmod -n jovyan rstudio
+#  # Rename the rstudio user as jovyan
+#  RUN usermod -l jovyan rstudio && \
+#      usermod -d /home/jovyan -m jovyan && \
+#      groupmod -n jovyan rstudio
 
 # Set up conda
-ENV NB_USER=jovyan
+ENV NB_USER=rstudio
 ENV CONDA_DIR=/opt/miniforge3
 ENV CONDA_ENV=notebook
 ENV NB_PYTHON_PREFIX=${CONDA_DIR}/envs/${CONDA_ENV} 
