@@ -1,3 +1,4 @@
+# Base rocker image
 FROM rocker/verse:4.3.3
 
 ## Set the default shell
