@@ -27,8 +27,8 @@ WORKDIR /home/${NB_USER}
 RUN usermod -s /bin/bash ${NB_USER} 
 
 # install into the default environment
-COPY install.R install.R
-RUN Rscript install.R && rm install.R
+# COPY install.R install.R
+# RUN Rscript install.R && rm install.R
 
 # set-up the base coastwatch environment
 # make sure we install in the base environment
