@@ -1,6 +1,10 @@
 FROM openscapes/rocker:a7596b5
 # Make sure R uses the conda path
+USER root
 RUN echo "PATH=${PATH}" >>"${R_HOME}/etc/Renviron.site"
+
+USER ${NB_USER}
+WORKDIR ${HOME}
 
 # install into the coastwatch packages if missing environment
 COPY install.R install.R
