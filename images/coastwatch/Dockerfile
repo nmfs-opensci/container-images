@@ -1,5 +1,4 @@
 FROM openscapes/rocker:a7596b5
-
 # Make sure R uses the conda path
 RUN echo "PATH=${PATH}" >>"${R_HOME}/etc/Renviron.site"
 
