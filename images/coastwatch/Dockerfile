@@ -1,5 +1,6 @@
 # devcontainer-focused Rocker
-FROM ghcr.io/rocker-org/devcontainer/tidyverse:4.3
+# FROM ghcr.io/rocker-org/devcontainer/tidyverse:4.3
+FROM rocker/geospatial:4.2
 # switch user to jovyan; later not working
 #RUN usermod -l rstudio jovyan
 
