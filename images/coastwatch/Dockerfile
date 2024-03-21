@@ -14,5 +14,5 @@ RUN Rscript install.R && rm install.R
 # make sure we install in the notebook environment which is default in the
 # Openscapes image
 COPY coastwatch-environment.yml coastwatch-environment.yml
-RUN mamba --name notebook -f coastwatch-environment.yml && mamba clean --all
+RUN mamba env update --name notebook -f coastwatch-environment.yml && mamba clean --all
 RUN rm coastwatch-environment.yml
