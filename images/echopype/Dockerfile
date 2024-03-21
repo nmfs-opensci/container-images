@@ -1,4 +1,5 @@
 FROM openscapes/python:4f340eb
 
-RUN conda install -c conda-forge cmocean
-RUN conda install -c conda-forge echopype
+# The default conda env on the openscapes image in notebook
+RUN conda install -c conda-forge --name notebook cmocean
+RUN conda install -c conda-forge --name notebook echopype
