@@ -2,8 +2,8 @@
 FROM openscapes/python:4f340eb
 
 # holoviews is out of date in the openscapes image
-RUN mamba update holoviews
-RUN mamba update hvplot
+RUN mamba update -c conda-forge --name notebook holoviews
+RUN mamba update -c conda-forge --name notebook hvplot
 
 # The default conda env on the openscapes image is notebook
 RUN mamba install -c conda-forge --name notebook cmocean
