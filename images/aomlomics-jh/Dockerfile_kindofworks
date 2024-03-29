@@ -1,11 +1,11 @@
 FROM docker.io/aomlomics/tourmaline:latest
 
+USER root
 ENV NB_USER=jovyan \
     NB_UID=1000 \
     CONDA_DIR=/opt/conda
-ENV HOME=/home/qiime2
+ENV HOME=/home/${NB_USER}
 
-USER root
 RUN echo "Creating ${NB_USER} user..." \
     # Create a group for the user to be part of, with gid same as uid
     && groupadd --gid ${NB_UID} ${NB_USER}  \
@@ -13,8 +13,6 @@ RUN echo "Creating ${NB_USER} user..." \
     && useradd --create-home --gid ${NB_UID} --no-log-init --uid ${NB_UID} ${NB_USER} \
     # Make sure that /opt (where conda lives) is owned by non-root user, so we can install things there
     && chown -R ${NB_USER}:${NB_USER} /opt
-
-USER ${NB_USER} 
 
 # add the packages needed for jupyterhubs to the base environment
 COPY jhub-environment.yml jhub-environment.yml
@@ -24,4 +22,9 @@ RUN conda env update --name base -f jhub-environment.yml && conda clean --all
 RUN conda install --name snakemake ipykernel && conda clean --all
 RUN conda install --name qiime2-2023.5 ipykernel && conda clean --all
 
-WORKDIR ${HOME}
+# Register the kernels so you can open in notebooks
+RUN python -m ipykernel install --prefix ${CONDA_DIR}/envs/snakemake --name snakemake --display-name snakemake
+RUN python -m ipykernel install --prefix ${CONDA_DIR}/envs/qiime2-2023.5 --name qiime2-2023.5 --display-name qiime2
+
+USER ${NB_USER} 
+WORKDIR /home/${NB_USER}
