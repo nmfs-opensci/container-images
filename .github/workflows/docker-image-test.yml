@@ -11,8 +11,8 @@ on:
   push:
     branches: main
     paths: 
-      - 'images/$IMAGE_NAME/**'
-      - '.github/workflows/docker-image-$IMAGE_NAME.yml'
+      - 'images/test/**'
+      - '.github/workflows/docker-image-test.yml'
 jobs:
   build:
     runs-on: ubuntu-latest
