@@ -6,9 +6,13 @@ RUN conda install --yes 'jupyter-server-proxy=3.2.2' && \
     
 RUN conda install --yes -c esri 'arcgis=2.0.0' && \
     conda clean --all -f -y
+RUN conda install --yes rasterio xarray geopandas  && conda clean --all -f -y
 
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@2 && \
     jupyter labextension install arcgis-map-ipywidget@2.0.0
+
+# version control for jupyter notebooks
+RUN conda install --yes jupytext -c conda-forge && conda clean --all -f -y
 
 COPY apt.txt /tmp/apt.txt
 
