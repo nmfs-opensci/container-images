@@ -24,6 +24,10 @@ COPY start-notebook.d /usr/local/bin/start-notebook.d
 # Fix permissions on /etc/jupyter as root
 USER root
 
+RUN mkdir /etc/jupyterhub
+COPY jupyterhub_config.py /etc/jupyterhub/
+RUN fix-permissions /etc/jupyterhub/
+
 RUN fix-permissions /etc/jupyter/
 
 # Switch back to jovyan to avoid accidental container runs as root
