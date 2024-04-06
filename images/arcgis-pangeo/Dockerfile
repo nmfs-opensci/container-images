@@ -1,3 +1,4 @@
+# Python 3.9 image based off pangeo/base-image:2023.01.13 on May 16, 2023
 FROM openscapes/python:f577786
 
 # install additional package...
