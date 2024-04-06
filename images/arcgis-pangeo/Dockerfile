@@ -15,9 +15,10 @@ RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@2 && \
     jupyter labextension install arcgis-map-ipywidget@2.0.0
 # make sure we install in the notebook environment which is default in the
 # Openscapes image
-#COPY environment.yml arcgis-environment.yml
-#RUN mamba env update --name notebook -f arcgis-environment.yml && mamba clean --all
-#RUN rm arcgis-environment.yml
+COPY environment.yml arcgis-environment.yml
+RUN mamba env update --name notebook -f arcgis-environment.yml && \
+    mamba clean --all
+RUN rm arcgis-environment.yml
 
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@2 && \
     jupyter labextension install arcgis-map-ipywidget@2.0.0

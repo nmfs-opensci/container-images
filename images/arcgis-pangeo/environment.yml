@@ -1,6 +1,7 @@
 name: arcgis
 channels:
   - conda-forge
+  - esri
 dependencies:
   - jupyterlab=2.2.9
   - esri::arcgis=2.0.0
