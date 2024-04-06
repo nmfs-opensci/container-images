@@ -36,9 +36,6 @@ if [ ! -z "$JPY_HUB_API_URL" ]; then
 fi
 NOTEBOOK_BIN="jupyterhub-singleuser"
 
-KubeSpawner.cmd = ['start-notebook.sh']
-c.Spawner.cmd = ["jupyter-labhub"]
-export JUPYTERHUB_SINGLEUSER_APP='jupyter_server.serverapp.ServerApp'
-c.Spawner.default_url = '/lab/'
+c.SingleUserNotebookApp.default_url = "/lab/"
 
-. /usr/local/bin/start.sh $NOTEBOOK_BIN $NOTEBOOK_ARGS '--Spawner.default_url=/lab/'"$@"
+. /usr/local/bin/start.sh $NOTEBOOK_BIN $NOTEBOOK_ARGS"$@"
