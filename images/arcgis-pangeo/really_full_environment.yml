@@ -1,0 +1,70 @@
+name: arcgis-pangeo
+channels:
+  - conda-forge
+dependencies:
+  - python=3.9
+  - pangeo-notebook
+#  - esri::arcgis=2.0.0
+## These are core geospatial packages
+  - dask
+  - distributed
+  - rioxarray
+  - xarray>=2022.12
+  - gdal~=3.6
+  - libgdal
+  - geopandas
+  - rasterio
+## These are for dealing with file formats
+  - h5netcdf
+  - netcdf4
+  - h5py
+  - hdf5plugin
+  - pydap
+  - zarr
+  - kerchunk
+  - rechunker
+  - s3fs
+## Visualization and plotting
+  - geoviews
+  - matplotlib-base
+  - hvplot
+  - datashader
+  - bqplot
+  - ipyleaflet
+## Working with data catalogs and searching
+  - earthaccess>=0.5.1
+  - intake
+  - pystac-client
+  - pyproj
+  - cartopy
+## Utilities
+  - conda-lock
+  - pip
+  - nbgitpuller~=1.1.0
+  - nodejs # for installing jupyterlab-widgets
+  - ipywidgets
+##
+  - jupyterlab=2.2.9
+  - jupyterlab-git
+  - jupyterlab-favorites
+  - jupyter-resource-usage
+  - jupyterlab-geojson
+  - jupyterlab-git
+  - jupyter-resource-usage
+  - jupyterlab-link-share
+  - jupyterlab-h5web
+## Add VSCode; server proxy allows the other proxies
+  - jupyter-server-proxy
+  - jupyter-vscode-proxy
+  - code-server >=3.2
+## Unknown
+  - pynco
+  - shapely
+  - pyresample
+  - joblib
+  - lxml
+  - ipympl
+  - pooch
+  - rasterstats
+  - pqdm
+

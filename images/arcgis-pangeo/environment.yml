@@ -1,20 +1,15 @@
-name: notebook
+name: arcgis-pangeo
 channels:
   - conda-forge
 dependencies:
   - python=3.9
   - pangeo-notebook
 #  - esri::arcgis=2.0.0
-## These are needed for jupyterhub functioning
-  - jupyterhub-singleuser
-  - jupyter-server-proxy
-  - jupyter-vscode-proxy
+## Utilities
+  - pip
+  - nodejs # for installing jupyterlab-widgets
   - ipywidgets
+##
   - jupyterlab=2.2.9
   - jupyterlab-git
-  - jupyterlab-favorites
   - jupyter-resource-usage
-  - conda-lock
-  - code-server >=3.2
-## needed for installing jupyterlab-widgets
-  - nodejs
