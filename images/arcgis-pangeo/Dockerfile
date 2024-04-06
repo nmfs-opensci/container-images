@@ -5,6 +5,9 @@ FROM openscapes/python:f577786
 
 USER ${NB_USER}
 
+RUN conda install --yes -c conda-forge 'jupyterlab=2.2.9' && \
+    conda clean --all -f -y
+
 RUN conda install --yes -c esri 'arcgis=2.0.0' && \
     conda clean --all -f -y
 
