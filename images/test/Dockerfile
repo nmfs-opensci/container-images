@@ -1,5 +1,5 @@
 FROM jupyter/base-notebook:lab-2.2.9
-ENV JUPYTERHUB_SINGLEUSER_APP=jupyter-server
+# ENV JUPYTERHUB_SINGLEUSER_APP=jupyter-server
 # Spawner.cmd = ["jupyter-labhub"]
 USER ${NB_UID}
 

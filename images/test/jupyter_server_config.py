@@ -12,7 +12,6 @@ c.ServerApp.ip = '0.0.0.0'
 c.ServerApp.port = 8888
 c.ServerApp.open_browser = False
 c.Spawner.cmd = ["jupyter-labhub"]
-export JUPYTERHUB_SINGLEUSER_APP='jupyter_server.serverapp.ServerApp'
 c.Spawner.default_url = '/lab/'
 c.SingleUserNotebookApp.default_url = "/lab/"
 c.NotebookApp.default_url = "/lab/"
