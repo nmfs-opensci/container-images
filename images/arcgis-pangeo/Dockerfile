@@ -5,7 +5,7 @@ FROM openscapes/python:f577786
 
 USER ${NB_USER}
 
-RUN conda update -n base -c conda-forge conda=22.9.0
+RUN conda install -n base -c conda-forge conda=22.9.0
 
 # make sure we install in the notebook environment which is default in the
 # Openscapes image
