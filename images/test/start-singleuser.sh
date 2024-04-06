@@ -37,5 +37,6 @@ fi
 NOTEBOOK_BIN="jupyterhub-singleuser"
 
 c.SingleUserNotebookApp.default_url = "/lab/"
+NOTEBOOK_ARGS = "--SingleUserNotebookApp.default_url='/lab/'  $NOTEBOOK_ARGS"
 
 . /usr/local/bin/start.sh $NOTEBOOK_BIN $NOTEBOOK_ARGS"$@"
