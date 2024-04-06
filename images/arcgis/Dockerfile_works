@@ -1,14 +1,18 @@
 # 
 FROM jupyter/base-notebook:lab-2.2.9
 
-RUN mamba update -c esri 'arcgis=2.0.0'
-RUN mamba update rasterio xarray geopandas
+RUN conda install --yes 'jupyter-server-proxy=3.2.2' && \
+    conda clean --all -f -y
+    
+RUN conda install --yes -c esri 'arcgis=2.0.0' && \
+    conda clean --all -f -y
+RUN conda install --yes rasterio xarray geopandas  && conda clean --all -f -y
 
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@2 && \
     jupyter labextension install arcgis-map-ipywidget@2.0.0
 
 # version control for jupyter notebooks
-RUN mamba update jupytext
+RUN conda install --yes jupytext -c conda-forge && conda clean --all -f -y
 
 COPY apt.txt /tmp/apt.txt
 
