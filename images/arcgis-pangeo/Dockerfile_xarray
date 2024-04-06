@@ -13,6 +13,7 @@ RUN conda install -n base --yes -c conda-forge rasterio
 RUN conda install -n base --yes -c conda-forge geopandas
 RUN conda clean --all -f -y
 
+# Broke here; jupyterlab failed to build
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@2 && \
     jupyter labextension install arcgis-map-ipywidget@2.0.0
 
