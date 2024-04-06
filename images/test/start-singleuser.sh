@@ -41,4 +41,4 @@ c.Spawner.cmd = ["jupyter-labhub"]
 export JUPYTERHUB_SINGLEUSER_APP='jupyter_server.serverapp.ServerApp'
 c.Spawner.default_url = '/lab/'
 
-. /usr/local/bin/start.sh $NOTEBOOK_BIN $NOTEBOOK_ARGS "$@"
+. /usr/local/bin/start.sh $NOTEBOOK_BIN $NOTEBOOK_ARGS '--Spawner.default_url=/lab/'"$@"
