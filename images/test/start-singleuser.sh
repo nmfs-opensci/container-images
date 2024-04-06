@@ -34,8 +34,8 @@ fi
 if [ ! -z "$JPY_HUB_API_URL" ]; then
     NOTEBOOK_ARGS="--hub-api-url=$JPY_HUB_API_URL $NOTEBOOK_ARGS"
 fi
-# NOTEBOOK_BIN="jupyterhub-singleuser"
-NOTEBOOK_BIN="jupyter-labhub"
+NOTEBOOK_BIN="jupyterhub-singleuser"
+#NOTEBOOK_BIN="jupyter-labhub"
 
 #NOTEBOOK_ARGS = "--SingleUserNotebookApp.default_url='/lab/'  $NOTEBOOK_ARGS"
 #NOTEBOOK_ARGS = "--NotebookApp.default_url='/lab/'  $NOTEBOOK_ARGS"

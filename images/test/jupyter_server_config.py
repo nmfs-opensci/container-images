@@ -12,9 +12,10 @@ c.ServerApp.ip = '0.0.0.0'
 c.ServerApp.port = 8888
 c.ServerApp.open_browser = False
 c.Spawner.cmd = ["jupyter-labhub"]
-c.Spawner.default_url = '/lab/'
-c.SingleUserNotebookApp.default_url = "/lab/"
-c.NotebookApp.default_url = "/lab/"
+c.Spawner.default_url = '/lab'
+c.Spawner.defaultUrl = '/lab'
+#c.SingleUserNotebookApp.default_url = "/lab"
+#c.NotebookApp.default_url = "/lab"
 
 # https://github.com/jupyter/notebook/issues/3130
 c.FileContentsManager.delete_to_trash = False
