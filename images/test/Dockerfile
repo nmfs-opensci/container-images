@@ -6,6 +6,8 @@ USER ${NB_UID}
 RUN conda install --yes 'jupyter_server' && \
     conda clean --all -f -y
 
+RUN jupyter labextension install @jupyterlab/hub-extension
+
 # I have to use this old base-notebook image (trust me), but it has a
 # start-notebook.py that doesn't include "lab"
     
