@@ -3,6 +3,7 @@ channels:
   - conda-forge
 dependencies:
   - python=3.9
+  - pangeo-notebook
 #  - esri::arcgis=2.0.0
 ## These are needed for jupyterhub functioning
   - jupyterhub-singleuser
