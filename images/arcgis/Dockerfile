@@ -7,6 +7,9 @@ FROM jupyter/base-notebook:lab-2.2.9
 RUN conda install --yes -c esri 'arcgis=2.0.0' && \
     conda clean --all -f -y
 
+RUN conda install --yes jupyterlab-git jupytext && \
+    conda clean --all -f -y
+
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@2 && \
     jupyter labextension install arcgis-map-ipywidget@2.0.0
 
