@@ -15,6 +15,7 @@ c.Spawner.cmd = ["jupyter-labhub"]
 export JUPYTERHUB_SINGLEUSER_APP='jupyter_server.serverapp.ServerApp'
 c.Spawner.default_url = '/lab/'
 c.SingleUserNotebookApp.default_url = "/lab/"
+c.NotebookApp.default_url = "/lab/"
 
 # https://github.com/jupyter/notebook/issues/3130
 c.FileContentsManager.delete_to_trash = False

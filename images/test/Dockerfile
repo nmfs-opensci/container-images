@@ -18,6 +18,7 @@ COPY start-notebook.d /usr/local/bin/start-notebook.d
 # Fix permissions on /etc/jupyter as root
 USER root
 
+export JUPYTERHUB_SINGLEUSER_APP='jupyter_server.serverapp.ServerApp'
 RUN fix-permissions /etc/jupyter/
 
 # Switch back to jovyan to avoid accidental container runs as root
