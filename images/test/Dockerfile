@@ -1,6 +1,6 @@
 FROM jupyter/base-notebook:lab-2.2.9
 ENV JUPYTERHUB_SINGLEUSER_APP="jupyter_server.serverapp.ServerApp"
-# Spawner.cmd = ["jupyter-labhub"]
+
 USER ${NB_UID}
 
 RUN conda install --yes 'jupyter_server' && \
