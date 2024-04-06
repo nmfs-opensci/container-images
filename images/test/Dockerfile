@@ -1,6 +1,6 @@
 FROM jupyter/base-notebook:lab-2.2.9
 ENV JUPYTERHUB_SINGLEUSER_APP=jupyter-server
-Spawner.cmd = ["jupyter-labhub"]
+# Spawner.cmd = ["jupyter-labhub"]
 USER ${NB_UID}
 
 # I have to use this old base-notebook image (trust me), but it has a
