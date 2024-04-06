@@ -16,5 +16,5 @@ elif [[ ! -z "${JUPYTER_ENABLE_LAB}" ]]; then
     . /usr/local/bin/start.sh $wrapper jupyter lab "$@"
 else
     echo "WARN: Jupyter Notebook deprecation notice https://github.com/jupyter/docker-stacks#jupyter-notebook-deprecation-notice."
-    . /usr/local/bin/start.sh $wrapper jupyter notebook "$@"
+    . /usr/local/bin/start.sh $wrapper jupyter lab "$@"
 fi
