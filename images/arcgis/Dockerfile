@@ -2,6 +2,7 @@
 FROM jupyter/base-notebook:lab-2.2.9
 
 # conda is ancient in this old version of base-notebook but needed for Python 3.9
+RUN conda install -n base conda=22.11.1
 RUN conda update -n base conda
 RUN conda install -n base conda-libmamba-solver
 RUN conda config --set solver libmamba
