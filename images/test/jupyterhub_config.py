@@ -9,6 +9,7 @@ import stat
 
 c = get_config()  # noqa: F821
 c.Spawner.cmd = ["jupyter-labhub"]
-c.Spawner.default_url = '/lab/'
+c.Spawner.default_url = '/lab'
 c.SingleUserNotebookApp.default_url = "/lab/"
 c.NotebookApp.default_url = "/lab/"
+c.Spawner.environment = {JUPYTERHUB_SINGLEUSER_APP="jupyter_server.serverapp.ServerApp"}
