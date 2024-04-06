@@ -1,7 +1,10 @@
 FROM jupyter/base-notebook:lab-2.2.9
-# ENV JUPYTERHUB_SINGLEUSER_APP=jupyter-server
+ENV JUPYTERHUB_SINGLEUSER_APP="jupyter_server.serverapp.ServerApp"
 # Spawner.cmd = ["jupyter-labhub"]
 USER ${NB_UID}
+
+RUN conda install --yes 'jupyter_server' && \
+    conda clean --all -f -y
 
 # I have to use this old base-notebook image (trust me), but it has a
 # start-notebook.py that doesn't include "lab"
