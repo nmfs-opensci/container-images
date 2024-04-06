@@ -1,10 +1,10 @@
-# 
+# ancient version by needed for Python 3.9
 FROM jupyter/base-notebook:lab-2.2.9
 
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@2 && \
     jupyter labextension install arcgis-map-ipywidget@2.0.0
 
-# conda is ancient in this old version of base-notebook but needed for Python 3.9
+# conda is ancient in this old version of base-notebook
 RUN conda install -n base conda=22.11.1
 RUN conda update -n base conda
 # faster solver in the more recent conda releases
