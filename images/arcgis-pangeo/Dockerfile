@@ -4,6 +4,8 @@ FROM pangeo/base-image:2023.01.13
 # activate notebook env that pangeo base creates
 RUN conda init zsh && conda init bash
 
+USER root
+
 # faster solver
 RUN conda update -n base conda
 RUN conda config --set solver libmamba
