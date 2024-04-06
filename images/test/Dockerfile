@@ -6,6 +6,7 @@ FROM jupyter/base-notebook:lab-2.2.9
 USER root
 
 # Configure container startup
+ENTRYPOINT []
 CMD ["abc.py"]
 
 # Copy local files as late as possible to avoid cache busting
