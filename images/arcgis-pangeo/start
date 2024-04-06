@@ -1,9 +1,0 @@
-#!/bin/bash -l
-
-# ==== ONLY EDIT WITHIN THIS BLOCK =====
-
-export PANGEO_ENV="arcgis-pangeo"
-
-# ==== ONLY EDIT WITHIN THIS BLOCK =====
-
-exec "$@"

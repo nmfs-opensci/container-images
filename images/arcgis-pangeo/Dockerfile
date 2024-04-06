@@ -1,14 +1,14 @@
-FROM pangeo/base-image:2023.01.13
-# pango base will look for environment.yml and apt.txt and install
+FROM openscapes/python:f577786
 
-# activate notebook env that pangeo base creates
-RUN conda init zsh && conda init bash
+# install additional package...
 
 USER ${NB_USER}
 
-# broken here; complaining re node.js and npm
-#RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@2 && \
-#    jupyter labextension install arcgis-map-ipywidget@2.0.0
+RUN conda install --yes -c esri 'arcgis=2.0.0' && \
+    conda clean --all -f -y
 
+RUN conda install --yes jupytext && \
+    conda clean --all -f -y
 
-WORKDIR ${HOME}
+RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@2 && \
+    jupyter labextension install arcgis-map-ipywidget@2.0.0

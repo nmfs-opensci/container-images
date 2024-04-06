@@ -9,7 +9,7 @@ env:
 on:
   workflow_dispatch: null
   push:
-    branches: main
+    branches: arcgis-pangeo
     paths: 
       - 'images/arcgis-pangeo/**'
       - '.github/workflows/docker-image-arcgis-pangeo.yml'
