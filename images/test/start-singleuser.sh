@@ -38,7 +38,7 @@ NOTEBOOK_BIN="jupyterhub-singleuser"
 
 #NOTEBOOK_ARGS = "--SingleUserNotebookApp.default_url='/lab/'  $NOTEBOOK_ARGS"
 #NOTEBOOK_ARGS = "--NotebookApp.default_url='/lab/'  $NOTEBOOK_ARGS"
-#NOTEBOOK_ARGS = "--Spawner.cmd='jupyter-labhub' $NOTEBOOK_ARGS"
+NOTEBOOK_ARGS = "--Spawner.cmd='jupyter-labhub' $NOTEBOOK_ARGS"
 #NOTEBOOK_ARGS = "--Spawner.default_url = '/lab/' $NOTEBOOK_ARGS"
 
 . /usr/local/bin/start.sh $NOTEBOOK_BIN $NOTEBOOK_ARGS"$@"
