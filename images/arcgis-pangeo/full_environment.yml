@@ -3,6 +3,16 @@ channels:
   - conda-forge
 dependencies:
   - python=3.9
+  - dask
+  - rioxarray
+  - xarray>=2022.12
+  - h5netcdf
+  - netcdf4
+  - gdal~=3.6
+  - geopandas
+  - rasterio
+  - pip
+  - bottleneck
   - esri::arcgis=2.0.0
 ## These are needed for jupyterhub functioning
   - jupyterhub-singleuser
@@ -10,3 +20,4 @@ dependencies:
   - jupyterlab=2.2.9
   - jupyterlab-git
   - jupyter-resource-usage
+  - jupytext
