@@ -9,7 +9,7 @@ USER root
 CMD ["start-notebook.py"]
 
 # Copy local files as late as possible to avoid cache busting
-RUN rm /usr/local/bin/start-notebook.py
+RUN rm /usr/local/bin/start-notebook.sh
 COPY start-notebook.sh /usr/local/bin/start-notebook.sh
 COPY start-singleuser.py /usr/local/bin/start-singleuser.py
 COPY start-singleuser.sh /usr/local/bin/start-singleuser.sh
