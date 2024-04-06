@@ -5,6 +5,7 @@ FROM pangeo/base-image:2023.01.13
 RUN conda init zsh && conda init bash
 
 # faster solver
+RUN conda update -n base conda
 RUN conda config --set solver libmamba
 RUN conda install -n notebook --yes -c esri 'arcgis=2.0.0'
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@2 && \
