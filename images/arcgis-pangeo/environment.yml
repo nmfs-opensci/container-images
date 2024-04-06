@@ -16,3 +16,9 @@ dependencies:
   - jupytext
   - bottleneck
   - esri::arcgis=2.0.0
+## These are needed for jupyterhub functioning
+  - jupyterhub-singleuser
+  - ipywidgets
+  - jupyterlab=2.2.9
+  - jupyterlab-git
+  - jupyter-resource-usage
