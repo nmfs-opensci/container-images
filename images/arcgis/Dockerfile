@@ -1,8 +1,8 @@
 # 
 FROM jupyter/base-notebook:lab-2.2.9
 
-RUN conda install --yes 'jupyter-server-proxy=3.2.2' && \
-    conda clean --all -f -y
+#RUN conda install --yes 'jupyter-server-proxy=3.2.2' && \
+#    conda clean --all -f -y
     
 RUN conda install --yes -c esri 'arcgis=2.0.0' && \
     conda clean --all -f -y
