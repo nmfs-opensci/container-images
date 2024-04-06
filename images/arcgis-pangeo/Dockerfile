@@ -4,10 +4,11 @@ FROM pangeo/base-image:2023.01.13
 # activate notebook env that pangeo base creates
 RUN conda init zsh && conda init bash
 
-# broken here; complaining re node.js and npm
-RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@2 && \
-    jupyter labextension install arcgis-map-ipywidget@2.0.0
-
 USER ${NB_USER}
+
+# broken here; complaining re node.js and npm
+#RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@2 && \
+#    jupyter labextension install arcgis-map-ipywidget@2.0.0
+
 
 WORKDIR ${HOME}
