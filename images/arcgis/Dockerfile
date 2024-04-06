@@ -1,5 +1,5 @@
-# 
-FROM jupyter/base-notebook:lab-4.0.7
+# Python 3.10
+FROM jupyter/base-notebook:lab-3.6.3
 
 RUN mamba update -c esri 'arcgis=2.0.0'
 RUN mamba update rasterio xarray geopandas
