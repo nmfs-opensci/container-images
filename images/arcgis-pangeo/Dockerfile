@@ -5,10 +5,12 @@ FROM openscapes/python:f577786
 
 USER ${NB_USER}
 
+RUN conda --name notebook remove jupyterlab-link-share
+
 #RUN conda install --yes -c conda-forge 'jupyterlab=2.2.9' 'conda=22.9.0' && \
 #    conda clean --all -f -y
 
-#RUN conda install --yes 'arcgis=2.0.0' -c esri -c conda-forge && \
+#RUN conda install --yes --name notebook 'arcgis=2.0.0' -c esri && \
 #    conda clean --all -f -y
 
 # make sure we install in the notebook environment which is default in the
