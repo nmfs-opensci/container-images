@@ -8,4 +8,4 @@ dependencies:
   - esri::arcgis=2.0.0
   - jupytext
   - ipywidgets=7.7.4
-  - nodejs=15.3.0
+  - nodejs
