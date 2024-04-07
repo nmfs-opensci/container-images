@@ -4,7 +4,7 @@ channels:
   - esri
 dependencies:
   - jupyterlab=2.2.9
-  - jupyterhub>=2.0.0
+  - jupyterhub=2.0.0
 #  - conda=22.9.0
   - esri::arcgis=2.0.0
   - ipywidgets
