@@ -17,8 +17,7 @@ RUN conda remove jupyterlab-link-share --name notebook
 # make sure we install in the notebook environment which is default in the
 # Openscapes image
 COPY environment.yml arcgis-environment.yml
-RUN mamba env update --name notebook -f arcgis-environment.yml && \
-    mamba clean --all
+RUN conda env update --name notebook -f arcgis-environment.yml
 RUN rm arcgis-environment.yml
 
 SHELL ["/bin/bash", "-c"]
