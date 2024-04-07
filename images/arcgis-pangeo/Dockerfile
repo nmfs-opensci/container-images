@@ -5,7 +5,7 @@ FROM openscapes/python:f577786
 
 USER ${NB_USER}
 
-RUN conda --name notebook remove jupyterlab-link-share
+RUN conda remove jupyterlab-link-share --name notebook 
 
 #RUN conda install --yes -c conda-forge 'jupyterlab=2.2.9' 'conda=22.9.0' && \
 #    conda clean --all -f -y
