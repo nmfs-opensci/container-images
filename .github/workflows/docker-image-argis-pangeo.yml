@@ -4,7 +4,7 @@ name: Docker Image CI argis pangeo
 # IMAGE_TAG whatever tag you want to automatically be used
 env:
   IMAGE_NAME: arcgis-pangeo
-  IMAGE_TAG: latest
+  IMAGE_TAG: pangeo
   
 on:
   workflow_dispatch: null
