@@ -21,5 +21,5 @@ RUN mamba env update --name notebook -f arcgis-environment.yml && \
     mamba clean --all
 RUN rm arcgis-environment.yml
 
-RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@2 && \
-    jupyter labextension install arcgis-map-ipywidget@2.0.0
+RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@2
+RUN jupyter labextension install arcgis-map-ipywidget@2.0.0
