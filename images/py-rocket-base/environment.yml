@@ -15,5 +15,6 @@ dependencies:
   - jupyter-resource-usage
   - conda-lock
   - code-server >=3.2
+  - nb_conda_kernels
 platforms:
   - linux-64
