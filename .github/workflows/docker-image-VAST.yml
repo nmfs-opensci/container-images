@@ -1,6 +1,6 @@
-name: Docker Image CI VAST
+name: Docker Image CI vast
 env:
-  IMAGE_NAME: VAST
+  IMAGE_NAME: vast
   IMAGE_TAG: latest
   
 on:
@@ -9,7 +9,7 @@ on:
     branches: main
     paths: 
       - 'images/VAST/**'
-      - '.github/workflows/docker-image-VAST.yml'
+      - '.github/workflows/docker-image-vast.yml'
 jobs:
   build:
     runs-on: ubuntu-latest
