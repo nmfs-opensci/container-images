@@ -42,13 +42,13 @@ ENV DASK_ROOT_CONFIG=${CONDA_DIR}/etc
 ## Ensure that RStudio uses the conda notebook env for Python and modules
 RUN echo "PATH=${PATH}" >>"${R_HOME}/etc/Renviron.site"
 
-## Ensure that users have a personal user library for R packages
-RUN R -e 'if(!dir.exists(Sys.getenv("R_LIBS_USER"))) dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE)'
-
 ## Change the home directory to /home/jovyan for the rstudio user
 ## So that /home/jovyan is consistently the user directory in JupyterHubs
 RUN usermod -aG sudo ${NB_USER} && chown -R ${NB_USER}:${NB_USER} /srv
 RUN usermod -d /home/jovyan rstudio
+
+## Ensure that users have a personal user library for R packages
+RUN R -e 'if(!dir.exists(Sys.getenv("R_LIBS_USER"))) dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE)'
 
 # add bin to PATH earlier ($NB_PYTHON_PREFIX/bin)
 RUN echo ". ${CONDA_DIR}/etc/profile.d/conda.sh ; conda activate ${CONDA_ENV}" > /etc/profile.d/init_conda.sh
