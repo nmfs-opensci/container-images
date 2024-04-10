@@ -1,4 +1,8 @@
 name: Docker Image CI py-rocket-base
+env:
+  IMAGE_NAME: py-rocket-base
+  IMAGE_TAG: latest
+  
 on:
   workflow_dispatch: null
   push:
@@ -22,9 +26,9 @@ jobs:
       - name: Build the Docker image
         if: github.repository == 'nmfs-opensci/container-images'
         run: |
-          docker build images/py-rocket-base -f images/py-rocket-base/Dockerfile  --tag ghcr.io/nmfs-opensci/container-images/py-rocket-base:latest
+          docker build images/$IMAGE_NAME -f images/$IMAGE_NAME/Dockerfile  --tag ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG
       - name: Publish
         if: github.repository == 'nmfs-opensci/container-images'
         run: |
-          docker push ghcr.io/nmfs-opensci/container-images/py-rocket-base:latest
+          docker push ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG
 
