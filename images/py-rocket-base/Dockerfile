@@ -1,37 +1,88 @@
 # devcontainer-focused geospatial rocker
+# Is designed to have a conda environment called notebook like
+# the pangeo images. The jupyterhub modules are in this environment.
 FROM ghcr.io/rocker-org/devcontainer/geospatial:4.3
-# switch user to jovyan; later not working
-#RUN usermod -l rstudio jovyan
+
+USER root
 
 # some Git preferences
 RUN git config --system pull.rebase false && \
     git config --system credential.helper 'cache --timeout=36000'
     
-# codeserver
+# codeserver; VSCode
 RUN curl -fsSL https://code-server.dev/install.sh | sh
 
-# Set up conda
-ENV NB_USER=rstudio
-ENV CONDA_ENV=/opt/miniforge3
-ENV PATH=${CONDA_ENV}/bin:${PATH}
-RUN curl -L -O "https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-$(uname)-$(uname -m).sh" && \
-    bash Miniforge3-$(uname)-$(uname -m).sh -b -p ${CONDA_ENV} && \
-    chown ${NB_USER}:staff -R ${CONDA_ENV} && \
-    rm -f Miniforge3*.sh *.deb
+# set environment variables
+ENV CONDA_ENV=notebook \
+    DEBIAN_FRONTEND=noninteractive \
+    NB_USER=rstudio \
+    SHELL=/bin/bash \
+    # Setup locale to be UTF-8, avoiding gnarly hard to debug encoding errors
+    LANG=C.UTF-8  \
+    LC_ALL=C.UTF-8 \
+    CONDA_DIR=/srv/conda
 
+# All env vars that reference other env vars need to be in their own ENV block
+# Path to the python environment where the jupyter notebook packages are installed
+ENV NB_PYTHON_PREFIX=${CONDA_DIR}/envs/${CONDA_ENV} \
+    # Home directory of our non-root user
+    HOME=/home/${NB_USER}
+
+# Add both our notebook env as well as default conda installation to $PATH
+# Thus, when we start a `python` process (for kernels, or notebooks, etc),
+# it loads the python in the notebook conda environment, as that comes
+# first here.
+ENV PATH=${NB_PYTHON_PREFIX}/bin:${CONDA_DIR}/bin:${PATH}
+
+# Ask dask to read config from ${CONDA_DIR}/etc rather than
+# the default of /etc, since the non-root jovyan user can write
+# to ${CONDA_DIR}/etc but not to /etc
+ENV DASK_ROOT_CONFIG=${CONDA_DIR}/etc
+
+## Ensure that RStudio uses the conda notebook env for Python and modules
 RUN echo "PATH=${PATH}" >>"${R_HOME}/etc/Renviron.site"
 
-# Initialize conda by default for all users:
-RUN conda init --system
-
-# Standard user setup here
+## Change the home directory to /home/jovyan for the rstudio user
+RUN usermod -aG sudo ${NB_USER} && chown -R ${NB_USER}:${NB_USER} /srv
 RUN usermod -d /home/jovyan rstudio
-USER ${NB_USER} 
-WORKDIR /home/jovyan
-# Make bash default
-RUN usermod -s /bin/bash ${NB_USER} 
 
-# add the packages needed for jupyterhubs
-COPY jhub-environment.yml jhub-environment.yml
-RUN conda env update --name base -f jhub-environment.yml && conda clean --all
-RUN rm jhub-environment.yml
+# add bin to PATH earlier ($NB_PYTHON_PREFIX/bin)
+RUN echo ". ${CONDA_DIR}/etc/profile.d/conda.sh ; conda activate ${CONDA_ENV}" > /etc/profile.d/init_conda.sh
+
+USER ${NB_USER}
+
+COPY --chown=rstudio:rstudio . /tmp/build
+
+WORKDIR /tmp/build
+
+# Install latest mambaforge in ${CONDA_DIR}
+RUN echo "Installing Mambaforge..." \
+    && URL="https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-x86_64.sh" \
+    && wget --quiet ${URL} -O installer.sh \
+    && /bin/bash installer.sh -u -b -p ${CONDA_DIR} \
+    && rm installer.sh \
+    && mamba clean -afy \
+    # After installing the packages, we cleanup some unnecessary files
+    # to try reduce image size - see https://jcristharif.com/conda-docker-tips.html
+    && find ${CONDA_DIR} -follow -type f -name '*.a' -delete \
+    && find ${CONDA_DIR} -follow -type f -name '*.pyc' -delete
+
+## Install environment that we need for JupyterHub into notebook
+## Need environment.yml or conda-lock with JupyterHub modules for
+## the image to work in a JupyterHub
+RUN echo "Checking for 'conda-linux-64.lock' or 'environment.yml'..." \
+        ; if test -f "conda-linux-64.lock" ; then \
+        mamba create --name ${CONDA_ENV} --file conda-linux-64.lock \
+        ; elif test -f "environment.yml" ; then \
+        mamba env create --name ${CONDA_ENV} -f environment.yml  \
+        ; fi \
+        && mamba clean -yaf \
+        && find ${CONDA_DIR} -follow -type f -name '*.a' -delete \
+        && find ${CONDA_DIR} -follow -type f -name '*.pyc' -delete \
+        && find ${CONDA_DIR} -follow -type f -name '*.js.map' -delete
+
+WORKDIR ${HOME}
+
+EXPOSE 8888
+
+CMD ["jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--allow-root", "--no-browser"]

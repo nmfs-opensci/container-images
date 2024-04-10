@@ -1,5 +1,7 @@
 # Readme
 
-This creates a basic Python-R image build off the rocker/verse.
+This creates a basic R image built off rocker/geospatial.
 
-Python environment is created with conda and jhub-environment.yml.  Only has Python 3.10 and some packages required for JupyterHub.
+Python 3.10 is installed with a conda environment called notebook that is activated on opening the container. The environment only has Python 3.10 and some packages required for JupyterHub.
+
+The user name is rstudio (not jovyan) but the user $home is /home/jovyan so that all user files appear in the same place across images.
