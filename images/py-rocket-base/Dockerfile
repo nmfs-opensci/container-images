@@ -1,4 +1,4 @@
-# devcontainer-focused geospatial rocker
+# devcontainer-focused geospatial rocker with RStudio
 # Is designed to have a conda environment called notebook like
 # the pangeo images. The jupyterhub modules are in this environment.
 FROM ghcr.io/rocker-org/devcontainer/geospatial:4.3
@@ -42,7 +42,11 @@ ENV DASK_ROOT_CONFIG=${CONDA_DIR}/etc
 ## Ensure that RStudio uses the conda notebook env for Python and modules
 RUN echo "PATH=${PATH}" >>"${R_HOME}/etc/Renviron.site"
 
+## Ensure that users have a personal user library for R packages
+RUN R -e 'if(!dir.exists(Sys.getenv("R_LIBS_USER"))) dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE)'
+
 ## Change the home directory to /home/jovyan for the rstudio user
+## So that /home/jovyan is consistently the user directory in JupyterHubs
 RUN usermod -aG sudo ${NB_USER} && chown -R ${NB_USER}:${NB_USER} /srv
 RUN usermod -d /home/jovyan rstudio
 
@@ -83,6 +87,6 @@ RUN echo "Checking for 'conda-linux-64.lock' or 'environment.yml'..." \
 
 WORKDIR ${HOME}
 
+## Add so that we can run the image as a devcontainer
 EXPOSE 8888
-
 CMD ["jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--allow-root", "--no-browser"]
