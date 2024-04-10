@@ -1,4 +1,4 @@
-# devcontainer-focused geospatial rocker with RStudio
+# geospatial rocker with RStudio
 # Is designed to have a conda environment called notebook like
 # the pangeo images. The jupyterhub modules are in this environment.
 FROM ghcr.io/rocker-org/devcontainer/geospatial:4.3
@@ -88,5 +88,13 @@ RUN echo "Checking for 'conda-linux-64.lock' or 'environment.yml'..." \
 WORKDIR ${HOME}
 
 ## Add so that we can run the image as a devcontainer
+# Add Tini. Tini operates as a process subreaper for jupyter. This prevents
+# kernel crashes.
+# https://jupyter-server.readthedocs.io/en/latest/operators/public-server.html#docker-cmd
+ENV TINI_VERSION v0.6.0
+ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /usr/bin/tini
+RUN chmod +x /usr/bin/tini
+ENTRYPOINT ["/usr/bin/tini", "--"]
+
 EXPOSE 8888
-CMD ["jupyter", "lab", "--ip=0.0.0.0", "--port=8888", "--allow-root", "--no-browser"]
+CMD ["jupyter", "server", "--port=8888", "--no-browser", "--ip=0.0.0.0"]
