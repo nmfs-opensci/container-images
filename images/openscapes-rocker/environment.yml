@@ -1,0 +1,7 @@
+name: openscapes
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10
+platforms:
+  - linux-64
