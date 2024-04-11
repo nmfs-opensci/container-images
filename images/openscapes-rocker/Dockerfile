@@ -1,5 +1,4 @@
-#FROM rocker/binder:4.3
-FROM rocker/geospatial:4.2
+FROM rocker/binder:4.3
 
 ENV CONDA_ENV=notebook \
     DEBIAN_FRONTEND=noninteractive \
@@ -26,6 +25,8 @@ ENV PATH=${NB_PYTHON_PREFIX}/bin:${CONDA_DIR}/bin:${PATH}
 # the default of /etc, since the non-root jovyan user can write
 # to ${CONDA_DIR}/etc but not to /etc
 ENV DASK_ROOT_CONFIG=${CONDA_DIR}/etc
+
+USER root
 
 RUN usermod -aG sudo ${NB_USER} && chown -R ${NB_USER}:${NB_USER} /srv
 RUN usermod -d /home/jovyan rstudio
