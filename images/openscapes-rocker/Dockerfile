@@ -27,7 +27,7 @@ ENV PATH=${NB_PYTHON_PREFIX}/bin:${CONDA_DIR}/bin:${PATH}
 ENV DASK_ROOT_CONFIG=${CONDA_DIR}/etc
 
 ## Ensure that RStudio uses the conda notebook env for Python and modules
-RUN echo "PATH=${PATH}" >>"${R_HOME}/etc/Renviron.site"
+#RUN echo "PATH=${PATH}" >>"${R_HOME}/etc/Renviron.site"
 
 ## Ensure that users have a personal user library for R packages
 RUN R -e 'if(!dir.exists(Sys.getenv("R_LIBS_USER"))) dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE)'
