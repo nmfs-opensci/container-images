@@ -37,7 +37,7 @@ USER root
 ## Change the home directory to /home/jovyan for the rstudio user
 ## So that /home/jovyan is consistently the user directory in JupyterHubs
 RUN usermod -aG sudo ${NB_USER} && chown -R ${NB_USER}:${NB_USER} /srv
-RUN usermod -d /home/jovyan rstudio
+#RUN usermod -d /home/jovyan rstudio
 
 # bin to PATH earlier ($NB_PYTHON_PREFIX/bin)
 RUN echo ". ${CONDA_DIR}/etc/profile.d/conda.sh ; conda activate ${CONDA_ENV}" > /etc/profile.d/init_conda.sh
