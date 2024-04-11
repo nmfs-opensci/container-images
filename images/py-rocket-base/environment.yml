@@ -4,17 +4,23 @@ channels:
 dependencies:
   - python=3.10
   ## These are needed for jupyterhub functioning
+  - jupyterhub
   - jupyterhub-singleuser >= 4
   - jupyter-server-proxy >= 4.1.1
   - jupyter-vscode-proxy
   - jupyter-rsession-proxy
-  - ipywidgets
+  - notebook
   - jupyterlab>4
   - jupyterlab-git
   - jupyterlab-favorites
   - jupyter-resource-usage
+  - jupyter-book
+  - jupyterlab-myst
+  - jupytext
   - conda-lock
   - code-server >=3.2
   - nb_conda_kernels
+  - nbgitpuller
+  - git >=2.39
 platforms:
   - linux-64

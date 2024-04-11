@@ -1,0 +1,54 @@
+name: py-rocket-geospatial
+channels:
+  - conda-forge
+dependencies:
+  - matplotlib-base
+  - seaborn
+  - intake
+  - hvplot
+  - datashader
+  - pyproj
+  - bqplot
+  - geopandas
+  - zarr
+  - cartopy
+  - pynco
+  - rasterio
+  - shapely
+  - pyresample
+  - icepyx
+  - joblib
+  - pystac-client
+  - pydap
+  - lxml
+  - ipyleaflet
+  - dask-labextension
+  - ipywidgets
+  - jupyterlab-geojson
+  - jupyterlab-h5web
+  - hdf5plugin
+  - ipympl
+  - pooch
+  - earthaccess>=0.8.2
+  - sliderule>=3.6.0
+  # QGIS
+  - qgis~=3.28
+  - pyopencl
+  - ocl-icd-system
+  - websockify>=0.10
+  # /QGIS 
+  - h5coro
+  - itslive
+  - rasterstats
+  - kerchunk
+  - rechunker
+  - pqdm
+  - spectral
+  - scikit-image
+  - coiled
+  - s3fs
+  - awscliv2
+  - certifi=2023.11.17
+  - cftime=1.6.3
+platforms:
+  - linux-64

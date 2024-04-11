@@ -1,6 +1,6 @@
 # Readme
 
-This creates a basic R image built off rocker/geospatial.
+This creates a basic R image built off rocker/verse.
 
 Python 3.10 is installed with a conda environment called notebook that is activated on opening the container. The environment only has Python 3.10 and some packages required for JupyterHub.
 
