@@ -1,0 +1,34 @@
+name: Docker Image CI openscapes-rocker
+env:
+  IMAGE_NAME: openscapes-rocker
+  IMAGE_TAG: latest
+  
+on:
+  workflow_dispatch: null
+  push:
+    branches: main
+    paths: 
+      - 'images/openscapes-rocker/**'
+      - '.github/workflows/docker-image-openscapes-rocker.yml'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - uses: actions/checkout@v3
+      - name: Login to GitHub Container Registry
+        if: github.repository == 'nmfs-opensci/container-images'
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{github.actor}}
+          password: ${{secrets.GITHUB_TOKEN}}
+      - name: Build the Docker image
+        if: github.repository == 'nmfs-opensci/container-images'
+        run: |
+          docker build images/$IMAGE_NAME -f images/$IMAGE_NAME/Dockerfile  --tag ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG
+      - name: Publish
+        if: github.repository == 'nmfs-opensci/container-images'
+        run: |
+          docker push ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG
+
