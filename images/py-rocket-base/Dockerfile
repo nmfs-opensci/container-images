@@ -54,15 +54,6 @@ RUN R -e 'if(!dir.exists(Sys.getenv("R_LIBS_USER"))) dir.create(Sys.getenv("R_LI
 # add bin to PATH earlier ($NB_PYTHON_PREFIX/bin)
 RUN echo ". ${CONDA_DIR}/etc/profile.d/conda.sh ; conda activate ${CONDA_ENV}" > /etc/profile.d/init_conda.sh
 
-## Add so that we can run the image as a devcontainer
-# Add Tini. Tini operates as a process subreaper for jupyter. This prevents
-# kernel crashes.
-# https://jupyter-server.readthedocs.io/en/latest/operators/public-server.html#docker-cmd
-ENV TINI_VERSION v0.6.0
-ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /usr/bin/tini
-RUN chmod +x /usr/bin/tini
-ENTRYPOINT ["/usr/bin/tini", "--"]
-
 USER ${NB_USER}
 
 COPY --chown=rstudio:rstudio . /tmp/build
