@@ -62,3 +62,17 @@ Still working to streamline this.
 ## GitPod -- like Codespaces
 
 Still working to streamline this.
+
+## Run on Colab?
+
+https://github.com/indigo-dc/udocker
+
+Installation in the Jupyter notebook
+```
+%%shell
+pip install udocker
+udocker --allow-root install
+Sample usage:
+udocker --allow-root run -p 127.0.0.1:8081:8081 -v -e ghcr.io/nmfs-opensci/container-images/openscapes-rocker:latest
+```
+
