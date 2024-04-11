@@ -72,7 +72,6 @@ Installation in the Jupyter notebook
 %%shell
 pip install udocker
 udocker --allow-root install
-Sample usage:
 udocker --allow-root run -p 127.0.0.1:8888:8888 -v -e ghcr.io/nmfs-opensci/container-images/openscapes-rocker:latest
 ```
 
