@@ -20,8 +20,10 @@ USER root
 ## Change the home directory to /home/jovyan for the rstudio user
 ## So that /home/jovyan is consistently the user directory in JupyterHubs
 RUN usermod -aG sudo ${NB_USER} && chown -R ${NB_USER}:${NB_USER} /srv
-RUN usermod -d /home/jovyan rstudio
-RUN chown -R "${DEFAULT_USER}:${DEFAULT_USER}" "/home/jovyan"
+RUN mkdir /home/jovyan \
+    usermod -d /home/jovyan rstudio \
+    chown -R "${DEFAULT_USER}:${DEFAULT_USER}" "/home/jovyan" \
+    cp -r /home/rstudio /home/jovyan
 
 # Add both our notebook env as well as default conda installation to $PATH
 # Thus, when we start a `python` process (for kernels, or notebooks, etc),
