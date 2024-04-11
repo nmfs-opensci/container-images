@@ -13,7 +13,7 @@ How can I use container images? JupyterHubs, Codespaces, GitLab, Binder, VSCode 
 
 See `images/jupyter-base-notebook` for a simple example using a `environment.yml` file
 
-## To run images
+## To run images in a JupyterHub with 'bring your image'
 
 * Go to https://itcoocean.2i2c.cloud/
 * Click on the 'Bring your own image' radio button at bottom
@@ -21,3 +21,38 @@ See `images/jupyter-base-notebook` for a simple example using a `environment.yml
 * You will find the urls in the right nav bar under 'Packages'
 * Example `ghcr.io/nmfs-opensci/container-images/jupyter-base-notebook:latest`
 
+## Run with a JupyterHub
+
+Should work out of the box. Put the url to the image whereever you would use images.
+
+## Run with docker
+
+```
+docker run -p 8888:8888 ghcr.io/nmfs-opensci/container-images/openscapes-rocker:latest
+```
+
+On a Mac M2+ with Rosetta emulation turned on in the Docker Desktop settings.
+```
+docker run --platform linux/amd64 -p 8888:8888 ghcr.io/nmfs-opensci/container-images/openscapes-rocker:latest
+```
+
+In the terminal look for something like and put that in a browser.
+```
+http://127.0.0.1:8888/lab?token=6d45c7d88aba92a815647c
+```
+
+## Run with Binder
+
+Should work out of the box. Copy the Dockerfile into a repo and put the Dockerfile in the base or in a folder called `binder`. Then put this in a browser. Note many of the Docker images are big and somewhat hairy to build. This might not work in binder.
+
+```
+https://mybinder.org/v2/gh/user-name/reponame/main
+```
+
+## With Codespaces
+
+Still working to streamline this.
+
+## GitPod -- like Codespaces
+
+Still working to streamline this.
