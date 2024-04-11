@@ -1,4 +1,4 @@
-FROM rocker/binder:4.3
+FROM rocker/geospatial:4.3
 
 ENV CONDA_ENV=notebook \
     DEBIAN_FRONTEND=noninteractive \
@@ -19,7 +19,7 @@ ENV NB_PYTHON_PREFIX=${CONDA_DIR}/envs/${CONDA_ENV} \
 # Thus, when we start a `python` process (for kernels, or notebooks, etc),
 # it loads the python in the notebook conda environment, as that comes
 # first here.
-# ENV PATH=${NB_PYTHON_PREFIX}/bin:${CONDA_DIR}/bin:${PATH}
+ENV PATH=${NB_PYTHON_PREFIX}/bin:${CONDA_DIR}/bin:${PATH}
 
 # Ask dask to read config from ${CONDA_DIR}/etc rather than
 # the default of /etc, since the non-root jovyan user can write
