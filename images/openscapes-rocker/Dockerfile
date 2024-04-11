@@ -1,5 +1,12 @@
 FROM rocker/geospatial:4.3
 
+USER root
+
+## Change the home directory to /home/jovyan for the rstudio user
+## So that /home/jovyan is consistently the user directory in JupyterHubs
+RUN usermod -aG sudo ${NB_USER} && chown -R ${NB_USER}:${NB_USER} /srv
+RUN usermod -d /home/jovyan rstudio
+
 ENV CONDA_ENV=notebook \
     DEBIAN_FRONTEND=noninteractive \
     NB_USER=rstudio \
@@ -13,7 +20,7 @@ ENV CONDA_ENV=notebook \
 # Path to the python environment where the jupyter notebook packages are installed
 ENV NB_PYTHON_PREFIX=${CONDA_DIR}/envs/${CONDA_ENV} \
     # Home directory of our non-root user
-    HOME=/home/${NB_USER}
+    HOME=/home/jovyan
 
 # Add both our notebook env as well as default conda installation to $PATH
 # Thus, when we start a `python` process (for kernels, or notebooks, etc),
@@ -31,13 +38,6 @@ ENV DASK_ROOT_CONFIG=${CONDA_DIR}/etc
 
 ## Ensure that users have a personal user library for R packages
 RUN R -e 'if(!dir.exists(Sys.getenv("R_LIBS_USER"))) dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE)'
-
-USER root
-
-## Change the home directory to /home/jovyan for the rstudio user
-## So that /home/jovyan is consistently the user directory in JupyterHubs
-RUN usermod -aG sudo ${NB_USER} && chown -R ${NB_USER}:${NB_USER} /srv
-#RUN usermod -d /home/jovyan rstudio
 
 # bin to PATH earlier ($NB_PYTHON_PREFIX/bin)
 RUN echo ". ${CONDA_DIR}/etc/profile.d/conda.sh ; conda activate ${CONDA_ENV}" > /etc/profile.d/init_conda.sh
