@@ -1,5 +1,5 @@
 # geospatial rocker with R 4.3 that is tailored to spin up in Codespaces nicely
-FROM ghcr.io/nmfs-opensci/container-images/py-rocket-base:latest
+FROM ghcr.io/nmfs-opensci/container-images/py-rocket-geospatial:4.3.3-3.10
 
 # By default, the versioned rocker image (which py-rocket-base uses) will use 
 # the Posit repository which has binaries for Unbuntu (which rocker image uses)
