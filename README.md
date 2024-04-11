@@ -77,3 +77,5 @@ udocker --allow-root run -p 127.0.0.1:8888:8888 -v -e ghcr.io/nmfs-opensci/conta
 
 Or this? https://stackoverflow.com/questions/62820498/how-to-connect-google-colab-with-localhost-running-docker-image
 
+port forwarding https://biplobsd.me/blogs/view/run-swirl-open-source-search-engine-on-google-colab.md
+
