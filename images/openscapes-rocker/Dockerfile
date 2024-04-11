@@ -1,4 +1,5 @@
-FROM rocker/binder:4.3
+#FROM rocker/binder:4.3
+FROM rocker/geospatial:4.2
 
 ENV CONDA_ENV=notebook \
     DEBIAN_FRONTEND=noninteractive \
