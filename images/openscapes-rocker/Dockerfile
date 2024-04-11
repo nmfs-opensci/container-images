@@ -46,7 +46,7 @@ RUN echo "Installing Mambaforge..." \
     && wget --quiet ${URL} -O installer.sh \
     && /bin/bash installer.sh -u -b -p ${CONDA_DIR} \
     && rm installer.sh \
-    && mamba clean -afy \
+    && ${CONDA_DIR}/bin/mamba clean -afy \
     # After installing the packages, we cleanup some unnecessary files
     # to try reduce image size - see https://jcristharif.com/conda-docker-tips.html
     && find ${CONDA_DIR} -follow -type f -name '*.a' -delete \
