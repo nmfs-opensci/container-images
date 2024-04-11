@@ -1,5 +1,5 @@
-# Rocker verse with conda notebook environment; rstudio user with
-# /home/jovyan home dir
+# Rocker verse with conda notebook environment; 
+# rstudio user with /home/jovyan home dir
 FROM ghcr.io/nmfs-opensci/container-images/py-rocket-base:4.3.3-3.10
 
 # install the geospatial libraries and R spatial
