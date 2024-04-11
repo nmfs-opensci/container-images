@@ -75,3 +75,5 @@ udocker --allow-root install
 udocker --allow-root run -p 127.0.0.1:8888:8888 -v -e ghcr.io/nmfs-opensci/container-images/openscapes-rocker:latest
 ```
 
+Or this? https://stackoverflow.com/questions/62820498/how-to-connect-google-colab-with-localhost-running-docker-image
+
