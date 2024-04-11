@@ -4,14 +4,20 @@ These are a collection of container images to provide standardized environments 
 
 How can I use container images? JupyterHubs, Codespaces, GitLab, Binder, VSCode on your laptop (need Docker or Podman installed). We are working on templates to show you how to use these in a Codespace to add a computational environment right to your Codespace without building it.
 
-## To add images
+## To creating Dockerfiles
 
-* Create new dir in `images` directory for your image . Add Dockerfile there.
+These are the main base images. They are variants of the Openscapes images. See `images/coastwatch` and `images/jupyter-base-notebook` for simple examples. Then see the next section on adding images.
+
+* R verse `ghcr.io/nmfs-opensci/container-images/py-rocket-base:4.3.3-3.10`
+* Python+R geospatial `ghcr.io/nmfs-opensci/container-images/py-rocket-geospatial:4.3.3-3.10`
+* Python geospatial `openscapes/python`
+
+## To add images to the repository
+
+* Create new dir in `images` directory for your image. Add the Dockerfile there.
 * Create new `build-docker-mynewimage.yml` file in `.github/workflows` folder and make necessary edits in the file. It'll be obvious.
 * Push the changes and the docker image should build. Check the Actions tab to check progress and debug fails.
 * Once the image builds, you'll see it listed under packages in the right nav bar.
-
-See `images/jupyter-base-notebook` for a simple example using a `environment.yml` file
 
 ## To run images in a JupyterHub with 'bring your image'
 
