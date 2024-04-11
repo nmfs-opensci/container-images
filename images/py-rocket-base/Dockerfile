@@ -1,7 +1,8 @@
 # geospatial rocker with RStudio
 # Is designed to have a conda environment called notebook like
 # the pangeo images. The jupyterhub modules are in this environment.
-FROM ghcr.io/rocker-org/devcontainer/geospatial:4.3
+#FROM ghcr.io/rocker-org/devcontainer/geospatial:4.3
+FROM rocker/binder:4.3.3
 
 USER root
 
