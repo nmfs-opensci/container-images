@@ -1,0 +1,37 @@
+name: Docker Image CI cmip6-cookbook
+# To use this template, change the env variables
+# IMAGE_NAME this should be the same name as the folder in which the Dockerfile is
+# IMAGE_TAG whatever tag you want to automatically be used
+env:
+  IMAGE_NAME: cmip6-cookbook
+  IMAGE_TAG: latest
+  
+on:
+  workflow_dispatch: null
+  push:
+    branches: main
+    paths: 
+      - 'images/cmip6-cookbook/**'
+      - '.github/workflows/docker-image-cmip6-cookbook.yml'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - uses: actions/checkout@v3
+      - name: Login to GitHub Container Registry
+        if: github.repository == 'nmfs-opensci/container-images'
+        uses: docker/login-action@v1
+        with:
+          registry: ghcr.io
+          username: ${{github.actor}}
+          password: ${{secrets.GITHUB_TOKEN}}
+      - name: Build the Docker image
+        if: github.repository == 'nmfs-opensci/container-images'
+        run: |
+          docker build images/$IMAGE_NAME -f images/$IMAGE_NAME/Dockerfile  --tag ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG
+      - name: Publish
+        if: github.repository == 'nmfs-opensci/container-images'
+        run: |
+          docker push ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG
+
