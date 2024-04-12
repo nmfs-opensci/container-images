@@ -1,10 +1,18 @@
 name: Docker Image CI openscapes-python
+# To use this template, change the env variables
+# IMAGE_NAME this should be the same name as the folder in which the Dockerfile is
+# IMAGE_TAG whatever tag you want to automatically be used
+env:
+  IMAGE_NAME: openscpapes-python
+  IMAGE_TAG: latest
+  
 on:
   workflow_dispatch: null
   push:
     branches: main
     paths: 
-      - 'images/openscapes-python/**'
+      - 'images/openscpapes-python/**'
+      - '.github/workflows/docker-image-openscpapes-python.yml'
 jobs:
   build:
     runs-on: ubuntu-latest
