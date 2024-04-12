@@ -2,7 +2,7 @@ FROM openscapes/python:6ee57a9
 
 # install additional package...
 
-USER ${NB_USER}
+USER root
 
 #RUN mamba install -c conda-forge -n notebook nb_conda_kernels
 
@@ -10,3 +10,6 @@ USER ${NB_USER}
 COPY environment.yml environment.yml
 RUN mamba env update -n notebook -f environment.yml
 RUN rm environment.yml
+
+USER ${NB_USER}
+
