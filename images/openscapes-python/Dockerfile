@@ -1,6 +1,6 @@
 FROM openscapes/python:f577786
 
-# install additional package...
+# install nb_conda_kernels to allow conda kernels
 
 USER ${NB_USER}
 
