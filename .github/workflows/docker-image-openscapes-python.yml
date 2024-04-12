@@ -3,7 +3,7 @@ name: Docker Image CI openscapes-python
 # IMAGE_NAME this should be the same name as the folder in which the Dockerfile is
 # IMAGE_TAG whatever tag you want to automatically be used
 env:
-  IMAGE_NAME: openscpapes-python
+  IMAGE_NAME: openscapes-python
   IMAGE_TAG: latest
   
 on:
@@ -11,8 +11,8 @@ on:
   push:
     branches: main
     paths: 
-      - 'images/openscpapes-python/**'
-      - '.github/workflows/docker-image-openscpapes-python.yml'
+      - 'images/openscapes-python/**'
+      - '.github/workflows/docker-image-openscapes-python.yml'
 jobs:
   build:
     runs-on: ubuntu-latest
