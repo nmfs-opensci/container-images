@@ -4,7 +4,7 @@ FROM openscapes/python:6ee57a9
 
 USER ${NB_USER}
 
-RUN conda install -c conda-forge -n notebook nb_conda_kernels
+RUN mamba env update -c conda-forge -n notebook nb_conda_kernels
 
 # set-up the base cmip6-cookbook environment
 COPY environment.yml environment.yml
