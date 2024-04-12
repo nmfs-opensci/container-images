@@ -4,5 +4,9 @@ FROM openscapes/python:f577786
 
 USER ${NB_USER}
 
-RUN conda install -c conda-forge nb_conda_kernels
-RUN conda install -c conda-forge pillow cmocean
+RUN conda install -c conda-forge -n notebook nb_conda_kernels
+
+# set-up the base cmip6-cookbook environment
+COPY environment.yml environment.yml
+RUN mamba env create -f environment.yml
+RUN rm environment.yml
