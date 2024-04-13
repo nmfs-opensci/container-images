@@ -1,18 +1,16 @@
-name: Docker Image CI openscapes-python
-# To use this template, change the env variables
-# IMAGE_NAME this should be the same name as the folder in which the Dockerfile is
-# IMAGE_TAG whatever tag you want to automatically be used
+name: Docker Image CI nmfs-opensci-python-base
 env:
-  IMAGE_NAME: openscapes-python
+  IMAGE_NAME: nmfs-opensci-python-base
   IMAGE_TAG: latest
   
 on:
   workflow_dispatch: null
   push:
     branches: main
+    # main path plus the nmfs-opensci-python-base if that is used.
     paths: 
-      - 'images/openscapes-python/**'
-      - '.github/workflows/docker-image-openscapes-python.yml'
+      - 'images/nmfs-opensci-python-base/**'
+      - '.github/workflows/docker-image-nmfs-opensci-python-base.yml'
 jobs:
   build:
     runs-on: ubuntu-latest
