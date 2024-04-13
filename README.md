@@ -23,6 +23,10 @@ These are the main base images. They are variants of the Openscapes images. See 
 * Create new `build-docker-mynewimage.yml` file in `.github/workflows` folder and make necessary edits in the file. It'll be obvious.
 * Push the changes and the docker image should build. Check the Actions tab to check progress and debug fails.
 * Once the image builds, you'll see it listed under packages in the right nav bar.
+* Create a lock-file for reproducibility
+```
+conda-lock -f environment.yml -p linux-64
+```
 
 ## To run images in a JupyterHub with 'bring your image'
 
