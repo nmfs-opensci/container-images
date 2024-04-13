@@ -4,5 +4,4 @@ FROM openscapes/python:4f340eb
 
 USER ${NB_USER}
 
-RUN mamba install -c conda-forge -n notebook nb_conda_kernels
-RUN mamba install -c conda-forge -n notebook pillow cmocean
+RUN mamba install -c conda-forge -n notebook cmocean
