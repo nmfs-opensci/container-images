@@ -5,12 +5,12 @@ name: Docker Image CI cmip6-cookbook
 env:
   IMAGE_NAME: cmip6-cookbook
   IMAGE_TAG: latest
-  
 on:
   workflow_dispatch: null
   push:
     branches: main
     paths: 
+      - 'images/nmfs-opensci-python-base/**'
       - 'images/cmip6-cookbook/**'
       - '.github/workflows/docker-image-cmip6-cookbook.yml'
 jobs:

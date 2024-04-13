@@ -1,16 +1,11 @@
-FROM pangeo/pangeo-notebook:2024.04.08
-RUN conda init zsh && conda init bash
+FROM ghcr.io/nmfs-opensci/container-images/nmfs-opensci-python-base:latest
 
-# set-up the base cmip6-cookbook environment
+# set-up the base cmip6-cookbook environment and create a kernel
+ENV NEWENV=cmip6
 COPY environment.yml environment.yml
-RUN mamba env create -n cmip6 -f environment.yml
+RUN mamba env create -n ${NEWENV} -f environment.yml
 RUN rm environment.yml
-
-# Activate so I can use --user instead of knowing where the conda dir is
-RUN conda activate cmip6 \
-  && python -m ipykernel install --user --name cmip6 \
-  && conda deactivate \
-  && conda activate notebook
+RUN python -m ipykernel install --prefix ${CONDA_DIR}/envs/${NEWENV} --name ${NEWENV}
 
 USER ${NB_USER}
 
