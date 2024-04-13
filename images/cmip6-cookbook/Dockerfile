@@ -6,7 +6,7 @@ ENV NEWENV=cmip6
 COPY environment.yml environment.yml
 RUN mamba env create -n ${NEWENV} -f environment.yml
 RUN rm environment.yml
-RUN python -m ipykernel install --prefix ${CONDA_DIR}/envs/${NEWENV} --name ${NEWENV}
+RUN python -m ipykernel install --prefix ${CONDA_DIR}/envs/notebook --name ${NEWENV}
 
 USER ${NB_USER}
 
