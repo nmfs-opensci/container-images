@@ -1,4 +1,5 @@
-FROM ghcr.io/nmfs-opensci/container-images/nmfs-opensci-python-base:latest
+#FROM ghcr.io/nmfs-opensci/container-images/nmfs-opensci-python-base:latest
+FROM pangeo/pangeo-notebook:2024.04.08
 
 # set-up the base cmip6-cookbook environment and create a kernel
 ENV NEWENV=cmip6
