@@ -10,7 +10,6 @@ RUN conda deactivate \
   && python -m ipykernel install --user --name cmip6 \
   && conda deactivate \
   && conda activate notebook
-```
 
 USER ${NB_USER}
 
