@@ -4,6 +4,7 @@ on:
   push:
     branches: main
     paths: 
+      - '!images/aomlomics-jh/README.md'
       - 'images/aomlomics-jh/**'
       - '.github/workflows/docker-image-aomlomics-jh.yml'
 jobs:
