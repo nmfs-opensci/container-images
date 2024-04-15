@@ -3,12 +3,14 @@ env:
   IMAGE_NAME: jupyter-base-notebook
   IMAGE_TAG: latest
   IMAGE_BRANCH: main
+
 on:
   workflow_dispatch: null
   push:
     branches: main
     paths: 
       - 'images/jupyter-base-notebook/**'
+      - '.github/workflows/docker-image-jupyter-base-notebook.yml'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -25,10 +27,9 @@ jobs:
       - name: Build the Docker image
         if: github.repository == 'nmfs-opensci/container-images'
         run: |
-          docker build images/jupyter-base-notebook -f images/jupyter-base-notebook/Dockerfile  --tag ghcr.io/nmfs-opensci/container-images/jupyter-base-notebook:latest
+          docker build images/$IMAGE_NAME -f images/$IMAGE_NAME/Dockerfile  --tag ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG
       - name: Publish
         if: github.repository == 'nmfs-opensci/container-images'
         run: |
-          docker push ghcr.io/nmfs-opensci/container-images/jupyter-base-notebook:latest
-          docker push ghcr.io/nmfs-opensci/jupyter-base-notebook:latest
-
+          docker push ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG
+          docker push ghcr.io/nmfs-opensci/$IMAGE_BRANCH/$IMAGE_NAME:$IMAGE_TAG
