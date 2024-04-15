@@ -5,14 +5,15 @@ name: Docker Image CI test
 env:
   IMAGE_NAME: test
   IMAGE_TAG: latest
+  IMAGE_BRANCH: main
   
 on:
   workflow_dispatch: null
   push:
-    branches: main
+    branches: ${{ env.IMAGE_BRANCH }}
     paths: 
-      - 'images/test/**'
-      - '.github/workflows/docker-image-test.yml'
+      - 'images/${{ env.IMAGE_NAME }}/**'
+      - '.github/workflows/docker-image-${{ env.IMAGE_NAME }}.yml'
 jobs:
   build:
     runs-on: ubuntu-latest
