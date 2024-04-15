@@ -1,4 +1,8 @@
 name: Docker Image CI base notebook
+env:
+  IMAGE_NAME: jupyter-base-notebook
+  IMAGE_TAG: latest
+  IMAGE_BRANCH: main
 on:
   workflow_dispatch: null
   push:
