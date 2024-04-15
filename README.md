@@ -9,7 +9,7 @@ These are a collection of container images to provide standardized environments 
 
 How can I use container images? JupyterHubs, Codespaces, GitLab, Binder, VSCode on your laptop (need Docker or Podman installed). We are working on templates to show you how to use these in a Codespace to add a computational environment right to your Codespace without building it.
 
-## To creating Dockerfiles
+## Creating Dockerfiles
 
 These are the main base images. They are variants of the Openscapes images. See `images/coastwatch` and `images/jupyter-base-notebook` for simple examples. Then see the next section on adding images.
 
