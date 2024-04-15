@@ -26,4 +26,5 @@ jobs:
         if: github.repository == 'nmfs-opensci/container-images'
         run: |
           docker push ghcr.io/nmfs-opensci/container-images/jupyter-base-notebook:latest
+          docker push ghcr.io/nmfs-opensci/jupyter-base-notebook:latest
 
