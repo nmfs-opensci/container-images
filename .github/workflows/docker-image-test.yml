@@ -10,7 +10,7 @@ env:
 on:
   workflow_dispatch: null
   push:
-    branches: ${{ env.IMAGE_BRANCH }}
+    branches: main
     paths: 
       - 'images/${{ env.IMAGE_NAME }}/**'
       - '.github/workflows/docker-image-${{ env.IMAGE_NAME }}.yml'
