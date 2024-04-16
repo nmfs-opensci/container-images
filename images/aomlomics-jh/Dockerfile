@@ -1,4 +1,9 @@
 FROM docker.io/aomlomics/tourmaline:latest
+LABEL org.opencontainers.image.maintainers="eli.holmes@noaa.gov"
+LABEL org.opencontainers.image.authors="Luke Thompson NOAA"
+LABEL org.opencontainers.image.source=https://github.com/nmfs-opensci/container-images/aomlomics-jh
+LABEL org.opencontainers.image.description="Tourmaline is an amplicon sequence processing workflow for Illumina sequence data that uses QIIME 2 and the software packages it wraps."
+LABEL org.opencontainers.image.licenses=Apache2.0
 
 ENV NB_USER=jovyan \
     NB_UID=1000 \
