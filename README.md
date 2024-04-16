@@ -112,6 +112,8 @@ All code used in the images is under open licenses. Some is copy-left which mean
 * [R](https://www.r-project.org/Licenses/): GPL-2, GPL-3
 * RStudio Server: GPL-3
 
+* conda and mamba solvers: are open source projects with 3-clause BSD license. Anaconda is not used in these images nor are the Anaconda repositories.
+
 <hr>
 
 ## Disclaimer
