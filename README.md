@@ -90,8 +90,15 @@ port forwarding https://biplobsd.me/blogs/view/run-swirl-open-source-search-engi
 * The Dockerfiles are released under Apache 2.0.
 * [jupyterhub](https://github.com/jupyterhub/jupyterhub?tab=License-1-ov-file#readme) : Modified BSD License
 * [juptyerlab](https://github.com/jupyterlab/jupyterlab?tab=License-1-ov-file#readme): Open license
+
+* [Openscapes base Python image](https://github.com/nasa-openscapes/corn): MIT
+* [Pangeo Docker Stack](https://github.com/pangeo-data/pangeo-docker-images): MIT
 * [Python](https://docs.python.org/3/license.html): Zero clause BSD
 
+* [Openscapes base rocker image](https://github.com/nasa-openscapes/py-rocket): MIT
+* [Rocker Docker Stack](https://github.com/rocker-org/rocker-versioned2?tab=GPL-2.0-1-ov-file#readme): GPL-2
+* [R](https://www.r-project.org/Licenses/): GPL-2, GPL-3
+* RStudio Server: GPL-3
 
 
 
