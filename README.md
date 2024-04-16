@@ -87,6 +87,8 @@ port forwarding https://biplobsd.me/blogs/view/run-swirl-open-source-search-engi
 
 ## License information
 
+All code is under open licenses. Some is copy-left which means if you modify their code (we don't), you need to also provide your source code. The Dockerfile code is released under Apache 2.0, a very permissive open source license which does not require that you make you own modifications open. See the README.md files for the licenses for specific code used in the Docker files.
+
 * The Dockerfiles are released under Apache 2.0.
 * [jupyterhub](https://github.com/jupyterhub/jupyterhub?tab=License-1-ov-file#readme) : Modified BSD License
 * [juptyerlab](https://github.com/jupyterlab/jupyterlab?tab=License-1-ov-file#readme): Open license
