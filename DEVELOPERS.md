@@ -1,6 +1,4 @@
-# NMFS Open Science Docker Stack -- Development Repo
-
-We work and experiment here and then post images to the [NMFS Open Sci Docker Stack](https://github.com/nmfs-opensci/docker-stack).
+# NMFS Open Science Docker Stack -- for developers
 
 These are a collection of container images to provide standardized environments for Python and R computing. See the wiki for discussion of the images. Want to contribute? Put in a pull request or if you are from NOAA Fisheries, reach out to Eli Holmes to be added to the repository.
 
