@@ -1,6 +1,3 @@
-[2]: <https://ghcr-badge.egpl.dev/nmfs-opensci/container-images%2Fnmfs-opensci-python-base/latest_tag?color=%2344cc11&ignore=&label=version&trim=>
-[3]: <https://ghcr-badge.egpl.dev/nmfs-opensci/container-images%2Fnmfs-opensci-python-base/size?color=%2344cc11&tag=latest&label=image+size&trim=>
-
 # NMFS Open Science Docker Stack -- Development Repo
 
 We work and experiment here and then post images to the [NMFS Open Sci Docker Stack](https://github.com/nmfs-opensci/docker-stack).
