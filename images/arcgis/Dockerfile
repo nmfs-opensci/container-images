@@ -1,10 +1,10 @@
+
+FROM jupyter/base-notebook:lab-2.2.9
 LABEL org.opencontainers.image.authors="tim.haverland@noaa.gov"
 LABEL org.opencontainers.image.source=https://github.com/nmfs-opensci/container-images/arcgis
 LABEL org.opencontainers.image.description="ArcGIS Python module image that will run in a JupyterHub"
 LABEL org.opencontainers.image.licenses=Apache2.0
 
-FROM jupyter/base-notebook:lab-2.2.9
-    
 RUN conda install --yes -c esri 'arcgis=2.0.0' && \
     conda clean --all -f -y
 
