@@ -85,3 +85,13 @@ Or this? https://stackoverflow.com/questions/62820498/how-to-connect-google-cola
 
 port forwarding https://biplobsd.me/blogs/view/run-swirl-open-source-search-engine-on-google-colab.md
 
+## License information
+
+* The Dockerfiles are released under Apache 2.0.
+* [jupyterhub](https://github.com/jupyterhub/jupyterhub?tab=License-1-ov-file#readme) : Modified BSD License
+* [juptyerlab](https://github.com/jupyterlab/jupyterlab?tab=License-1-ov-file#readme): Open license
+* [Python](https://docs.python.org/3/license.html): Zero clause BSD
+
+
+
+
