@@ -1,9 +1,9 @@
 [2]: <https://ghcr-badge.egpl.dev/nmfs-opensci/container-images%2Fnmfs-opensci-python-base/latest_tag?color=%2344cc11&ignore=&label=version&trim=>
 [3]: <https://ghcr-badge.egpl.dev/nmfs-opensci/container-images%2Fnmfs-opensci-python-base/size?color=%2344cc11&tag=latest&label=image+size&trim=>
 
-# NMFS Open Science Docker Stack
+# NMFS Open Science Docker Stack -- Development Repo
 
-nmfs-opensci-python-base [![2] ![3]](https://github.com/nmfs-opensci/container-images/pkgs/container/nmfs-opensci-python-base)
+We work and experiment here and then post images to the [NMFS Open Sci Docker Stack](https://github.com/nmfs-opensci/docker-stack).
 
 These are a collection of container images to provide standardized environments for Python and R computing. See the wiki for discussion of the images. Want to contribute? Put in a pull request or if you are from NOAA Fisheries, reach out to Eli Holmes to be added to the repository.
 
