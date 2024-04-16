@@ -13,6 +13,10 @@ These are a collection of container images to provide standardized environments 
 * When an image contains both R and Python, the base image is rocker and micromamba is installed along with the Pangeo environment structure. RStudio will use the Python environment in the notebook environment when Python is used from within RStudio.
 * The images are designed to be deployable from JupyterHubs, Codespaces, GitPod, Colab, Binder, and on your computer via Docker or Podman. See instructions below.
 * However, they are not terribly light-weight (large). Use the original Jupyter, Pangeo or Rocker images if you are looking for simple lightweight data science images.
+
+## Stable set of images
+
+There are many other images in the `images` folder that are experimental in nature.
   
 
 | Image           | Description                            | Size | Link | Dockerfile |
