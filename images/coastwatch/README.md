@@ -2,6 +2,10 @@
 
 Author of Dockerfile: Sunny Hospital (NOAA)
 
+## Description
+
+This is a geospatial Python and R image with Jupyter Lab and RStudio Server for use in CoastWatch training courses.
+
 ## License
 
 * Dockerfile: Apache 2.0
@@ -11,6 +15,3 @@ Author of Dockerfile: Sunny Hospital (NOAA)
 * [R](https://www.r-project.org/Licenses/): GPL-2, GPL-3
 * RStudio Server: GPL-3
 
-## Description
-
-This is a geospatial Python and R image with Jupyter Lab and RStudio Server for use in CoastWatch training courses.
