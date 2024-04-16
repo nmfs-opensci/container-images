@@ -8,7 +8,6 @@ Author of echopype: Wu-Jung Lee (UW) + echopype team
 * Dockerfile: Apache 2.0
 * [Openscapes base Python image](https://github.com/nasa-openscapes/corn): MIT
 * [Pangeo Docker Stack](https://github.com/pangeo-data/pangeo-docker-images): MIT
-* [Python](https://docs.python.org/3/license.html): Zero-Clause BSD
 * [echopype](https://github.com/OSOceanAcoustics/echopype): Apache 2.0
 
 ## Description
