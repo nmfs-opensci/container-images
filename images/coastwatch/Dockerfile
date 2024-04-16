@@ -1,4 +1,9 @@
 FROM openscapes/rocker:a7596b5
+LABEL org.opencontainers.image.maintainers="sun.bak-hospital@noaa.gov"
+LABEL org.opencontainers.image.source=https://github.com/nmfs-opensci/container-images/coastwatch
+LABEL org.opencontainers.image.description="CoastWatch image for satellite training courses"
+LABEL org.opencontainers.image.licenses=Apache2.0
+
 # Make sure R uses the conda path
 USER root
 RUN echo "PATH=${PATH}" >>"${R_HOME}/etc/Renviron.site"
