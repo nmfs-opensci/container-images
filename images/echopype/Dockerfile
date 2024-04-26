@@ -8,9 +8,9 @@ LABEL org.opencontainers.image.licenses=Apache2.0
 
 # holoviews is out of date in the openscapes image
 RUN mamba update -c conda-forge --name notebook holoviews
-RUN mamba update -c conda-forge --name notebook hvplot
+RUN mamba update -c conda-forge --name notebook hvplot datashader
 
 # The default conda env on the openscapes image is notebook
 # Pin echopype so the examples run
 RUN mamba install -c conda-forge --name notebook cmocean
-RUN mamba install -c conda-forge --name notebook echopype=0.8.1
+RUN mamba install -c conda-forge --name notebook echopype=0.8.4
