@@ -78,7 +78,7 @@ https://mybinder.org/v2/gh/user-name/reponame/main
 
 ## With Codespaces
 
-Still working to streamline this.
+See https://github.com/MichaelAkridge-NOAA/Open-Science-Codespaces
 
 ## GitPod -- like Codespaces
 
