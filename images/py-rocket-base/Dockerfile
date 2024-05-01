@@ -83,6 +83,11 @@ RUN echo "Checking for 'conda-linux-64.lock' or 'environment.yml'..." \
 
 RUN pip install jupyter-rsession-proxy
 
+# some teaching preferences
+RUN git config --system pull.rebase false && \
+    git config --system credential.helper 'cache --timeout=36000'
+
+
 WORKDIR ${HOME}
 
 EXPOSE 8888
