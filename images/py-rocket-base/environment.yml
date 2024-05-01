@@ -19,7 +19,6 @@ dependencies:
   - jupytext
   - conda-lock
   - code-server >=3.2
-  - nb_conda_kernels
   - nbgitpuller
   - git >=2.39
 platforms:
