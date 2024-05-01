@@ -1,7 +1,7 @@
 #! /usr/local/bin/Rscript
 # install R dependencies
 
-#install.packages(c("rstac", "spData", "quarto", "aws.s3", "reticulate", "gdalcubes"))
+install.packages(c("rstac", "quarto", "aws.s3", "reticulate", "gdalcubes"))
 remotes::install_github('r-tmap/tmap', upgrade=FALSE)
 devtools::install_github("boettiger-lab/earthdatalogin")
 
