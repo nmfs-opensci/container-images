@@ -1,10 +1,11 @@
 #! /usr/local/bin/Rscript
 # install R dependencies
 
-# We could use renv.lock approach here instead, but will force re-creation of environment from scratch
-# Does not provide a good way to ensure that sf/terra/gdalcubes are installed from source while other packages can be binary
-# Likewise, pak insists on installing old gdal from apt instead of respecting system library source builds
-# install.packages("pak")
-install.packages(c("rstac", "spData", "earthdatalogin", "quarto", "aws.s3", "tmap", "reticulate"))
+#install.packages(c("rstac", "spData", "quarto", "aws.s3", "reticulate", "gdalcubes"))
 remotes::install_github('r-tmap/tmap', upgrade=FALSE)
+devtools::install_github("boettiger-lab/earthdatalogin")
 
+# CoastWatch required
+list.of.packages <- c("parsedate", "reshape2", "gridGraphics", "PBSmapping",   
+                      "date", "openair", "cmocean", "plotdap", "rerddapXtracto")
+install.packages(list.of.packages)

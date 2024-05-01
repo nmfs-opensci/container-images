@@ -1,6 +1,6 @@
 # Rocker verse with conda notebook environment; 
 # rstudio user with /home/jovyan home dir
-FROM ghcr.io/nmfs-opensci/container-images/py-rocket-base:4.3.3-3.10
+FROM ghcr.io/nmfs-opensci/container-images/py-rocket-base:4.4-3.10
 
 USER root
 
@@ -9,7 +9,7 @@ RUN /rocker_scripts/install_geospatial.sh
 
 USER ${NB_USER} 
 
-# install a few more R geospatial libraries
+# install a few more R geospatial libraries mainly for CoastWatch
 COPY install.R install.R
 RUN Rscript install.R && rm install.R
 
