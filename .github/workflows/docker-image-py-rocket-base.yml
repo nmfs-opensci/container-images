@@ -1,7 +1,7 @@
 name: Docker Image CI py-rocket-base
 env:
   IMAGE_NAME: py-rocket-base
-  IMAGE_TAG: 4.3.3-3.10
+  IMAGE_TAG: 4.4-3.10
   
 on:
   workflow_dispatch: null
