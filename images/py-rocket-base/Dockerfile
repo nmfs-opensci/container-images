@@ -1,7 +1,7 @@
 # tidyverse + texlive rocker with RStudio
 # Is designed to have a conda environment called notebook like
 # the pangeo images. The jupyterhub modules are in this environment.
-FROM rocker/verse:4.3.3
+FROM rocker/verse:4.4
 
 ENV CONDA_ENV=notebook \
     DEBIAN_FRONTEND=noninteractive \
