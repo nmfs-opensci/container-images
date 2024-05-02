@@ -5,7 +5,11 @@ FROM ghcr.io/nmfs-opensci/container-images/py-rocket-base:4.4-3.10
 USER root
 
 # install the geospatial libraries and R spatial
-RUN /rocker_scripts/install_geospatial.sh
+# RUN /rocker_scripts/install_geospatial.sh
+# Wee need the dev version of gdal
+RUN apt-get update && apt-get -y install libxt6 libzmq3-dev gh
+ADD https://raw.githubusercontent.com/rocker-org/rocker-versioned2/master/scripts/experimental/install_dev_osgeo.sh install_dev_osgeo.sh
+RUN bash install_dev_osgeo.sh && rm install_dev_osgeo.sh
 
 USER ${NB_USER} 
 
