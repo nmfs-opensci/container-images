@@ -1,43 +1,41 @@
-FROM jupyter/base-notebook:lab-2.2.9
-#ENV JUPYTERHUB_SINGLEUSER_APP="jupyter_server.serverapp.ServerApp"
+# devcontainer-focused Rocker
+FROM ghcr.io/rocker-org/devcontainer/tidyverse:4.3
 
-USER ${NB_UID}
+## latest version of geospatial libs
+RUN /rocker_scripts/experimental/install_dev_osgeo.sh
+RUN apt-get update -qq && apt-get -y install vim gh git-lfs awscli
 
-RUN conda install --yes 'jupyterhub=2.0.0' && \
-    conda clean --all -f -y
+# standard python/jupyter setup
+ENV NB_USER=rstudio
+ENV VIRTUAL_ENV=/opt/venv
+ENV PATH=${VIRTUAL_ENV}/bin:${PATH}
+RUN /rocker_scripts/install_python.sh && \
+  chown ${NB_USER}:staff -R ${VIRTUAL_ENV}
 
-RUN conda install --yes -c esri 'arcgis=2.0.0' && \
-    conda clean --all -f -y
+# podman doesn't not understand group permissions
+RUN chown ${NB_USER}:staff -R ${R_HOME}/site-library
 
-#RUN conda install --yes jupyterlab-git jupytext && \
-#    conda clean --all -f -y
+# some teaching preferences
+RUN git config --system pull.rebase false && \
+    git config --system credential.helper 'cache --timeout=36000'
 
-RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager@2 && \
-    jupyter labextension install arcgis-map-ipywidget@2.0.0
+# codeserver
+RUN curl -fsSL https://code-server.dev/install.sh | sh && rm -rf .cache
 
-# I have to use this old base-notebook image (trust me), but it has a
-# start-notebook.py that doesn't include "lab"
-    
-# Configure container startup
-ENTRYPOINT ["tini", "-g", "--"]
-CMD ["start-notebook.sh"]
+USER rstudio
+WORKDIR /home/rstudio
+RUN usermod -s /bin/bash rstudio
+ENV PATH=$PATH:/home/rstudio/.local/bin
 
-# Copy local files as late as possible to avoid cache busting
-COPY start.sh start-notebook.sh start-singleuser.sh /usr/local/bin/
-# Currently need to have both jupyter_notebook_config and jupyter_server_config to support classic and lab
-COPY jupyter_notebook_config.py jupyter_server_config.py /etc/jupyter/
-COPY start-notebook.d /usr/local/bin/start-notebook.d
+COPY jupyter-requirements.txt jupyter-requirements.txt
+RUN python -m pip install --no-cache-dir -r jupyter-requirements.txt && rm jupyter-requirements.txt
 
-# Fix permissions on /etc/jupyter as root
-USER root
+COPY nasa-requirements.txt requirements.txt
+RUN python -m pip install --no-cache-dir -r requirements.txt && rm requirements.txt
 
-RUN mkdir /etc/jupyterhub
-COPY jupyterhub_config.py /etc/jupyterhub/
-RUN fix-permissions /etc/jupyterhub/
+# latest GDAL
+RUN pip install --no-cache-dir --find-links https://girder.github.io/large_image_wheels GDAL
 
-RUN fix-permissions /etc/jupyter/
 
-# Switch back to jovyan to avoid accidental container runs as root
-USER $NB_UID
-
-WORKDIR $HOME
+COPY install.R install.R
+RUN Rscript install.R && rm install.R
