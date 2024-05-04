@@ -50,5 +50,6 @@ dependencies:
   - awscliv2
   - certifi=2023.11.17
   - cftime=1.6.3
+  - regionmask
 platforms:
   - linux-64
