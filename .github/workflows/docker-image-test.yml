@@ -39,8 +39,8 @@ jobs:
             -f images/$IMAGE_NAME/Dockerfile \
             --tag ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG \
             --push
-      - name: Publish
-        if: github.repository == 'nmfs-opensci/container-images'
+#      - name: Publish
+#        if: github.repository == 'nmfs-opensci/container-images'
 #        run: |
 #          docker push ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG
 
