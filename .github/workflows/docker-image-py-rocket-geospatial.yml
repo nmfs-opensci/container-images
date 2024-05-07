@@ -26,7 +26,6 @@ jobs:
       - name: Build the Docker image
         if: github.repository == 'nmfs-opensci/container-images'
         run: |
-        run: |
           docker buildx create \
             --name container \
             --driver=docker-container
