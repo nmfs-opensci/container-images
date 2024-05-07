@@ -1,2 +1,2 @@
-# devcontainer-focused Rocker
-FROM jupyter/base-notebook:lab-2.2.9
+FROM alpine:3.19
+RUN apk add curl
