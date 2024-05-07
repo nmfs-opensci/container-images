@@ -17,12 +17,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        platform:
-          - linux/amd64
-          - linux/arm64
     permissions: write-all
     steps:
       - uses: actions/checkout@v3
@@ -36,6 +30,9 @@ jobs:
       - name: Build the Docker image
         if: github.repository == 'nmfs-opensci/container-images'
         run: |
+          docker buildx create \
+            --name container \
+            --driver=docker-container
           docker buildx build --platform linux/amd64,linux/arm64 images/$IMAGE_NAME -f images/$IMAGE_NAME/Dockerfile  --tag ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG
       - name: Publish
         if: github.repository == 'nmfs-opensci/container-images'
