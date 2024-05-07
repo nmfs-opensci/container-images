@@ -4,7 +4,7 @@ name: Docker Image CI test
 # IMAGE_TAG whatever tag you want to automatically be used
 env:
   IMAGE_NAME: test
-  IMAGE_TAG: latest
+  IMAGE_TAG: test
   IMAGE_BRANCH: main
   
 on:
@@ -38,6 +38,7 @@ jobs:
             --builder container images/$IMAGE_NAME \
             -f images/$IMAGE_NAME/Dockerfile \
             --tag ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG \
+            --tag ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:latest \
             --push
 #      - name: Publish
 #        if: github.repository == 'nmfs-opensci/container-images'
