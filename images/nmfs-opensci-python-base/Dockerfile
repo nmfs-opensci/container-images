@@ -1,4 +1,4 @@
-FROM openscapes/python:4f340eb
+FROM openscapes/python:39dffde
 
 # install nb_conda_kernels to allow conda kernels
 
