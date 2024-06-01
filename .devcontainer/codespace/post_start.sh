@@ -17,7 +17,4 @@ echo "Debug: Constructed message."
 
 echo "$message" > /home/jovyan/codespace/README.md
 
-# Start Jupyter Lab on port 8889
-jupyter lab --ip=0.0.0.0 --port=8889 --allow-root --no-browser --NotebookApp.token='' --NotebookApp.password=''
-
-sleep 10
+sleep 5
