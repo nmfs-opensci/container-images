@@ -3,70 +3,78 @@
 
 # NMFS Open Science Docker Stack
 
-## THE DOCKER STACK IS IN ACTIVE DEVELOPMENT
-
-### Beta release targeted for June 1, 2024.
+### Beta release June 1, 2024.
 
 These are a collection of container images that provide standardized
 environments for Python and R with Jupyter Lab, RStudio and VS Code
 IDEs. The images are built off the
 [Rocker](https://rocker-project.org/images/devcontainer/images.html),
 [Pangeo](https://github.com/pangeo-data/pangeo-docker-images) and
-Jupyter base images. This repo holds the (mostly) stable docker stack
-for specific pipelines used in Fisheries. Why use a container? The main
-reason is that geospatial, bioinformatics, and TMB/INLA environments can
-be hard to get working right. Using a Docker image means you use a
-stable environment. Watch this video from Yuvi Panda (Jupyter Project)
-[video](https://www.youtube.com/watch?v=qgLPpULvBbQ) and read about the
-Rocker Project in the R Project Journal
-[article](https://journal.r-project.org/archive/2017/RJ-2017-065/RJ-2017-065.pdf)
-by Carl Boettiger and Dirk Eddelbuettel.
+[Jupyter](https://jupyter-docker-stacks.readthedocs.io/en/latest/) base
+images. This repo holds the stable Docker stack for specific pipelines
+used in Fisheries. The images are designed to work out-of-box and
+identically in Jupyter Hubs, Codespaces, Binder, etc.Read the Design
+section below on what the NMFS Open Sci Docker Stack does. For use
+instructions, see
+[INSTRUCTIONS.md](https://nmfs-opensci/container-images/INSTRUCTIONS.md).
 
 ## Stable set of images
 
 There are many other images in the `images` folder that are experimental
-in nature. There are also experimental images in the branches.
+in nature. *If you are looking for standard Python or R Docker images,
+go to the base Docker stacks linked above.*
 
-| Image                                                                                                                                                                                                                                                                              | Description                                                                                                                             | Open                                                                                                                                                                                                                                                                                                                                                              | info                                                                                                                                                                                                                     |
-|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Base**                                                                                                                                                                                                                                                                           | Use as the base image when possible                                                                                                     |                                                                                                                                                                                                                                                                                                                                                                   |                                                                                                                                                                                                                          |
-| [py-geospatial](https://github.com/nmfs-opensci/container-images/pkgs/container/container-images%2Fpy-geospatial) <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci/container-images%2Fpy-geospatial/size?color=%2344cc11&tag=latest&label=image+size&trim=)                      | NASA Openscapes Python image used in workshops                                                                                          | [![Button GCS](https://img.shields.io/badge/Open_in_Codespace-37a779?style=for-the-badge)](https://codespaces.new/nmfs-opensci/container-images?devcontainer_path=.devcontainer%2Fpy-geospatial%2Fdevcontainer.json) <br/> [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/nmfs-opensci/container-images/py-geospatial)               | [Dockerfile](https://github.com/nmfs-opensci/container-images/tree/main/images/py-geospatial/Dockerfile) <br> [directory](https://github.com/nmfs-opensci/container-images/tree/main/images/py-geospatial)               |
-| [py-rocket-base](https://github.com/nmfs-opensci/container-images/pkgs/container/container-images%2Fpy-rocket-base) <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci/container-images%2Fpy-rocket-base/size?color=%2344cc11&tag=latest&label=image+size&trim=)                   | Tidyverse based R image with Python                                                                                                     | [![Button GCS](https://img.shields.io/badge/Open_in_Codespace-37a779?style=for-the-badge)](https://codespaces.new/nmfs-opensci/container-images?devcontainer_path=.devcontainer%2Fpy-rocket-base%2Fdevcontainer.json) <br/> [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/nmfs-opensci/container-images/py-rocket-base)             | [Dockerfile](https://github.com/nmfs-opensci/container-images/tree/main/images/py-rocket-base/Dockerfile) <br> [directory](https://github.com/nmfs-opensci/container-images/tree/main/images/py-rocket-base)             |
-| [py-rocket-geospatial](https://github.com/nmfs-opensci/container-images/pkgs/container/container-images%2Fpy-rocket-geospatial) <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci/container-images%2Fpy-rocket-geospatial/size?color=%2344cc11&tag=latest&label=image+size&trim=) | Geospatial Python and Geospatial R image                                                                                                | [![Button GCS](https://img.shields.io/badge/Open_in_Codespace-37a779?style=for-the-badge)](https://codespaces.new/nmfs-opensci/container-images?devcontainer_path=.devcontainer%2Fpy-rocket-geospatial%2Fdevcontainer.json) <br/> [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/nmfs-opensci/container-images/py-rocket-geospatial) | [Dockerfile](https://github.com/nmfs-opensci/container-images/tree/main/images/py-rocket-geospatial/Dockerfile) <br> [directory](https://github.com/nmfs-opensci/container-images/tree/main/images/py-rocket-geospatial) |
-|                                                                                                                                                                                                                                                                                    |                                                                                                                                         |                                                                                                                                                                                                                                                                                                                                                                   |                                                                                                                                                                                                                          |
-| **Specialized**                                                                                                                                                                                                                                                                    | Images for specific analyses                                                                                                            |                                                                                                                                                                                                                                                                                                                                                                   |                                                                                                                                                                                                                          |
-| [arcgis](https://github.com/nmfs-opensci/container-images/pkgs/container/container-images%2Farcgis) <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci/container-images%2Farcgis/size?color=%2344cc11&tag=latest&label=image+size&trim=)                                           | ArcGIS Python module image that will run in a JupyterHub                                                                                | [![Button GCS](https://img.shields.io/badge/Open_in_Codespace-37a779?style=for-the-badge)](https://codespaces.new/nmfs-opensci/container-images?devcontainer_path=.devcontainer%2Farcgis%2Fdevcontainer.json) <br/> [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/nmfs-opensci/container-images/arcgis)                             | [Dockerfile](https://github.com/nmfs-opensci/container-images/tree/main/images/arcgis/Dockerfile) <br> [directory](https://github.com/nmfs-opensci/container-images/tree/main/images/arcgis)                             |
-| [coastwatch](https://github.com/nmfs-opensci/container-images/pkgs/container/container-images%2Fcoastwatch) <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci/container-images%2Fcoastwatch/size?color=%2344cc11&tag=latest&label=image+size&trim=)                               | CoastWatch image for satellite training courses                                                                                         | [![Button GCS](https://img.shields.io/badge/Open_in_Codespace-37a779?style=for-the-badge)](https://codespaces.new/nmfs-opensci/container-images?devcontainer_path=.devcontainer%2Fcoastwatch%2Fdevcontainer.json) <br/> [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/nmfs-opensci/container-images/coastwatch)                     | [Dockerfile](https://github.com/nmfs-opensci/container-images/tree/main/images/coastwatch/Dockerfile) <br> [directory](https://github.com/nmfs-opensci/container-images/tree/main/images/coastwatch)                     |
-| [echopype](https://github.com/nmfs-opensci/container-images/pkgs/container/container-images%2Fechopype) <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci/container-images%2Fechopype/size?color=%2344cc11&tag=latest&label=image+size&trim=)                                     | echopype tooling for ocean sonar data processing in Python. Author: Wu-Jung Lee + echopype team.                                        | [![Button GCS](https://img.shields.io/badge/Open_in_Codespace-37a779?style=for-the-badge)](https://codespaces.new/nmfs-opensci/container-images?devcontainer_path=.devcontainer%2Fechopype%2Fdevcontainer.json) <br/>                                                                                                                                             | [Dockerfile](https://github.com/nmfs-opensci/container-images/tree/main/images/echopype/Dockerfile) <br> [directory](https://github.com/nmfs-opensci/container-images/tree/main/images/echopype)                         |
-| [vast](https://github.com/nmfs-opensci/container-images/pkgs/container/container-images%2Fvast) <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci/container-images%2Fvast/size?color=%2344cc11&tag=latest&label=image+size&trim=)                                                 | VAST with R 4.3.3                                                                                                                       | [![Button GCS](https://img.shields.io/badge/Open_in_Codespace-37a779?style=for-the-badge)](https://codespaces.new/nmfs-opensci/container-images?devcontainer_path=.devcontainer%2Fvast%2Fdevcontainer.json) <br/>                                                                                                                                                 | [Dockerfile](https://github.com/nmfs-opensci/container-images/tree/main/images/vast/Dockerfile) <br> [directory](https://github.com/nmfs-opensci/container-images/tree/main/images/vast)                                 |
-| [aomlomics-jh](https://github.com/nmfs-opensci/container-images/pkgs/container/container-images%2Faomlomics-jh) <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci/container-images%2Faomlomics-jh/size?color=%2344cc11&tag=latest&label=image+size&trim=)                         | Tourmaline is an amplicon sequence processing workflow for Illumina sequence data that uses QIIME 2 and the software packages it wraps. | [![Button GCS](https://img.shields.io/badge/Open_in_Codespace-37a779?style=for-the-badge)](https://codespaces.new/nmfs-opensci/container-images?devcontainer_path=.devcontainer%2Faomlomics-jh%2Fdevcontainer.json) <br/>                                                                                                                                         | [Dockerfile](https://github.com/nmfs-opensci/container-images/tree/main/images/aomlomics-jh/Dockerfile) <br> [directory](https://github.com/nmfs-opensci/container-images/tree/main/images/aomlomics-jh)                 |
+| Image                                                                                                                                                                                                                                                                                                                                                                                                                                       | Description                                                                                                                             | Open                                                                                                                                                                                                                                                                                                                                                              | info                                                                                                                                                                                                                     |
+|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Base**                                                                                                                                                                                                                                                                                                                                                                                                                                    | Use as the base image when possible                                                                                                     |                                                                                                                                                                                                                                                                                                                                                                   |                                                                                                                                                                                                                          |
+| [py-geospatial](https://github.com/nmfs-opensci/container-images/pkgs/container/container-images%2Fpy-geospatial) <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci/container-images%2Fpy-geospatial/size?color=%2344cc11&tag=latest&label=image+size&trim=) <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci%2Fcontainer-images/py-geospatial/latest_tag?color=%2344cc11&ignore=latest&label=version&trim=)                             | NASA Openscapes Python image used in workshops                                                                                          | [![Button GCS](https://img.shields.io/badge/Open_in_Codespace-37a779?style=for-the-badge)](https://codespaces.new/nmfs-opensci/container-images?devcontainer_path=.devcontainer%2Fpy-geospatial%2Fdevcontainer.json) <br/> [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/nmfs-opensci/container-images/py-geospatial)               | [Dockerfile](https://github.com/nmfs-opensci/container-images/tree/main/images/py-geospatial/Dockerfile) <br> [directory](https://github.com/nmfs-opensci/container-images/tree/main/images/py-geospatial)               |
+| [py-rocket-base](https://github.com/nmfs-opensci/container-images/pkgs/container/container-images%2Fpy-rocket-base) <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci/container-images%2Fpy-rocket-base/size?color=%2344cc11&tag=latest&label=image+size&trim=) <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci%2Fcontainer-images/py-rocket-base/latest_tag?color=%2344cc11&ignore=latest&label=version&trim=)                         | Tidyverse based R image with Python                                                                                                     | [![Button GCS](https://img.shields.io/badge/Open_in_Codespace-37a779?style=for-the-badge)](https://codespaces.new/nmfs-opensci/container-images?devcontainer_path=.devcontainer%2Fpy-rocket-base%2Fdevcontainer.json) <br/> [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/nmfs-opensci/container-images/py-rocket-base)             | [Dockerfile](https://github.com/nmfs-opensci/container-images/tree/main/images/py-rocket-base/Dockerfile) <br> [directory](https://github.com/nmfs-opensci/container-images/tree/main/images/py-rocket-base)             |
+| [py-rocket-geospatial](https://github.com/nmfs-opensci/container-images/pkgs/container/container-images%2Fpy-rocket-geospatial) <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci/container-images%2Fpy-rocket-geospatial/size?color=%2344cc11&tag=latest&label=image+size&trim=) <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci%2Fcontainer-images/py-rocket-geospatial/latest_tag?color=%2344cc11&ignore=latest&label=version&trim=) | Geospatial Python and Geospatial R image                                                                                                | [![Button GCS](https://img.shields.io/badge/Open_in_Codespace-37a779?style=for-the-badge)](https://codespaces.new/nmfs-opensci/container-images?devcontainer_path=.devcontainer%2Fpy-rocket-geospatial%2Fdevcontainer.json) <br/> [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/nmfs-opensci/container-images/py-rocket-geospatial) | [Dockerfile](https://github.com/nmfs-opensci/container-images/tree/main/images/py-rocket-geospatial/Dockerfile) <br> [directory](https://github.com/nmfs-opensci/container-images/tree/main/images/py-rocket-geospatial) |
+|                                                                                                                                                                                                                                                                                                                                                                                                                                             |                                                                                                                                         |                                                                                                                                                                                                                                                                                                                                                                   |                                                                                                                                                                                                                          |
+| **Specialized**                                                                                                                                                                                                                                                                                                                                                                                                                             | Images for specific analyses                                                                                                            |                                                                                                                                                                                                                                                                                                                                                                   |                                                                                                                                                                                                                          |
+| [arcgis](https://github.com/nmfs-opensci/container-images/pkgs/container/container-images%2Farcgis) <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci/container-images%2Farcgis/size?color=%2344cc11&tag=latest&label=image+size&trim=) <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci%2Fcontainer-images/arcgis/latest_tag?color=%2344cc11&ignore=latest&label=version&trim=)                                                         | ArcGIS Python module image that will run in a JupyterHub                                                                                | [![Button GCS](https://img.shields.io/badge/Open_in_Codespace-37a779?style=for-the-badge)](https://codespaces.new/nmfs-opensci/container-images?devcontainer_path=.devcontainer%2Farcgis%2Fdevcontainer.json) <br/> [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/nmfs-opensci/container-images/arcgis)                             | [Dockerfile](https://github.com/nmfs-opensci/container-images/tree/main/images/arcgis/Dockerfile) <br> [directory](https://github.com/nmfs-opensci/container-images/tree/main/images/arcgis)                             |
+| [coastwatch](https://github.com/nmfs-opensci/container-images/pkgs/container/container-images%2Fcoastwatch) <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci/container-images%2Fcoastwatch/size?color=%2344cc11&tag=latest&label=image+size&trim=) <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci%2Fcontainer-images/coastwatch/latest_tag?color=%2344cc11&ignore=latest&label=version&trim=)                                         | CoastWatch image for satellite training courses                                                                                         | [![Button GCS](https://img.shields.io/badge/Open_in_Codespace-37a779?style=for-the-badge)](https://codespaces.new/nmfs-opensci/container-images?devcontainer_path=.devcontainer%2Fcoastwatch%2Fdevcontainer.json) <br/> [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/nmfs-opensci/container-images/coastwatch)                     | [Dockerfile](https://github.com/nmfs-opensci/container-images/tree/main/images/coastwatch/Dockerfile) <br> [directory](https://github.com/nmfs-opensci/container-images/tree/main/images/coastwatch)                     |
+| [echopype](https://github.com/nmfs-opensci/container-images/pkgs/container/container-images%2Fechopype) <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci/container-images%2Fechopype/size?color=%2344cc11&tag=latest&label=image+size&trim=) <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci%2Fcontainer-images/echopype/latest_tag?color=%2344cc11&ignore=latest&label=version&trim=)                                                 | echopype tooling for ocean sonar data processing in Python. Author: Wu-Jung Lee + echopype team.                                        | [![Button GCS](https://img.shields.io/badge/Open_in_Codespace-37a779?style=for-the-badge)](https://codespaces.new/nmfs-opensci/container-images?devcontainer_path=.devcontainer%2Fechopype%2Fdevcontainer.json) <br/> [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/nmfs-opensci/container-images/echopype)                         | [Dockerfile](https://github.com/nmfs-opensci/container-images/tree/main/images/echopype/Dockerfile) <br> [directory](https://github.com/nmfs-opensci/container-images/tree/main/images/echopype)                         |
+| [vast](https://github.com/nmfs-opensci/container-images/pkgs/container/container-images%2Fvast) <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci/container-images%2Fvast/size?color=%2344cc11&tag=latest&label=image+size&trim=) <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci%2Fcontainer-images/vast/latest_tag?color=%2344cc11&ignore=latest&label=version&trim=)                                                                 | VAST with R 4.3.3                                                                                                                       | [![Button GCS](https://img.shields.io/badge/Open_in_Codespace-37a779?style=for-the-badge)](https://codespaces.new/nmfs-opensci/container-images?devcontainer_path=.devcontainer%2Fvast%2Fdevcontainer.json) <br/>                                                                                                                                                 | [Dockerfile](https://github.com/nmfs-opensci/container-images/tree/main/images/vast/Dockerfile) <br> [directory](https://github.com/nmfs-opensci/container-images/tree/main/images/vast)                                 |
+| [aomlomics-jh](https://github.com/nmfs-opensci/container-images/pkgs/container/container-images%2Faomlomics-jh) <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci/container-images%2Faomlomics-jh/size?color=%2344cc11&tag=latest&label=image+size&trim=) <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci%2Fcontainer-images/aomlomics-jh/latest_tag?color=%2344cc11&ignore=latest&label=version&trim=)                                 | Tourmaline is an amplicon sequence processing workflow for Illumina sequence data that uses QIIME 2 and the software packages it wraps. | [![Button GCS](https://img.shields.io/badge/Open_in_Codespace-37a779?style=for-the-badge)](https://codespaces.new/nmfs-opensci/container-images?devcontainer_path=.devcontainer%2Faomlomics-jh%2Fdevcontainer.json) <br/>                                                                                                                                         | [Dockerfile](https://github.com/nmfs-opensci/container-images/tree/main/images/aomlomics-jh/Dockerfile) <br> [directory](https://github.com/nmfs-opensci/container-images/tree/main/images/aomlomics-jh)                 |
 
 *Click on the image name in the table above for a current list of
 installed packages and versions*
 
 ## Design principles
 
-- The images are designed to be deployable “out of the box” from
-  JupyterHubs, Codespaces, GitPod, Colab, Binder, and on your computer
-  via Docker or Podman. See instructions below. Each will spin up
-  Jupyter Lab with JLab, RStudio and VS Code within a specific
-  development environment.
+The images are designed to be deployable “out of the box” from
+JupyterHubs, Codespaces, GitPod, Colab, Binder, and on your computer via
+Docker or Podman with no modification. See instructions below. Each will
+spin up Jupyter Lab with Jupyter Lab (and Notebook), RStudio and VS Code
+with the specific development environment.
+
 - Python environment follows Pangeo images with micromamba installed as
   the solver and base and notebook environments. The Jupyter modules are
-  installed in notebook environment and images will launch with the
-  notebook activated, again following Pangeo design structure. Images
-  that use Pangeo as base will have user jovyan and user home directory
-  home/jovyan.
-- R set-up follows Rocker’s environment design with the exception that
-  the user home directory is home/jovyan so it plays nice with
-  JupyterHub deployments. The user is rstudio however.
+  installed in notebook conda environment and images will launch with
+  the notebook environment activated, again following Pangeo design
+  structure. Images that use Pangeo as base will have user jovyan and
+  user home directory home/jovyan.
+- Images with R ONLY follow Rocker’s environment design with the
+  exception that the user home directory is home/jovyan so it plays nice
+  with JupyterHub deployments. The user is rstudio however.
 - When an image contains both R and Python, the base image is rocker and
   micromamba is installed along with the Pangeo environment structure.
-  RStudio will use the Python environment in the notebook environment
-  when Python is used from within RStudio.
-- However, they are not terribly light-weight (large). Use the original
-  Jupyter, Pangeo or Rocker images if you are looking for simple
+  RStudio will use the Python environment in the notebook conda
+  environment when Python is used from within RStudio.
+- These images are not terribly light-weight (they are large). Use the
+  original Jupyter, Pangeo or Rocker images if you are looking for
   lightweight data science images.
+
+## Why use a container?
+
+The main reason is that geospatial, bioinformatics, and TMB/INLA
+environments can be hard to get working right. Using a Docker image
+means you use a stable environment. Watch this video from Yuvi Panda
+(Jupyter Project) [video](https://www.youtube.com/watch?v=qgLPpULvBbQ)
+and read about the Rocker Project in the R Project Journal
+[article](https://journal.r-project.org/archive/2017/RJ-2017-065/RJ-2017-065.pdf)
+by Carl Boettiger and Dirk Eddelbuettel.
 
 ### Acknowledgements
 
@@ -85,61 +93,6 @@ Michael Akridge’s [Open Science
 Codespaces](https://github.com/MichaelAkridge-NOAA/Open-Science-Codespaces)
 work. Individual images have different core developers: Tim Haverland
 (arcgis), Sunny Hospital (coastwatch), Luke Thompson (aomlomics).
-
-## To run images in a JupyterHub with ‘bring your image’
-
-If your JupyterHub has this option:
-
-- Click on the ‘Bring your own image’ radio button at bottom
-- Paste in url to your image (or any other image)
-- You will find the urls in the right nav bar under ‘Packages’
-- Example `ghcr.io/nmfs-opensci/jupyter-base-notebook:latest`
-
-## Run with a JupyterHub
-
-Should work out of the box. Put the url to the image whereever you would
-use images.
-
-## Run with docker
-
-    docker run -p 8888:8888 ghcr.io/nmfs-opensci/jupyter-base-notebook:latest
-
-On a Mac M2+ with Rosetta emulation turned on in the Docker Desktop
-settings.
-
-    docker run --platform linux/amd64 -p 8888:8888 ghcr.io/nmfs-opensci/jupyter-base-notebook:latest
-
-In the terminal look for something like and put that in a browser.
-
-    http://127.0.0.1:8888/lab?token=6d45c7d88aba92a815647c
-
-## Run with Binder
-
-Should work out of the box. Copy the Dockerfile into a repo and put the
-Dockerfile in the base or in a folder called `binder`. Then put the url
-below in a browser. Note many of the Docker images are big and somewhat
-hairy to build. This might not work in binder.
-
-    https://mybinder.org/v2/gh/user-name/reponame/main
-
-## With Codespaces
-
-See the folders in the `.devcontainer` folder. Note that the folder
-`.devcontainer/codespace` is required. Do not use port 8888 or else
-RStudio will not launch. See examples of how to create a button to
-launch a new codespace in the table above.
-
-Based on:
-<https://github.com/MichaelAkridge-NOAA/Open-Science-Codespaces>
-
-## GitPod – like Codespaces
-
-Still working to streamline this.
-
-## Run on Colab
-
-TBD See this
-[issue](https://github.com/nmfs-opensci/container-images/issues/14)
 
 ## License information
 
