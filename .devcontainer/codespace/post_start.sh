@@ -2,17 +2,15 @@
 
 # Construct the message
 message="# Welcome
-- This VS code container is the entry to your Jupyter Lab
+- This VS code container is the entry to your Jupyter Lab. Click green button to open.
 - This Codespace is not connected to a repo. Make sure to connect to a GitHub repo and push your changes.
   
-# Jupyter Lab is available at this URL:
-## [Open Jupyter Lab](https://$CODESPACE_NAME-8889.app.github.dev)
+[![Button]][Link]
 
-[![Button Example]][Link]
+[Button]: https://img.shields.io/badge/Open%20Jupyter%20Lab-37a779?style=for-the-badge
 
-[Button Example]: https://img.shields.io/badge/Title-37a779?style=for-the-badge
-
-[Link]: https://$CODESPACE_NAME-8889.app.github.dev"
+[Link]: https://$CODESPACE_NAME-8889.app.github.dev
+"
 echo "Debug: Constructed message."
 
 echo "$message" > /home/jovyan/codespace/README.md
