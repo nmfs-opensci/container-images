@@ -15,7 +15,9 @@ images. This repo holds the stable Docker stack for specific pipelines
 used in Fisheries. The images are designed to work out-of-box and
 identically in Jupyter Hubs, Codespaces, Binder, etc.Read the Design
 section below on what the NMFS Open Sci Docker Stack does. For use, see
-[Instructions](#instructions) and [Link to files](#files).
+[Instructions](#instructions) and [Link to files](#files). This Docker
+Stack was the joint of a number of people. See
+[Acknowledgements](#thanks).
 
 ## Stable set of images
 
@@ -54,13 +56,14 @@ with the specific development environment.
   the notebook environment activated, again following Pangeo design
   structure. Images that use Pangeo as base will have user jovyan and
   user home directory home/jovyan.
-- Images with R ONLY follow Rocker’s environment design with the
-  exception that the user home directory is home/jovyan so it plays nice
-  with JupyterHub deployments. The user is rstudio however.
-- When an image contains both R and Python, the base image is rocker and
-  micromamba is installed along with the Pangeo environment structure.
-  RStudio will use the Python environment in the notebook conda
-  environment when Python is used from within RStudio.
+- When an image contains both R and Python, the base image is a rocker
+  image and adheres to the rocker norms for R and RStudio environment
+  design. For the Python side of these images, micromamba is installed
+  and the Pangeo conda environment structure is applied as in the Python
+  only images. RStudio will use the Python environment in the conda
+  notebook environment when Python is used from within RStudio. The user
+  is `rstudio` but the home directory is `home/jovyan` so images play
+  nice with standard JupyterHub deployments with persistent memory.
 - These images are not terribly light-weight (they are large). Use the
   original Jupyter, Pangeo or Rocker images if you are looking for
   lightweight data science images.
@@ -75,23 +78,28 @@ and read about the Rocker Project in the R Project Journal
 [article](https://journal.r-project.org/archive/2017/RJ-2017-065/RJ-2017-065.pdf)
 by Carl Boettiger and Dirk Eddelbuettel.
 
-### Acknowledgements
+### <a name="thanks">Acknowledgements
 
-The core stack is credited to the work of Luis Lopez (NASA) who
-developed the NASA Openscapes Python image used in countless workshops
-on cloud-computing with NASA Earth Data. Subsequently the NASA
-Openscapes mentor cloud-infrastructure Slack group and weekly co-work
-sessions plugged away at the problem of helping users ‘fledge’ off the
-Openscapes JupyterHub, which involved creating images that were more
-versitile. Carl Boettiger (UC Berkeley & Rocker Project) and Eli Holmes
-(NOAA Fisheries) took on different aspects of this. The GitHub Action
-tooling is curtesy of Carl. Yuvi Panda (Jupyter, 2i2c) was also very
-helpful in desiging the ‘scaffolding’ in the images that helps them be
-robust and versitile. The Codespaces and devcontainer code is based on
-Michael Akridge’s [Open Science
+The motivation of the Docker Stack was the success of the NASA
+Openscapes “corn” image developed by Luis Lopez (NASA) and used in
+countless workshops on cloud-computing with NASA Earth Data.
+Subsequently the NASA Openscapes mentor cloud-infrastructure Slack group
+met during weekly co-work sessions and plugged away at the problem of
+helping users ‘fledge’ off the Openscapes JupyterHub, which involved
+creating images that could be used outside of JupyterHubs, and updating
+the original “py-rocket” R image created by Luis. Carl Boettiger (UC
+Berkeley & Rocker Project) and Eli Holmes (NOAA Fisheries) took on
+different aspects of this work. The GitHub Action tooling is curtesy of
+Carl. “py-rocket-base” is derived from Carl’s “version 2.conda” of
+py-rocket. Eli further developed py-rocket into the form in this repo to
+bring it closer to the “corn” and Pangeo designs. Yuvi Panda (Jupyter,
+2i2c) was instrumental in helping sort through so many mystery bugs. The
+Codespaces and devcontainer code is based on Michael Akridge’s [Open
+Science
 Codespaces](https://github.com/MichaelAkridge-NOAA/Open-Science-Codespaces)
 work. Individual images have different core developers: Tim Haverland
-(arcgis), Sunny Hospital (coastwatch), Luke Thompson (aomlomics).
+(arcgis), Sunny Hospital (coastwatch), Luke Thompson (aomlomics-jh), Eli
+Holmes (the various py-rocket versions).
 
 ## License information
 
