@@ -79,7 +79,9 @@ https://mybinder.org/v2/gh/user-name/reponame/main
 
 ## With Codespaces
 
-See <https://github.com/MichaelAkridge-NOAA/Open-Science-Codespaces>
+See the folders in the `.devcontainer` folder. Note that the folder `.devcontainer/codespace` is required. Do not use port 8888 or else RStudio will not launch. See examples of how to create a button to launch a new codespace in the table above.
+
+Based on: <https://github.com/MichaelAkridge-NOAA/Open-Science-Codespaces>
 
 ## GitPod -- like Codespaces
 
