@@ -2,6 +2,11 @@
 # Is designed to have a conda environment called notebook like
 # the pangeo images. The jupyterhub modules are in this environment.
 FROM rocker/verse:4.4
+LABEL org.opencontainers.image.maintainers="eli.holmes@noaa.gov"
+LABEL org.opencontainers.image.author="eli.holmes@noaa.gov"
+LABEL org.opencontainers.image.source=https://github.com/nmfs-opensci/container-images/py-rocket-base
+LABEL org.opencontainers.image.description="Tidyverse based R image with Python"
+LABEL org.opencontainers.image.licenses=Apache2.0
 
 ENV CONDA_ENV=notebook \
     DEBIAN_FRONTEND=noninteractive \
