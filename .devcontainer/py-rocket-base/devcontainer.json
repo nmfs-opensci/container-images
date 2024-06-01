@@ -3,13 +3,13 @@
   "name": "Py-Rocket Base Codespace",
 
   // Path to the Docker Compose file
-  "dockerComposeFile": "./docker-compose.yml",
+  "image": "ghcr.io/nmfs-opensci/container-images/py-rocket-base:4.4-3.10",
 
   // Service to use for the container
   "service": "jlab",
 
   // Default workspace folder within the container
-  "workspaceFolder": "/home/jovyan/codespace",
+  "workspaceFolder": "/home/jovyan",
 
   // Required for Jupyter Lab
   "customizations": {
