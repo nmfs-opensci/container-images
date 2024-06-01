@@ -81,11 +81,11 @@ RUN echo "Checking for 'conda-linux-64.lock' or 'environment.yml'..." \
         find ${NB_PYTHON_PREFIX}/lib/python*/site-packages/bokeh/server/static -follow -type f -name '*.js' ! -name '*.min.js' -delete \
         ; fi
 
-RUN pip install jupyter-rsession-proxy
+# RUN pip install jupyter-rsession-proxy
 
-# some teaching preferences
-RUN git config --system pull.rebase false && \
-    git config --system credential.helper 'cache --timeout=36000'
+# some git preferences
+RUN git config --global pull.rebase false && \
+    git config --global credential.helper store
 
 
 WORKDIR ${HOME}
