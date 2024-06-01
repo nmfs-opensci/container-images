@@ -1,5 +1,11 @@
 # verse rocker with R 4.3 that is tailored to spin up in Codespaces nicely
 FROM ghcr.io/nmfs-opensci/container-images/py-rocket-base:4.3.3-3.10
+LABEL org.opencontainers.image.maintainers="eli.holmes@noaa.gov"
+LABEL org.opencontainers.image.author="eli.holmes@noaa.gov"
+LABEL org.opencontainers.image.source=https://github.com/nmfs-opensci/container-images/vast
+LABEL org.opencontainers.image.description="VAST with R 4.3.3"
+LABEL org.opencontainers.image.licenses=Apache2.0
+
 
 USER root
 
