@@ -1,4 +1,8 @@
 name: Docker Image CI AOML-omics
+env:
+  IMAGE_NAME: aomlomics-jh
+  IMAGE_TAG: 2024-06-01
+
 on:
   workflow_dispatch: null
   push:
@@ -23,9 +27,10 @@ jobs:
       - name: Build the Docker image
         if: github.repository == 'nmfs-opensci/container-images'
         run: |
-          docker build images/aomlomics-jh -f images/aomlomics-jh/Dockerfile  --tag ghcr.io/nmfs-opensci/container-images/aomlomics-jh:latest
+          docker build images/$IMAGE_NAME -f images/$IMAGE_NAME/Dockerfile  --tag ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG --tag ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:latest
       - name: Publish
         if: github.repository == 'nmfs-opensci/container-images'
         run: |
-          docker push ghcr.io/nmfs-opensci/container-images/aomlomics-jh:latest
+          docker push ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG
+          docker push ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:latest
 
