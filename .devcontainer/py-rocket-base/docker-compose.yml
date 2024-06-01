@@ -1,6 +1,0 @@
-services:
-  jlab:
-    container_name: jlab
-    image: ghcr.io/nmfs-opensci/container-images/py-rocket-base:latest
-    volumes:
-      - ../codespace:/home/jovyan/codespace
