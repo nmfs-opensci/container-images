@@ -5,7 +5,7 @@
   // Path to the Docker file
   "image": "ghcr.io/nmfs-opensci/container-images/py-rocket-base:4.4-3.10",
 
-  "workspaceMount": "source=${localWorkspaceFolder}/.devcontainer/codespace,target=home/jovyan/codespace,type=bind,consistency=delegated",
+  "workspaceMount": "source=${localWorkspaceFolder}/.devcontainer/codespace,target=/home/jovyan/codespace,type=bind,consistency=delegated",
 
   // Default workspace folder within the container
   "workspaceFolder": "/home/jovyan",
