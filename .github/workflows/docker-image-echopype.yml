@@ -1,4 +1,7 @@
 name: Docker Image CI echopype
+env:
+  IMAGE_NAME: echopype
+  IMAGE_TAG: 4f340eb
 
 on:
   workflow_dispatch: null
@@ -23,8 +26,9 @@ jobs:
       - name: Build the Docker image
         if: github.repository == 'nmfs-opensci/container-images'
         run: |
-          docker build images/echopype -f images/echopype/Dockerfile  --tag ghcr.io/nmfs-opensci/container-images/echopype:latest
+          docker build images/$IMAGE_NAME -f images/$IMAGE_NAME/Dockerfile  --tag ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG --tag ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:latest
       - name: Publish
         if: github.repository == 'nmfs-opensci/container-images'
         run: |
-          docker push ghcr.io/nmfs-opensci/container-images/echopype:latest
+          docker push ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG
+          docker push ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:latest
