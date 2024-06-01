@@ -10,7 +10,7 @@ on:
   push:
     branches: main
     paths: 
-      - 'images/nmfs-opensci-python-base/**'
+      - 'images/py-geospatial/**'
       - 'images/cmip6-cookbook/**'
       - '.github/workflows/docker-image-cmip6-cookbook.yml'
 jobs:
