@@ -24,13 +24,16 @@ table_line <- function(i){
 #    desc <- readLines(fil, warn=FALSE)
     desc <- parse_dockerfile(fil)
   }
-  cat("| [", i, "](https://github.com/nmfs-opensci/container-images/pkgs/container/container-images%2F", i, ") <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci/container-images%2F", i,"/size?color=%2344cc11&tag=latest&label=image+size&trim=) | ", desc, " | [![Button GCS]](https://codespaces.new/nmfs-opensci/container-images?devcontainer_path=.devcontainer%2F", i, "%2Fdevcontainer.json) |  [Dockerfile](https://github.com/nmfs-opensci/container-images/tree/main/images/", i, "/Dockerfile) <br> [directory](https://github.com/nmfs-opensci/container-images/tree/main/images/", i, ") |\n", sep="")
+  branch <- system(paste0("git show-ref refs/heads/", i, " ignore.stdout = TRUE"))
+  binder_button <- ""
+  if(branch == 0) binder_button <- paste0("[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/nmfs-opensci/container-images/", i, ")")
+  cat("| [", i, "](https://github.com/nmfs-opensci/container-images/pkgs/container/container-images%2F", i, ") <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci/container-images%2F", i,"/size?color=%2344cc11&tag=latest&label=image+size&trim=) | ", desc, " | [![Button GCS]](https://codespaces.new/nmfs-opensci/container-images?devcontainer_path=.devcontainer%2F", i, "%2Fdevcontainer.json) <br/> ", binder_button, " |  [Dockerfile](https://github.com/nmfs-opensci/container-images/tree/main/images/", i, "/Dockerfile) <br> [directory](https://github.com/nmfs-opensci/container-images/tree/main/images/", i, ") |\n", sep="")
 }
 ```
 
 | Image      | Description  | Open  | info  |
 |-----------|---------------------------|----------------|-----------|
-|   **Base**      |    Typically other images will be built of these   |      |      |
+|   **Base**      |    Use as the base image when possible   |      |      |
 ```{r results='asis', echo=FALSE}
 imgs <- c("py-geospatial", "py-rocket-base", "py-rocket-geospatial")
 for(i in imgs) table_line(i)
