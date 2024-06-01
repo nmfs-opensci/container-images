@@ -1,10 +1,17 @@
 {
-  "name": "py-rocket-base",
+  // Name of the Dev Container
+  "name": "Py-Rocket Base Codespace",
+
+  // Path to the Docker Compose file
+  "dockerComposeFile": "./docker-compose.yml",
+
+  // Service to use for the container
+  "service": "jlab",
+
+  // Default workspace folder within the container
   "workspaceFolder": "/home/jovyan/codespace",
-  "image": "ghcr.io/nmfs-opensci/container-images/py-rocket-base:latest",
-  "hostRequirements": {
-    "cpus": "2"
-  },
+
+  // Required for Jupyter Lab
   "customizations": {
     "vscode": {
       "extensions": [
@@ -13,14 +20,26 @@
       ]
     }
   },
-  "forwardPorts": [
-    8889
-  ],
+
+  // Settings for the integrated terminal
+  "settings": {
+    "terminal.integrated.shell.linux": "/bin/bash"
+  },
+
+  // Ports to be forwarded from the container to the host
+  "forwardPorts": [8889],
+
+  // Attributes for the forwarded ports
   "portsAttributes": {
     "8889": {
-      "label": "Jupyter Lab - py-rocket-base",
+      "label": "Jupyter Lab",
       "onAutoForward": "openPreview"
     }
   },
-  "postCreateCommand": "jupyter lab --ip=0.0.0.0 --port=8889 --allow-root --no-browser --NotebookApp.token='' --NotebookApp.password=''"
+
+  // Command to run after the container starts. Runs script to add a link to the RStudio
+  "postStartCommand": "chmod +x /home/jovyan/codespace/post_start.sh && /home/jovyan/codespace/post_start.sh",
+
+  // List of extensions to be installed
+  "extensions": []
 }
