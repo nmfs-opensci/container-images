@@ -1,5 +1,10 @@
 # Python 3.11
 FROM quay.io/jupyter/base-notebook:2024-02-13
+LABEL org.opencontainers.image.maintainers="Jupyter Docker Stacks"
+LABEL org.opencontainers.image.authors="Jupyter Docker Stacks"
+LABEL org.opencontainers.image.source="https://jupyter-docker-stacks.readthedocs.io/en/latest/"
+LABEL org.opencontainers.image.description="An image mostly for testing"
+LABEL org.opencontainers.image.licenses=Modified BSD License
 
 USER root
 RUN apt-get -y update
