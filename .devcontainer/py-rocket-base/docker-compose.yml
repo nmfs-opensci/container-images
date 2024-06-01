@@ -5,7 +5,7 @@ services:
     ports:
       - "8889:8888"
     volumes:
-      - ../codespace:/home/jovyan/workspace
+      - ../codespace:/home/jovyan/codespace
       - ./other_dir:/other_dir
     environment:
       - DISABLE_AUTH=true
