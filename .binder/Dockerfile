@@ -1,1 +1,1 @@
-FROM ghcr.io/nmfs-opensci/container-images/py-geospatial:latest
+FROM ghcr.io/nmfs-opensci/container-images/py-rocket-base:latest
