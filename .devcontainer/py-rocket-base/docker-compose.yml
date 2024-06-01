@@ -2,9 +2,5 @@ services:
   jlab:
     container_name: jlab
     image: ghcr.io/nmfs-opensci/container-images/py-rocket-base:latest
-    ports:
-      - "8889:8888"
     volumes:
       - ../codespace:/home/jovyan/codespace
-    environment:
-      - DISABLE_AUTH=true
