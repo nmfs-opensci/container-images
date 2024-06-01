@@ -1,15 +1,15 @@
-name: Docker Image CI nmfs-opensci-python-base
+name: Docker Image CI py-geospatial
 env:
-  IMAGE_NAME: nmfs-opensci-python-base
-  IMAGE_TAG: latest
+  IMAGE_NAME: py-geospatial
+  IMAGE_TAG: 39dffde
 on:
   workflow_dispatch: null
   push:
     branches: main
     # main path plus the nmfs-opensci-python-base if that is used.
     paths: 
-      - 'images/nmfs-opensci-python-base/**'
-      - '.github/workflows/docker-image-nmfs-opensci-python-base.yml'
+      - 'images/py-geospatial/**'
+      - '.github/workflows/docker-image-py-geospatial.yml'
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,9 +26,10 @@ jobs:
       - name: Build the Docker image
         if: github.repository == 'nmfs-opensci/container-images'
         run: |
-          docker build images/$IMAGE_NAME -f images/$IMAGE_NAME/Dockerfile  --tag ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG
+          docker build images/$IMAGE_NAME -f images/$IMAGE_NAME/Dockerfile  --tag ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG   --tag ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:latest
       - name: Publish
         if: github.repository == 'nmfs-opensci/container-images'
         run: |
           docker push ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG
+          docker push ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:latest
 
