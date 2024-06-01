@@ -4,3 +4,10 @@
   
 # Jupyter Lab is available at this URL:
 
+[![Button]][Link]
+
+[Button]: https://img.shields.io/badge/Open%20Jupyter%20Lab-37a779?style=for-the-badge
+
+[Link]: https://$CODESPACE_NAME-8889.app.github.dev"
+
+
