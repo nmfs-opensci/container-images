@@ -24,7 +24,7 @@ RUN ${NB_PYTHON_PREFIX}/bin/pip install --no-cache -r requirements.txt \
     && rm requirements.txt
     
 # set the proj lib
-ENV PROJ_LIB=/srv/conda/envs/notebook/share/proj"
+ENV PROJ_LIB=/srv/conda/envs/notebook/share/proj
 
 # Set user dir
 WORKDIR /home/jovyan
