@@ -9,7 +9,7 @@ echo "$message"
 
 # Check if the message is already in README.md and append if it's not
 echo "Debug: Checking if message is in README.md."
-if ! grep -Fqx "$message" /home/jovyan/codespace/README.md; then
+if ! grep -Fqx "$message" /home/jovyan/README.md; then
     echo "Debug: Message not found in README.md, appending now."
     echo "$message" >> /home/jovyan/codespace/README.md
 else
