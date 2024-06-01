@@ -9,7 +9,7 @@ message="# Welcome
 ## [Open Jupyter Lab](https://$CODESPACE_NAME-8889.app.github.dev)"
 echo "Debug: Constructed message."
 
-echo "$message" > /home/jovyan/README.md
+echo "$message" > /home/jovyan/codespace/README.md
 
 # Start Jupyter Lab on port 8889
 jupyter lab --ip=0.0.0.0 --port=8889 --allow-root --no-browser --NotebookApp.token='' --NotebookApp.password=''
