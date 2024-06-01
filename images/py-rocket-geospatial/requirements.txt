@@ -1,6 +1,5 @@
 harmony-py
 xq
 jupyterlab-quarto
-jupyter-desktop-server==0.1.3
 graphviz
 netcdf4==1.6.5
