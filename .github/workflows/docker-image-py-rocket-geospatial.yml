@@ -10,6 +10,7 @@ on:
     paths: 
       - 'images/py-rocket-geospatial/**'
       - '.github/workflows/docker-image-py-rocket-geospatial.yml'
+      - '.github/workflows/docker-image-py-rocket-base.yml'
 jobs:
   build:
     runs-on: ubuntu-latest
