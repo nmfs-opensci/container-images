@@ -36,7 +36,7 @@ There are many other images in the `images` folder that are experimental in natu
 
 ### Acknowledgements
 
-The core stack is credited to the work of Luis Lopez (NASA) who developed the NASA Openscapes Python image used in countless workshops on cloud-computing with NASA Earth Data. Subsequently the NASA Openscapes mentor cloud-infrastructure Slack group and weekly co-work sessions plugged away at the problem of helping users 'fledge' off the Openscapes JupyterHub, which involved creating images that were more versitile. Carl Boettiger (Rocker, UC Berkeley) and Eli Holmes (NOAA Fisheries) took on different aspects of this. The GitHub Action tooling is curtesy of Carl. Yuvi Panda (Jupyter, 2i2c) was also very helpful in desiging the 'scaffolding' in the images that helps them be robust and versitile. The Codespaces and devcontainer code is based on Michael Akridge's [Open Science Codespaces](https://github.com/MichaelAkridge-NOAA/Open-Science-Codespaces) work. Individual images have different core developers: Tim Haverland (ArcGIS), Sunny Hospital (CoastWatch), SnakeMake.
+The core stack is credited to the work of Luis Lopez (NASA) who developed the NASA Openscapes Python image used in countless workshops on cloud-computing with NASA Earth Data. Subsequently the NASA Openscapes mentor cloud-infrastructure Slack group and weekly co-work sessions plugged away at the problem of helping users 'fledge' off the Openscapes JupyterHub, which involved creating images that were more versitile. Carl Boettiger (UC Berkeley & Rocker Project) and Eli Holmes (NOAA Fisheries) took on different aspects of this. The GitHub Action tooling is curtesy of Carl. Yuvi Panda (Jupyter, 2i2c) was also very helpful in desiging the 'scaffolding' in the images that helps them be robust and versitile. The Codespaces and devcontainer code is based on Michael Akridge's [Open Science Codespaces](https://github.com/MichaelAkridge-NOAA/Open-Science-Codespaces) work. Individual images have different core developers: Tim Haverland (arcgis), Sunny Hospital (coastwatch), Luke Thompson (aomlomics).
 
 ## To run images in a JupyterHub with 'bring your image'
 
@@ -71,7 +71,7 @@ http://127.0.0.1:8888/lab?token=6d45c7d88aba92a815647c
 
 ## Run with Binder
 
-Should work out of the box. Copy the Dockerfile into a repo and put the Dockerfile in the base or in a folder called `binder`. Then put this in a browser. Note many of the Docker images are big and somewhat hairy to build. This might not work in binder.
+Should work out of the box. Copy the Dockerfile into a repo and put the Dockerfile in the base or in a folder called `binder`. Then put the url below in a browser. Note many of the Docker images are big and somewhat hairy to build. This might not work in binder.
 
 ```         
 https://mybinder.org/v2/gh/user-name/reponame/main
