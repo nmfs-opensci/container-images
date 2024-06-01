@@ -6,7 +6,13 @@ message="# Welcome
 - This Codespace is not connected to a repo. Make sure to connect to a GitHub repo and push your changes.
   
 # Jupyter Lab is available at this URL:
-## [Open Jupyter Lab](https://$CODESPACE_NAME-8889.app.github.dev)"
+## [Open Jupyter Lab](https://$CODESPACE_NAME-8889.app.github.dev)
+
+[![Button Example]][Link]
+
+[Button Example]: https://img.shields.io/badge/Title-37a779?style=for-the-badge
+
+[Link]: https://$CODESPACE_NAME-8889.app.github.dev"
 echo "Debug: Constructed message."
 
 echo "$message" > /home/jovyan/codespace/README.md
