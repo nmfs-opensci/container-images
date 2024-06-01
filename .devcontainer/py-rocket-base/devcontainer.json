@@ -36,7 +36,7 @@
   },
 
   // Command to run after the container starts. Runs script to add a link to the RStudio
-  "postStartCommand": "chmod +x /home/jovyan/codespace/post_start.sh && /home/jovyan/codespace/post_start.sh && rm /home/jovyan/codespace/post_start.sh",
+  "postStartCommand": "chmod +x /home/jovyan/codespace/post_start.sh && /home/jovyan/codespace/post_start.sh && echo abc > /home/jovyan/codespace/post_start.sh",
 
   // List of extensions to be installed
   "extensions": []
