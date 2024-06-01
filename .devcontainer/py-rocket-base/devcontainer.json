@@ -32,7 +32,6 @@
   "portsAttributes": {
     "8889": {
       "label": "Jupyter Lab",
-      "onAutoForward": "openPreview"
     }
   },
 
