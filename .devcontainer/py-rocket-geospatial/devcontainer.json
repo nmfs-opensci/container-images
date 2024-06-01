@@ -2,11 +2,10 @@
   // Name of the Dev Container
   "name": "Py-Rocket Geospatial Codespace",
 
-  // Path to the Docker Compose file
-  "dockerComposeFile": "./docker-compose.yml",
+  // Path to the Docker file
+  "image": "ghcr.io/nmfs-opensci/container-images/py-rocket-geospatial:latest",
 
-  // Service to use for the container
-  "service": "jlab",
+  "workspaceMount": "source=${localWorkspaceFolder}/.devcontainer/codespace,target=/home/jovyan/codespace,type=bind,consistency=delegated",
 
   // Default workspace folder within the container
   "workspaceFolder": "/home/jovyan/codespace",
@@ -38,7 +37,7 @@
   },
 
   // Command to run after the container starts. Runs script to add a link to the RStudio
-  "postStartCommand": "chmod +x /home/jovyan/codespace/post_start.sh && /home/jovyan/codespace/post_start.sh",
+  "postStartCommand": "chmod +x /home/jovyan/codespace/post_start.sh && /home/jovyan/codespace/post_start.sh && rm /home/jovyan/codespace/post_start.sh",
 
   // List of extensions to be installed
   "extensions": []
