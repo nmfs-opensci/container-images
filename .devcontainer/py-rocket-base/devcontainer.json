@@ -8,7 +8,7 @@
   "workspaceMount": "source=${localWorkspaceFolder}/.devcontainer/codespace,target=/home/jovyan/codespace,type=bind,consistency=delegated",
 
   // Default workspace folder within the container
-  "workspaceFolder": "/home/jovyan",
+  "workspaceFolder": "/home/jovyan/codespace",
 
   // Required for Jupyter Lab
   "customizations": {
