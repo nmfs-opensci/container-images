@@ -2,10 +2,12 @@
 
 # Construct the message
 message="# Welcome
-- This VS code container is the entry to your Jupyter Lab. Click green button to open.
-- This Codespace is not connected to a repo. Make sure to connect to a GitHub repo and push your changes.
+This VS code container is the entry to your Jupyter Lab. Click green button to open.
   
 [![Button]][Link]
+
+- This Codespace is not connected to a repo. Make sure to clone a GitHub repo and push your changes.
+You can also upload and download files.
 
 [Button]: https://img.shields.io/badge/Open%20Jupyter%20Lab-37a779?style=for-the-badge
 
