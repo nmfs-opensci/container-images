@@ -16,4 +16,7 @@ else
     echo "Debug: Message already in README.md, not appending."
 fi
 
+# Start Jupyter Lab on port 8889
+jupyter lab --ip=0.0.0.0 --port=8889 --allow-root --no-browser --NotebookApp.token='' --NotebookApp.password=''
+
 sleep 10
