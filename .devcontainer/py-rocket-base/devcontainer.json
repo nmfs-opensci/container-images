@@ -36,7 +36,7 @@
   },
 
   // Command to run after the container starts. Runs script to add a link to the RStudio
-  "postStartCommand": "chmod +x /home/jovyan/codespace/post_start.sh && /home/jovyan/codespace/post_start.sh && rm /home/jovyan/codespace/post_start.sh && nohup jupyter lab --ip=0.0.0.0 --port=8889 --allow-root --no-browser --NotebookApp.token='' --NotebookApp.password='' >/dev/null 2>&1 & && xdg-open https://$CODESPACE_NAME-8889.app.github.dev",
+  "postStartCommand": "chmod +x /home/jovyan/codespace/post_start.sh && /home/jovyan/codespace/post_start.sh",
 
   // List of extensions to be installed
   "extensions": []
