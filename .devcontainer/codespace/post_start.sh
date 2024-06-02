@@ -21,5 +21,4 @@ sleep 5
 
 nohup jupyter lab --ip=0.0.0.0 --port=8889 --allow-root --no-browser --NotebookApp.token='' --NotebookApp.password='' >/dev/null 2>&1 &
 
-xdg-open https://$CODESPACE_NAME-8889.app.github.dev
-
+sensible-browser https://$CODESPACE_NAME-8889.app.github.dev

@@ -5,10 +5,13 @@
   // Path to the Docker file
   "image": "ghcr.io/nmfs-opensci/container-images/py-rocket-base:latest",
 
+  // Mount a folder with the post_start.sh script to /home/jovyan/codespace
+  // Don't use /home/jovyan as that would wipe out files there
+  // We need post_start.sh in our container
   "workspaceMount": "source=${localWorkspaceFolder}/.devcontainer/codespace,target=/home/jovyan/codespace,type=bind,consistency=delegated",
 
   // Default workspace folder within the container
-  "workspaceFolder": "/home/jovyan/codespace",
+  "workspaceFolder": "/home/jovyan",
 
   // Required for Jupyter Lab
   "customizations": {
@@ -36,7 +39,7 @@
   },
 
   // Command to run after the container starts. Runs script to add a link to the RStudio
-  "postStartCommand": "chmod +x /home/jovyan/codespace/post_start.sh && /home/jovyan/codespace/post_start.sh",
+  "postStartCommand": "chmod +x /home/jovyan/codespace/post_start.sh && /home/jovyan/codespace/post_start.sh && mv /home/jovyan/codespace/README.md /home/jovyan",
 
   // List of extensions to be installed
   "extensions": []
