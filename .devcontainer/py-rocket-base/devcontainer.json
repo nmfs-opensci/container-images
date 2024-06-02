@@ -20,12 +20,18 @@
         "ms-toolsai.jupyter",
         "ms-python.python",
       ]
+    },
+  " codespaces": {
+     "openFiles": [ "/home/jovyan/README.md", ]
     }
   },
 
-  // Settings for the integrated terminal
+  // Settings for the VS Code
   "settings": {
-    "terminal.integrated.shell.linux": "/bin/bash"
+    "terminal.integrated.shell.linux": "/bin/bash",
+    "workbench.editorAssociations": {   
+        "*.md": "vscode.markdown.preview.editor",
+    }
   },
 
   // Ports to be forwarded from the container to the host
