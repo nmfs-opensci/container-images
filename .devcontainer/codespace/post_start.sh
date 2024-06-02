@@ -21,4 +21,7 @@ sleep 5
 
 nohup jupyter lab --ip=0.0.0.0 --port=8889 --allow-root --no-browser --NotebookApp.token='' --NotebookApp.password='' >/dev/null 2>&1 &
 
-sensible-browser https://$CODESPACE_NAME-8889.app.github.dev
+sudo apt-get update
+sudo apt-get install -y xdg-utils
+
+xdg-open https://$CODESPACE_NAME-8889.app.github.dev
