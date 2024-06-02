@@ -11,7 +11,7 @@
   "workspaceMount": "source=${localWorkspaceFolder}/.devcontainer/codespace,target=/home/jovyan/codespace,type=bind,consistency=delegated",
 
   // Default workspace folder within the container
-  "workspaceFolder": "/home/jovyan",
+  "workspaceFolder": "/home/jovyan/codespace",
 
   // Required for Jupyter Lab
   "customizations": {
@@ -21,17 +21,11 @@
         "ms-python.python",
       ]
     },
-  " codespaces": {
-     "openFiles": [ "/home/jovyan/README.md", ]
-    }
   },
 
   // Settings for the VS Code
   "settings": {
     "terminal.integrated.shell.linux": "/bin/bash",
-    "workbench.editorAssociations": {   
-        "*.md": "vscode.markdown.preview.editor",
-    }
   },
 
   // Ports to be forwarded from the container to the host
@@ -46,7 +40,7 @@
   },
 
   // Command to run after the container starts. Runs script to add a link to the Jupyter Lab
-  "postStartCommand": "chmod +x /home/jovyan/codespace/post_start.sh && /home/jovyan/codespace/post_start.sh && mv /home/jovyan/codespace/README.md /home/jovyan && code /home/jovyan/README.md && jupyter lab --ip=0.0.0.0 --port=8889 --allow-root --no-browser --NotebookApp.token='' --NotebookApp.password=''",
+  "postStartCommand": "chmod +x /home/jovyan/codespace/post_start.sh && /home/jovyan/codespace/post_start.sh && rm /home/jovyan/codespace/post_start.sh &&  jupyter lab --ip=0.0.0.0 --port=8889 --allow-root --no-browser --NotebookApp.token='' --NotebookApp.password=''",
 
   // List of extensions to be installed
   "extensions": []
