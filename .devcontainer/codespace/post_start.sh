@@ -19,9 +19,5 @@ echo "$message" > /home/jovyan/codespace/README.md
 
 sleep 5
 
+# Start jupyter lab in detached mode
 nohup jupyter lab --ip=0.0.0.0 --port=8889 --allow-root --no-browser --NotebookApp.token='' --NotebookApp.password='' >/dev/null 2>&1 &
-
-echo rstudio | sudo -S apt-get update
-sudo apt-get install -y xdg-utils
-
-xdg-open https://$CODESPACE_NAME-8889.app.github.dev
