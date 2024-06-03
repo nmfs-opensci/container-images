@@ -1,0 +1,17 @@
+{
+  "name": "test",
+  "workspaceFolder": "/home/jovyan",
+  "image": "ghcr.io/nmfs-opensci/container-images/py-rocket-base:latest",
+  "hostRequirements": {
+    "cpus": "2"
+  },
+  "forwardPorts": [
+    8889
+  ],
+  "portsAttributes": {
+    "8889": {
+      "label": "Jupyter Lab",
+    }
+  },
+  "postCreateCommand": "jupyter lab --ip=0.0.0.0 --port=8889 --allow-root --no-browser --NotebookApp.token='' --NotebookApp.password=''"
+}
