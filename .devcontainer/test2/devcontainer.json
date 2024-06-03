@@ -1,0 +1,25 @@
+{
+  // Name of the Dev Container
+  "name": "test2",
+
+  // Path to the Docker file
+  "image": "ghcr.io/nmfs-opensci/container-images/py-rocket-base:latest",
+
+
+  // Ports to be forwarded from the container to the host
+  "forwardPorts": [8889],
+
+  // Attributes for the forwarded ports
+  "portsAttributes": {
+    "8889": {
+      "label": "Jupyter Lab",
+      "onAutoForward": "openBrowser"
+    }
+  },
+
+  // Command to run after the container starts. Runs script to add a link to the Jupyter Lab
+  "postStartCommand": "docker run -p 8889:8888  ghcr.io/nmfs-opensci/container-images/py-rocket-base:latest",
+
+  // List of extensions to be installed
+  "extensions": []
+}
