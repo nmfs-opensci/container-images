@@ -9,6 +9,7 @@
     "codespaces": {
       "openFiles": [
          "../../workspaces/container-images/.devcontainer/codespace/README.md",
+         "README.md"
       ]
     },
     "vscode": {
@@ -23,5 +24,6 @@
       "onAutoForward": "notify"
     }
   },
-  "postStartCommand": "echo '[![](https://img.shields.io/badge/Open%20Jupyter%20Lab-37a779?style=for-the-badge)](https://$CODESPACE_NAME-8889.app.github.dev)' > README.md && jupyter lab --ip=0.0.0.0 --port=8889 --allow-root --no-browser --NotebookApp.token='' --NotebookApp.password=''"
+  "postCreateCommand": "echo '[![](https://img.shields.io/badge/Open%20Jupyter%20Lab-37a779?style=for-the-badge)](https://${CODESPACE_NAME}-8889.app.github.dev)' > README.md",
+  "postStartCommand": "jupyter lab --ip=0.0.0.0 --port=8889 --allow-root --no-browser --NotebookApp.token='' --NotebookApp.password=''"
 }
