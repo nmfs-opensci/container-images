@@ -9,7 +9,6 @@
     "codespaces": {
       "openFiles": [
          "../../workspaces/container-images/.devcontainer/codespace/README.md",
-        "README.md"
       ]
     },
     "vscode": {
@@ -24,5 +23,5 @@
       "onAutoForward": "notify"
     }
   },
-  "postStartCommand": "echo '[![Button]][Link]\n\n[Button]: https://img.shields.io/badge/Open%20Jupyter%20Lab-37a779?style=for-the-badge\n[Link]: https://$CODESPACE_NAME-8889.app.github.dev\n' > README.md && jupyter lab --ip=0.0.0.0 --port=8889 --allow-root --no-browser --NotebookApp.token='' --NotebookApp.password=''"
+  "postStartCommand": "echo '[![](https://img.shields.io/badge/Open%20Jupyter%20Lab-37a779?style=for-the-badge)](https://$CODESPACE_NAME-8889.app.github.dev)' > README.md && code README.md && jupyter lab --ip=0.0.0.0 --port=8889 --allow-root --no-browser --NotebookApp.token='' --NotebookApp.password=''"
 }
