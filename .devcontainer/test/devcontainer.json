@@ -8,6 +8,7 @@
   "customizations": {
     "codespaces": {
       "openFiles": [
+        ".gitconfig",
         ".devcontainer/codespace/README.md",
         "../../workspaces/container-images/.devcontainer/codespace/README.md"
       ]
