@@ -1,7 +1,22 @@
 {
   // Name of the Dev Container
   "name": "test2",
+  
+  // Home dir
+  "workspaceFolder": "/home/jovyan",
 
+  // Dockerfile
+  "build": { "dockerfile": "Dockerfile" },
+
+  // Open README
+  "customizations": {
+    "codespaces": {
+      "openFiles": [
+         "README.md"
+      ]
+    },
+  },
+  
   // Ports to be forwarded from the container to the host
   "forwardPorts": [8889],
 
@@ -9,10 +24,9 @@
   "portsAttributes": {
     "8889": {
       "label": "Jupyter Lab",
-      "onAutoForward": "openBrowser"
     }
   },
 
   // Command to run after the container starts. Runs script to add a link to the Jupyter Lab
-  "postStartCommand": "docker run -p 8889:8888  ghcr.io/nmfs-opensci/container-images/py-rocket-base:latest",
+  "postStartCommand": "jupyter lab --ip=0.0.0.0 --port=8889 --allow-root --no-browser --NotebookApp.token='' --NotebookApp.password=''",
 }
