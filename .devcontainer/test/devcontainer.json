@@ -16,5 +16,5 @@
     }
   },
   "postCreateCommand": "echo '[![](https://img.shields.io/badge/Open%20Jupyter%20Lab-37a779?style=for-the-badge)](https://'${CODESPACE_NAME}'-8889.app.github.dev)' > README.md",
-  "postStartCommand": "jupyter lab --ip=0.0.0.0 --port=8889 --allow-root --no-browser --NotebookApp.token='' --NotebookApp.password=''",
+  "postStartCommand": "jupyter lab --ip=0.0.0.0 --port=8889 --allow-root --no-browser --notebook-dir=/home/jovyan --NotebookApp.token='' --NotebookApp.password=''",
 }
