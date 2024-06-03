@@ -8,9 +8,14 @@
   "customizations": {
     "codespaces": {
       "openFiles": [
-        ".gitconfig",
-        "../../workspaces/container-images/.devcontainer/codespace/README.md"
+         "../../workspaces/container-images/.devcontainer/codespace/README.md",
+        "README.md"
       ]
+    }
+  },
+  "settings": {
+    "workbench.editorAssociations": {   
+        "*.md": "vscode.markdown.preview.editor",
     }
   },
   "portsAttributes": {
@@ -19,5 +24,5 @@
       "onAutoForward": "openBrowser"
     }
   },
-  "postStartCommand": "echo 'abc' > README.md && jupyter lab --ip=0.0.0.0 --port=8889 --allow-root --no-browser --NotebookApp.token='' --NotebookApp.password=''"
+  "postStartCommand": "echo -e '[![Button]][Link]\n[Button]: https://img.shields.io/badge/Open%20Jupyter%20Lab-37a779?style=for-the-badge\n[Link]: https://$CODESPACE_NAME-8889.app.github.dev\n' > README.md && jupyter lab --ip=0.0.0.0 --port=8889 --allow-root --no-browser --NotebookApp.token='' --NotebookApp.password=''"
 }
