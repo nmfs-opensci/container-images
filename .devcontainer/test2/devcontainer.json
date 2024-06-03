@@ -2,10 +2,6 @@
   // Name of the Dev Container
   "name": "test2",
 
-  // Path to the Docker file
-  "image": "ghcr.io/nmfs-opensci/container-images/py-rocket-base:latest",
-
-
   // Ports to be forwarded from the container to the host
   "forwardPorts": [8889],
 
