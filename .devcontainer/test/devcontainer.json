@@ -5,18 +5,10 @@
   "hostRequirements": {
     "cpus": "2"
   },
-  "customizations": {
-    "codespaces": {
-      "openFiles": [
-         "README.md"
-      ]
-    },
-    "vscode": {
-      "settings": { 
-        "workbench.editorAssociations": { "*.md": "vscode.markdown.preview.editor", },
-      },
-    }
-  },
+  
+  // Ports to be forwarded from the container to the host
+  "forwardPorts": [8889],
+
   "portsAttributes": {
     "8889": {
       "label": "Jupyter Lab",
