@@ -9,7 +9,6 @@
     "codespaces": {
       "openFiles": [
         ".gitconfig",
-        ".devcontainer/codespace/README.md",
         "../../workspaces/container-images/.devcontainer/codespace/README.md"
       ]
     }
@@ -17,8 +16,8 @@
   "portsAttributes": {
     "8889": {
       "label": "Jupyter Lab",
-      "onAutoForward": "openBrowserOnce"
+      "onAutoForward": "openBrowser"
     }
   },
-  "postStartCommand": "jupyter lab --ip=0.0.0.0 --port=8889 --allow-root --no-browser --NotebookApp.token='' --NotebookApp.password=''"
+  "postStartCommand": "echo "abc" > README.md && jupyter lab --ip=0.0.0.0 --port=8889 --allow-root --no-browser --NotebookApp.token='' --NotebookApp.password=''"
 }
