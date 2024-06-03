@@ -11,11 +11,10 @@
          "../../workspaces/container-images/.devcontainer/codespace/README.md",
         "README.md"
       ]
-    }
-  },
-  "settings": {
-    "workbench.editorAssociations": {   
-        "*.md": "vscode.markdown.preview.editor",
+    },
+    "vscode": {
+      "settings": { 
+        "workbench.editorAssociations": { "*.md": "vscode.markdown.preview.editor", },
     }
   },
   "portsAttributes": {
@@ -24,5 +23,6 @@
       "onAutoForward": "notify"
     }
   },
-  "postStartCommand": "echo -e '[![Button]][Link]\n[Button]: https://img.shields.io/badge/Open%20Jupyter%20Lab-37a779?style=for-the-badge\n[Link]: https://$CODESPACE_NAME-8889.app.github.dev\n' > README.md && jupyter lab --ip=0.0.0.0 --port=8889 --allow-root --no-browser --NotebookApp.token='' --NotebookApp.password=''"
+  "postCreateCommand": "echo '[![Button]][Link]\n\n[Button]: https://img.shields.io/badge/Open%20Jupyter%20Lab-37a779?style=for-the-badge\n[Link]: https://$CODESPACE_NAME-8889.app.github.dev\n' > README.md"
+  "postStartCommand": "jupyter lab --ip=0.0.0.0 --port=8889 --allow-root --no-browser --NotebookApp.token='' --NotebookApp.password=''"
 }
