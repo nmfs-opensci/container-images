@@ -8,15 +8,6 @@
   // Dockerfile
   "build": { "dockerfile": "Dockerfile" },
 
-  // Open README
-  "customizations": {
-    "codespaces": {
-      "openFiles": [
-         "README.md"
-      ]
-    },
-  },
-  
   // Ports to be forwarded from the container to the host
   "forwardPorts": [8889],
 
