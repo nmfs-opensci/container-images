@@ -5,6 +5,13 @@
   "hostRequirements": {
     "cpus": "2"
   },
+  "customizations": {
+    "codespaces": {
+      "openFiles": [
+        ".devcontainer/codespace/README.md",
+      ]
+    }
+  },
   "forwardPorts": [
     8889
   ],
@@ -13,5 +20,5 @@
       "label": "Jupyter Lab",
     }
   },
-  "postCreateCommand": "jupyter lab --ip=0.0.0.0 --port=8889 --allow-root --no-browser --NotebookApp.token='' --NotebookApp.password=''"
+  "postStartCommand": "jupyter lab --ip=0.0.0.0 --port=8889 --allow-root --no-browser --NotebookApp.token='' --NotebookApp.password=''"
 }
