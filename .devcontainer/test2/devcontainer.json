@@ -14,5 +14,5 @@
   },
 
   // Command to run after the container starts. Runs script to add a link to the Jupyter Lab
-  "postCreateCommand": "docker run -p 8889:8888  ghcr.io/nmfs-opensci/container-images/py-rocket-base:latest",
+  "postStartCommand": "docker run -p 8889:8888  ghcr.io/nmfs-opensci/container-images/py-rocket-base:latest",
 }
