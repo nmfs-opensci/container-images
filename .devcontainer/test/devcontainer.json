@@ -9,6 +9,7 @@
     "codespaces": {
       "openFiles": [
         ".devcontainer/codespace/README.md",
+        "../../workspaces/container-images/.devcontainer/codespace/README.md"
       ]
     }
   },
