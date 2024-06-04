@@ -14,7 +14,7 @@
   
   // Create a README that is automatically opened in preview mode
   // the echo bit is to fix pwd in bash terminal in RStudio
-  "postCreateCommand": "echo '[![](https://img.shields.io/badge/Open%20Jupyter%20Lab-37a779?style=for-the-badge)](https://''-8889.app.github.dev)' > README.md && echo PWD=/home/jovyan\ncd /Users/eli.holmes/Documents/GitHub/container-images >> ~/.bash_login",
+  "postCreateCommand": "echo '[![](https://img.shields.io/badge/Open%20Jupyter%20Lab-37a779?style=for-the-badge)](https://'${CODESPACE_NAME}'-8889.app.github.dev)' > README.md && echo PWD=/home/jovyan\ncd /Users/eli.holmes/Documents/GitHub/container-images >> ~/.bash_login",
   
   // Start Jupyter Lab
   "postStartCommand": "jupyter lab --ip=0.0.0.0 --port=8889 --allow-root --no-browser --notebook-dir=/home/jovyan --NotebookApp.token='' --NotebookApp.password=''",
