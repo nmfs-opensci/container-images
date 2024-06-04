@@ -12,7 +12,7 @@ on:
   push:
     branches: main
     paths: 
-      - 'images/test/**'
+      - 'draft_images/test/**'
       - '.github/workflows/docker-image-test.yml'
 jobs:
   build:

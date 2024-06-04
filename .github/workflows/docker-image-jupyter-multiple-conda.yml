@@ -4,7 +4,7 @@ on:
   push:
     branches: main
     paths: 
-      - 'images/jupyter-multiple-conda/**'
+      - 'draft_images/jupyter-multiple-conda/**'
       - '.github/workflows/docker-image-jupyter-multiple-conda.yml'
 jobs:
   build:

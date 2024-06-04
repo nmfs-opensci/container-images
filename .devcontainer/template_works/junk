@@ -1,0 +1,10 @@
+  "customizations": {
+    "codespaces": {
+      "openFiles": [ "README.md" ],
+    },
+    "vscode": {
+      "settings": { 
+        "workbench.editorAssociations": { "*.md": "vscode.markdown.preview.editor", },
+      },
+    }
+  },

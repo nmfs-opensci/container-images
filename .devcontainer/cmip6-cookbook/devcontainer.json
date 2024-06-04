@@ -1,7 +1,7 @@
 {
-  "name": "py-rocket-geospatial",
+  "name": "cmip6-cookbook",
   "workspaceFolder": "/home/jovyan",
-  "image": "ghcr.io/nmfs-opensci/container-images/py-rocket-geospatial:latest",
+  "image": "ghcr.io/nmfs-opensci/container-images/cmip6-cookbook:latest",
 
   // Ports to be forwarded from the container to the host
   "forwardPorts": [8889],

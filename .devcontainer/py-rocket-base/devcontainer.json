@@ -1,47 +1,21 @@
 {
-  // Name of the Dev Container
-  "name": "Py-Rocket Base Codespace",
-
-  // Path to the Docker file
+  "name": "py-rocket-base",
+  "workspaceFolder": "/home/jovyan",
   "image": "ghcr.io/nmfs-opensci/container-images/py-rocket-base:latest",
-
-  // Mount a folder with the post_start.sh script to /home/jovyan/codespace
-  // Don't use /home/jovyan as that would wipe out files there
-  // We need post_start.sh in our container
-  "workspaceMount": "source=${localWorkspaceFolder}/.devcontainer/codespace,target=/home/jovyan/codespace,type=bind,consistency=delegated",
-
-  // Default workspace folder within the container
-  "workspaceFolder": "/home/jovyan/codespace",
-
-  // Required for Jupyter Lab
-  "customizations": {
-    "vscode": {
-      "extensions": [
-        "ms-toolsai.jupyter",
-        "ms-python.python",
-      ]
-    },
-  },
-
-  // Settings for the VS Code
-  "settings": {
-    "terminal.integrated.shell.linux": "/bin/bash",
-  },
 
   // Ports to be forwarded from the container to the host
   "forwardPorts": [8889],
-
-  // Attributes for the forwarded ports
   "portsAttributes": {
     "8889": {
       "label": "Jupyter Lab",
-      "onAutoForward": "openBrowser"
+      "onAutoForward": "notify"
     }
   },
-
-  // Command to run after the container starts. Runs script to add a link to the Jupyter Lab
-  "postStartCommand": "chmod +x /home/jovyan/codespace/post_start.sh && /home/jovyan/codespace/post_start.sh && rm /home/jovyan/codespace/post_start.sh &&  jupyter lab --ip=0.0.0.0 --port=8889 --allow-root --no-browser --NotebookApp.token='' --NotebookApp.password=''",
-
-  // List of extensions to be installed
-  "extensions": []
+  
+  // Create a README that is automatically opened in preview mode
+  // the echo bit is to fix pwd in bash terminal in RStudio
+  "postCreateCommand": "echo '[![](https://img.shields.io/badge/Open%20Jupyter%20Lab-37a779?style=for-the-badge)](https://''-8889.app.github.dev)' > README.md && echo PWD=/home/jovyan\ncd /Users/eli.holmes/Documents/GitHub/container-images >> ~/.bash_login",
+  
+  // Start Jupyter Lab
+  "postStartCommand": "jupyter lab --ip=0.0.0.0 --port=8889 --allow-root --no-browser --notebook-dir=/home/jovyan --NotebookApp.token='' --NotebookApp.password=''",
 }

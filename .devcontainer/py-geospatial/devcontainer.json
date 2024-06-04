@@ -1,7 +1,7 @@
 {
-  "name": "py-rocket-geospatial",
+  "name": "py-geospatial",
   "workspaceFolder": "/home/jovyan",
-  "image": "ghcr.io/nmfs-opensci/container-images/py-rocket-geospatial:latest",
+  "image": "ghcr.io/nmfs-opensci/container-images/py-geospatial:latest",
 
   // Ports to be forwarded from the container to the host
   "forwardPorts": [8889],
