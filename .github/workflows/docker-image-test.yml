@@ -6,6 +6,7 @@ env:
   IMAGE_NAME: test
   IMAGE_TAG: test
   IMAGE_BRANCH: main
+  IMAGE_DIR: draft_images
   
 on:
   workflow_dispatch: null
@@ -35,8 +36,8 @@ jobs:
             --driver=docker-container
           docker buildx build \
             --platform linux/amd64,linux/arm64 \
-            --builder container images/$IMAGE_NAME \
-            -f images/$IMAGE_NAME/Dockerfile \
+            --builder container $IMAGE_DIR/$IMAGE_NAME \
+            -f $IMAGE_DIR/$IMAGE_NAME/Dockerfile \
             --tag ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG \
             --tag ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:latest \
             --push
@@ -44,4 +45,5 @@ jobs:
 #        if: github.repository == 'nmfs-opensci/container-images'
 #        run: |
 #          docker push ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG
+#          docker push ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:latest
 

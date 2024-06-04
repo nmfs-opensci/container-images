@@ -2,6 +2,7 @@ name: Docker Image CI arcgis-pangeo
 env:
   IMAGE_NAME: arcgis-pangeo
   IMAGE_TAG: 2024-06-04
+  IMAGE_DIR: draft_images
 
 on:
   workflow_dispatch: null
@@ -26,7 +27,7 @@ jobs:
       - name: Build the Docker image
         if: github.repository == 'nmfs-opensci/container-images'
         run: |
-          docker build images/$IMAGE_NAME -f images/$IMAGE_NAME/Dockerfile  --tag ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG  --tag ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:latest
+          docker build $IMAGE_DIR/$IMAGE_NAME -f $IMAGE_DIR/$IMAGE_NAME/Dockerfile  --tag ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG  --tag ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:latest
       - name: Publish
         if: github.repository == 'nmfs-opensci/container-images'
         run: |

@@ -1,4 +1,9 @@
 name: Docker Image CI jupyter-multiple-conda
+env:
+  IMAGE_NAME: jupyter-multiple-conda
+  IMAGE_TAG: 2024-06-04
+  IMAGE_DIR: draft_images
+
 on:
   workflow_dispatch: null
   push:
@@ -6,6 +11,7 @@ on:
     paths: 
       - 'draft_images/jupyter-multiple-conda/**'
       - '.github/workflows/docker-image-jupyter-multiple-conda.yml'
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -22,9 +28,9 @@ jobs:
       - name: Build the Docker image
         if: github.repository == 'nmfs-opensci/container-images'
         run: |
-          docker build images/jupyter-multiple-conda -f images/jupyter-multiple-conda/Dockerfile  --tag ghcr.io/nmfs-opensci/container-images/jupyter-multiple-conda:latest
+          docker build $IMAGE_DIR/$IMAGE_NAME -f $IMAGE_DIR/$IMAGE_NAME/Dockerfile  --tag ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG  --tag ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:latest
       - name: Publish
         if: github.repository == 'nmfs-opensci/container-images'
         run: |
-          docker push ghcr.io/nmfs-opensci/container-images/jupyter-multiple-conda:latest
-
+          docker push ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG
+          docker push ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:latest
