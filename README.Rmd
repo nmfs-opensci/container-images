@@ -25,7 +25,10 @@ table_line <- function(i){
   branch <- system(paste0("git show-ref refs/heads/", i, " ignore.stdout = TRUE"))
   binder_button <- ""
   if(branch == 0) binder_button <- paste0("[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/nmfs-opensci/container-images/", i, ")")
-  cat("| [", i, "](https://github.com/nmfs-opensci/container-images/pkgs/container/container-images%2F", i, ") <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci/container-images%2F", i,"/size?color=%2344cc11&tag=latest&label=image+size&trim=) <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci%2Fcontainer-images/", i, "/latest_tag?color=%2344cc11&ignore=latest&label=version&trim=) | ", desc, " | [![Button GCS]](https://codespaces.new/nmfs-opensci/container-images?devcontainer_path=.devcontainer%2F", i, "%2Fdevcontainer.json) <br/> ", binder_button, " |  [Dockerfile](https://github.com/nmfs-opensci/container-images/tree/main/images/", i, "/Dockerfile) <br> [directory](https://github.com/nmfs-opensci/container-images/tree/main/images/", i, ") |\n", sep="")
+  devfil <- paste0(".devcontainer/",i,"/devcontainer.json")
+  devcon_button <- ""
+  if(file.exists(devfil)) devcon_button <- paste0("[![Button GCS]](https://codespaces.new/nmfs-opensci/container-images?devcontainer_path=.devcontainer/", i, "/devcontainer.json)")
+  cat("| [", i, "](https://github.com/nmfs-opensci/container-images/pkgs/container/container-images%2F", i, ") <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci/container-images%2F", i,"/size?color=%2344cc11&tag=latest&label=image+size&trim=) <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci%2Fcontainer-images/", i, "/latest_tag?color=%2344cc11&ignore=latest&label=version&trim=) | ", desc, " | ", devcon_button, " <br/> ", binder_button, " |  [Dockerfile](https://github.com/nmfs-opensci/container-images/tree/main/images/", i, "/Dockerfile) <br> [directory](https://github.com/nmfs-opensci/container-images/tree/main/images/", i, ") |\n", sep="")
 }
 ```
 
@@ -43,8 +46,7 @@ imgs <- c("arcgis", "coastwatch", "echopype", "vast", "aomlomics-jh")
 for(i in imgs) table_line(i)
 ```
 
-[Button GCS]: https://img.shields.io/badge/Open_in_Codespace-37a779?style=for-the-badge
-
+[Button GCS]: https://img.shields.io/badge/launch-codespace-brightgreen?logo=github
 
 *Click on the image name in the table above for a current list of installed packages and versions*
 
@@ -59,6 +61,16 @@ The images are designed to be deployable "out of the box" from JupyterHubs, Code
 ## Why use a container?
 
 The main reason is that geospatial, bioinformatics, and TMB/INLA environments can be hard to get working right. Using a Docker image means you use a stable environment. Watch this video from Yuvi Panda (Jupyter Project) [video](https://www.youtube.com/watch?v=qgLPpULvBbQ) and read about the Rocker Project in the R Project Journal [article](https://journal.r-project.org/archive/2017/RJ-2017-065/RJ-2017-065.pdf) by Carl Boettiger and Dirk Eddelbuettel.
+
+**Related Docker Stacks**
+
+* [NASA Openscapes corn]() and [NASA Openscapes py-rocket]()
+* [Rocker](https://rocker-project.org/images/devcontainer/images.html) 
+* [Pangeo](https://github.com/pangeo-data/pangeo-docker-images)
+* [Jupyter](https://jupyter-docker-stacks.readthedocs.io/en/latest/)
+* [geocompx](https://github.com/geocompx/docker)
+* [GPU accelerated docker images and devcontainers](https://github.com/b-data)
+
 
 ### <a name="thanks">Acknowledgements
 
