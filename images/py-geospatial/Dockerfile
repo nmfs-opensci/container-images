@@ -5,8 +5,6 @@ LABEL org.opencontainers.image.source=https://github.com/NASA-Openscapes/corn/tr
 LABEL org.opencontainers.image.description="NASA Openscapes Python image used in workshops"
 LABEL org.opencontainers.image.licenses=Apache2.0
 
-# install nb_conda_kernels to allow conda kernels
-
 USER ${NB_USER}
 
 RUN mamba install -c conda-forge -n notebook cmocean

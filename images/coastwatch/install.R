@@ -1,8 +1,9 @@
 #! /usr/local/bin/Rscript
 # install R dependencies
 
-# to match rocker/geospatial:4.2 uses in openscapes/rocker:a7596b5
-repo <- "https://p3m.dev/cran/__linux__/jammy/2023-04-20"
+# to match rocker/verse:4.4 used in py-rocker-base
+# look up the date that the image was created and put that
+repo <- "https://p3m.dev/cran/__linux__/jammy/2024-05-13"
 list.of.packages <- c("ncdf4", "httr", "plyr", "lubridate", "parsedate", "rerddap",
                       "maps", "mapdata", "RColorBrewer",
                       "ggplot2","scales", "dplyr", "RCurl", "raster", "colorRamps",
