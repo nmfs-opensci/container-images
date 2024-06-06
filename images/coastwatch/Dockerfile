@@ -1,4 +1,4 @@
-FROM openscapes/rocker:a7596b5
+FROM ghcr.io/nmfs-opensci/container-images/py-rocket-geospatial:4.4-3.10
 LABEL org.opencontainers.image.maintainers="sun.bak-hospital@noaa.gov"
 LABEL org.opencontainers.image.source=https://github.com/nmfs-opensci/container-images/coastwatch
 LABEL org.opencontainers.image.description="CoastWatch image for satellite training courses"
