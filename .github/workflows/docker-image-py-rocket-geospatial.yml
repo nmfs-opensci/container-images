@@ -5,13 +5,15 @@ env:
   
 on:
   workflow_dispatch: null
+  workflow_run:
+    workflows: ['Docker Image CI py-rocket-base']
+    types: [completed]
   push:
     branches: main
     paths: 
-      - 'images/py-rocket-base/**'
       - 'images/py-rocket-geospatial/**'
       - '.github/workflows/docker-image-py-rocket-geospatial.yml'
-      - '.github/workflows/docker-image-py-rocket-base.yml'
+
 jobs:
   build:
     runs-on: ubuntu-latest
