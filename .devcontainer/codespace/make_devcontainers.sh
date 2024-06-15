@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# cd .devcontainer/codespace
-# chmod +x ./make_devcontainers.sh
+# chmod +x ./.devcontainer/codespace/make_devcontainers.sh
 # ./.devcontainer/codespace/make_devcontainers.sh
 a=$(Rscript -e 'cat(here::here())')
 cd $a
@@ -10,6 +9,6 @@ fils="$(ls ./images)"
 for i in $fils
 do
    echo $i
-   mkdir ../$i
+   mkdir ./.devcontainer/$i
    ./.devcontainer/codespace/devcontainer_template.sh $i
 done
