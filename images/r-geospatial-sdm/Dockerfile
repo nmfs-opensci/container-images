@@ -4,7 +4,7 @@ FROM ghcr.io/nmfs-opensci/container-images/py-rocket-base:4.4-3.10
 LABEL org.opencontainers.image.maintainers="eli.holmes@noaa.gov"
 LABEL org.opencontainers.image.author="eli.holmes@noaa.gov"
 LABEL org.opencontainers.image.source=https://github.com/nmfs-opensci/container-images/r-geospatial-sdm
-LABEL org.opencontainers.image.description="Geospatial R image with sdmTMB"
+LABEL org.opencontainers.image.description="Geospatial R (vrs 4.4) image with Species Dist Modeling packages including sdmTMB"
 LABEL org.opencontainers.image.licenses=Apache2.0
 
 USER root
