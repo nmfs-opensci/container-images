@@ -6,7 +6,7 @@ on:
   workflow_dispatch: null
   workflow_run:
     workflows: ['Docker Image CI py-rocket-base']
-      types: [completed]
+    types: [completed]
   push:
     branches: main
     paths: 
