@@ -50,7 +50,7 @@ ENV DASK_ROOT_CONFIG=${CONDA_DIR}/etc
 RUN echo "PATH=${PATH}" >>"${R_HOME}/etc/Renviron.site"
 
 ## Ensure that if user installs packages they go to the user library
-RUN echo "dir.create(Sys.getenv("R_LIBS_USER"), recursive = TRUE, showWarnings = FALSE)" >> "${R_HOME}/etc/Rprofile.site"
+RUN echo "dir.create(Sys.getenv('R_LIBS_USER'), recursive = TRUE, showWarnings = FALSE)" >> "${R_HOME}/etc/Rprofile.site"
 RUN echo ".libPaths(c(Sys.getenv('R_LIBS_USER'), .libPaths()))" >> "${R_HOME}/etc/Rprofile.site"
 
 # bin to PATH earlier ($NB_PYTHON_PREFIX/bin)

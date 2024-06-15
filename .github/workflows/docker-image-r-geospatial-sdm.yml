@@ -11,6 +11,7 @@ on:
       - 'images/py-rocket-base/**'
       - 'images/r-geospatial-sdm/**'
       - '.github/workflows/docker-image-r-geospatial-sdm.yml'
+      - '.github/workflows/docker-image-py-rocket-base.yml'
 jobs:
   build:
     runs-on: ubuntu-latest
