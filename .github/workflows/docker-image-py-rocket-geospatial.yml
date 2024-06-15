@@ -8,6 +8,7 @@ on:
   push:
     branches: main
     paths: 
+      - 'images/py-rocket-base/**'
       - 'images/py-rocket-geospatial/**'
       - '.github/workflows/docker-image-py-rocket-geospatial.yml'
       - '.github/workflows/docker-image-py-rocket-base.yml'
