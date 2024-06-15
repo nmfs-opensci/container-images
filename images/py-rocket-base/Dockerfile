@@ -49,9 +49,8 @@ ENV DASK_ROOT_CONFIG=${CONDA_DIR}/etc
 ## Ensure that RStudio uses the conda notebook env for Python and modules
 RUN echo "PATH=${PATH}" >>"${R_HOME}/etc/Renviron.site"
 
-## Ensure that if user installs packages they go to the user library
+## Ensure that user library exists
 RUN echo "dir.create(Sys.getenv('R_LIBS_USER'), recursive = TRUE, showWarnings = FALSE)" >> "${R_HOME}/etc/Rprofile.site"
-RUN echo ".libPaths(c(Sys.getenv('R_LIBS_USER'), .libPaths()))" >> "${R_HOME}/etc/Rprofile.site"
 
 # bin to PATH earlier ($NB_PYTHON_PREFIX/bin)
 RUN echo ". ${CONDA_DIR}/etc/profile.d/conda.sh ; conda activate ${CONDA_ENV}" > /etc/profile.d/init_conda.sh
