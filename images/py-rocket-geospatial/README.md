@@ -1,6 +1,6 @@
 # Readme
 
-This creates a base R image built off rocker/verse with geospatial packages.
+This creates a base R image built off rocker/verse with geospatial packages for Python and R.
 
 It meant to emulate the geospatial Python image used by NASA Openscapes for their training and tutorials.
 
