@@ -4,14 +4,15 @@ env:
   IMAGE_TAG: 4.4
 on:
   workflow_dispatch: null
+  workflow_run:
+    workflows: ['Docker Image CI py-rocket-base']
+      types: [completed]
   push:
     branches: main
-    # main path plus the nmfs-opensci-python-base if that is used.
     paths: 
-      - 'images/py-rocket-base/**'
       - 'images/r-geospatial-sdm/**'
       - '.github/workflows/docker-image-r-geospatial-sdm.yml'
-      - '.github/workflows/docker-image-py-rocket-base.yml'
+
 jobs:
   build:
     runs-on: ubuntu-latest
