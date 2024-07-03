@@ -12,6 +12,7 @@ on:
     paths: 
       - 'draft_images/test-gcp/**'
       - '.github/workflows/docker-image-test-gcp.yml'
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -28,18 +29,10 @@ jobs:
       - name: Build the Docker image
         if: github.repository == 'nmfs-opensci/container-images'
         run: |
-          docker buildx create \
-            --name container \
-            --driver=docker-container
-          docker buildx build \
-            --platform linux/amd64,linux/arm64 \
-            --builder container $IMAGE_DIR/$IMAGE_NAME \
-            -f $IMAGE_DIR/$IMAGE_NAME/Dockerfile \
-            --tag ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG \
-            --tag ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:latest \
-            --push
-#      - name: Publish
-#        if: github.repository == 'nmfs-opensci/container-images'
-#        run: |
-#          docker push ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG
-#          docker push ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:latest
+          docker build images/$IMAGE_NAME -f images/$IMAGE_NAME/Dockerfile  --tag ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG  --tag ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:latest
+      - name: Publish
+        if: github.repository == 'nmfs-opensci/container-images'
+        run: |
+          docker push ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG
+          docker push ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:latest
+
