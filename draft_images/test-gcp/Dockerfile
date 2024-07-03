@@ -5,7 +5,7 @@ FROM ghcr.io/nmfs-opensci/container-images/py-rocket-base:latest
 #USER root
 COPY ./assets/. /
 #RUN chmod +x /google/scripts/entrypoint.sh
-#USER ${NB_USER}
+USER root
 
 # Set the entrypoint
 ENTRYPOINT ["/google/scripts/entrypoint.sh"]
