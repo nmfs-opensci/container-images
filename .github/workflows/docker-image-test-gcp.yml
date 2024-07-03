@@ -26,6 +26,9 @@ jobs:
           registry: ghcr.io
           username: ${{github.actor}}
           password: ${{secrets.GITHUB_TOKEN}}
+      - name: Check permision on entrypoint.sh
+        run: |
+          chmod +x $IMAGE_DIR/$IMAGE_NAME/assets/google/scripts/entrypoint.sh
       - name: Build the Docker image
         if: github.repository == 'nmfs-opensci/container-images'
         run: |
