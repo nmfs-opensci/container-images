@@ -43,3 +43,14 @@ docker push us-east4-docker.pkg.dev/ggn-nmfs-opensciws-dev-1/$ARTIFACT_REGISTRY_
 ```
 
 
+## Debugging
+
+* Go to VM Instances
+* Click on yours
+* Look at logs
+
+## Opening an app running on different app
+
+* Click on dropdown instead of Launch on workstation page
+
+
