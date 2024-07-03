@@ -1,5 +1,8 @@
 FROM ghcr.io/nmfs-opensci/container-images/py-rocket-base:latest
 
-ENTRYPOINT sleep infinity
+# Merge in files from the assets directory
+# https://source.corp.google.com/dev-con/workstation/base/Dockerfile
+COPY ./assets/. /
 
-CMD ["jupyter", "lab", "--ip=0.0.0.0", "--port=80", "--allow-root", "--no-browser"]
+# Set the entrypoint
+ENTRYPOINT ["/google/scripts/entrypoint.sh"]
