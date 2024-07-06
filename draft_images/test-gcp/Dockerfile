@@ -4,7 +4,7 @@ FROM ghcr.io/nmfs-opensci/container-images/py-rocket-base:latest
 # https://source.corp.google.com/dev-con/workstation/base/Dockerfile
 #USER root
 COPY ./assets/. /
-#RUN chmod +x /google/scripts/entrypoint.sh
+
 USER root
 
 # Set the entrypoint
