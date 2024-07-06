@@ -1,5 +1,15 @@
 # Instructions
 
+## July 6th
+
+Still not working on Google Workstation, but gets to the JupyterLab page. From there however nothing works not even Terminal.  Also the user of the Docker image must be root and `jupyter lab` in the EntryPoint needs to be run as root. It is possible that this is causing a problem. But when I use 
+```
+runuser rstudio -c "jupyter lab ..." &
+```
+The jupyter lab does not successfully launch. Says cannot connect to backend.
+
+
+
 ## Setting up gcloud on your computer
 
 The Cloud Shell crashes constantly so this is the way to go.
