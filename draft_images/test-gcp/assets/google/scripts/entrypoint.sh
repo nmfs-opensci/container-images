@@ -1,4 +1,5 @@
 #!/bin/bash
+# https://github.com/mchmarny/custom-cloud-workstation-image/tree/main
 
 echo "Starting entrypoint.sh"
 
