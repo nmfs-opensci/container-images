@@ -18,27 +18,24 @@ These are Mac instructions
 * Get into cloud shell by clicking the `>_` like icon in top nav bar
 * Set up variable names
 ```
-$IMAGE_URL="ghcr.io/nmfs-opensci/container-images/test-gcp"
-$IMAGE_NAME="test-gcp"
-$IMAGE_TAG="latest"
-$ARTIFACT_REGISTRY_REPONAME="nmfs-opensci-images"
-$GCP_PROJECT_NAME="ggn-nmfs-opensciws-dev-1"
-$ARTIFACT_REGISTRY_LOCATION="us-east4-docker.pkg.dev"
+IMAGE_URL="ghcr.io/nmfs-opensci/container-images/test-gcp"
+IMAGE_NAME="test-gcp"
+IMAGE_TAG="v1.0.9"
+ARTIFACT_REGISTRY_REPONAME="nmfs-opensci-images"
+GCP_PROJECT_NAME="ggn-nmfs-opensciws-dev-1"
+ARTIFACT_REGISTRY_LOCATION="us-east4-docker.pkg.dev"
 ```
 * pull in the image. You need to have docker running.
 ```
-docker pull ghcr.io/nmfs-opensci/container-images/test-gcp:latest
+docker pull ghcr.io/nmfs-opensci/container-images/test-gcp:$IMAGE_TAG
 ```
 
 * Tag the image with Artifact Registry info
 ```
-docker tag ghcr.io/nmfs-opensci/container-images/test-gcp us-east4-docker.pkg.dev/ggn-nmfs-opensciws-dev-1/nmfs-opensci-images/test-gcp:latest
+docker tag ghcr.io/nmfs-opensci/container-images/test-gcp:$IMAGE_TAG us-east4-docker.pkg.dev/ggn-nmfs-opensciws-dev-1/nmfs-opensci-images/test-gcp:$IMAGE_TAG
 ```
 * Push in the image
 ```
-$IMAGE_NAME="test-gcp"
-$IMAGE_TAG="latest"
-$ARTIFACT_REGISTRY_REPONAME="nmfs-opensci-images"
 docker push us-east4-docker.pkg.dev/ggn-nmfs-opensciws-dev-1/$ARTIFACT_REGISTRY_REPONAME/$IMAGE_NAME:$IMAGE_TAG
 ```
 
