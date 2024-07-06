@@ -88,6 +88,7 @@ by Carl Boettiger and Dirk Eddelbuettel.
 - [geocompx](https://github.com/geocompx/docker)
 - [GPU accelerated docker images and
   devcontainers](https://github.com/b-data)
+- [ml tooling](https://github.com/ml-tooling/ml-workspace)
 
 ### <a name="thanks">Acknowledgements
 
