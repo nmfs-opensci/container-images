@@ -2,11 +2,35 @@
 
 ## July 6th
 
+*Scroll down for instructions for setting up workstations*
+
 Still not working on Google Workstation, but gets to the JupyterLab page. From there however nothing works not even Terminal.  Also the user of the Docker image must be root and `jupyter lab` in the EntryPoint needs to be run as root. It is possible that this is causing a problem. But when I use 
 ```
 runuser rstudio -c "jupyter lab ..." &
 ```
-The jupyter lab does not successfully launch. Says cannot connect to backend.
+The jupyter lab does not successfully launch. It says cannot connect to backend.
+
+Gets to the Jupyter Lab
+
+* test-v12 `jupyter lab` launched with root
+* config-ly4sa1ub (test-ssh)  `jupyter lab` launched with root
+
+Does not get to the Jupyter Lab
+
+* test-v13 `runuser rstudio -c "jupyter lab"`
+
+Problem might be the firewall rules? https://cloud.google.com/workstations/docs/configure-firewall-rules
+
+https://medium.com/analytics-vidhya/setting-up-jupyter-lab-instance-on-google-cloud-platform-3a7acaa732b7
+```
+gcloud compute firewall-rules create JHUB \
+    --action=ALLOW \
+    --direction=INGRESS \
+    --network=NETWORK \
+    --rules=tcp\
+    --source-tags=cloud-workstations-instance \
+    --destination-ranges=CONTROL_PLANE_IP
+```
 
 
 
