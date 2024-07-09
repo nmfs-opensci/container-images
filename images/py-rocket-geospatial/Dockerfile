@@ -1,6 +1,6 @@
 # Rocker verse with conda notebook environment; 
 # rstudio user with /home/jovyan home dir
-FROM ghcr.io/nmfs-opensci/container-images/py-rocket-base:2024.07.09
+FROM ghcr.io/nmfs-opensci/container-images/py-rocket-base:4.4-3.10
 LABEL org.opencontainers.image.maintainers="eli.holmes@noaa.gov"
 LABEL org.opencontainers.image.author="eli.holmes@noaa.gov"
 LABEL org.opencontainers.image.source=https://github.com/nmfs-opensci/container-images/py-rocket-geospatial
