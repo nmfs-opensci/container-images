@@ -74,6 +74,7 @@ dependencies:
   - scikit-image
   - coiled
   - s3fs
+  - gcsfs
   - nbgitpuller
   - awscliv2
   - certifi=2023.11.17

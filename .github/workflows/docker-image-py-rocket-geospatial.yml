@@ -1,7 +1,7 @@
 name: Docker Image CI py-rocket-geospatial
 env:
   IMAGE_NAME: py-rocket-geospatial
-  IMAGE_TAG: 4.4-3.10
+  IMAGE_TAG: 2024.07.09
   
 on:
   workflow_dispatch: null
@@ -36,17 +36,3 @@ jobs:
         run: |
           docker push ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG
           docker push ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:latest
-          
-      # - name: Build Multi-Arch Docker image (broke)
-      #   if: github.repository == 'nmfs-opensci/container-images'
-      #   run: |
-      #     docker buildx create \
-      #       --name container \
-      #       --driver=docker-container
-      #     docker buildx build \
-      #       --platform linux/amd64,linux/arm64 \
-      #       --builder container images/$IMAGE_NAME \
-      #       -f images/$IMAGE_NAME/Dockerfile \
-      #       --tag ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG \
-      #       --tag ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:latest \
-      #       --push
