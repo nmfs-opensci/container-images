@@ -59,7 +59,7 @@ IMAGE_URL="ghcr.io/nmfs-opensci/container-images/"
 IMAGE_NAME="test-gcp"
 IMAGE_TAG="v1.0.9"
 ARTIFACT_REGISTRY_REPONAME="nmfs-opensci-images"
-GCP_PROJECT_NAME="ggn-nmfs-opensciws-dev-1"
+GCP_PROJECT_NAME="abc-abc"
 ARTIFACT_REGISTRY_LOCATION="us-east4-docker.pkg.dev"
 ```
 * Pull in the image. You need to have docker running.
