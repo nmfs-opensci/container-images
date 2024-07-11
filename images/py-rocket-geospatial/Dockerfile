@@ -6,6 +6,7 @@ LABEL org.opencontainers.image.author="eli.holmes@noaa.gov"
 LABEL org.opencontainers.image.source=https://github.com/nmfs-opensci/container-images/py-rocket-geospatial
 LABEL org.opencontainers.image.description="Geospatial Python (3.10) and R (4.4) image"
 LABEL org.opencontainers.image.licenses=Apache2.0
+LABEL org.opencontainers.image.version=2024.07.11
 
 USER root
 
