@@ -75,6 +75,7 @@ dependencies:
   - coiled
   - s3fs
   - gcsfs
+  - motuclient
   - nbgitpuller
   - awscliv2
   - certifi=2023.11.17
