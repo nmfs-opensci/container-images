@@ -8,4 +8,5 @@ COPY ./assets/. /
 USER root
 
 # Set the entrypoint
-ENTRYPOINT ["/google/scripts/entrypoint.sh"]
+#ENTRYPOINT ["/google/scripts/entrypoint.sh"]
+CMD ["jupyter", "lab", "--ip=0.0.0.0", "--port=80", "--allow-root", "--no-browser --notebook-dir=/home/jovyan --NotebookApp.token='' --NotebookApp.password=''"]

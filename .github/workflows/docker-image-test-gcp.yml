@@ -1,7 +1,7 @@
 name: Docker Image CI test-gcp
 env:
   IMAGE_NAME: test-gcp
-  IMAGE_TAG: v1.0.13
+  IMAGE_TAG: v1.0.14
   IMAGE_BRANCH: main
   IMAGE_DIR: draft_images
   
