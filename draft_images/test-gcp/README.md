@@ -2,6 +2,17 @@
 
 ## July 6th
 
+```
+IMAGE_NAME="test-gcp"
+IMAGE_TAG="v1.0.14"
+ARTIFACT_REGISTRY_REPONAME="nmfs-opensci-images"
+GCP_PROJECT_NAME="ggn-nmfs-opensciws-dev-1"
+ARTIFACT_REGISTRY_LOCATION="us-east4-docker.pkg.dev"
+docker pull ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG
+docker tag ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG us-east4-docker.pkg.dev/ggn-nmfs-opensciws-dev-1/nmfs-opensci-images/$IMAGE_NAME:$IMAGE_TAG
+docker push us-east4-docker.pkg.dev/ggn-nmfs-opensciws-dev-1/$ARTIFACT_REGISTRY_REPONAME/$IMAGE_NAME:$IMAGE_TAG
+```
+
 *Scroll down for instructions for setting up workstations*
 
 Still not working on Google Workstation, but gets to the JupyterLab page. From there however nothing works not even Terminal.  Also the user of the Docker image must be root and `jupyter lab` in the EntryPoint needs to be run as root. It is possible that this is causing a problem. But when I use 
