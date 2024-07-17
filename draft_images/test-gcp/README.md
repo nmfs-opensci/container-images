@@ -4,6 +4,9 @@
 
 * The JLab is working. RStudio will not connect to R.
 * Some ideas for the image: https://github.com/rstudio/rstudio-docker-products/issues/459
+* Modify the workbench image: https://github.com/rstudio/rstudio-docker-products/tree/dev/workbench-for-google-cloud-workstations (that looks slightly painful)
+
+* https://github.com/mchmarny/custom-cloud-workstation-image
 
 ## July 6th
 
