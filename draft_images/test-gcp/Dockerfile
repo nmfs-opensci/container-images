@@ -9,3 +9,6 @@ USER root
 
 # Set the entrypoint
 ENTRYPOINT ["/google/scripts/entrypoint.sh"]
+
+EXPOSE 80/tcp
+EXPOSE 8787/tcp
