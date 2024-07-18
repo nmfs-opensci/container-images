@@ -8,13 +8,17 @@
 
 * https://github.com/mchmarny/custom-cloud-workstation-image
 
+Thread where user is com w Carl and trying to debug something similar
+
+* https://github.com/rocker-org/rocker-versioned2/issues/260
+
 ## July 6th
 
 ```
 ARTIFACT_REGISTRY_REPONAME="nmfs-opensci-images"
 GCP_PROJECT_NAME="ggn-nmfs-opensciws-dev-1"
 ARTIFACT_REGISTRY_LOCATION="us-east4-docker.pkg.dev"
-IMAGE_TAG="v1.0.20"
+IMAGE_TAG="v1.0.21"
 IMAGE_NAME="test-gcp"
 docker pull ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG
 docker tag ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG us-east4-docker.pkg.dev/ggn-nmfs-opensciws-dev-1/nmfs-opensci-images/$IMAGE_NAME:$IMAGE_TAG
