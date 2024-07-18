@@ -1,8 +1,10 @@
 FROM ghcr.io/nmfs-opensci/container-images/py-rocket-base:latest
 
 COPY entrypoint.sh /scripts/entrypoint.sh
+USER root
 RUN ["chmod", "+x", "/scripts/entrypoint.sh"]
 ENTRYPOINT ["/scripts/entrypoint.sh"]
+USER rstudio
 
 #USER root
 
