@@ -253,6 +253,13 @@ RStudio will not launch.
 The Codespaces code is based on:
 <https://github.com/MichaelAkridge-NOAA/Open-Science-Codespaces>
 
+## Google Cloud Shell
+
+Easily use any of the container images, using docker, on google cloud via their free cloud shell/IDE
+
+* <https://cloud.google.com/shell>
+* [Tutorial for nmfs-opensci container images](https://github.com/MichaelAkridge-NOAA/Open-Science-Codespaces/tree/main/google-cloud-shell)
+
 ## GitPod – like Codespaces
 
 Work in progress. Approach is similar to Codespaces.
