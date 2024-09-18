@@ -28,9 +28,9 @@ ENV MANPATH=${MANPATH}:/srv/cwutils/doc/man
 ENV INSTALL4J ADD VM PARAMS=-Dsun.java2d.uiScale=2.0
 
 ENV PANOPLY=https://www.giss.nasa.gov/tools/panoply/download/PanoplyJ-5.5.1.tgz
-RUN wget -O /tmp/panoply.tar.gz ${PANOPLY}
-RUN tar -zxf /tmp/panoply.tar.gz
-RUN rm -rf /tmp/panoply.tar.gz
+RUN wget --user-agent Mozilla/4.0  /tmp/panoply.tgz ${PANOPLY}
+RUN tar -zxf /tmp/panoply.tgz
+RUN rm -rf /tmp/panoply.tgz
 
 WORKDIR ${HOME}
 USER ${NB_USER}
