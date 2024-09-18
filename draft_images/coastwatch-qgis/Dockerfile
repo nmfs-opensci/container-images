@@ -18,7 +18,10 @@ ENV CW_UTILS=https://www.star.nesdis.noaa.gov/socd/coastwatch/cwf/cwutils-4_0_0_
 
 WORKDIR /srv
 
-RUN wget -O /tmp/cw_utils.tar.gz ${CW_UTILS} && tar -zxf /tmp/cw_utils.tar.gz && rm -rf /tmp/cw_utils.tar.gz && apt-get clean
+RUN wget -O /tmp/cw_utils.tar.gz ${CW_UTILS}
+RUN tar -zxf /tmp/cw_utils.tar.gz
+RUN rm -rf /tmp/cw_utils.tar.gz
+RUN apt-get clean
 
 ENV PATH=${PATH}:/srv/cwutils/bin
 ENV MANPATH=${MANPATH}:/srv/cwutils/doc/man
