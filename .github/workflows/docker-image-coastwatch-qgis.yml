@@ -5,9 +5,6 @@ env:
   
 on:
   workflow_dispatch: null
-  workflow_run:
-    workflows: ['Docker Image CI coastwatch-qgis']
-    types: [completed]
   push:
     branches: main
     paths: 
