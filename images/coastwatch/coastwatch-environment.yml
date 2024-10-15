@@ -22,5 +22,10 @@ dependencies:
   - geopandas
   - regionmask
   - erddapy
+  - pymannkendall
+  - pyresample
+  - rioxarray
+  - rasterio
+  - ecmwflibs
 platforms:
   - linux-64
