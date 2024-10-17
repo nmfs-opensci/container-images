@@ -10,5 +10,5 @@ list.of.packages <- c("ncdf4", "httr", "plyr", "lubridate", "parsedate", "rerdda
                       "parsedate", "sp", "sf", "reshape2", "jsonlite",
                       "gridGraphics", "PBSmapping", "date", "viridis",
                       "openair","cmocean", "terra",
-                      "plotdap", "rerddapXtracto", "rgdal")
+                      "plotdap", "rerddapXtracto")
 install.packages(list.of.packages, repos=repo)
