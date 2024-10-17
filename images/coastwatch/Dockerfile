@@ -24,7 +24,7 @@ RUN rm coastwatch-environment.yml
 
 # Install cwutils
 USER root
-RUN cd /tmp && /
+RUN cd /tmp && \
     wget https://www.star.nesdis.noaa.gov/socd/coastwatch/cwf/cwutils-4_0_0_198-linux-x86_64.tar.gz && \
     tar -zxf cwutils-4_0_0_198-linux-x86_64.tar.gz && \
     rm -rf cwutils-4_0_0_198-linux-x86_64.tar.gz
