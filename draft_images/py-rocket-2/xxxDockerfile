@@ -1,0 +1,60 @@
+FROM ghcr.io/nmfs-opensci/py-rocket-base:latest
+
+USER ${NB_USER}
+
+# set-up the base coastwatch environment
+# make sure we install in the notebook environment which is default in the
+# Openscapes image
+COPY coastwatch-environment.yml coastwatch-environment.yml
+RUN mamba env update --name notebook -f coastwatch-environment.yml && mamba clean --all
+RUN rm coastwatch-environment.yml
+
+# Install R, RStudio on any Ubuntu LTS
+RUN curl -s https://raw.githubusercontent.com/boettiger-lab/repo2docker-r/refs/heads/main/install_r.sh | bash
+RUN curl -s https://raw.githubusercontent.com/boettiger-lab/repo2docker-r/refs/heads/main/install_rstudio.sh | bash
+# Get the rocker_scripts which will be used to install R things
+RUN wget --recursive https://raw.githubusercontent.com/rocker-org/rocker-versioned2/tree/master/scripts
+RUN mv /scripts /rocker_scripts
+
+# Add both our notebook env as well as default conda installation to $PATH
+# Thus, when we start a `python` process (for kernels, or notebooks, etc)
+# it loads the python in the notebook conda environment, as that comes
+# first here.
+ENV PATH=${NB_PYTHON_PREFIX}/bin:${CONDA_DIR}/bin:${PATH}
+
+# Ask dask to read config from ${CONDA_DIR}/etc rather than
+# the default of /etc, since the non-root jovyan user can write
+# to ${CONDA_DIR}/etc but not to /etc
+ENV DASK_ROOT_CONFIG=${CONDA_DIR}/etc
+
+## Ensure that RStudio uses the conda notebook env for Python and modules
+RUN echo "PATH=${PATH}" >>"${RHOME}/etc/Renviron.site"
+
+## Ensure that user library exists
+RUN echo "dir.create(Sys.getenv('R_LIBS_USER'), recursive = TRUE, showWarnings = FALSE)" >> "${RHOME}/etc/Rprofile.site"
+
+# bin to PATH earlier ($NB_PYTHON_PREFIX/bin)
+RUN echo ". ${CONDA_DIR}/etc/profile.d/conda.sh ; conda activate ${CONDA_ENV}" > /etc/profile.d/init_conda.sh
+
+
+USER root
+WORKDIR /srv
+
+ENV CW_UTILS=https://www.star.nesdis.noaa.gov/socd/coastwatch/cwf/cwutils-4_0_0_198-linux-x86_64.tar.gz
+
+RUN wget -O /tmp/cw_utils.tar.gz ${CW_UTILS}
+RUN tar -zxf /tmp/cw_utils.tar.gz
+RUN rm -rf /tmp/cw_utils.tar.gz
+
+ENV PATH=${PATH}:/srv/cwutils/bin
+ENV MANPATH=${MANPATH}:/srv/cwutils/doc/man
+ENV INSTALL4J ADD VM PARAMS=-Dsun.java2d.uiScale=2.0
+
+ENV PANOPLY=https://www.giss.nasa.gov/tools/panoply/download/PanoplyJ-5.5.1.tgz
+RUN wget --user-agent Mozilla/4.0  /tmp/panoply.tgz ${PANOPLY}
+RUN tar -zxf /tmp/panoply.tgz
+RUN rm -rf /tmp/panoply.tgz
+
+WORKDIR ${HOME}
+USER ${NB_USER}
+
