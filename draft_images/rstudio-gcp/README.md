@@ -12,7 +12,7 @@ ARTIFACT_REGISTRY_REPONAME="nmfs-opensci-images"
 GCP_PROJECT_NAME="ggn-nmfs-opensciws-dev-1"
 ARTIFACT_REGISTRY_LOCATION="us-east4-docker.pkg.dev"
 IMAGE_NAME="rstudio-gcp"
-IMAGE_TAG="v1.0.1"
+IMAGE_TAG="v1.0.2"
 docker pull ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG
 docker tag ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG us-east4-docker.pkg.dev/ggn-nmfs-opensciws-dev-1/nmfs-opensci-images/$IMAGE_NAME:$IMAGE_TAG
 docker push us-east4-docker.pkg.dev/ggn-nmfs-opensciws-dev-1/$ARTIFACT_REGISTRY_REPONAME/$IMAGE_NAME:$IMAGE_TAG

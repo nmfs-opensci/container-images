@@ -25,7 +25,7 @@ Thread where user is com w Carl and trying to debug something similar
 ARTIFACT_REGISTRY_REPONAME="nmfs-opensci-images"
 GCP_PROJECT_NAME="ggn-nmfs-opensciws-dev-1"
 ARTIFACT_REGISTRY_LOCATION="us-east4-docker.pkg.dev"
-IMAGE_TAG="v1.0.23"
+IMAGE_TAG="v1.0.24"
 IMAGE_NAME="test-gcp"
 docker pull ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG
 docker tag ghcr.io/nmfs-opensci/container-images/$IMAGE_NAME:$IMAGE_TAG us-east4-docker.pkg.dev/ggn-nmfs-opensciws-dev-1/nmfs-opensci-images/$IMAGE_NAME:$IMAGE_TAG

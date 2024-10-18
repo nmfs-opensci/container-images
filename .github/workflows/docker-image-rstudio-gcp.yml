@@ -1,7 +1,7 @@
 name: Docker Image CI rstudio-gcp
 env:
   IMAGE_NAME: rstudio-gcp
-  IMAGE_TAG: v1.0.1
+  IMAGE_TAG: v1.0.2
   IMAGE_BRANCH: main
   IMAGE_DIR: draft_images
   
