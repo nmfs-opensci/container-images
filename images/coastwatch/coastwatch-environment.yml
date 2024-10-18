@@ -27,5 +27,6 @@ dependencies:
   - rioxarray
   - rasterio
   - ecmwflibs
+  - gh-scoped-creds
 platforms:
   - linux-64
