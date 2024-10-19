@@ -1,4 +1,4 @@
-FROM ghcr.io/nmfs-opensci/py-rocket-base:latest
+FROM ghcr.io/nmfs-opensci/py-rocket-base:8aeeeb44030c
 
 USER root
 # Add a Desktop application
