@@ -1,7 +1,7 @@
 name: Docker Image CI coastwatch-qgis
 env:
   IMAGE_NAME: coastwatch-qgis
-  IMAGE_TAG: 2024.09.18
+  IMAGE_TAG: 2024.10.19
   
 on:
   workflow_dispatch: null

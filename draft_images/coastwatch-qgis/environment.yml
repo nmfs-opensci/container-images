@@ -5,8 +5,6 @@ dependencies:
   - python=3.9
   - cartopy
   - cmocean
-  - jupyter
-  - jupyterlab
   - matplotlib
   - netCDF4
   - pandas
@@ -22,5 +20,15 @@ dependencies:
   - geopandas
   - regionmask
   - erddapy
-platforms:
-  - linux-64
+  - pymannkendall
+  - pyresample
+  - rioxarray
+  - rasterio
+  - ecmwflibs
+  - gh-scoped-creds
+# Ensure that updating the conda env doesn't get rid of Desktop
+  - qgis
+  - pip
+  - pip:
+    # Access linux desktop from inside JupyterHub
+    - jupyter-desktop-server==0.1.3
