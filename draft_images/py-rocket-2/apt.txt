@@ -1,0 +1,2 @@
+# Needed for qgis maybe
+libgl1-mesa-glx
