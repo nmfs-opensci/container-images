@@ -1,0 +1,9 @@
+name: pangeo
+channels:
+ - conda-forge
+dependencies:
+  - qgis
+  - pip
+  - pip:
+    # Access linux desktop from inside JupyterHub
+    - jupyter-desktop-server==0.1.3
