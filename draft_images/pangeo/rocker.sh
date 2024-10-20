@@ -39,3 +39,9 @@ while IFS= read -r line; do
         eval "$cmd" # || echo ${cmd}" encountered an error, but continuing..."
     fi
 done < /rocker_scripts/original.Dockerfile
+
+# Install extra tex packages that are not installed by default
+if command -v tlmgr &> /dev/null; then
+    echo "Installing texlive collection-latexrecommended..."
+    tlmgr install collection-latexrecommended
+fi
