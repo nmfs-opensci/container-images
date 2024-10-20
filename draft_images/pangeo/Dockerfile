@@ -22,10 +22,10 @@ RUN package_list=$(grep -v '^\s*#' ${REPO_DIR}/apt.txt | grep -v '^\s*$' | sed '
   apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
-# Revert to default user
-USER ${NB_USER}
-
 COPY environment.yml environment.yml
 RUN mamba env update --name notebook -f environment.yml && mamba clean --all
 RUN rm environment.yml
+
+# Revert to default user
+USER ${NB_USER}
 
