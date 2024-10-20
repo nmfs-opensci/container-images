@@ -5,23 +5,22 @@ channels:
   - nodefaults
 
 dependencies:
-  - python~=3.11.0
   # gh-scoped-creds allows users to securely push to GitHub from their repo.
   # https://blog.jupyter.org/securely-pushing-to-github-from-a-jupyterhub-3ee42dfdc54f has
   # some more information
   - gh-scoped-creds==4.1
   # More git tools from github-cli
-  - gh~=2.32.1
+  - gh
 
   # R/RStudio Support
   - jupyter-rsession-proxy
   
   # VS Code support
-  - jupyter-vscode-proxy~=0.5
-  - code-server~=4.23
+  - jupyter-vscode-proxy
+  - code-server
 
   # JupyterBook Addons
-  - sphinx~=7.3
+  - sphinx
   - sphinxcontrib-bibtex
 
   # Resolves warning "No ICDs were found": https://github.com/CryoInTheCloud/hub-image/issues/50
@@ -34,7 +33,7 @@ dependencies:
 
   # Desktop server
   # Not all packages will be available from conda-forge, we install from pip when we need to.
-  - pip~=23.3.2
+  - pip
   - pip:
     # Access linux desktop from inside JupyterHub
     - jupyter-desktop-server==0.1.3
