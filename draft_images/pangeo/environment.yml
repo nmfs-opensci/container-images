@@ -5,12 +5,7 @@ channels:
   - nodefaults
 
 dependencies:
-  # This provides memory usage stats on JupyterLab and classic notebook
-  - jupyter-resource-usage~=1.0.1
-  # https://syncthing.net/ provides a dropbox-like interface for syncing directories across users,
-  # hubs and machines. Used along with `jupyter-syncthing-proxy`.
-  # - jupyter-syncthing-proxy==1.0.3
-  # - syncthing~=1.22.1
+  - python~=3.11.0
   # gh-scoped-creds allows users to securely push to GitHub from their repo.
   # https://blog.jupyter.org/securely-pushing-to-github-from-a-jupyterhub-3ee42dfdc54f has
   # some more information
@@ -24,7 +19,6 @@ dependencies:
   # VS Code support
   - jupyter-vscode-proxy~=0.5
   - code-server~=4.23
-
 
   # JupyterBook Addons
   - sphinx~=7.3
