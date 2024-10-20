@@ -1,9 +1,46 @@
-name: pangeo
+name: py-rocket-base
+
 channels:
- - conda-forge
+  - conda-forge
+  - nodefaults
+
 dependencies:
-  - qgis
-  - pip
+  # This provides memory usage stats on JupyterLab and classic notebook
+  - jupyter-resource-usage~=1.0.1
+  # https://syncthing.net/ provides a dropbox-like interface for syncing directories across users,
+  # hubs and machines. Used along with `jupyter-syncthing-proxy`.
+  # - jupyter-syncthing-proxy==1.0.3
+  # - syncthing~=1.22.1
+  # gh-scoped-creds allows users to securely push to GitHub from their repo.
+  # https://blog.jupyter.org/securely-pushing-to-github-from-a-jupyterhub-3ee42dfdc54f has
+  # some more information
+  - gh-scoped-creds==4.1
+  # More git tools from github-cli
+  - gh~=2.32.1
+
+  # R/RStudio Support
+  - jupyter-rsession-proxy
+  
+  # VS Code support
+  - jupyter-vscode-proxy~=0.5
+  - code-server~=4.23
+
+
+  # JupyterBook Addons
+  - sphinx~=7.3
+  - sphinxcontrib-bibtex
+
+  # Resolves warning "No ICDs were found": https://github.com/CryoInTheCloud/hub-image/issues/50
+  - ocl-icd-system
+  # needed for Linux desktop to work
+  - websockify>=0.10
+  # Includes new subcommands (`switch` & `restore`) and vulnerability fixes
+  # over the version available via ubuntu sources
+  - git>=2.39
+
+  # Desktop server
+  # Not all packages will be available from conda-forge, we install from pip when we need to.
+  - pip~=23.3.2
   - pip:
     # Access linux desktop from inside JupyterHub
     - jupyter-desktop-server==0.1.3
