@@ -11,9 +11,9 @@ ENV R_VERSION="4.4.1"
 ENV R_DOCKERFILE="verse_${R_VERSION}"
 RUN PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin && \
   chmod +x ${REPO_DIR}/rocker.sh && \
-  ${REPO_DIR}/rocker.sh
-# Missing some basic tex packages
-RUN tlmgr install collection-latexrecommended && tlmgr clean --all
+  ${REPO_DIR}/rocker.sh && \
+  tlmgr install collection-latexrecommended && \
+  tlmgr clean --all
 
 # Install extra cmd line packages after R installation
 # The package_list part is reading the file and doing clean-up to just have the list of packages
