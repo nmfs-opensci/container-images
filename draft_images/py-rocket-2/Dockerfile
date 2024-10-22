@@ -1,25 +1,21 @@
-FROM ghcr.io/nmfs-opensci/py-rocket-base:8aeeeb44030c
+FROM ghcr.io/nmfs-opensci/py-rocket-2:latest
 
 USER root
-# Add a Desktop application
-RUN mkdir -p ${REPO_DIR}/mime/
-COPY *.desktop ${REPO_DIR}/
-COPY mime/*.xml ${REPO_DIR}/mime/
 
-COPY environment.yml environment.yml
-RUN mamba env update --name notebook -f environment.yml && mamba clean --all
-RUN rm environment.yml
+# Install extra cmd line packages needed for qgis
+RUN apt-get update && \
+    apt-get install --yes --no-install-recommends libgl1-mesa-glx && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-# Install extra cmd line packages 
-# The package_list part is reading the file and doing clean-up to just have the list of packages
-COPY apt.txt apt.txt
-RUN package_list=$(grep -v '^\s*#' apt.txt | grep -v '^\s*$' | sed 's/\r//g; s/#.*//; s/^[[:space:]]*//; s/[[:space:]]*$//' | awk '{$1=$1};1') && \
-  apt-get update && \
-  apt-get install --yes --no-install-recommends $package_list && \
-  apt-get autoremove --purge && \
-  apt-get clean && \
-  rm -rf /var/lib/apt/lists/*
-RUN rm apt.txt
+# Install cwutils
+USER root
+RUN cd /tmp && \
+    wget https://www.star.nesdis.noaa.gov/socd/coastwatch/cwf/cwutils-4_0_0_198-linux-x86_64.tar.gz && \
+    tar -zxf cwutils-4_0_0_198-linux-x86_64.tar.gz && \
+    rm -rf cwutils-4_0_0_198-linux-x86_64.tar.gz
+ENV PATH=${PATH}:/tmp/cwutils_4.0.0.198/bin
+ENV MANPATH=${MANPATH}:/tmp/cwutils_4.0.0.198/doc/man
+ENV INSTALL4J ADD VM PARAMS=-Dsun.java2d.uiScale=2.0
 
 USER ${NB_USER}
-
