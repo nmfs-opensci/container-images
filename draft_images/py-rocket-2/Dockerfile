@@ -1,4 +1,4 @@
-FROM ghcr.io/nmfs-opensci/py-rocket-2:latest
+FROM ghcr.io/nmfs-opensci/hub-image-template:latest
 
 USER root
 
