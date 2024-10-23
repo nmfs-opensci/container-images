@@ -1,4 +1,4 @@
-FROM ghcr.io/nmfs-opensci/py-rocket-2:latest
+FROM ghcr.io/nmfs-opensci/py-rocket-2:3c411f330cfb
 
 COPY . /tmpbuild/
 RUN whoami && rm -rf /tmpbuild
