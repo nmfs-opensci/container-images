@@ -1,7 +1,6 @@
 FROM ghcr.io/nmfs-opensci/py-rocket-2:27cc0a5a065c
 
-COPY Dockerfile Dockerfile
-RUN whoami && rm -rf Dockerfile
+RUN whoami && pwd
 
 USER root
 
