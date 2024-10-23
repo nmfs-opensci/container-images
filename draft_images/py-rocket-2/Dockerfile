@@ -1,9 +1,9 @@
 FROM ghcr.io/nmfs-opensci/py-rocket-2:27cc0a5a065c
 
-COPY . ${REPO_DIR}/tmpbuild/
+COPY --chown=${NB_USER}:${NB_USER} . ${REPO_DIR}/childimage
 RUN ls -ld /srv/repo
-RUN ls -ld /srv/repo/tmpbuild
-RUN ls -l /srv/repo/tmpbuild
+RUN ls -ld /srv/repo/childimage
+RUN ls -l /srv/repo/childimage
 
 USER root
 
