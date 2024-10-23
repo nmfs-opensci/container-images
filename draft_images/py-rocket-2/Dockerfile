@@ -1,6 +1,7 @@
 FROM ghcr.io/nmfs-opensci/py-rocket-2:27cc0a5a065c
 
-RUN whoami && pwd
+COPY . ${REPO_DIR}/tmpbuild/
+RUN rm -rf ${REPO_DIR}/tmpbuild/
 
 USER root
 
