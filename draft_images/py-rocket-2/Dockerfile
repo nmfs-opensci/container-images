@@ -1,7 +1,7 @@
 FROM ghcr.io/nmfs-opensci/py-rocket-2:latest
 
-COPY . /tmpbuild
-RUN rm -rf /tmpbuild
+COPY . /tmpbuild/
+RUN whoami && rm -rf /tmpbuild
 
 USER root
 
