@@ -1,6 +1,6 @@
 FROM ghcr.io/nmfs-opensci/py-rocket-2:27cc0a5a065c
 
-COPY Docker /tmpbuild/Dockerfile
+COPY Dockerfile /tmpbuild/Dockerfile
 RUN whoami && rm -rf /tmpbuild/Dockerfile
 
 USER root
