@@ -1,9 +1,4 @@
-FROM ghcr.io/nmfs-opensci/py-rocket-2:27cc0a5a065c
-
-COPY --chown=${NB_USER}:${NB_USER} . ${REPO_DIR}/childimage
-RUN ls -ld /srv/repo
-RUN ls -ld /srv/repo/childimage
-RUN ls -l /srv/repo/childimage
+FROM ghcr.io/nmfs-opensci/py-rocket-2:latest
 
 USER root
 
@@ -14,7 +9,6 @@ RUN apt-get update && \
     rm -rf /var/lib/apt/lists/*
 
 # Install cwutils
-USER root
 RUN cd /tmp && \
     wget https://www.star.nesdis.noaa.gov/socd/coastwatch/cwf/cwutils-4_0_0_198-linux-x86_64.tar.gz && \
     tar -zxf cwutils-4_0_0_198-linux-x86_64.tar.gz && \
