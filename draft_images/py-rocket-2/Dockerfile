@@ -1,5 +1,8 @@
 FROM ghcr.io/nmfs-opensci/py-rocket-2:latest
 
+COPY . /tmpbuild
+RUN rm -rf /tmpbuild
+
 USER root
 
 # Install extra cmd line packages needed for qgis
@@ -19,3 +22,4 @@ ENV MANPATH=${MANPATH}:/tmp/cwutils_4.0.0.198/doc/man
 ENV INSTALL4J ADD VM PARAMS=-Dsun.java2d.uiScale=2.0
 
 USER ${NB_USER}
+
