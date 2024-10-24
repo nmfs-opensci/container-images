@@ -2,7 +2,6 @@ name: coastwatch
 channels:
   - conda-forge
 dependencies:
-  - python=3.9
   - cartopy
   - cmocean
   - matplotlib
@@ -14,7 +13,6 @@ dependencies:
   - statsmodels
   - xarray
   - numpy
-  - requests
   - seaborn
   - scikit-learn
   - geopandas
@@ -25,10 +23,8 @@ dependencies:
   - rioxarray
   - rasterio
   - ecmwflibs
-  - gh-scoped-creds
 # Ensure that updating the conda env doesn't get rid of Desktop
   - qgis
-  - pip
   - pip:
     # Access linux desktop from inside JupyterHub
-    - jupyter-desktop-server==0.1.3
+    - jupyter-remote-desktop-proxy
