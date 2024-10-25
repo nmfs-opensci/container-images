@@ -1,4 +1,4 @@
-FROM ghcr.io/nmfs-opensci/py-rocket-2:addac2417068
+FROM ghcr.io/nmfs-opensci/py-rocket-2:764fa9dd761b
 
 RUN echo ${CONDA_ENV}
 RUN echo ${CONDA_DEFAULT_ENV}
