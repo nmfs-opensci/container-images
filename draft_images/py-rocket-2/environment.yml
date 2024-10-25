@@ -23,8 +23,5 @@ dependencies:
   - rioxarray
   - rasterio
   - ecmwflibs
-# Ensure that updating the conda env doesn't get rid of Desktop
+# QGIS
   - qgis
-  - pip:
-    # Access linux desktop from inside JupyterHub
-    - jupyter-remote-desktop-proxy
