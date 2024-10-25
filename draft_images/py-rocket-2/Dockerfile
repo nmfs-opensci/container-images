@@ -21,4 +21,10 @@ ENV MANPATH=${MANPATH}:/tmp/cwutils_4.0.0.198/doc/man
 ENV INSTALL4J ADD VM PARAMS=-Dsun.java2d.uiScale=2.0
 
 USER ${NB_USER}
+WORKDIR ${HOME}
+
+# install into the coastwatch packages if missing environment
+COPY install.R install.R
+RUN Rscript install.R && rm install.R
+
 
