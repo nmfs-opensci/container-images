@@ -1,4 +1,4 @@
-FROM ghcr.io/nmfs-opensci/py-rocket-base:8aeeeb44030c
+FROM ghcr.io/nmfs-opensci/py-rocket-2:764fa9dd761b
 
 USER ${NB_USER}
 WORKDIR ${HOME}
