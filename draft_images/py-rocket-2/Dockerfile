@@ -1,5 +1,8 @@
 FROM ghcr.io/nmfs-opensci/py-rocket-2:addac2417068
 
+RUN echo ${CONDA_ENV}
+RUN echo ${CONDA_DEFAULT_ENV}
+
 USER root
 
 # Install extra cmd line packages needed for qgis
