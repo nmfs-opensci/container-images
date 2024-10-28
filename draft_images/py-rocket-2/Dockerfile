@@ -1,4 +1,4 @@
-FROM ghcr.io/nmfs-opensci/py-rocket-2:0d4f560a7bca
+FROM ghcr.io/nmfs-opensci/py-rocket-2:708007eff771
 
 USER root
 
@@ -19,9 +19,5 @@ ENV INSTALL4J ADD VM PARAMS=-Dsun.java2d.uiScale=2.0
 
 USER ${NB_USER}
 WORKDIR ${HOME}
-
-# install into the coastwatch packages if missing environment
-COPY install.R install.R
-RUN Rscript install.R && rm install.R
 
 
