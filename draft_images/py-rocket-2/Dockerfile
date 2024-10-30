@@ -17,7 +17,8 @@ ENV PATH=${PATH}:/tmp/cwutils_4.0.0.198/bin
 ENV MANPATH=${MANPATH}:/tmp/cwutils_4.0.0.198/doc/man
 ENV INSTALL4J ADD VM PARAMS=-Dsun.java2d.uiScale=2.0
 
-RUN cp /usr/share/applications/qgit.desktop /usr/share/xsessions/ && chmod +x /usr/share/xsessions/qgit.desktop
+COPY xfce4-desktop.xml xfce4-desktop.xml
+RUN cp xfce4-desktop.xml /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
 
 USER ${NB_USER}
 WORKDIR ${HOME}
