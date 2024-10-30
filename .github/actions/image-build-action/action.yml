@@ -1,60 +1,61 @@
-name: Build and Push Docker Image
-on:
-  workflow_call:
-    inputs:
-      image_name:
-        required: false
-        type: string
-      image_tag:
-        required: false
-        type: string
-        default: 'latest'
-      image_dir:
-        required: false
-        type: string
+name: Build and Push Docker Image to ghcr.io
 
-jobs:
-  build-and-push:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
+description: A reusable GitHub Action to build and push Docker images to ghcr.io (GitHub packages).
 
-    steps:
-      - name: Check out the repository
-        uses: actions/checkout@v3
+inputs:
+  image_name:
+    description: 'The name of the Docker image. If not provided, it defaults to the repository name.'
+    required: false
+    type: string
+  image_tag:
+    description: 'The tag for the Docker image. If not provided, it defaults to latest.'
+    required: false
+    default: 'latest'
+    type: string
+  image_dir:
+    description: 'The directory containing Docker build files. If not provided, it defaults to . (the repository base).'
+    required: false
+    type: string
 
-      - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v1
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+runs:
+  using: "composite"
+  steps:
+    - name: Check out the repository
+      uses: actions/checkout@v3
 
-      - name: Set Image Name and Directory
-        id: setup
-        run: |
-          # Default image name to repository name if not provided
-          if [ -z "${{ inputs.image_name }}" ]; then
-            echo "name=${{ github.event.repository.name }}" >> $GITHUB_ENV
-          else
-            echo "name=${{ inputs.image_name }}" >> $GITHUB_ENV
-          fi
+    - name: Log in to GitHub Container Registry
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
 
-          # Default image directory to current directory if not provided
-          if [ -z "${{ inputs.image_dir }}" ]; then
-            echo "dir=." >> $GITHUB_ENV
-          else
-            echo "dir=${{ inputs.image_dir }}" >> $GITHUB_ENV
-          fi
+    - name: Set Image Name and Directory
+      id: setup
+      run: |
+        if [ -z "${{ inputs.image_name }}" ]; then
+          echo "name=${{ github.event.repository.name }}" >> $GITHUB_ENV
+        else
+          echo "name=${{ inputs.image_name }}" >> $GITHUB_ENV
+        fi
 
-      - name: Build the Docker image
-        run: |
-          docker build ${{ env.dir }} \
-            -f ${{ env.dir }}/Dockerfile \
-            --tag ghcr.io/${{ github.repository_owner }}/${{ env.name }}:${{ inputs.image_tag }} \
-            --tag ghcr.io/${{ github.repository_owner }}/${{ env.name }}:latest
+        if [ -z "${{ inputs.image_dir }}" ]; then
+          echo "dir=." >> $GITHUB_ENV
+        else
+          echo "dir=${{ inputs.image_dir }}" >> $GITHUB_ENV
+        fi
 
+    - name: Build the Docker image
+      run: |
+        docker build ${{ env.dir }} \
+          -f ${{ env.dir }}/Dockerfile \
+          --tag ghcr.io/${{ github.repository_owner }}/${{ env.name }}:${{ inputs.image_tag }} \
+          --tag ghcr.io/${{ github.repository_owner }}/${{ env.name }}:latest
+
+    - name: Push the Docker image
+      run: |
+        docker push ghcr.io/${{ github.repository_owner }}/${{ env.name }}:${{ inputs.image_tag }}
+        docker push ghcr.io/${{ github.repository_owner }}/${{ env.name }}:latest
       - name: Push the Docker image
         run: |
           docker push ghcr.io/${{ github.repository_owner }}/${{ env.name }}:${{ inputs.image_tag }}
