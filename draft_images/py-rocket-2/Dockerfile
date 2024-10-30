@@ -1,4 +1,4 @@
-FROM ghcr.io/nmfs-opensci/py-rocket-2:54fe630f8393
+FROM ghcr.io/nmfs-opensci/py-rocket-2:adc835a355bc
 
 USER root
 
@@ -16,10 +16,6 @@ RUN cd /tmp && \
 ENV PATH=${PATH}:/tmp/cwutils_4.0.0.198/bin
 ENV MANPATH=${MANPATH}:/tmp/cwutils_4.0.0.198/doc/man
 ENV INSTALL4J ADD VM PARAMS=-Dsun.java2d.uiScale=2.0
-
-RUN echo 'XDG_DESKTOP_DIR="/usr/share/Desktop"' > /etc/xdg/user-dirs.defaults
-COPY Desktop/cdat.desktop cdat.desktop
-RUN mkdir -p /usr/share/Desktop && cp cdat.desktop /usr/share/Desktop/cdat.desktop && rm cdat.desktop
 
 USER ${NB_USER}
 WORKDIR ${HOME}
