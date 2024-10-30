@@ -17,11 +17,11 @@ ENV PATH=${PATH}:/tmp/cwutils_4.0.0.198/bin
 ENV MANPATH=${MANPATH}:/tmp/cwutils_4.0.0.198/doc/man
 ENV INSTALL4J ADD VM PARAMS=-Dsun.java2d.uiScale=2.0
 
-COPY xfce4-desktop.xml xfce4-desktop.xml
-RUN cp xfce4-desktop.xml /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
+COPY user-dirs.defaults user-dirs.defaults
+RUN cp user-dirs.defaults /etc/xdg/user-dirs.defaults && rm user-dirs.defaults
 
 COPY Desktop/cdat.desktop cdat.desktop
-RUN mkdir -p /usr/share/Desktop && ln -s /usr/share/Desktop /home/jovyan/Desktop && cp cdat.desktop /usr/share/Desktop/cdat.desktop
+RUN mkdir -p /usr/share/Desktop && cp cdat.desktop /usr/share/Desktop/cdat.desktop && rm cdat.desktop
 
 USER ${NB_USER}
 WORKDIR ${HOME}
