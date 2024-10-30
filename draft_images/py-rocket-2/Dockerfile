@@ -17,9 +17,7 @@ ENV PATH=${PATH}:/tmp/cwutils_4.0.0.198/bin
 ENV MANPATH=${MANPATH}:/tmp/cwutils_4.0.0.198/doc/man
 ENV INSTALL4J ADD VM PARAMS=-Dsun.java2d.uiScale=2.0
 
-COPY user-dirs.defaults user-dirs.defaults
-RUN cp user-dirs.defaults /etc/xdg/user-dirs.defaults && rm user-dirs.defaults
-
+RUN echo 'XDG_DESKTOP_DIR="/usr/share/Desktop"' > /etc/xdg/user-dirs.defaults
 COPY Desktop/cdat.desktop cdat.desktop
 RUN mkdir -p /usr/share/Desktop && cp cdat.desktop /usr/share/Desktop/cdat.desktop && rm cdat.desktop
 
