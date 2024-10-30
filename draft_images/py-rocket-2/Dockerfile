@@ -1,4 +1,4 @@
-FROM ghcr.io/nmfs-opensci/py-rocket-2:695381e4f6fc
+FROM ghcr.io/nmfs-opensci/py-rocket-2:54fe630f8393
 
 USER root
 
