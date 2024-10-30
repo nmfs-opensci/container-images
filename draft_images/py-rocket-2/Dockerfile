@@ -20,7 +20,7 @@ ENV INSTALL4J ADD VM PARAMS=-Dsun.java2d.uiScale=2.0
 COPY xfce4-desktop.xml xfce4-desktop.xml
 RUN cp xfce4-desktop.xml /etc/xdg/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
 
-COPY Desktop cdat.desktop cdat.desktop
+COPY Desktop/cdat.desktop cdat.desktop
 RUN mkdir -p /usr/share/Desktop && ln -s /usr/share/Desktop /home/jovyan/Desktop && cp cdat.desktop /usr/share/Desktop/cdat.desktop
 
 USER ${NB_USER}
