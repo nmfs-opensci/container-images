@@ -2,7 +2,7 @@
 Type=Application
 Name=CWUtils
 GenericName=CoastWatch Data Analysis Tool
-Icon=/srv/repo/Desktop/cdat.png
+Icon=cdat
 TryExec=cdat
 Exec=cdat %F
 Terminal=false
