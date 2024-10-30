@@ -1,19 +1,14 @@
-name: Build and Push Docker Image to ghcr.io
+name: Build and Push Docker Image
 
-description: A reusable GitHub Action to build and push Docker images to ghcr.io (GitHub packages).
+description: A reusable GitHub Action to build and push Docker images to GitHub packages.
 
 inputs:
   image_name:
-    description: 'The name of the Docker image. If not provided, it defaults to the repository name.'
+    description: 'The name of the Docker image. If left off, the repository name is used.'
     required: false
-    type: string
-  image_tag:
-    description: 'The tag for the Docker image. If not provided, it defaults to latest.'
-    required: false
-    default: 'latest'
     type: string
   image_dir:
-    description: 'The directory containing Docker build files. If not provided, it defaults to . (the repository base).'
+    description: 'The directory containing Docker build files. If left off, . (the base repository level) is used.'
     required: false
     type: string
 
@@ -33,30 +28,54 @@ runs:
     - name: Set Image Name and Directory
       id: setup
       run: |
+        # Default image name to repository name if not provided
         if [ -z "${{ inputs.image_name }}" ]; then
           echo "name=${{ github.event.repository.name }}" >> $GITHUB_ENV
         else
           echo "name=${{ inputs.image_name }}" >> $GITHUB_ENV
         fi
 
+        # Default image directory to current directory if not provided
         if [ -z "${{ inputs.image_dir }}" ]; then
           echo "dir=." >> $GITHUB_ENV
         else
           echo "dir=${{ inputs.image_dir }}" >> $GITHUB_ENV
         fi
 
+    - name: Extract VERSION from Dockerfile
+      id: get_version
+      run: |
+        if grep -q "LABEL VERSION=" ${{ env.dir }}/Dockerfile; then
+          version=$(grep "LABEL VERSION=" ${{ env.dir }}/Dockerfile | cut -d '=' -f 2 | tr -d ' ')
+          echo "version=${version}" >> $GITHUB_ENV
+        else
+          echo "version=" >> $GITHUB_ENV
+        fi
+        
+        # Always create a short SHA for tagging
+        short_sha=$(echo "${{ github.sha }}" | cut -c1-7)
+        echo "tag=latest-${short_sha}" >> $GITHUB_ENV
+
     - name: Build the Docker image
       run: |
+        # Build the Docker image with both tags
         docker build ${{ env.dir }} \
           -f ${{ env.dir }}/Dockerfile \
-          --tag ghcr.io/${{ github.repository_owner }}/${{ env.name }}:${{ inputs.image_tag }} \
+          --tag ghcr.io/${{ github.repository_owner }}/${{ env.name }}:${{ env.tag }} \
           --tag ghcr.io/${{ github.repository_owner }}/${{ env.name }}:latest
+        
+        # If VERSION exists, tag the image with that as well
+        if [ -n "${{ env.version }}" ]; then
+          docker tag ghcr.io/${{ github.repository_owner }}/${{ env.name }}:${{ env.tag }} ghcr.io/${{ github.repository_owner }}/${{ env.name }}:${{ env.version }}
+        fi
 
     - name: Push the Docker image
       run: |
-        docker push ghcr.io/${{ github.repository_owner }}/${{ env.name }}:${{ inputs.image_tag }}
+        docker push ghcr.io/${{ github.repository_owner }}/${{ env.name }}:${{ env.tag }}
         docker push ghcr.io/${{ github.repository_owner }}/${{ env.name }}:latest
-      - name: Push the Docker image
-        run: |
-          docker push ghcr.io/${{ github.repository_owner }}/${{ env.name }}:${{ inputs.image_tag }}
-          docker push ghcr.io/${{ github.repository_owner }}/${{ env.name }}:latest
+        
+        # Push the version tag if it exists
+        if [ -n "${{ env.version }}" ]; then
+          docker push ghcr.io/${{ github.repository_owner }}/${{ env.name }}:${{ env.version }}
+        fi
+        
