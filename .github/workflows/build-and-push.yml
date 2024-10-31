@@ -1,11 +1,5 @@
 name: Docker Image Build and Push
 
-env:
-  WATCHED_DIRECTORIES: |
-    draft_images/py-rocket-2
-    draft_images/coastwatch-qgis
-    draft_images/test
-
 on:
   workflow_dispatch: null
   push:
@@ -14,11 +8,18 @@ on:
     paths:
       - 'action.yml'
       # Reference the watched directories here
-      - ${{ join(fromJson(env.WATCHED_DIRECTORIES), '/**') }}
-
+      - draft_images/py-rocket-2/**
+      - draft_images/coastwatch-qgis/**
+      - draft_images/test/**
+      
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      WATCHED_DIRECTORIES: |
+        draft_images/py-rocket-2
+        draft_images/coastwatch-qgis
+        draft_images/test
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
