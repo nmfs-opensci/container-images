@@ -23,6 +23,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 2  # Fetch the last two commits to enable diff with previous commit
 
       - name: Find changed directories
         id: find-changes
