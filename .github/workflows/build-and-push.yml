@@ -30,7 +30,9 @@ jobs:
           echo "Changed directories:"
           # Convert WATCHED_DIRECTORIES to a grep pattern
           watched_pattern=$(echo "${WATCHED_DIRECTORIES}" | sed 's| |/|g; s|$|/|g' | tr '\n' '|')
+          echo $watched_pattern
           watched_pattern="${watched_pattern%|}"  # Remove the trailing "|"  
+          echo $watched_pattern
           dirs=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -E "${watched_pattern}" | sed 's|/[^/]*$||' | sort -u)
           echo "dirs=$dirs" >> $GITHUB_ENV
           if [ -z "$dirs" ]; then
