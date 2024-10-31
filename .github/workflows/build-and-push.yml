@@ -1,51 +1,68 @@
 name: Docker Image Build and Push
 
 on:
-  workflow_dispatch: null
+  workflow_dispatch:
   push:
     branches:
       - main
     paths:
       - 'action.yml'
-      # Reference the watched directories here
       - draft_images/py-rocket-2/**
       - draft_images/coastwatch-qgis/**
       - draft_images/test/**
-      
+
 jobs:
-  build:
+  find-changes:
     runs-on: ubuntu-latest
     env:
       WATCHED_DIRECTORIES: |
         draft_images/py-rocket-2
         draft_images/coastwatch-qgis
         draft_images/test
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          fetch-depth: 2  # Fetch the last two commits to enable diff with previous commit
+          fetch-depth: 2
 
       - name: Find changed directories
         id: find-changes
         run: |
+          echo "Changed directories:"
           watched_pattern=$(echo "${WATCHED_DIRECTORIES}" | tr '\n' '|')
-          watched_pattern="${watched_pattern%|}"  # Remove trailing "|"  
-          dirs=$(git diff --name-only HEAD^ HEAD | grep -E "${watched_pattern}" | sed 's|/[^/]*$||' | sort -u)
+          watched_pattern="${watched_pattern%|}"
+          
+          dirs=$(git diff --name-only HEAD^ HEAD | grep -E "^(${watched_pattern})" | sed 's|/[^/]*$||' | sort -u)
+          
           echo "dirs=$dirs" >> $GITHUB_ENV
+          
           if [ -z "$dirs" ]; then
             echo "No changed directories"
             exit 1
           fi
+          
           echo "Directories changed: $dirs"
 
-      - name: Build and push images
+      - name: Prepare matrix for changed directories
+        if: success()
         run: |
-          for dir in ${{ env.dirs }}; do
-            image_name=$(basename "$dir")  # Set image name to the directory name
-            echo "Building image for directory: $dir with name: $image_name"
-            # Assuming your reusable action is at the root level
-            uses: nmfs-opensci/container-images@main
-            with:
-              image_dir: $dir
-              image_name: $image_name  # Pass the image name based on the directory
+          echo "matrix_dirs=$(echo "$dirs" | jq -R -s -c 'split("\n") | map(select(. != ""))')" >> $GITHUB_ENV
+
+  # Build job using matrix
+  build:
+    runs-on: ubuntu-latest
+    needs: find-changes
+    strategy:
+      matrix:
+        dir: ${{ fromJson(env.matrix_dirs) }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Use reusable action for each directory
+        uses: nmfs-opensci/container-images@main
+        with:
+          image_dir: ${{ matrix.dir }}
+          image_name: ${{ matrix.dir | split('/')[-1] }}
+          
