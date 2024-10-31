@@ -4,7 +4,7 @@ Author of Dockerfile: Eli Holmes (NOAA)
 
 ## Description
 
-This is a test. More info. Test.
+This is a test.
 
 ## License
 
