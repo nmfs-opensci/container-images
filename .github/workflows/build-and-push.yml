@@ -47,3 +47,22 @@ jobs:
           echo "::set-output name=matrix_dirs::$matrix_dirs"
           echo "Debugging: matrix_dirs output is $matrix_dirs"
 
+  # Build job using matrix
+  build:
+    runs-on: ubuntu-latest
+    needs: find-changes
+    if: needs.find-changes.outputs.matrix_dirs != '[]'  # Only run if there are changed directories
+    strategy:
+      matrix:
+        dir: ${{ fromJson(needs.find-changes.outputs.matrix_dirs) }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Extract image name
+        id: extract-name
+        shell: bash
+        run: |
+          echo "image_name=$(basename ${{ matrix.dir }})" >> $GITHUB_ENV
+          echo "image_name=$(basename ${{ matrix.dir }})"
+          
