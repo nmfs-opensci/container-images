@@ -4,7 +4,7 @@ Author of Dockerfile: Eli Holmes (NOAA)
 
 ## Description
 
-This is a geospatial Python built off the [py-rocket-base](https://github.com/nmfs-opensci/py-rocket-base) image with QGIS and CoastWatch utils
+This is a test.
 
 ## License
 
