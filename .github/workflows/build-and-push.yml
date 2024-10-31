@@ -7,19 +7,19 @@ on:
       - main
     paths:
       - 'action.yml'
-      - draft_images/py-rocket-2/**
-      - draft_images/coastwatch-qgis/**
-      - draft_images/test/**
+      - 'draft_images/py-rocket-2/**'
+      - 'draft_images/coastwatch-qgis/**'
+      - 'draft_images/test/**'
+
+env:
+  WATCHED_DIRECTORIES: |
+    draft_images/py-rocket-2
+    draft_images/coastwatch-qgis
+    draft_images/test
 
 jobs:
   find-changes:
     runs-on: ubuntu-latest
-    env:
-      WATCHED_DIRECTORIES: |
-        draft_images/py-rocket-2
-        draft_images/coastwatch-qgis
-        draft_images/test
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -29,25 +29,18 @@ jobs:
       - name: Find changed directories
         id: find-changes
         run: |
-          echo "Changed directories:"
-          watched_pattern=$(echo "${WATCHED_DIRECTORIES}" | tr '\n' '|')
-          watched_pattern="${watched_pattern%|}"
+          watched_dirs=$(echo "${WATCHED_DIRECTORIES}" | tr '\n' '|')
+          watched_dirs="${watched_dirs%|}"
           
-          dirs=$(git diff --name-only HEAD^ HEAD | grep -E "^(${watched_pattern})" | sed 's|/[^/]*$||' | sort -u)
-          
-          echo "dirs=$dirs" >> $GITHUB_ENV
+          dirs=$(git diff --name-only HEAD^ HEAD | grep -E "^(${watched_dirs})" | sed 's|/[^/]*$||' | sort -u)
           
           if [ -z "$dirs" ]; then
             echo "No changed directories"
             exit 1
           fi
           
-          echo "Directories changed: $dirs"
-
-      - name: Prepare matrix for changed directories
-        if: success()
-        run: |
-          echo "matrix_dirs=$(echo "$dirs" | jq -R -s -c 'split("\n") | map(select(. != ""))')" >> $GITHUB_ENV
+          # Convert to JSON array for matrix strategy
+          echo "::set-output name=matrix_dirs::$(echo "$dirs" | jq -R -s -c 'split("\n") | map(select(. != ""))')"
 
   # Build job using matrix
   build:
@@ -55,7 +48,7 @@ jobs:
     needs: find-changes
     strategy:
       matrix:
-        dir: ${{ fromJson(env.matrix_dirs) }}
+        dir: ${{ fromJson(needs.find-changes.outputs.matrix_dirs) }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -65,4 +58,4 @@ jobs:
         with:
           image_dir: ${{ matrix.dir }}
           image_name: ${{ matrix.dir | split('/')[-1] }}
-          
+
