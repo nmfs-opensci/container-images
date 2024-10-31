@@ -13,7 +13,7 @@ inputs:
     type: string
   github_token:
     description: 'GitHub token for authentication. Optional.'
-    required: false
+    required: true
     type: string
     
 runs:
@@ -27,7 +27,7 @@ runs:
       with:
         registry: ghcr.io
         username: ${{ github.actor }}
-        password: ${{ inputs.github_token || secrets.GITHUB_TOKEN }}
+        password: ${{ inputs.github_token }}
 
     - name: Set Image Name and Directory
       id: setup
