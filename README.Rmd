@@ -227,3 +227,30 @@ Mac users with Apple chips, add `--platform linux/amd64`:
 docker run --platform linux/amd64 -p 8888:8888 --volume ./myproject_files:/home/jovyan/mydir ghcr.io/nmfs-opensci/container-images/py-rocket-base:latest
 ```
 
+## Use py-rocket-base as a base image
+
+Create a file called `Dockerfile`
+```
+FROM ghcr.io/nmfs-opensci/container-images/py-geospatial:latest
+```
+add more code in that file. See the `images` and `draft_images` folders for examples.
+
+Use a GitHub Action to automatically build and push the image to ghcr.io (GitHub packages, associated with every repo). This action is triggered whenever your dockerfile changes.
+
+```
+name: Docker Image CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'Dockerfile'
+
+jobs:
+  build-and-push:
+    uses: nmfs-opensci/container-images@main
+```
+
+
