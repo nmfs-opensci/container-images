@@ -12,7 +12,7 @@ inputs:
     required: false
     type: string
   github_token:
-    description: 'GitHub token for authentication. Optional, defaults to ${{ secrets.GITHUB_TOKEN }} if not provided.'
+    description: 'GitHub token for authentication. Optional.'
     required: false
     type: string
     
