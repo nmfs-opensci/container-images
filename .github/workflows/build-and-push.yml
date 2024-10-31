@@ -28,13 +28,16 @@ jobs:
         id: find-changes
         run: |
           echo "Changed directories:"
-          dirs=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -E "$(echo "${WATCHED_DIRECTORIES}" | sed 's| |/|g; s|$|/|g' | tr '\n' '|')" | sed 's|/[^/]*$||' | sort -u)
+          # Convert WATCHED_DIRECTORIES to a grep pattern
+          watched_pattern=$(echo "${WATCHED_DIRECTORIES}" | sed 's| |/|g; s|$|/|g' | tr '\n' '|')
+          watched_pattern="${watched_pattern%|}"  # Remove the trailing "|"  
+          dirs=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -E "${watched_pattern}" | sed 's|/[^/]*$||' | sort -u)
           echo "dirs=$dirs" >> $GITHUB_ENV
           if [ -z "$dirs" ]; then
             echo "No changed directories"
             exit 1
           fi
-          echo "$dirs"
+          echo "Directories changed: $dirs"
 
       - name: Build and push images
         run: |
