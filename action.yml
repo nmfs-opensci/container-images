@@ -11,7 +11,11 @@ inputs:
     description: 'The directory containing Docker build files. If left off, . (the base repository level) is used.'
     required: false
     type: string
-
+  github_token:
+    description: 'GitHub token for authentication. Optional, defaults to ${{ secrets.GITHUB_TOKEN }} if not provided.'
+    required: false
+    type: string
+    
 runs:
   using: "composite"
   steps:
@@ -23,7 +27,7 @@ runs:
       with:
         registry: ghcr.io
         username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
+        password: ${{ inputs.github_token || secrets.GITHUB_TOKEN }}
 
     - name: Set Image Name and Directory
       id: setup
