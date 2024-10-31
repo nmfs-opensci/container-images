@@ -1,61 +1,40 @@
-name: Build and Push Docker Image
+name: Docker Image Build and Push
+
 on:
-  workflow_call:
-    inputs:
-      image_name:
-        required: false
-        type: string
-      image_tag:
-        required: false
-        type: string
-        default: 'latest'
-      image_dir:
-        required: false
-        type: string
+  push:
+    branches:
+      - main
+    paths:
+      - 'draft-images/py-rocket-2/**'
+      - 'draft-images/coastwatch-qgis/**'
+      - 'draft-images/test/**'
 
 jobs:
-  build-and-push:
+  build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
-
     steps:
-      - name: Check out the repository
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v1
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Set Image Name and Directory
-        id: setup
+      - name: Find changed directories
+        id: find-changes
         run: |
-          # Default image name to repository name if not provided
-          if [ -z "${{ inputs.image_name }}" ]; then
-            echo "name=${{ github.event.repository.name }}" >> $GITHUB_ENV
-          else
-            echo "name=${{ inputs.image_name }}" >> $GITHUB_ENV
+          echo "Changed directories:"
+          dirs=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -E 'images/app1/|images/app2/' | sed 's|/[^/]*$||' | sort -u)
+          echo "dirs=$dirs" >> $GITHUB_ENV
+          if [ -z "$dirs" ]; then
+            echo "No changed directories"
+            exit 1
           fi
+          echo "$dirs"
 
-          # Default image directory to current directory if not provided
-          if [ -z "${{ inputs.image_dir }}" ]; then
-            echo "dir=." >> $GITHUB_ENV
-          else
-            echo "dir=${{ inputs.image_dir }}" >> $GITHUB_ENV
-          fi
-
-      - name: Build the Docker image
+      - name: Build and push images
         run: |
-          docker build ${{ env.dir }} \
-            -f ${{ env.dir }}/Dockerfile \
-            --tag ghcr.io/${{ github.repository_owner }}/${{ env.name }}:${{ inputs.image_tag }} \
-            --tag ghcr.io/${{ github.repository_owner }}/${{ env.name }}:latest
-
-      - name: Push the Docker image
-        run: |
-          docker push ghcr.io/${{ github.repository_owner }}/${{ env.name }}:${{ inputs.image_tag }}
-          docker push ghcr.io/${{ github.repository_owner }}/${{ env.name }}:latest
+          for dir in ${{ env.dirs }}; do
+            image_name=$(basename "$dir")  # Set image name to the directory name
+            echo "Building image for directory: $dir with name: $image_name"
+            # Assuming your reusable action is at the root level
+            uses: nmfs-opensci/container-images@main
+            with:
+              image_dir: $dir
+              image_name: $image_name  # Pass the image name based on the directory
