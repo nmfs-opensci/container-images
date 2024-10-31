@@ -65,4 +65,10 @@ jobs:
         run: |
           echo "image_name=$(basename ${{ matrix.dir }})" >> $GITHUB_ENV
           echo "image_name=$(basename ${{ matrix.dir }})"
-          
+
+      - name: Use reusable action for each directory
+        uses: nmfs-opensci/container-images@main
+        with:
+          image_dir: ${{ matrix.dir }}
+          image_name: ${{ env.image_name }}
+
