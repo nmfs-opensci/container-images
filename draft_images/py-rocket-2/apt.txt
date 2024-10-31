@@ -1,5 +1,5 @@
 # Some useful stuff
-tk-dev
+libgl1-mesa-glx
 
 # Add some more
 # or not
