@@ -1,4 +1,8 @@
-name: Docker Image Build and Push
+env:
+  WATCHED_DIRECTORIES: |
+    draft_images/py-rocket-2
+    draft_images/coastwatch-qgis
+    draft_images/test
 
 on:
   workflow_dispatch: null
@@ -6,10 +10,9 @@ on:
     branches:
       - main
     paths:
-      - 'draft_images/py-rocket-2/**'
-      - 'draft_images/coastwatch-qgis/**'
-      - 'draft_images/test/**'
       - 'action.yml'
+      # Reference the watched directories here
+      - ${{ join(fromJson(env.WATCHED_DIRECTORIES), '/**') }}
 
 jobs:
   build:
@@ -22,7 +25,7 @@ jobs:
         id: find-changes
         run: |
           echo "Changed directories:"
-          dirs=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -E 'images/app1/|images/app2/' | sed 's|/[^/]*$||' | sort -u)
+          dirs=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -E "$(echo "${WATCHED_DIRECTORIES}" | sed 's| |/|g; s|$|/|g' | tr '\n' '|')" | sed 's|/[^/]*$||' | sort -u)
           echo "dirs=$dirs" >> $GITHUB_ENV
           if [ -z "$dirs" ]; then
             echo "No changed directories"
