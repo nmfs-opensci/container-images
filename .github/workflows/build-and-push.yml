@@ -29,12 +29,8 @@ jobs:
       - name: Find changed directories
         id: find-changes
         run: |
-          echo "Changed directories:"
-          # Convert WATCHED_DIRECTORIES to a grep pattern
           watched_pattern=$(echo "${WATCHED_DIRECTORIES}" | tr '\n' '|')
-          echo $watched_pattern
           watched_pattern="${watched_pattern%|}"  # Remove trailing "|"  
-          echo $watched_pattern
           dirs=$(git diff --name-only HEAD^ HEAD | grep -E "${watched_pattern}" | sed 's|/[^/]*$||' | sort -u)
           echo "dirs=$dirs" >> $GITHUB_ENV
           if [ -z "$dirs" ]; then
