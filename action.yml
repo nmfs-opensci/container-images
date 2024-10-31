@@ -31,6 +31,7 @@ runs:
 
     - name: Set Image Name and Directory
       id: setup
+      shell: bash
       run: |
         # Default image name to repository name if not provided
         if [ -z "${{ inputs.image_name }}" ]; then
@@ -48,6 +49,7 @@ runs:
 
     - name: Extract VERSION from Dockerfile
       id: get_version
+      shell: bash
       run: |
         if grep -q "LABEL VERSION=" ${{ env.dir }}/Dockerfile; then
           version=$(grep "LABEL VERSION=" ${{ env.dir }}/Dockerfile | cut -d '=' -f 2 | tr -d ' ')
@@ -61,6 +63,7 @@ runs:
         echo "tag=latest-${short_sha}" >> $GITHUB_ENV
 
     - name: Build the Docker image
+      shell: bash
       run: |
         # Build the Docker image with both tags
         docker build ${{ env.dir }} \
@@ -74,6 +77,7 @@ runs:
         fi
 
     - name: Push the Docker image
+      shell: bash
       run: |
         docker push ghcr.io/${{ github.repository_owner }}/${{ env.name }}:${{ env.tag }}
         docker push ghcr.io/${{ github.repository_owner }}/${{ env.name }}:latest
