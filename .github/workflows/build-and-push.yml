@@ -1,3 +1,5 @@
+name: Docker Image Build and Push
+
 env:
   WATCHED_DIRECTORIES: |
     draft_images/py-rocket-2
