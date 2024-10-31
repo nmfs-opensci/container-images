@@ -9,6 +9,7 @@ on:
       - 'draft_images/py-rocket-2/**'
       - 'draft_images/coastwatch-qgis/**'
       - 'draft_images/test/**'
+      - 'action.yml'
 
 jobs:
   build:
