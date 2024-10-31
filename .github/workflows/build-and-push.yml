@@ -33,7 +33,7 @@ jobs:
           echo $watched_pattern
           watched_pattern="${watched_pattern%|}"  # Remove trailing "|"  
           echo $watched_pattern
-          dirs=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep -E "${watched_pattern}" | sed 's|/[^/]*$||' | sort -u)
+          dirs=$(git diff --name-only HEAD^ HEAD | grep -E "${watched_pattern}" | sed 's|/[^/]*$||' | sort -u)
           echo "dirs=$dirs" >> $GITHUB_ENV
           if [ -z "$dirs" ]; then
             echo "No changed directories"
