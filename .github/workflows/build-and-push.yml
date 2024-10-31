@@ -71,4 +71,5 @@ jobs:
         with:
           image_dir: ${{ matrix.dir }}
           image_name: ${{ env.image_name }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}  
 
