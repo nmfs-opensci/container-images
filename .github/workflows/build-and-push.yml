@@ -1,13 +1,14 @@
 name: Docker Image Build and Push
 
 on:
+  workflow_dispatch: null
   push:
     branches:
       - main
     paths:
-      - 'draft-images/py-rocket-2/**'
-      - 'draft-images/coastwatch-qgis/**'
-      - 'draft-images/test/**'
+      - 'draft_images/py-rocket-2/**'
+      - 'draft_images/coastwatch-qgis/**'
+      - 'draft_images/test/**'
 
 jobs:
   build:
