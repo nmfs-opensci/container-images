@@ -1,4 +1,4 @@
-FROM ghcr.io/nmfs-opensci/py-rocket-2:0d562e510d31
+FROM ghcr.io/nmfs-opensci/py-rocket-2:f5ee1fd5e5bb
 
 USER root
 
@@ -16,6 +16,12 @@ RUN cd /tmp && \
 ENV PATH=${PATH}:/tmp/cwutils_4.0.0.198/bin
 ENV MANPATH=${MANPATH}:/tmp/cwutils_4.0.0.198/doc/man
 ENV INSTALL4J ADD VM PARAMS=-Dsun.java2d.uiScale=2.0
+
+# Install panoply
+RUN cd /tmp && \
+  wget https://www.giss.nasa.gov/tools/panoply/download/PanoplyJ-5.5.4.tgz && \
+  tar -zxf PanoplyJ-5.5.4.tgz && \
+  rm -rf PanoplyJ-5.5.4.tgz
 
 USER ${NB_USER}
 WORKDIR ${HOME}
