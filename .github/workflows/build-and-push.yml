@@ -34,7 +34,8 @@ jobs:
           watched_dirs=$(echo "${WATCHED_DIRECTORIES}" | tr '\n' '|')
           watched_dirs="${watched_dirs%|}"
           
-          dirs=$(git diff --name-only HEAD^ HEAD | grep -E "^(${watched_dirs})" | sed 's|/[^/]*$||' | sort -u)
+          dirs=$(git diff --name-only HEAD^ HEAD | grep -E "^(${watched_dirs})" | sed -E "s|^(${watched_dirs})(/.*)|\1|" | sort -u)
+          # dirs=$(git diff --name-only HEAD^ HEAD | grep -E "^(${watched_dirs})" | sed 's|/[^/]*$||' | sort -u)
           
           if [ -z "$dirs" ]; then
             echo "No changed directories"
