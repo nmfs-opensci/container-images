@@ -51,12 +51,15 @@ runs:
       id: get_version
       shell: bash
       run: |
-        if grep -q "LABEL VERSION=" ${{ env.dir }}/Dockerfile; then
+        # Check for both OCI-compliant version label and generic version label
+        if grep -q "LABEL org.opencontainers.image.version=" ${{ env.dir }}/Dockerfile; then
+          version=$(grep "LABEL org.opencontainers.image.version=" ${{ env.dir }}/Dockerfile | cut -d '=' -f 2 | tr -d ' ')
+        elif grep -q "LABEL VERSION=" ${{ env.dir }}/Dockerfile; then
           version=$(grep "LABEL VERSION=" ${{ env.dir }}/Dockerfile | cut -d '=' -f 2 | tr -d ' ')
-          echo "version=${version}" >> $GITHUB_ENV
         else
-          echo "version=" >> $GITHUB_ENV
+          version=""
         fi
+        echo "version=${version}" >> $GITHUB_ENV
         
         # Always create a short SHA for tagging
         short_sha=$(echo "${{ github.sha }}" | cut -c1-7)
