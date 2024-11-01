@@ -69,7 +69,7 @@ jobs:
       - name: Use reusable action for each directory
         uses: nmfs-opensci/container-images@main
         with:
-          image_dir: ${{ matrix.dir }}
+          image_dir: ${{ github.event.repository.name }}
           image_name: ${{ env.image_name }}
           github_token: ${{ secrets.GITHUB_TOKEN }}  
 
