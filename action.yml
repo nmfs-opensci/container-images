@@ -60,7 +60,7 @@ runs:
         
         # Always create a short SHA for tagging
         short_sha=$(echo "${{ github.sha }}" | cut -c1-7)
-        echo "tag=latest-${short_sha}" >> $GITHUB_ENV
+        echo "tag=${short_sha}" >> $GITHUB_ENV
 
     - name: Build the Docker image
       shell: bash
