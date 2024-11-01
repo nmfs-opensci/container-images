@@ -63,8 +63,9 @@ jobs:
         id: extract-name
         shell: bash
         run: |
-          echo "image_name=$(basename ${{ matrix.dir }})" >> $GITHUB_ENV
-          echo "image_name=$(basename ${{ matrix.dir }})"
+          full_image_name="${{ github.event.repository.name }}/$(basename ${{ matrix.dir }})"
+          echo "image_name=$full_image_name" >> $GITHUB_ENV
+          echo "Full image name set to: $full_image_name"
 
       - name: Use reusable action for each directory
         uses: nmfs-opensci/container-images@main
