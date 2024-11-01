@@ -2,7 +2,7 @@
 Type=Application
 Name=Panoply
 GenericName=Panoply netCDF, HDF and GRIB Data Viewer
-Icon=cdat
+Icon=panoply
 Exec=/tmp/PanoplyJ/panoply.sh %F
 Terminal=false
 StartupNotify=false
