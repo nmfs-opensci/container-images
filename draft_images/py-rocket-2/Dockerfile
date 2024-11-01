@@ -22,6 +22,7 @@ RUN cd /tmp && \
   wget --user-agent="Mozilla/5.0" https://www.giss.nasa.gov/tools/panoply/download/PanoplyJ-5.5.4.tgz && \
   tar -zxf PanoplyJ-5.5.4.tgz && \
   rm -rf PanoplyJ-5.5.4.tgz
+ENV PATH=${PATH}:/tmp/PanoplyJ
 
 USER ${NB_USER}
 WORKDIR ${HOME}
