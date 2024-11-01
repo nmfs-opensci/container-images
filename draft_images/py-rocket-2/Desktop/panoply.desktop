@@ -1,1 +1,10 @@
-# test
+[Desktop Entry]
+Type=Application
+Name=Panoply
+GenericName=Panoply netCDF, HDF and GRIB Data Viewer
+Icon=cdat
+Exec=/tmp/PanoplyJ/panoply.sh %F
+Terminal=false
+StartupNotify=false
+Categories=Qt;Education;Science;Geography;
+Keywords=map;globe;
