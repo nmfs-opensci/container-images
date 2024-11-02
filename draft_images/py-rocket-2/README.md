@@ -4,7 +4,7 @@ Author of Dockerfile: Eli Holmes (NOAA)
 
 ## Description
 
-This is a test of py-rocket-base. Adding in the geospatial packages. TEST.
+This is a test of py-rocket-base. Adding in the geospatial packages.
 
 ## License
 
