@@ -32,16 +32,22 @@ jobs:
       - name: Find changed directories
         id: find-changes
         run: |
-          # watched_dirs=$(echo "${WATCHED_DIRECTORIES}" | tr '\n' '|')
-          # watched_dirs="${watched_dirs%|}"          
-          # dirs=$(git diff --name-only HEAD^ HEAD | grep -E "^(${watched_dirs})" | sed -E "s|^(${watched_dirs})(/.*)|\1|" | sort -u)
-          # dirs=$(git diff --name-only HEAD^ HEAD | grep -E "^(${watched_dirs})" | sed 's|/[^/]*$||' | sort -u)
           # Prepare the watched directories list as a single line with | separator
-          watched_dirs=$(echo "${WATCHED_DIRECTORIES}" | tr '\n' '|' | sed 's/|$//')
+          watched_dirs=$(echo "${WATCHED_DIRECTORIES}" | tr '\n' '|')
           all_changed_dirs=$(git diff --name-only HEAD^ HEAD | grep -E "^(${watched_dirs})" | sort -u)
           echo "Debugging: all_changed_dirs is $all_changed_dirs"
-          # Reduce to watched directories only, excluding any subdirectories
-          dirs=$(echo "$all_changed_dirs" | sed -E "s|^(${watched_dirs})(/.*)?|\1|" | sort -u | uniq)
+          # Now apply sed to reduce each path to the top-level watched directory
+          dirs=$(echo "$all_changed_dirs" | while read -r path; do
+            # Match the path to one of the watched directories, preserving only the matched part
+            for watched in ${WATCHED_DIRECTORIES}; do
+              if [[ "$path" == $watched* ]]; then
+              echo "$watched"
+              fi
+            done
+          done | sort -u | uniq)
+
+          echo "Filtered directories: $dirs"
+          
           echo "Debugging: all_changed_dirs is $dirs"
           if [ -z "$dirs" ]; then
             echo "No changed directories"
