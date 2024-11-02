@@ -16,7 +16,7 @@ env:
   WATCHED_DIRECTORIES: |
     draft_images/py-rocket-2
     draft_images/coastwatch-qgis
-    draft_images/test
+    draft_images/test/test
 
 jobs:
   find-changes:
@@ -40,6 +40,8 @@ jobs:
           watched_dirs=$(echo "${WATCHED_DIRECTORIES}" | tr '\n' '|' | sed 's/|$//')
           echo ${watched_dirs}
           dirs=$(git diff --name-only HEAD^ HEAD | grep -E "^(${watched_dirs})" | sed 's|/[^/]*$||' | sort -u)
+          echo ${dirs}
+          dirs=$(echo "$all_changed_dirs" | grep -E "^(${watched_dirs})$")
           echo ${dirs}
           if [ -z "$dirs" ]; then
             echo "No changed directories"
