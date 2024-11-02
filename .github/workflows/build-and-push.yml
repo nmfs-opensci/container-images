@@ -7,7 +7,7 @@ on:
       - main
     paths:
       - 'action.yml'
-      - .github/workflows/guild-and-push.yml
+      - .github/workflows/build-and-push.yml
       - 'draft_images/py-rocket-2/**'
       - 'draft_images/coastwatch-qgis/**'
       - 'draft_images/test/**'
