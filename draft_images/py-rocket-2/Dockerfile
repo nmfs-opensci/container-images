@@ -9,7 +9,8 @@ LABEL org.opencontainers.image.version=2024.11.01
 USER root
 
 # install the geospatial libraries and R spatial; the rocket script are part of py-rocket-base
-RUN /rocker_scripts/install_geospatial.sh
+RUN PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin && \
+    /rocker_scripts/install_geospatial.sh
 
 # Install extra cmd line packages needed for qgis
 RUN apt-get update && \

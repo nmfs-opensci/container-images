@@ -7,4 +7,4 @@ Exec=/tmp/PanoplyJ/panoply.sh %F
 Terminal=false
 StartupNotify=false
 Categories=Qt;Education;Science;Geography;
-Keywords=map;globe;
+Keywords=map;
