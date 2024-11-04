@@ -16,7 +16,7 @@ env:
   WATCHED_DIRECTORIES: |
     draft_images/py-rocket-2
     draft_images/coastwatch-qgis
-    draft_images/test/test
+    draft_images/test
 
 jobs:
   find-changes:
