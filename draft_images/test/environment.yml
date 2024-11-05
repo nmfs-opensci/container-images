@@ -114,8 +114,7 @@ dependencies:
   - xmip
   - spectral # pure Python module for processing hyperspectral image data
 
-
-  # Desktop tools whose versions are more recent on conda-forge than ubuntu
+  # Desktop tools
   - qgis 
   - pyopencl  # Maybe needed for qgis? https://github.com/conda-forge/qgis-feedstock/issues/263
   # Resolves warning "No ICDs were found": https://github.com/CryoInTheCloud/hub-image/issues/50
