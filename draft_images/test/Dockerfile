@@ -4,10 +4,10 @@ RUN echo ${PATH}
 
 USER root
 COPY . /tmp2/
-RUN /pyrocket_scripts/install-conda-packages.sh /tmp/environment.yml || echo "install-conda-packages.sh failed" || true
-RUN /pyrocket_scripts/install-r-packages.sh /tmp/install.R || echo "install-r-package.sh failed" || true
-RUN /pyrocket_scripts/install-pip-packages.sh /tmp/requirements.txt || echo "install-pip-packages.sh failed" || true
-RUN /pyrocket_scripts/install-apt-packages.sh /tmp/apt.txt || echo "install-apt-packages.sh failed" || true
+RUN /pyrocket_scripts/install-conda-packages.sh /tmp2/environment.yml || echo "install-conda-packages.sh failed" || true
+RUN /pyrocket_scripts/install-r-packages.sh /tmp2/install.R || echo "install-r-package.sh failed" || true
+RUN /pyrocket_scripts/install-pip-packages.sh /tmp2/requirements.txt || echo "install-pip-packages.sh failed" || true
+RUN /pyrocket_scripts/install-apt-packages.sh /tmp2/apt.txt || echo "install-apt-packages.sh failed" || true
 RUN /pyrocket_scripts/install-desktop.sh || echo "setup-desktop.sh failed" || true
 RUN /pyrocket_scripts/run-postbuild.sh || echo "run-postbuild.sh failed" || true
 RUN /pyrocket_scripts/setup-start.sh || echo "setup-start.sh failed" || true
