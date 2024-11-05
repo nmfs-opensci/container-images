@@ -1,5 +1,3 @@
-# Some useful stuff
+# for qgis
 libgl1-mesa-glx
 
-# Add some more
-# or not
