@@ -14,6 +14,9 @@ RUN /pyrocket_scripts/setup-start.sh || echo "setup-start.sh failed" || true
 RUN rm -rf /tmp2
 USER ${NB_USER}
 
+COPY apt.txt apt.txt
+RUN rm apt.txt
+
 USER root
 # install the geospatial libraries and R spatial; the rocket script are part of py-rocket-base
 RUN PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin && \
