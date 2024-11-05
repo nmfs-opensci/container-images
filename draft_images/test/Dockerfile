@@ -1,4 +1,4 @@
-FROM ghcr.io/nmfs-opensci/py-rocket-2:d4b37324ce78
+FROM ghcr.io/nmfs-opensci/py-rocket-base:afad8e0f65e1
 
 RUN echo ${PATH}
 
