@@ -1,22 +1,25 @@
-FROM ghcr.io/nmfs-opensci/py-rocket-2:f5ee1fd5e5bb
+FROM ghcr.io/nmfs-opensci/py-rocket-2:732c273a2ba2
+
 LABEL org.opencontainers.image.maintainers="eli.holmes@noaa.gov"
 LABEL org.opencontainers.image.author="eli.holmes@noaa.gov"
-LABEL org.opencontainers.image.source=https://github.com/nmfs-opensci/container-images/draft_images/py-rocket-2
+LABEL org.opencontainers.image.source=https://github.com/nmfs-opensci/container-images/py-rocket-2
 LABEL org.opencontainers.image.description="Geospatial Python (3.11) and R (4.4) image"
 LABEL org.opencontainers.image.licenses=Apache2.0
-LABEL org.opencontainers.image.version=2024.11.01
+LABEL org.opencontainers.image.version=2024.11.06
 
 USER root
+COPY . /tmp2/
+RUN /pyrocket_scripts/install-conda-packages.sh /tmp2/environment.yml || echo "install-conda-packages.sh failed" || true
+RUN /pyrocket_scripts/install-r-packages.sh /tmp2/install.R || echo "install-r-package.sh failed" || true
+RUN /pyrocket_scripts/install-apt-packages.sh /tmp2/apt.txt || echo "install-apt-packages.sh failed" || true
+RUN /pyrocket_scripts/install-desktop.sh /tmp2/Desktop|| echo "setup-desktop.sh failed" || true
+RUN rm -rf /tmp2
+USER ${NB_USER}
 
+USER root
 # install the geospatial libraries and R spatial; the rocket script are part of py-rocket-base
 RUN PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin && \
     /rocker_scripts/install_geospatial.sh
-
-# Install extra cmd line packages needed for qgis
-RUN apt-get update && \
-    apt-get install --yes --no-install-recommends libgl1-mesa-glx && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
 
 # Install cwutils
 RUN cd /tmp && \
@@ -36,5 +39,3 @@ ENV PATH=${PATH}:/tmp/PanoplyJ
 
 USER ${NB_USER}
 WORKDIR ${HOME}
-
-

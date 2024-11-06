@@ -8,13 +8,13 @@ on:
     paths:
       - 'action.yml'
       - .github/workflows/build-and-push.yml
-      - 'draft_images/py-rocket-2/**'
+      - 'draft_images/py-rocket-geospatial-2/**'
       - 'draft_images/coastwatch-qgis/**'
       - 'draft_images/test/**'
 
 env:
   WATCHED_DIRECTORIES: |
-    draft_images/py-rocket-2
+    draft_images/py-rocket-geospatial-2
     draft_images/coastwatch-qgis
     draft_images/test
 

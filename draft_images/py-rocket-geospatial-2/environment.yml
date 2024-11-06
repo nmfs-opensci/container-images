@@ -93,6 +93,7 @@ dependencies:
   - pydap # OPeNDAP implementation
   - erddapy # connect to erddap servers
   - ecmwflibs # wraps some of European Centre for Medium-Range Weather Forecasts libraries
+  - harmony-py
 
   # Distributed computing
   - dask>=2023.12.1
@@ -114,9 +115,14 @@ dependencies:
   - xmip
   - spectral # pure Python module for processing hyperspectral image data
 
-
-  # Desktop tools whose versions are more recent on conda-forge than ubuntu
+  # Desktop tools
   - qgis 
   - pyopencl  # Maybe needed for qgis? https://github.com/conda-forge/qgis-feedstock/issues/263
   # Resolves warning "No ICDs were found": https://github.com/CryoInTheCloud/hub-image/issues/50
   - ocl-icd-system
+  
+  # Quarto
+  - quarto
+  - pip:
+    - xq # Apply XPath expressions to XML
+    - jupyterlab-quarto

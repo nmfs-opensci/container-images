@@ -22,7 +22,7 @@ Stack was the joint of a number of people. See
 ## Stable set of images
 
 There are many other images in the `images` folder that are experimental
-in nature. *If you are looking for standard Python or R Docker images,
+in nature. *If you are looking for vanilla Python or R Docker images,
 go to the base Docker stacks linked above.*
 
 | Image                                                                                                                                                                                                                                                                                                                                                                                                                                       | Description                                                                                                                                                                                                           | Open                                                                                                                                                                                                                                                                                                                                                      | info                                                                                                                                                                                                                      |
