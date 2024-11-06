@@ -1,4 +1,4 @@
-FROM ghcr.io/nmfs-opensci/py-rocket-base:afad8e0f65e1
+FROM ghcr.io/nmfs-opensci/py-rocket-2:732c273a2ba2
 
 RUN echo ${PATH}
 
@@ -8,14 +8,14 @@ RUN /pyrocket_scripts/install-conda-packages.sh /tmp2/environment.yml || echo "i
 RUN /pyrocket_scripts/install-r-packages.sh /tmp2/install.R || echo "install-r-package.sh failed" || true
 RUN /pyrocket_scripts/install-pip-packages.sh /tmp2/requirements.txt || echo "install-pip-packages.sh failed" || true
 RUN /pyrocket_scripts/install-apt-packages.sh /tmp2/apt.txt || echo "install-apt-packages.sh failed" || true
-RUN /pyrocket_scripts/install-desktop.sh || echo "setup-desktop.sh failed" || true
-RUN /pyrocket_scripts/run-postbuild.sh || echo "run-postbuild.sh failed" || true
-RUN /pyrocket_scripts/setup-start.sh || echo "setup-start.sh failed" || true
+RUN /pyrocket_scripts/install-desktop.sh /tmp2/Desktop|| echo "setup-desktop.sh failed" || true
+RUN /pyrocket_scripts/run-postbuild.sh /tmp2/postBuild|| echo "run-postbuild.sh failed" || true
+RUN /pyrocket_scripts/setup-start.sh /tmp2/start || echo "setup-start.sh failed" || true
 RUN rm -rf /tmp2
 USER ${NB_USER}
 
 COPY apt.txt apt.txt
-RUN rm apt.txt
+RUN rm apt.txt || true
 
 USER root
 # install the geospatial libraries and R spatial; the rocket script are part of py-rocket-base
