@@ -13,6 +13,13 @@ USER root
 # install the geospatial libraries and R spatial
 RUN /rocker_scripts/install_geospatial.sh
 
+# Install extra tex packages that are not installed by default
+RUN if command -v tlmgr > /dev/null; then \
+      echo "Installing texlive collection-latexrecommended..."; \
+      tlmgr install collection-latexrecommended; \
+      tlmgr install pdfcol tcolorbox eurosym upquote adjustbox titling enumitem ulem soul rsfs; \
+    fi
+
 USER ${NB_USER} 
 
 # install a few more R geospatial libraries mainly for CoastWatch
