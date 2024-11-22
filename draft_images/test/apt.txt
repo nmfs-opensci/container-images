@@ -1,3 +1,2 @@
-# for qgis
-libgl1-mesa-glx
+zotero
 
