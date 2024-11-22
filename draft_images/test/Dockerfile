@@ -9,6 +9,7 @@ RUN cd /tmp && \
 
 COPY . /tmp2/
 RUN /pyrocket_scripts/install-apt-packages.sh /tmp2/apt.txt || echo "install-apt-packages.sh failed" || true
+RUN /pyrocket_scripts/install-desktop.sh /tmp2/Desktop|| echo "setup-desktop.sh failed" || true
 RUN rm -rf /tmp2
 
 USER ${NB_USER}
