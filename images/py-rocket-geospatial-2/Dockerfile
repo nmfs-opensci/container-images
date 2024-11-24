@@ -8,6 +8,9 @@ LABEL org.opencontainers.image.licenses=Apache2.0
 LABEL org.opencontainers.image.version=2024.11.19
 
 USER root
+# Install Zotero; must be run before apt since apt install zotero requires this script be run first
+RUN wget -qO- https://raw.githubusercontent.com/retorquere/zotero-deb/master/install.sh | bash
+
 COPY . /tmp2/
 RUN /pyrocket_scripts/install-conda-packages.sh /tmp2/environment.yml || echo "install-conda-packages.sh failed" || true
 RUN /pyrocket_scripts/install-r-packages.sh /tmp2/install.R || echo "install-r-package.sh failed" || true
@@ -36,10 +39,6 @@ RUN cd /tmp && \
   tar -zxf PanoplyJ-5.5.5.tgz && \
   rm -rf PanoplyJ-5.5.5.tgz
 ENV PATH=${PATH}:/tmp/PanoplyJ
-
-# Install Zotero
-RUN wget -qO- https://raw.githubusercontent.com/retorquere/zotero-deb/master/install.sh | bash
-
 
 USER ${NB_USER}
 WORKDIR ${HOME}
