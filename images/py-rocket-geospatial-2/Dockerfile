@@ -37,5 +37,9 @@ RUN cd /tmp && \
   rm -rf PanoplyJ-5.5.5.tgz
 ENV PATH=${PATH}:/tmp/PanoplyJ
 
+# Install Zotero
+RUN wget -qO- https://raw.githubusercontent.com/retorquere/zotero-deb/master/install.sh | bash
+
+
 USER ${NB_USER}
 WORKDIR ${HOME}
