@@ -46,7 +46,7 @@ imgs <- c("py-geospatial", "r-geospatial-sdm", "arcgis", "coastwatch", "echopype
 for(i in imgs) table_line(i)
 ```
 | **Community**   | Images from other Docker Stacks    |       |        |
-| [pangeo-notebook](https://github.com/pangeo-data/pangeo-docker-images/tree/master/pangeo-notebook)) <br/> ![](https://img.shields.io/docker/image-size/pangeo/pangeo-notebook?sort=date) <br/>                                     | Pangeo Notebook                                                                                         | [![Button GCS](https://img.shields.io/badge/launch-codespace-brightgreen?logo=github)](https://codespaces.new/nmfs-opensci/container-images?devcontainer_path=.devcontainer/pangeo-notebook/devcontainer.json)               | [directory](https://github.com/pangeo-data/pangeo-docker-images/tree/master/pangeo-notebook)                   |
+| [pangeo-notebook](https://github.com/pangeo-data/pangeo-docker-images/tree/master/pangeo-notebook) <br/> ![](https://img.shields.io/docker/image-size/pangeo/pangeo-notebook?sort=date) <br/>                                     | Pangeo Notebook                                                                                         | [![Button GCS](https://img.shields.io/badge/launch-codespace-brightgreen?logo=github)](https://codespaces.new/nmfs-opensci/container-images?devcontainer_path=.devcontainer/pangeo-notebook/devcontainer.json)               | [directory](https://github.com/pangeo-data/pangeo-docker-images/tree/master/pangeo-notebook)                   |
 
 [Button GCS]: https://img.shields.io/badge/launch-codespace-brightgreen?logo=github
 
