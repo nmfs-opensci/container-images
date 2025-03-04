@@ -122,7 +122,7 @@ dependencies:
   - ocl-icd-system
   
   # Quarto
-  - quarto
+  - quarto==1.5.57
   - pip:
     - xq # Apply XPath expressions to XML
     - jupyterlab-quarto
