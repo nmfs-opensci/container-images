@@ -121,8 +121,8 @@ dependencies:
   # Resolves warning "No ICDs were found": https://github.com/CryoInTheCloud/hub-image/issues/50
   - ocl-icd-system
   
-  # Quarto
-  - quarto==1.5.57
+  # Quarto is installed via R installation in py-rocket-base
+  # - quarto==1.5.57
   - pip:
     - xq # Apply XPath expressions to XML
     - jupyterlab-quarto
