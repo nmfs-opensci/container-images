@@ -5,6 +5,12 @@
 # look up the CRAN env set in the Dockerfile used
 repo <- "https://p3m.dev/cran/__linux__/jammy/2025-02-27"
 
+# Check if the first library path is inside /home
+install_lib <- .libPaths()[1]
+if (grepl("^/home", install_lib)) {
+  stop("Error: Packages are being installed to /home, which will be removed in the final image. Exiting.", call. = FALSE)
+}
+
 install.packages(c("rstac", "quarto", "aws.s3", "gdalcubes", "rnaturalearth"), repos=repo)
 install.packages("rnaturalearthdata", repos=repo)
 
