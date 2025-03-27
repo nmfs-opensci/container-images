@@ -4,3 +4,7 @@ libgl1-mesa-glx
 # for zotero
 zotero
 libpci-dev
+
+# for google cloud
+google-cloud-sdk
+
