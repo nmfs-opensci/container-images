@@ -126,3 +126,4 @@ dependencies:
   - pip:
     - xq # Apply XPath expressions to XML
     - jupyterlab-quarto
+    - google-cloud-storage

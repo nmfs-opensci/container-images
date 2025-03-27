@@ -5,5 +5,6 @@ libgl1-mesa-glx
 zotero
 libpci-dev
 
-# for google cloud buckets
+# for google cloud
 google-cloud-sdk
+
