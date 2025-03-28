@@ -41,6 +41,7 @@ dependencies:
   - graphviz
   - bqplot # 2-D visualization system
   - regionmask # create masks of (geo)spatial regions
+  - contextily # base maps
 
   # Machine Learning packages
   - py-xgboost~=2.1.1=cpu*
