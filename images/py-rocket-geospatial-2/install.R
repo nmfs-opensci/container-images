@@ -3,7 +3,7 @@
 
 # to match rocker/verse:4.4 used in py-rocker-base
 # look up the CRAN env set in the Dockerfile used
-repo <- "https://p3m.dev/cran/__linux__/jammy/2025-02-27"
+repo <- "https://p3m.dev/cran/__linux__/jammy/2025-04-10"
 
 # Check if the first library path is inside /home
 install_lib <- .libPaths()[1]
