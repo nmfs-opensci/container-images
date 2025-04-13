@@ -41,6 +41,7 @@ dependencies:
   - graphviz
   - bqplot # 2-D visualization system
   - regionmask # create masks of (geo)spatial regions
+  - contextily # base maps
 
   # Machine Learning packages
   - py-xgboost~=2.1.1=cpu*
@@ -96,11 +97,10 @@ dependencies:
   - harmony-py
 
   # Distributed computing
-  - dask[complete]
+  - dask>=2023.12.1
   - dask-labextension
   - dask-geopandas
   - coiled
-  - dask-gateway
 
   # Other useful generic python packages
   - pillow # Python imaging library, useful for many image-related tasks
@@ -127,3 +127,4 @@ dependencies:
   - pip:
     - xq # Apply XPath expressions to XML
     - jupyterlab-quarto
+    - google-cloud-storage
