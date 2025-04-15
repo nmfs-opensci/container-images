@@ -1,11 +1,11 @@
-FROM ghcr.io/nmfs-opensci/py-rocket-base:2025.04.11
+FROM ghcr.io/nmfs-opensci/py-rocket-base:2025.04.14
 
 LABEL org.opencontainers.image.maintainers="eli.holmes@noaa.gov"
 LABEL org.opencontainers.image.author="eli.holmes@noaa.gov"
 LABEL org.opencontainers.image.source=https://github.com/nmfs-opensci/container-images/py-rocket-2
 LABEL org.opencontainers.image.description="Geospatial Python (3.11) and R (4.4.3) image with Desktop (QGIS, Panoply, CWUtils)"
 LABEL org.opencontainers.image.licenses=Apache2.0
-LABEL org.opencontainers.image.version=2025.04.11
+LABEL org.opencontainers.image.version=2025.04.14
 
 ENV PROJ_LIB=/srv/conda/envs/notebook/share/proj
 
