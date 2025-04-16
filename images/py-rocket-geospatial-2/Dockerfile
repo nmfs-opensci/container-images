@@ -10,6 +10,11 @@ LABEL org.opencontainers.image.version=2025.04.16
 ENV PROJ_LIB=/srv/conda/envs/notebook/share/proj
 
 USER root
+# install the geospatial libraries and R spatial; the rocket script are part of py-rocket-base
+# need to ensure that it installs to the system library and with a clean PATH
+RUN echo '.libPaths(.Library)' > /tmp/rprofile.site
+
+USER root
 # Install Zotero; must be run before apt since apt install zotero requires this script be run first
 RUN wget -qO- https://raw.githubusercontent.com/retorquere/zotero-deb/master/install.sh | bash
 
