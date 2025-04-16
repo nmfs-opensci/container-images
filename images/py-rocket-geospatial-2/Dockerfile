@@ -23,9 +23,13 @@ USER ${NB_USER}
 
 USER root
 # install the geospatial libraries and R spatial; the rocket script are part of py-rocket-base
-RUN PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin && \
-    /rocker_scripts/install_geospatial.sh
-
+# need to ensure that it installs to the system library
+RUN echo '.libPaths(.Library)' > /tmp/rprofile.site && \
+    R_PROFILE=/tmp/rprofile.site \
+    PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
+    /rocker_scripts/install_geospatial.sh && \
+    rm /tmp/rprofile.site
+    
 # Install cwutils
 RUN cd /tmp && \
     wget https://www.star.nesdis.noaa.gov/socd/coastwatch/cwf/cwutils-4_0_0_198-linux-x86_64.tar.gz && \
