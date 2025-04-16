@@ -23,11 +23,9 @@ USER ${NB_USER}
 
 USER root
 # install the geospatial libraries and R spatial; the rocket script are part of py-rocket-base
-# need to ensure that it installs to the system library
+# need to ensure that it installs to the system library and with a clean PATH
 RUN echo '.libPaths(.Library)' > /tmp/rprofile.site && \
-    R_PROFILE=/tmp/rprofile.site \
-    PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
-    /rocker_scripts/install_geospatial.sh && \
+    R_PROFILE=/tmp/rprofile.site PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin /rocker_scripts/install_geospatial.sh && \
     rm /tmp/rprofile.site
     
 # Install cwutils
