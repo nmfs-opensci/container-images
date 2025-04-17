@@ -17,6 +17,25 @@ RUN echo '{ "ServerApp": { "default_url": "/rstudio" } }' \
     echo '{ "NotebookApp": { "default_url": "/rstudio" } }' \
     > ${NB_PYTHON_PREFIX}/etc/jupyter/jupyter_notebook_config.d/default_url.json
     
+# Set up TeX Live repo and install required packages
+USER root
+
+# Ensure tlmgr uses system mode
+RUN unset TEXMFHOME && \
+    tlmgr install \
+        lualatex-math \
+        hyphenat \
+        pdfcomment \
+        luatex85 \
+        tracklang \
+        zref \
+        wallpaper \
+        multirow \
+        wrapfig \
+        draftwatermark \
+        luatexbase \
+        selnolig
+    
 USER ${NB_USER}
 ENV JUPYTERHUB_DEFAULT_URL=/rstudio
 CMD ["jupyter", "server", "--ServerApp.default_url=/rstudio"]
