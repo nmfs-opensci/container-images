@@ -1,7 +1,7 @@
-# py-rocket-geospatial v2.0
+# asar
 
-This creates a base Python-R image built off repo2docker with geospatial packages for Python and R. The Python environment is similar to NASA Openscapes JupyterHub image [corn](https://github.com/NASA-Openscapes/corn/tree/main) and the CryoCloud JupyterHub [image](https://github.com/CryoInTheCloud/hub-image). The image also includes a linux Desktop with QGIS, CoastWatch Utilities, and Panoply.
+This image provides the
 
-Python 3.11 is installed with a conda environment called notebook that is activated on opening the container. 
+[nmfs-ost/asar](https://github.com/nmfs-ost/asar) and nmfs-ost/stockplotr packages.
 
-See the documentation on [py-rocket-base](https://nmfs-opensci.github.io/py-rocket-base/) for information on the image structure and design.
+The goal of ASAR is to automate stock assessment reports for NOAA science centers so they are reproducible and cohesive across the agency. This project intends to create a streamlined workflow that allows the analyst to create a customized report tailored to their needs and requirements by the SSC, council, or other regional management organizations.
