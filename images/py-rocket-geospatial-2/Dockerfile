@@ -22,9 +22,9 @@ RUN rm -rf /tmp2
 
 USER root
 # install the geospatial libraries and R spatial; the rocket script are part of py-rocket-base
-# need to ensure that it installs to the system library and with a clean PATH
-RUN rm -f /tmp/rprofile.site && \
-    echo '.libPaths(.Library)' > /tmp/rprofile.site
+# need to ensure that it installs to the site-library (that user can control) and with a clean PATH
+RUN mkdir -p /tmp2 && \
+    echo '.libPaths(file.path(Sys.getenv("R_HOME"), "site-library"))' > /tmp2/rprofile.site
 RUN env R_PROFILE=/tmp/rprofile.site \
         PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
         /rocker_scripts/install_geospatial.sh
