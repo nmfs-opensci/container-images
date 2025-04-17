@@ -12,6 +12,7 @@ COPY . /tmp2/
 RUN /pyrocket_scripts/install-r-packages.sh /tmp2/install.R || echo "install-r-package.sh failed" || true
 RUN rm -rf /tmp2
 
-USER ${NB_USER}
 ENV JUPYTERHUB_DEFAULT_URL=/rstudio
+
+USER ${NB_USER}
 WORKDIR ${HOME}
