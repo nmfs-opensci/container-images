@@ -19,12 +19,12 @@ RUN /pyrocket_scripts/install-r-packages.sh /tmp2/install.R || echo "install-r-p
 RUN /pyrocket_scripts/install-apt-packages.sh /tmp2/apt.txt || echo "install-apt-packages.sh failed" || true
 RUN /pyrocket_scripts/install-desktop.sh /tmp2/Desktop|| echo "setup-desktop.sh failed" || true
 RUN rm -rf /tmp2
-USER ${NB_USER}
 
 USER root
 # install the geospatial libraries and R spatial; the rocket script are part of py-rocket-base
 # need to ensure that it installs to the system library and with a clean PATH
-RUN echo '.libPaths(.Library)' > /tmp/rprofile.site 
+RUN rm -f /tmp/rprofile.site && \
+    echo '.libPaths(.Library)' > /tmp/rprofile.site
 RUN env R_PROFILE=/tmp/rprofile.site \
         PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
         /rocker_scripts/install_geospatial.sh
