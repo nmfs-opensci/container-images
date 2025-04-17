@@ -18,7 +18,7 @@ RUN cp jupyter-rstudio-config.json ${NB_PYTHON_PREFIX}/etc/jupyter/jupyter_serve
     cp jupyter-rstudio-config.json ${NB_PYTHON_PREFIX}/etc/jupyter/jupyter_notebook_config.d/ && \
     rm jupyter-rstudio-config.json
 
-
-
 USER ${NB_USER}
+ENV JUPYTERHUB_DEFAULT_URL=/rstudio
+CMD ["jupyter", "server", "--ServerApp.default_url=/rstudio"]
 WORKDIR ${HOME}
