@@ -22,6 +22,7 @@ USER root
 
 # Ensure tlmgr uses system mode
 RUN unset TEXMFHOME && \
+    PATH=/usr/local/texlive/bin/linux:$PATH && \
     tlmgr install \
         lualatex-math \
         hyphenat \
@@ -35,6 +36,17 @@ RUN unset TEXMFHOME && \
         draftwatermark \
         luatexbase \
         selnolig
+
+# Install DejaVu Sans Font       
+RUN apt-get update && \
+    apt-get install -y fonts-dejavu-core && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Install Arial Font; no Ariel Narrow since that is proprietary       
+RUN apt-get update && \
+    apt-get install -y ttf-mscorefonts-installer fontconfig && \
+    fc-cache -f -v && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
     
 USER ${NB_USER}
 ENV JUPYTERHUB_DEFAULT_URL=/rstudio
