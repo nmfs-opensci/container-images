@@ -12,12 +12,11 @@ COPY . /tmp2/
 RUN /pyrocket_scripts/install-r-packages.sh /tmp2/install.R || echo "install-r-package.sh failed" || true
 RUN rm -rf /tmp2
 
-# Add custom Jupyter server configurations to launch in RStudio
-COPY jupyter-rstudio-config.json jupyter-rstudio-config.json
-RUN cp jupyter-rstudio-config.json ${NB_PYTHON_PREFIX}/etc/jupyter/jupyter_server_config.d/ && \
-    cp jupyter-rstudio-config.json ${NB_PYTHON_PREFIX}/etc/jupyter/jupyter_notebook_config.d/ && \
-    rm jupyter-rstudio-config.json
-
+RUN echo '{ "ServerApp": { "default_url": "/rstudio" } }' \
+    > ${NB_PYTHON_PREFIX}/etc/jupyter/jupyter_server_config.d/default_url.json && \
+    echo '{ "NotebookApp": { "default_url": "/rstudio" } }' \
+    > ${NB_PYTHON_PREFIX}/etc/jupyter/jupyter_notebook_config.d/default_url.json
+    
 USER ${NB_USER}
 ENV JUPYTERHUB_DEFAULT_URL=/rstudio
 CMD ["jupyter", "server", "--ServerApp.default_url=/rstudio"]
