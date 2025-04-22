@@ -13,4 +13,4 @@ RUN mamba update -c conda-forge --name notebook hvplot datashader
 # The default conda env on the openscapes image is notebook
 # Pin echopype so the examples run
 RUN mamba install -c conda-forge --name notebook cmocean
-RUN mamba install -c conda-forge --name notebook echopype=0.8.4
+RUN mamba install -c conda-forge --name notebook echopype=0.10.1
