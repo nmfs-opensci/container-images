@@ -1,43 +1,35 @@
-# Rocker verse with conda notebook environment; 
-# rstudio user with /home/jovyan home dir
-FROM ghcr.io/nmfs-opensci/container-images/py-rocket-base:4.4-3.10
+FROM ghcr.io/nmfs-opensci/py-rocket-base:2025.04.17
+
 LABEL org.opencontainers.image.maintainers="eli.holmes@noaa.gov"
 LABEL org.opencontainers.image.author="eli.holmes@noaa.gov"
-LABEL org.opencontainers.image.source=https://github.com/nmfs-opensci/container-images/py-rocket-geospatial
-LABEL org.opencontainers.image.description="Geospatial Python (3.10) and R (4.4) image"
+LABEL org.opencontainers.image.source=https://github.com/nmfs-opensci/container-images
+LABEL org.opencontainers.image.description="Geospatial Python (3.11) and R (4.4.3) image"
 LABEL org.opencontainers.image.licenses=Apache2.0
-LABEL org.opencontainers.image.version=2024.07.11
+LABEL org.opencontainers.image.version=2025.04.23
+
+ENV PROJ_LIB=/srv/conda/envs/notebook/share/proj
 
 USER root
 
-# install the geospatial libraries and R spatial
-RUN /rocker_scripts/install_geospatial.sh
+COPY . /tmp2/
+RUN /pyrocket_scripts/install-conda-packages.sh /tmp2/environment.yml || echo "install-conda-packages.sh failed" || true
+RUN /pyrocket_scripts/install-r-packages.sh /tmp2/install.R || echo "install-r-package.sh failed" || true
+RUN /pyrocket_scripts/install-apt-packages.sh /tmp2/apt.txt || echo "install-apt-packages.sh failed" || true
+RUN rm -rf /tmp2
 
-# Install extra tex packages that are not installed by default
-RUN if command -v tlmgr > /dev/null; then \
-      echo "Installing texlive collection-latexrecommended..."; \
-      tlmgr install collection-latexrecommended; \
-      tlmgr install pdfcol tcolorbox eurosym upquote adjustbox titling enumitem ulem soul rsfs; \
-    fi
+USER root
+# install the geospatial libraries and R spatial; the rocket script are part of py-rocket-base
+# need to ensure that it installs to the site-library (that user can control) and with a clean PATH
+# Ensure packages go to site-library whether installed via R, Rscript, or littler (r)
+RUN echo '.libPaths("/usr/local/lib/R/site-library")' > /etc/littler.r && \
+    echo '.libPaths("/usr/local/lib/R/site-library")' > /tmp/rprofile.site && \
+    R_PROFILE=/tmp/rprofile.site \
+    PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
+    /rocker_scripts/install_geospatial.sh && \
+    rm /etc/littler.r /tmp/rprofile.site
 
-USER ${NB_USER} 
+# Install tools for working with Google Cloud Buckets
+RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg && apt-get update -y && apt-get install google-cloud-cli -y
 
-# install a few more R geospatial libraries mainly for CoastWatch
-COPY install.R install.R
-RUN Rscript install.R && rm install.R
-
-# install the Python geospatial libraries
-COPY environment.yml environment.yml
-RUN conda env update -n notebook -f environment.yml \
-    && conda clean --all \
-    && rm environment.yml
-
-COPY requirements.txt requirements.txt
-RUN ${NB_PYTHON_PREFIX}/bin/pip install --no-cache -r requirements.txt \
-    && rm requirements.txt
-    
-# set the proj lib
-ENV PROJ_LIB=/srv/conda/envs/notebook/share/proj
-
-# Set user dir
-WORKDIR /home/jovyan
+USER ${NB_USER}
+WORKDIR ${HOME}
