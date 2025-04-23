@@ -3,7 +3,7 @@ FROM ghcr.io/nmfs-opensci/py-rocket-base:2025.04.17
 LABEL org.opencontainers.image.maintainers="eli.holmes@noaa.gov"
 LABEL org.opencontainers.image.author="eli.holmes@noaa.gov"
 LABEL org.opencontainers.image.source=ghcr.io/nmfs-opensci/py-rocket-base
-LABEL org.opencontainers.image.description="asar"
+LABEL org.opencontainers.image.description="asar: The goal of ASAR is to automate stock assessment reports for NOAA science centers so they are reproducible and cohesive across the agency."
 LABEL org.opencontainers.image.licenses=Apache2.0
 LABEL org.opencontainers.image.version=2025.04.17
 
