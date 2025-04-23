@@ -1,0 +1,8 @@
+name: echopype
+channels:
+  - conda-forge
+  - nodefaults
+
+dependencies:
+  - cmocean
+  - echopype

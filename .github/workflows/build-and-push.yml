@@ -10,6 +10,8 @@ on:
       - .github/workflows/build-and-push.yml
       - 'images/py-rocket-geospatial-2/**'
       - 'images/asar/**'
+      - 'images/echopype/**'
+      - 'images/coastwatch/**'
       - 'draft_images/coastwatch-qgis/**'
       - 'draft_images/test/**'
 
@@ -17,6 +19,8 @@ env:
   WATCHED_DIRECTORIES: |
     images/py-rocket-geospatial-2
     images/asar
+    images/echopype
+    images/coastwatch
     draft_images/coastwatch-qgis
     draft_images/test
 
