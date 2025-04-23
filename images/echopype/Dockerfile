@@ -5,6 +5,7 @@ LABEL org.opencontainers.image.authors="Wu-Jung Lee + echopype team"
 LABEL org.opencontainers.image.source="https://github.com/nmfs-opensci/container-images/echopype"
 LABEL org.opencontainers.image.description="echopype tooling for ocean sonar data processing in Python. Author: Wu-Jung Lee + echopype team."
 LABEL org.opencontainers.image.licenses=Apache2.0
+LABEL org.opencontainers.image.version=2025.04.23
 
 USER root
 
