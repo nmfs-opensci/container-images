@@ -5,4 +5,4 @@ channels:
 
 dependencies:
   - cmocean
-  - echopype
+  - echopype==0.10.1
