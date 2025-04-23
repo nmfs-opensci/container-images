@@ -4,8 +4,6 @@ output: github_document
 <!-- DO NOT EDIT. CREATED BY README.RMD. Knit that. -->
 # <a name="top">NMFS Open Science Docker Stack
 
-### Beta release June 1, 2024.
-
 These are a collection of container images that provide standardized environments for Python and R with Jupyter Lab, RStudio and VS Code IDEs. The images are built off the [Rocker](https://rocker-project.org/images/devcontainer/images.html), [Pangeo](https://github.com/pangeo-data/pangeo-docker-images) and [Jupyter](https://jupyter-docker-stacks.readthedocs.io/en/latest/) base images. This repo holds the stable Docker stack for specific pipelines used in Fisheries. The images are designed to work out-of-box and identically in Jupyter Hubs, Codespaces, Binder, etc.Read the Design section below on what the NMFS Open Sci Docker Stack does.  For use, see [Instructions](#instructions) and [Link to files](#files). This Docker Stack was the joint of a number of people. See [Acknowledgements](#thanks).
 
 ## Stable set of images
@@ -34,19 +32,21 @@ table_line <- function(i){
 
 | Image      | Description  | Open  | info  |
 |-----------|---------------------------|----------------|-----------|
-|   **Base**      |    Use as the base image when possible   |      |      |
+|   [py-rocket-base](https://github.com/nmfs-opensci/py-rocket-base/pkgs/container/py-rocket-base) </br> ![](https://ghcr-badge.egpl.dev/nmfs-opensci/py-rocket-base/size?color=%2344cc11&tag=latest&label=image+size&trim=) <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci/py-rocket-base/latest_tag?color=%2344cc11&ignore=latest&label=version&trim=)     |    Use as the base Python-R image   |   [Documentation](https://nmfs-opensci.github.io/py-rocket-base/)   |   [repo](https://github.com/nmfs-opensci/py-rocket-base)   |
 ```{r results='asis', echo=FALSE}
-imgs <- c("py-rocket-base", "py-rocket-geospatial", "py-rocket-geospatial-2")
+imgs <- c("py-rocket-geospatial-2")
 for(i in imgs) table_line(i)
 ```
 |         |       |      |     |
 |   **Specialized**      |   Images for specific analyses    |      |     |
 ```{r results='asis', echo=FALSE}
-imgs <- c("py-geospatial", "r-geospatial-sdm", "arcgis", "coastwatch", "echopype", "vast", "aomlomics-jh")
+imgs <- c("asar", "py-geospatial", "r-geospatial-sdm", "arcgis", "coastwatch", "echopype", "vast", "aomlomics-jh")
 for(i in imgs) table_line(i)
 ```
 | **Community**   | Images from other Docker Stacks    |       |        |
-| [pangeo-notebook](https://github.com/pangeo-data/pangeo-docker-images/tree/master/pangeo-notebook) <br/> ![](https://img.shields.io/docker/image-size/pangeo/pangeo-notebook?sort=date) <br/>                                     | Pangeo Notebook                                                                                         | [![Button GCS](https://img.shields.io/badge/launch-codespace-brightgreen?logo=github)](https://codespaces.new/nmfs-opensci/container-images?devcontainer_path=.devcontainer/pangeo-notebook/devcontainer.json)               | [directory](https://github.com/pangeo-data/pangeo-docker-images/tree/master/pangeo-notebook)                   |
+| [pangeo-notebook](https://github.com/pangeo-data/pangeo-docker-images/tree/master/pangeo-notebook) <br/> ![](https://img.shields.io/docker/image-size/pangeo/pangeo-notebook?sort=date) <br/>              | Pangeo Notebook   | [![Button GCS](https://img.shields.io/badge/launch-codespace-brightgreen?logo=github)](https://codespaces.new/nmfs-opensci/container-images?devcontainer_path=.devcontainer/pangeo-notebook/devcontainer.json)               | [directory](https://github.com/pangeo-data/pangeo-docker-images/tree/master/pangeo-notebook) |
+| [rocker-binder](https://github.com/rocker-org/rocker-versioned2/pkgs/container/binder/374714295?tag=latest) <br/> ![](https://img.shields.io/docker/image-size/rocker/binder?sort=date) <br/>                | Rocker binder based on rocker-geospatial [Documentation](https://rocker-project.org/images/versioned/binder.html) | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/rocker-org/binder/HEAD?urlpath=rstudio) | [repo](https://github.com/rocker-org/rocker-versioned2/tree/master)  |
+
 
 [Button GCS]: https://img.shields.io/badge/launch-codespace-brightgreen?logo=github
 
