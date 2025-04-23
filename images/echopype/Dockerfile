@@ -6,6 +6,11 @@ LABEL org.opencontainers.image.source="https://github.com/nmfs-opensci/container
 LABEL org.opencontainers.image.description="echopype tooling for ocean sonar data processing in Python. Author: Wu-Jung Lee + echopype team."
 LABEL org.opencontainers.image.licenses=Apache2.0
 
+USER root
+
 COPY . /tmp2/
 RUN /pyrocket_scripts/install-conda-packages.sh /tmp2/environment.yml || echo "install-conda-packages.sh failed" || true
 RUN rm -rf /tmp2
+
+USER ${NB_USER}
+WORKDIR ${HOME}
