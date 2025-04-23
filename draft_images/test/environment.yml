@@ -4,4 +4,4 @@ channels:
   - nodefaults
 
 dependencies:
-  - echopype
+  - echopype==0.10.1
