@@ -1,16 +1,9 @@
-# echopype Dockerfile
+# py-rocket-geospatial v2.0
 
-Author of Dockerfile: Eli Holmes (NOAA)
-Author of echopype: Wu-Jung Lee (UW) + echopype team
+This creates a base Python-R image with geospatial packages for Python and R. The Python environment is the Pangeo notebook environment + extra geospatial libraries (similar to CryoCloud). The R environment is Rocker geospatial plus a few other packages. The image also includes a linux Desktop with QGIS, CoastWatch Utilities, and Panoply.
 
-## License
+TeXLive and Quarto are installed along with MyST and JupyterBook.
 
-* Dockerfile: Apache 2.0
-* [Openscapes base Python image](https://github.com/nasa-openscapes/corn): MIT
-* [Pangeo Docker Stack](https://github.com/pangeo-data/pangeo-docker-images): MIT
-* [echopype](https://github.com/OSOceanAcoustics/echopype): Apache 2.0
+Python 3.11 is installed with a conda environment called notebook that is activated on opening the container. R 4.4.X is installed.
 
-## Description
-
-Echopype is a package built to enable interoperability and scalability in ocean sonar data processing. This Dockerfile creates an image that can be easily
-dropped into a JupyterHub and will have a NASA Openscapes environment (geospatial with a variety of tooling).
+See the documentation on [py-rocket-base](https://nmfs-opensci.github.io/py-rocket-base/) for information on the image structure and design.

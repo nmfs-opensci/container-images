@@ -1,7 +1,130 @@
-name: echopype
+name: py-rocket-geospatial 
+# 2024-11-01
 channels:
   - conda-forge
   - nodefaults
 
 dependencies:
-  - echopype==0.10.1
+  # Core scientific python stack
+  - cython # optimization, C API access
+  - flox # optimization, xarray operations
+  - hypothesis # needed by numpy testing tools
+  - networkx
+  - numba # high-performance numerics
+  - numpy
+  - pandas
+  - scikit-image
+  - scikit-learn
+  - scipy
+  - statsmodels
+  - pymannkendall # non-parametric Mann-Kendall trend analysis
+  - sympy
+  - xarray>=2024.05.0
+
+  # Visualization packages
+  - bokeh
+  - cartopy # geospatial plotting with matplotlib
+  - geemap
+  - geoviews
+  - hvplot
+  - ipyleaflet
+  - ipympl # This enables matplotlib interaction with jupyter widgets
+  - leafmap
+  - lonboard
+  - matplotlib
+  - plotly
+  - seaborn # statistical plotting with matplotlib
+  - cmocean # colormaps for ocean
+  - imageio # helps writing image files
+  - apng # create animation from multiple png
+  - holoviews
+  - graphviz
+  - bqplot # 2-D visualization system
+  - regionmask # create masks of (geo)spatial regions
+  - contextily # base maps
+
+  # Machine Learning packages
+  - py-xgboost~=2.1.1=cpu*
+
+  # Geospatial data packages
+  - geopandas>=0.14.4
+  - pygmt
+  - rasterio
+  - rioxarray
+  - rasterstats # summarize geospatial raster datasets based on vector geometries
+  - pyresample # resampling geospatial image data
+  - shapely # manipulation and analysis of planar geometric objects
+  - pyproj
+  - datashader
+
+  # File formats and file management, download, dataset caching
+  - h5py
+  - h5netcdf
+  - nco
+  - pooch
+  - zarr
+  - kerchunk
+  - rechunker
+  - cftime # for decoding time units and variable values in a netCDF file
+  - h5coro # reading HDF5 data stored in S3
+  - hdf5plugin # provides HDF5 compression filters
+  - lxml # processing XML and HTML
+  - pynco # python style access to the NetCDF Operators (NCO)
+
+  # Cloud access tools and libraries
+  - awscli
+  - awscliv2
+  - boto3
+  - s3fs>=2023.6.0
+  # handle login and similar details for accessing earthdata protected data
+  # Access datasets exposed via STAC
+  - pystac-client
+  - stackstac
+  # Access datasets exposed via intake catalogs
+  - intake
+  - intake-esm>=2023.7.7
+  - intake-stac==0.4.0
+  - intake-xarray==0.6.1
+  - gcsfs>=2023.5.0
+  - certifi # Root Certificates for validating the trustworthiness of SSL certificates.
+
+  # Specific cloud access libraries
+  - copernicusmarine # get data from copernicus
+  - earthaccess>=0.11.0 # get data from nasa earth access
+  - pydap # OPeNDAP implementation
+  - erddapy # connect to erddap servers
+  - ecmwflibs # wraps some of European Centre for Medium-Range Weather Forecasts libraries
+  - harmony-py
+
+  # Distributed computing
+  - dask>=2023.12.1
+  - dask-labextension
+  - dask-geopandas
+  - coiled
+
+  # Other useful generic python packages
+  - pillow # Python imaging library, useful for many image-related tasks
+  - pytest
+  - pytest-cov
+  - pep8
+  - flake8
+  - tqdm # progress bars, with notebook support
+  - joblib # lightweight pipelining in Python
+
+  # Packages specific to climate and ocean data work
+  - esmpy
+  - xmip
+  - spectral # pure Python module for processing hyperspectral image data
+
+  # Desktop tools
+  - qgis 
+  - pyopencl  # Maybe needed for qgis? https://github.com/conda-forge/qgis-feedstock/issues/263
+  # Resolves warning "No ICDs were found": https://github.com/CryoInTheCloud/hub-image/issues/50
+  - ocl-icd-system
+  
+  # Quarto is installed via R installation in py-rocket-base
+  # - quarto==1.5.57
+  - pip:
+    - xq # Apply XPath expressions to XML
+    - jupyterlab-quarto
+    - google-cloud-storage

@@ -1,35 +1,18 @@
-FROM ghcr.io/nmfs-opensci/py-rocket-base:2025.04.17
+FROM ghcr.io/nmfs-opensci/container-images/py-geospatial:2025.04.23
 
 LABEL org.opencontainers.image.maintainers="eli.holmes@noaa.gov"
 LABEL org.opencontainers.image.author="eli.holmes@noaa.gov"
 LABEL org.opencontainers.image.source=https://github.com/nmfs-opensci/container-images
-LABEL org.opencontainers.image.description="Geospatial Python (3.11) and R (4.4.3) image"
+LABEL org.opencontainers.image.description="Geospatial Python (3.12) and R (4.4.3) image"
 LABEL org.opencontainers.image.licenses=Apache2.0
-LABEL org.opencontainers.image.version=2025.04.23
-
-ENV PROJ_LIB=/srv/conda/envs/notebook/share/proj
+LABEL org.opencontainers.image.version=2025.04.24
 
 USER root
 
 COPY . /tmp2/
-RUN /pyrocket_scripts/install-conda-packages.sh /tmp2/environment.yml || echo "install-conda-packages.sh failed" || true
 RUN /pyrocket_scripts/install-r-packages.sh /tmp2/install.R || echo "install-r-package.sh failed" || true
-RUN /pyrocket_scripts/install-apt-packages.sh /tmp2/apt.txt || echo "install-apt-packages.sh failed" || true
 RUN rm -rf /tmp2
-
-USER root
-# install the geospatial libraries and R spatial; the rocket script are part of py-rocket-base
-# need to ensure that it installs to the site-library (that user can control) and with a clean PATH
-# Ensure packages go to site-library whether installed via R, Rscript, or littler (r)
-RUN echo '.libPaths("/usr/local/lib/R/site-library")' > /etc/littler.r && \
-    echo '.libPaths("/usr/local/lib/R/site-library")' > /tmp/rprofile.site && \
-    R_PROFILE=/tmp/rprofile.site \
-    PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
-    /rocker_scripts/install_geospatial.sh && \
-    rm /etc/littler.r /tmp/rprofile.site
-
-# Install tools for working with Google Cloud Buckets
-RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg && apt-get update -y && apt-get install google-cloud-cli -y
+RUN /pyrocket_scripts/install-geospatial-r.sh || echo "install-geospatial-r.sh failed" || true
 
 USER ${NB_USER}
 WORKDIR ${HOME}
