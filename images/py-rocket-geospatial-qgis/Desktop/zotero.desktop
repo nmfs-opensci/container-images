@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Zotero
+GenericName=Zotero Bibliography Manager
+Icon=zotero
+TryExec=zotero
+Exec=zotero %F
+Terminal=false
+StartupNotify=false
+Categories=Education;Science;
+Keywords=bibliography;

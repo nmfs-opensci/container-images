@@ -9,8 +9,6 @@ on:
       - 'action.yml'
       - .github/workflows/build-and-push.yml
       - 'images/py-rocket-geospatial-2/**'
-      - 'images/py-rocket-geospatial/**'
-      - 'images/py-geospatial/**'
       - 'images/r-geospatial/**'
       - 'images/asar/**'
       - 'images/echopype/**'
@@ -21,8 +19,6 @@ on:
 env:
   WATCHED_DIRECTORIES: |
     images/py-rocket-geospatial-2
-    images/py-rocket-geospatial
-    images/py-geospatial
     images/r-geospatial
     images/asar
     images/echopype

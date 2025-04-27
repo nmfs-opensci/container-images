@@ -1,0 +1,37 @@
+FROM ghcr.io/nmfs-opensci/py-rocket-geospatial:2025.04.27
+
+LABEL org.opencontainers.image.maintainers="eli.holmes@noaa.gov"
+LABEL org.opencontainers.image.author="eli.holmes@noaa.gov"
+LABEL org.opencontainers.image.source=https://github.com/nmfs-opensci/container-images/py-rocket-geospatial-qgis
+LABEL org.opencontainers.image.description="Geospatial Python (3.12) and R (4.4.3) image with Desktop (QGIS, Panoply, CWUtils)"
+LABEL org.opencontainers.image.licenses=Apache2.0
+LABEL org.opencontainers.image.version=2025.04.27
+
+USER root
+# Install Zotero; must be run before apt since apt install zotero requires this script be run first
+RUN wget -qO- https://raw.githubusercontent.com/retorquere/zotero-deb/master/install.sh | bash
+
+COPY . /tmp2/
+RUN /pyrocket_scripts/install-conda-packages.sh /tmp2/environment.yml || (echo "install-conda-packages.sh failed" >&2 && exit 1)
+RUN /pyrocket_scripts/install-apt-packages.sh /tmp2/apt.txt || (echo "install-apt-packages.sh failed" >&2 && exit 1)
+RUN /pyrocket_scripts/install-desktop.sh /tmp2/Desktop || (echo "install-desktop.sh failed" >&2 && exit 1)
+RUN rm -rf /tmp2
+
+# Install cwutils
+RUN cd /tmp && \
+    wget https://www.star.nesdis.noaa.gov/socd/coastwatch/cwf/cwutils-4_0_0_198-linux-x86_64.tar.gz && \
+    tar -zxf cwutils-4_0_0_198-linux-x86_64.tar.gz && \
+    rm -rf cwutils-4_0_0_198-linux-x86_64.tar.gz
+ENV PATH=${PATH}:/tmp/cwutils_4.0.0.198/bin
+ENV MANPATH=${MANPATH}:/tmp/cwutils_4.0.0.198/doc/man
+ENV INSTALL4J ADD VM PARAMS=-Dsun.java2d.uiScale=2.0
+
+# Install panoply
+RUN cd /tmp && \
+  wget --user-agent="Mozilla/5.0" https://www.giss.nasa.gov/tools/panoply/download/PanoplyJ-5.6.0.tgz && \
+  tar -zxf PanoplyJ-5.6.0.tgz && \
+  rm -rf PanoplyJ-5.6.0.tgz
+ENV PATH=${PATH}:/tmp/PanoplyJ
+
+USER ${NB_USER}
+WORKDIR ${HOME}

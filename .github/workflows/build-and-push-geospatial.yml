@@ -1,0 +1,76 @@
+name: Docker Image Build and Push Geospatial
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'action.yml'
+      - .github/workflows/build-and-push-geospatial.yml
+      - 'images/py-rocket-geospatial-qgis/**'
+      - 'images/py-rocket-geospatial/**'
+      - 'images/py-geospatial/**'
+
+env:
+  WATCHED_DIRECTORIES: |
+    images/py-geospatial
+    images/py-rocket-geospatial
+    images/py-rocket-geospatial-qgis
+
+jobs:
+  find-changes:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.find-changes.outputs.changed }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 2
+
+      - name: Find changed directories
+        id: find-changes
+        run: |
+          dirs=$(git diff --name-only HEAD^ HEAD | grep -E "^(${WATCHED_DIRECTORIES//'\n'/'|'})" | cut -d/ -f1-2 | sort -u)
+          matrix_dirs=$(echo "$dirs" | jq -R -s -c 'split("\n") | map(select(. != ""))')
+          echo "::set-output name=changed::$matrix_dirs"
+
+  build-py-geospatial:
+    runs-on: ubuntu-latest
+    needs: find-changes
+    if: contains(fromJson(needs.find-changes.outputs.changed), 'images/py-geospatial')
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build py-geospatial
+        uses: nmfs-opensci/container-images@main
+        with:
+          image_dir: images/py-geospatial
+          image_name: container-images/py-geospatial
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+  build-py-rocket-geospatial:
+    runs-on: ubuntu-latest
+    needs: build-py-geospatial
+    if: contains(fromJson(needs.find-changes.outputs.changed), 'images/py-rocket-geospatial')
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build py-rocket-geospatial
+        uses: nmfs-opensci/container-images@main
+        with:
+          image_dir: images/py-rocket-geospatial
+          image_name: container-images/py-rocket-geospatial
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+  build-py-rocket-geospatial-qgis:
+    runs-on: ubuntu-latest
+    needs: build-py-rocket-geospatial
+    if: contains(fromJson(needs.find-changes.outputs.changed), 'images/py-rocket-geospatial-qgis')
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build py-rocket-geospatial-qgis
+        uses: nmfs-opensci/container-images@main
+        with:
+          image_dir: images/py-rocket-geospatial-qgis
+          image_name: container-images/py-rocket-geospatial-qgis
+          github_token: ${{ secrets.GITHUB_TOKEN }}
