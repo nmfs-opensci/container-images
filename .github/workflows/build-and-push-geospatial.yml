@@ -32,10 +32,35 @@ jobs:
       - name: Find changed directories
         id: find-changes
         run: |
-          dirs=$(git diff --name-only HEAD^ HEAD | grep -E "^(${WATCHED_DIRECTORIES//'\n'/'|'})" | cut -d/ -f1-2 | sort -u)
+          # Prepare pattern for grep
+          watched_dirs=$(echo "${WATCHED_DIRECTORIES}" | tr '\n' '|')
+
+          # Get all changed paths
+          all_changed_dirs=$(git diff --name-only HEAD^ HEAD | grep -E "^(${watched_dirs})" || true)
+
+          echo "All changed candidate dirs: $all_changed_dirs"
+
+          # Manually filter to only top-level watched directories
+          dirs=$(echo "$all_changed_dirs" | while read -r path; do
+            for watched in ${WATCHED_DIRECTORIES}; do
+              if [[ "$path" == "$watched"* ]]; then
+                echo "$watched"
+              fi
+            done
+          done | sort -u)
+
+          echo "Filtered watched dirs: $dirs"
+
+          # Handle case of no dirs changed
+          if [ -z "$dirs" ]; then
+            echo "::set-output name=changed::[]"  # empty array
+            exit 0
+          fi
+
+          # Convert to JSON for matrix
           matrix_dirs=$(echo "$dirs" | jq -R -s -c 'split("\n") | map(select(. != ""))')
           echo "::set-output name=changed::$matrix_dirs"
-
+          
   build-py-geospatial:
     runs-on: ubuntu-latest
     needs: find-changes
