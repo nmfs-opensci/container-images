@@ -60,13 +60,15 @@ jobs:
           # Convert to JSON for matrix
           matrix_dirs=$(echo "$dirs" | jq -R -s -c 'split("\n") | map(select(. != ""))')
           echo "::set-output name=changed::$matrix_dirs"
-          
+
   build-py-geospatial:
     runs-on: ubuntu-latest
     needs: find-changes
-    if: contains(fromJson(needs.find-changes.outputs.changed), 'images/py-geospatial')
     steps:
       - uses: actions/checkout@v3
+      - name: Check if py-geospatial changed
+        if: ${{ !contains(fromJson(needs.find-changes.outputs.changed), 'images/py-geospatial') }}
+        run: echo "No changes for py-geospatial, skipping." && exit 0
       - name: Build py-geospatial
         uses: nmfs-opensci/container-images@main
         with:
@@ -77,11 +79,11 @@ jobs:
   build-py-rocket-geospatial:
     runs-on: ubuntu-latest
     needs: build-py-geospatial
-    if: |
-      always() &&
-      contains(fromJson(needs.find-changes.outputs.changed), 'images/py-rocket-geospatial')
     steps:
       - uses: actions/checkout@v3
+      - name: Check if py-rocket-geospatial changed
+        if: ${{ !contains(fromJson(needs.find-changes.outputs.changed), 'images/py-rocket-geospatial') }}
+        run: echo "No changes for py-rocket-geospatial, skipping." && exit 0
       - name: Build py-rocket-geospatial
         uses: nmfs-opensci/container-images@main
         with:
@@ -92,11 +94,11 @@ jobs:
   build-py-rocket-geospatial-qgis:
     runs-on: ubuntu-latest
     needs: build-py-rocket-geospatial
-    if: |
-      always() &&
-      contains(fromJson(needs.find-changes.outputs.changed), 'images/py-rocket-geospatial-qgis')
     steps:
       - uses: actions/checkout@v3
+      - name: Check if py-rocket-geospatial-qgis changed
+        if: ${{ !contains(fromJson(needs.find-changes.outputs.changed), 'images/py-rocket-geospatial-qgis') }}
+        run: echo "No changes for py-rocket-geospatial-qgis, skipping." && exit 0
       - name: Build py-rocket-geospatial-qgis
         uses: nmfs-opensci/container-images@main
         with:
