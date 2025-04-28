@@ -7,7 +7,7 @@ on:
       - main
     paths:
       - 'action.yml'
-      - .github/workflows/build-and-push-geospatial.yml
+      - .github/workflows/build-and-push-geospatial.yml'
       - 'images/py-rocket-geospatial-qgis/**'
       - 'images/py-rocket-geospatial/**'
       - 'images/py-geospatial/**'
@@ -40,7 +40,6 @@ jobs:
 
           echo "All changed candidate dirs: $all_changed_dirs"
 
-          # Manually filter to only top-level watched directories
           dirs=$(echo "$all_changed_dirs" | while read -r path; do
             for watched in ${WATCHED_DIRECTORIES}; do
               if [[ "$path" == "$watched"* ]]; then
@@ -51,23 +50,22 @@ jobs:
 
           echo "Filtered watched dirs: $dirs"
 
-          # Handle case of no dirs changed
           if [ -z "$dirs" ]; then
-            echo "::set-output name=changed::[]"  # empty array
-            exit 0
+            echo "No changes detected."
+            matrix_dirs="[]"
+          else
+            matrix_dirs=$(echo "$dirs" | jq -R -s -c 'split("\n") | map(select(. != ""))')
           fi
 
-          # Convert to JSON for matrix
-          matrix_dirs=$(echo "$dirs" | jq -R -s -c 'split("\n") | map(select(. != ""))')
           echo "::set-output name=changed::$matrix_dirs"
 
   build-py-geospatial:
     runs-on: ubuntu-latest
     needs: find-changes
+    if: ${{ needs.find-changes.outputs.changed != '[]' && contains(fromJson(needs.find-changes.outputs.changed), 'images/py-geospatial') }}
     steps:
       - uses: actions/checkout@v3
       - name: Build py-geospatial
-        if: ${{ contains(fromJson(needs.find-changes.outputs.changed), 'images/py-geospatial') }}
         uses: nmfs-opensci/container-images@main
         with:
           image_dir: images/py-geospatial
@@ -77,10 +75,10 @@ jobs:
   build-py-rocket-geospatial:
     runs-on: ubuntu-latest
     needs: build-py-geospatial
+    if: ${{ needs.find-changes.outputs.changed != '[]' && contains(fromJson(needs.find-changes.outputs.changed), 'images/py-rocket-geospatial') }}
     steps:
       - uses: actions/checkout@v3
       - name: Build py-rocket-geospatial
-        if: ${{ contains(fromJson(needs.find-changes.outputs.changed), 'images/py-rocket-geospatial') }}
         uses: nmfs-opensci/container-images@main
         with:
           image_dir: images/py-rocket-geospatial
@@ -90,10 +88,10 @@ jobs:
   build-py-rocket-geospatial-qgis:
     runs-on: ubuntu-latest
     needs: build-py-rocket-geospatial
+    if: ${{ needs.find-changes.outputs.changed != '[]' && contains(fromJson(needs.find-changes.outputs.changed), 'images/py-rocket-geospatial-qgis') }}
     steps:
       - uses: actions/checkout@v3
       - name: Build py-rocket-geospatial-qgis
-        if: ${{ contains(fromJson(needs.find-changes.outputs.changed), 'images/py-rocket-geospatial-qgis') }}
         uses: nmfs-opensci/container-images@main
         with:
           image_dir: images/py-rocket-geospatial-qgis
