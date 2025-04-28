@@ -1,4 +1,4 @@
-FROM ghcr.io/nmfs-opensci/py-rocket-geospatial:2025.04.26
+FROM ghcr.io/nmfs-opensci/container-images/py-rocket-geospatial:2025.04.26
 
 LABEL org.opencontainers.image.maintainers="eli.holmes@noaa.gov"
 LABEL org.opencontainers.image.author="eli.holmes@noaa.gov"
