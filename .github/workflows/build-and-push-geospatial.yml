@@ -77,7 +77,9 @@ jobs:
   build-py-rocket-geospatial:
     runs-on: ubuntu-latest
     needs: build-py-geospatial
-    if: contains(fromJson(needs.find-changes.outputs.changed), 'images/py-rocket-geospatial')
+    if: |
+      always() &&
+      contains(fromJson(needs.find-changes.outputs.changed), 'images/py-rocket-geospatial')
     steps:
       - uses: actions/checkout@v3
       - name: Build py-rocket-geospatial
@@ -90,7 +92,9 @@ jobs:
   build-py-rocket-geospatial-qgis:
     runs-on: ubuntu-latest
     needs: build-py-rocket-geospatial
-    if: contains(fromJson(needs.find-changes.outputs.changed), 'images/py-rocket-geospatial-qgis')
+    if: |
+      always() &&
+      contains(fromJson(needs.find-changes.outputs.changed), 'images/py-rocket-geospatial-qgis')
     steps:
       - uses: actions/checkout@v3
       - name: Build py-rocket-geospatial-qgis
