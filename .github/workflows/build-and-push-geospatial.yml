@@ -22,7 +22,7 @@ jobs:
   find-changes:
     runs-on: ubuntu-latest
     outputs:
-      changed: ${{ steps.find-changes.outputs.matrix_dirs }}
+      changed: ${{ steps.find-changes.outputs.changed }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -32,38 +32,34 @@ jobs:
       - name: Find changed directories
         id: find-changes
         run: |
-          # Prepare the watched directories list as a single line with | separator
           watched_dirs=$(echo "${WATCHED_DIRECTORIES}" | tr '\n' '|')
-          all_changed_dirs=$(git diff --name-only HEAD^ HEAD | grep -E "^(${watched_dirs})" | sort -u)
-          echo "Debugging: all_changed_dirs is $all_changed_dirs"
-          # Now apply sed to reduce each path to the top-level watched directory
+          echo "DEBUG: watched_dirs=${watched_dirs}"
+          all_changed_dirs=$(git diff --name-only HEAD^ HEAD | grep -E "^(${watched_dirs})" || true)
+          echo "DEBUG: all_changed_dirs=$all_changed_dirs"
           dirs=$(echo "$all_changed_dirs" | while read -r path; do
-            # Match the path to one of the watched directories, preserving only the matched part
             for watched in ${WATCHED_DIRECTORIES}; do
               if [[ "$path" == "$watched" || "$path" == "$watched/"* ]]; then
-              echo "$watched"
+                echo "$watched"
               fi
             done
-          done | sort -u | uniq)
+          done | sort -u)
 
-          echo "Filtered directories: $dirs"
-          
-          echo "Debugging: all_changed_dirs is $dirs"
+          echo "DEBUG: filtered dirs=$dirs"
+
           if [ -z "$dirs" ]; then
-            echo "No changed directories"
-            echo "::set-output name=matrix_dirs::[]"  # Set an empty array to handle no changes
-            exit 0
+            echo "No changes detected."
+            matrix_dirs="[]"
+          else
+            matrix_dirs=$(echo "$dirs" | jq -R -s -c 'split("\n") | map(select(. != ""))')
           fi
-          
-          # Convert to JSON array for matrix strategy
-          matrix_dirs=$(echo "$dirs" | jq -R -s -c 'split("\n") | map(select(. != ""))')
-          echo "::set-output name=matrix_dirs::$matrix_dirs"
-          echo "Debugging: matrix_dirs output is $matrix_dirs"
+
+          echo "::set-output name=changed::$matrix_dirs"
+          echo "DEBUG: final matrix_dirs=$matrix_dirs"
 
   build-py-geospatial:
     runs-on: ubuntu-latest
     needs: find-changes
-    if: ${{ needs.find-changes.outputs.matrix_dirs != '[]' && contains(fromJson(needs.find-changes.outputs.matrix_dirs), 'images/py-geospatial') }}
+    if: ${{ needs.find-changes.outputs.changed != '[]' && contains(fromJson(needs.find-changes.outputs.changed), 'images/py-geospatial') }}
     steps:
       - uses: actions/checkout@v3
       - name: Build py-geospatial
@@ -76,7 +72,7 @@ jobs:
   build-py-rocket-geospatial:
     runs-on: ubuntu-latest
     needs: build-py-geospatial
-    if: ${{ needs.find-changes.outputs.matrix_dirs != '[]' && contains(fromJson(needs.find-changes.outputs.matrix_dirs), 'images/py-rocket-geospatial') }}
+    if: ${{ needs.find-changes.outputs.changed != '[]' && contains(fromJson(needs.find-changes.outputs.changed), 'images/py-rocket-geospatial') }}
     steps:
       - uses: actions/checkout@v3
       - name: Build py-rocket-geospatial
@@ -89,7 +85,7 @@ jobs:
   build-py-rocket-geospatial-qgis:
     runs-on: ubuntu-latest
     needs: build-py-rocket-geospatial
-    if: ${{ needs.find-changes.outputs.matrix_dirs != '[]' && contains(fromJson(needs.find-changes.outputs.matrix_dirs), 'images/py-rocket-geospatial-qgis') }}
+    if: ${{ needs.find-changes.outputs.changed != '[]' && contains(fromJson(needs.find-changes.outputs.changed), 'images/py-rocket-geospatial-qgis') }}
     steps:
       - uses: actions/checkout@v3
       - name: Build py-rocket-geospatial-qgis
