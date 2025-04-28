@@ -32,32 +32,35 @@ jobs:
       - name: Find changed directories
         id: find-changes
         run: |
-          # Prepare pattern for grep
           watched_dirs=$(echo "${WATCHED_DIRECTORIES}" | tr '\n' '|')
+          
+          echo "DEBUG: watched_dirs=${watched_dirs}"
 
-          # Get all changed paths
           all_changed_dirs=$(git diff --name-only HEAD^ HEAD | grep -E "^(${watched_dirs})" || true)
 
-          echo "All changed candidate dirs: $all_changed_dirs"
+          echo "DEBUG: all_changed_dirs=$all_changed_dirs"
 
+          # Now manually match changed paths back to watched directories
           dirs=$(echo "$all_changed_dirs" | while read -r path; do
             for watched in ${WATCHED_DIRECTORIES}; do
-              if [[ "$path" == "$watched"* ]]; then
+              if [[ "$path" == $watched* ]]; then
                 echo "$watched"
               fi
             done
           done | sort -u)
 
-          echo "Filtered watched dirs: $dirs"
+          echo "DEBUG: filtered dirs=$dirs"
 
           if [ -z "$dirs" ]; then
             echo "No changes detected."
-            matrix_dirs="[]"
-          else
-            matrix_dirs=$(echo "$dirs" | jq -R -s -c 'split("\n") | map(select(. != ""))')
+            echo "::set-output name=changed::[]"  # set empty array
+            exit 0
           fi
 
+          # Convert to JSON array
+          matrix_dirs=$(echo "$dirs" | jq -R -s -c 'split("\n") | map(select(. != ""))')
           echo "::set-output name=changed::$matrix_dirs"
+          echo "DEBUG: final matrix_dirs=$matrix_dirs"
 
   build-py-geospatial:
     runs-on: ubuntu-latest
