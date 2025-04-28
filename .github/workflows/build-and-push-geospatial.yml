@@ -71,7 +71,7 @@ jobs:
 
   build-py-rocket-geospatial:
     runs-on: ubuntu-latest
-    needs: build-py-geospatial
+    needs: [find-changes, build-py-geospatial]
     if: ${{ needs.find-changes.outputs.changed != '[]' && contains(fromJson(needs.find-changes.outputs.changed), 'images/py-rocket-geospatial') }}
     steps:
       - uses: actions/checkout@v3
@@ -84,7 +84,7 @@ jobs:
 
   build-py-rocket-geospatial-qgis:
     runs-on: ubuntu-latest
-    needs: build-py-rocket-geospatial
+    needs: [find-changes, build-py-rocket-geospatial]
     if: ${{ needs.find-changes.outputs.changed != '[]' && contains(fromJson(needs.find-changes.outputs.changed), 'images/py-rocket-geospatial-qgis') }}
     steps:
       - uses: actions/checkout@v3
