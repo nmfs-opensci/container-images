@@ -66,10 +66,8 @@ jobs:
     needs: find-changes
     steps:
       - uses: actions/checkout@v3
-      - name: Check if py-geospatial changed
-        if: ${{ !contains(fromJson(needs.find-changes.outputs.changed), 'images/py-geospatial') }}
-        run: echo "No changes for py-geospatial, skipping." && exit 0
       - name: Build py-geospatial
+        if: ${{ contains(fromJson(needs.find-changes.outputs.changed), 'images/py-geospatial') }}
         uses: nmfs-opensci/container-images@main
         with:
           image_dir: images/py-geospatial
@@ -81,10 +79,8 @@ jobs:
     needs: build-py-geospatial
     steps:
       - uses: actions/checkout@v3
-      - name: Check if py-rocket-geospatial changed
-        if: ${{ !contains(fromJson(needs.find-changes.outputs.changed), 'images/py-rocket-geospatial') }}
-        run: echo "No changes for py-rocket-geospatial, skipping." && exit 0
       - name: Build py-rocket-geospatial
+        if: ${{ contains(fromJson(needs.find-changes.outputs.changed), 'images/py-rocket-geospatial') }}
         uses: nmfs-opensci/container-images@main
         with:
           image_dir: images/py-rocket-geospatial
@@ -96,10 +92,8 @@ jobs:
     needs: build-py-rocket-geospatial
     steps:
       - uses: actions/checkout@v3
-      - name: Check if py-rocket-geospatial-qgis changed
-        if: ${{ !contains(fromJson(needs.find-changes.outputs.changed), 'images/py-rocket-geospatial-qgis') }}
-        run: echo "No changes for py-rocket-geospatial-qgis, skipping." && exit 0
       - name: Build py-rocket-geospatial-qgis
+        if: ${{ contains(fromJson(needs.find-changes.outputs.changed), 'images/py-rocket-geospatial-qgis') }}
         uses: nmfs-opensci/container-images@main
         with:
           image_dir: images/py-rocket-geospatial-qgis
