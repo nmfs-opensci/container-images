@@ -11,7 +11,7 @@ if (grepl("^/home", install_lib)) {
   stop("Error: Packages are being installed to /home, which will be removed in the final image. Exiting.", call. = FALSE)
 }
 
-install.packages(c("rstac", "quarto", "aws.s3", "gdalcubes", "rnaturalearth"), repos=repo)
+install.packages(c("rstac", "quarto", "aws.s3", "reticulate", "gdalcubes", "rnaturalearth"), repos=repo)
 install.packages("rnaturalearthdata", repos=repo)
 
 remotes::install_github('r-tmap/tmap', upgrade=FALSE)

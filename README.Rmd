@@ -32,7 +32,7 @@ table_line <- function(i){
 
 | Image      | Description  | Open  | info  |
 |-----------|---------------------------|----------------|-----------|
-|   [py-rocket-base](https://github.com/nmfs-opensci/py-rocket-base/pkgs/container/py-rocket-base) </br> ![](https://ghcr-badge.egpl.dev/nmfs-opensci/py-rocket-base/size?color=%2344cc11&tag=latest&label=image+size&trim=) <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci/py-rocket-base/latest_tag?color=%2344cc11&ignore=latest&label=version&trim=)     |    Use as the base Python-R image   |   [Documentation](https://nmfs-opensci.github.io/py-rocket-base/)   |   [repo](https://github.com/nmfs-opensci/py-rocket-base)   |
+|   [py-rocket-base](https://github.com/nmfs-opensci/py-rocket-base/pkgs/container/py-rocket-base) <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci/py-rocket-base/size?color=%2344cc11&tag=latest&label=image+size&trim=) <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci/py-rocket-base/latest_tag?color=%2344cc11&ignore=latest&label=version&trim=)     |    Use as the base Python-R image   |   [Documentation](https://nmfs-opensci.github.io/py-rocket-base/)   |   [repo](https://github.com/nmfs-opensci/py-rocket-base)   |
 ```{r results='asis', echo=FALSE}
 imgs <- c("py-rocket-geospatial-2")
 for(i in imgs) table_line(i)
