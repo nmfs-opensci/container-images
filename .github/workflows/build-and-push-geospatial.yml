@@ -89,7 +89,7 @@ jobs:
 
   build-py-rocket-geospatial:
     runs-on: ubuntu-latest
-    needs: build-py-geospatial
+    needs: [find-changes, build-py-geospatial]
     steps:
       - uses: actions/checkout@v3
 
@@ -116,7 +116,7 @@ jobs:
 
   build-py-rocket-geospatial-qgis:
     runs-on: ubuntu-latest
-    needs: build-py-rocket-geospatial
+    needs: [find-changes, build-py-rocket-geospatial]
     steps:
       - uses: actions/checkout@v3
 
