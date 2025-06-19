@@ -35,7 +35,10 @@ RUN unset TEXMFHOME && \
         wrapfig \
         draftwatermark \
         luatexbase \
-        selnolig
+        selnolig \
+        lastpage \
+        tagpdf \
+        luamml
 
 # Install DejaVu Sans Font       
 RUN apt-get update && \
