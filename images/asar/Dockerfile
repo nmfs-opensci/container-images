@@ -12,7 +12,7 @@ ENV GITHUB_PAT=${GITHUB_PAT}
 
 USER root
 COPY . /tmp2/
-RUN /pyrocket_scripts/install-r-packages.sh /tmp2/install.R || echo "install-r-package.sh failed" || true
+RUN /pyrocket_scripts/install-r-packages.sh /tmp2/install.R || (echo "ERROR: install-r-packages.sh failed" && exit 1)
 RUN rm -rf /tmp2
 
 RUN echo '{ "ServerApp": { "default_url": "/rstudio" } }' \
