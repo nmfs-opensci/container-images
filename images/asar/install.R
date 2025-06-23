@@ -15,6 +15,22 @@ repo <- "https://p3m.dev/cran/__linux__/jammy/2025-04-10"
 list.of.packages <- c("quarto", "here", "tinytex", "devtools")
 install.packages(list.of.packages, repos=repo)
 
-devtools::install_github("nmfs-ost/asar")
-devtools::install_github("nmfs-ost/stockplotr")
+#devtools::install_github("nmfs-ost/asar")
+#devtools::install_github("nmfs-ost/stockplotr")
+
+# Robust install_github wrapper
+safe_install <- function(pkg) {
+  tryCatch({
+    devtools::install_github(pkg)
+  }, error = function(e) {
+    message(sprintf("Failed to install %s: %s", pkg, e$message))
+    quit(status = 1)
+  })
+}
+
+# Install GitHub packages
+safe_install("nmfs-ost/asar")
+safe_install("nmfs-ost/stockplotr")
+
+message("All packages installed successfully.")
 
