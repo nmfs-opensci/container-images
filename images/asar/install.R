@@ -10,11 +10,30 @@ if (grepl("^/home", install_lib)) {
 # to match rocker/verse:4.4 used in py-rocker-base
 # look up the date that the Rocker image was created
 repo <- "https://p3m.dev/cran/__linux__/jammy/2025-04-10"
+options(pkgType = "both") # install from binary if possible
 
 # Extra packages
 list.of.packages <- c("quarto", "here", "tinytex", "devtools")
 install.packages(list.of.packages, repos=repo)
 
-devtools::install_github("nmfs-ost/asar")
-devtools::install_github("nmfs-ost/stockplotr")
+#devtools::install_github("nmfs-ost/asar")
+#devtools::install_github("nmfs-ost/stockplotr")
+
+# Robust install_github wrapper
+safe_install <- function(pkg) {
+  tryCatch({
+    devtools::install_github(pkg)
+  }, error = function(e) {
+    message(sprintf("Failed to install %s: %s", pkg, e$message))
+    quit(status = 1)
+  })
+}
+
+# Install GitHub packages
+safe_install("r4ss/r4ss")
+safe_install("nmfs-ost/nmfspalette")
+safe_install("nmfs-ost/asar")
+safe_install("nmfs-ost/stockplotr")
+
+message("All packages installed successfully.")
 
