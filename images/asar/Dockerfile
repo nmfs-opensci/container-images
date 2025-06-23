@@ -20,10 +20,23 @@ RUN echo '{ "ServerApp": { "default_url": "/rstudio" } }' \
 # Set up TeX Live repo and install required packages
 USER root
 
-# Ensure tlmgr uses system mode
+# Install extra TeX Live packages not included by default
+# Ensure tlmgr uses system mode and full path is available
 RUN unset TEXMFHOME && \
     PATH=/usr/local/texlive/bin/linux:$PATH && \
+    echo "Installing texlive collections and extra packages..." && \
+    tlmgr install collection-latexrecommended collection-latexextra && \
     tlmgr install \
+        pdfcol \
+        tcolorbox \
+        eurosym \
+        upquote \
+        adjustbox \
+        titling \
+        enumitem \
+        ulem \
+        soul \
+        rsfs \
         lualatex-math \
         hyphenat \
         pdfcomment \
