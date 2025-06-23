@@ -11,6 +11,12 @@ ARG GITHUB_PAT
 ENV GITHUB_PAT=${GITHUB_PAT}
 
 USER root
+# Needed for pdftools
+RUN apt-get update && apt-get install -y \
+    libpoppler-cpp-dev \
+    libpoppler-private-dev \
+    && rm -rf /var/lib/apt/lists/*
+    
 COPY . /tmp2/
 RUN /pyrocket_scripts/install-r-packages.sh /tmp2/install.R || (echo "ERROR: install-r-packages.sh failed" && exit 1)
 RUN rm -rf /tmp2
