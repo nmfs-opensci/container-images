@@ -11,7 +11,6 @@ ARG GITHUB_PAT
 ENV GITHUB_PAT=${GITHUB_PAT}
 
 USER root
-RUN Rscript -e "install.packages('pdftools')"
 COPY . /tmp2/
 RUN /pyrocket_scripts/install-r-packages.sh /tmp2/install.R || (echo "ERROR: install-r-packages.sh failed" && exit 1)
 RUN rm -rf /tmp2

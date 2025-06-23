@@ -10,6 +10,7 @@ if (grepl("^/home", install_lib)) {
 # to match rocker/verse:4.4 used in py-rocker-base
 # look up the date that the Rocker image was created
 repo <- "https://p3m.dev/cran/__linux__/jammy/2025-04-10"
+Sys.setenv(R_INSTALL_PKGTYPE = "binary")
 
 # Extra packages
 list.of.packages <- c("quarto", "here", "tinytex", "devtools")
