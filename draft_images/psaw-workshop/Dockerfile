@@ -42,9 +42,9 @@ ENV INSTALL4J ADD VM PARAMS=-Dsun.java2d.uiScale=2.0
 
 # Install panoply
 RUN cd /tmp && \
-  wget --user-agent="Mozilla/5.0" https://www.giss.nasa.gov/tools/panoply/download/PanoplyJ-5.6.0.tgz && \
-  tar -zxf PanoplyJ-5.6.0.tgz && \
-  rm -rf PanoplyJ-5.6.0.tgz
+  wget --user-agent="Mozilla/5.0" https://www.giss.nasa.gov/tools/panoply/download/PanoplyJ-5.7.0.tgz && \
+  tar -zxf PanoplyJ-5.7.0.tgz && \
+  rm -rf PanoplyJ-5.7.0.tgz
 ENV PATH=${PATH}:/tmp/PanoplyJ
 
 # Install tools for working with Google Cloud Buckets
