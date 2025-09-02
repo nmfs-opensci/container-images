@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=Positron
+GenericName=Positron IDE
+Icon=positron
+TryExec=positron .
+Exec=positron . %F
+Terminal=false
+StartupNotify=false
+Categories=Education;Science;
+Keywords=ide
