@@ -31,22 +31,6 @@ RUN echo '.libPaths("/usr/local/lib/R/site-library")' > /etc/littler.r && \
     /rocker_scripts/install_geospatial.sh && \
     rm /etc/littler.r /tmp/rprofile.site
   
-# Install cwutils
-RUN cd /tmp && \
-    wget https://www.star.nesdis.noaa.gov/socd/coastwatch/cwf/cwutils-4_0_0_198-linux-x86_64.tar.gz && \
-    tar -zxf cwutils-4_0_0_198-linux-x86_64.tar.gz && \
-    rm -rf cwutils-4_0_0_198-linux-x86_64.tar.gz
-ENV PATH=${PATH}:/tmp/cwutils_4.0.0.198/bin
-ENV MANPATH=${MANPATH}:/tmp/cwutils_4.0.0.198/doc/man
-ENV INSTALL4J ADD VM PARAMS=-Dsun.java2d.uiScale=2.0
-
-# Install panoply
-RUN cd /tmp && \
-  wget --user-agent="Mozilla/5.0" https://www.giss.nasa.gov/tools/panoply/download/PanoplyJ-5.6.0.tgz && \
-  tar -zxf PanoplyJ-5.6.0.tgz && \
-  rm -rf PanoplyJ-5.6.0.tgz
-ENV PATH=${PATH}:/tmp/PanoplyJ
-
 # Install tools for working with Google Cloud Buckets
 RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg && apt-get update -y && apt-get install google-cloud-cli -y
 
