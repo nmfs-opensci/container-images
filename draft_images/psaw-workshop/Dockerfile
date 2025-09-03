@@ -8,6 +8,7 @@ LABEL org.opencontainers.image.licenses=Apache2.0
 LABEL org.opencontainers.image.version=2025.09.02
 
 ENV PROJ_LIB=/srv/conda/envs/notebook/share/proj
+    QUARTO_VERSION="1.7.34"
 
 USER root
 # Install Zotero; must be run before apt since apt install zotero requires this script be run first
@@ -35,6 +36,7 @@ RUN echo '.libPaths("/usr/local/lib/R/site-library")' > /etc/littler.r && \
 RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg && apt-get update -y && apt-get install google-cloud-cli -y
 
 # Install Positron
+RUN apt-get install -fy xdg-utils
 RUN wget https://cdn.posit.co/positron/releases/deb/x86_64/Positron-2025.09.0-139-x64.deb -O /tmp/positron.deb && \
     dpkg -i /tmp/positron.deb || apt-get install -fy && \
     rm /tmp/positron.deb
