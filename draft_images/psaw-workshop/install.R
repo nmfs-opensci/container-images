@@ -11,4 +11,4 @@ if (grepl("^/home", install_lib)) {
   stop("Error: Packages are being installed to /home, which will be removed in the final image. Exiting.", call. = FALSE)
 }
 
-install.packages(c("quarto", "reticulate", "tidyverse",'gt','sf','terra','stars','rnaturalearth'), repos=repo)
+install.packages(c("quarto", "reticulate", "tidyverse",'gt','units','sf','terra','stars','rnaturalearth',), repos=repo)

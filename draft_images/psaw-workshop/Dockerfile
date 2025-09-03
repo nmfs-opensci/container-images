@@ -41,5 +41,11 @@ RUN wget https://cdn.posit.co/positron/releases/deb/x86_64/Positron-2025.09.0-13
     dpkg -i /tmp/positron.deb || apt-get install -fy && \
     rm /tmp/positron.deb
 
+RUN wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.7.34/quarto-1.7.34-linux-amd64.deb -O /tmp/quarto.deb && \
+    dpkg -i /tmp/quarto.deb || apt-get install -fy && \
+    rm /tmp/quarto.deb
+
+
+
 USER ${NB_USER}
 WORKDIR ${HOME}
