@@ -1,4 +1,18 @@
-# py-rocket-geospatial v2.0
+# README
+
+## Emilio's notes on new image
+
+```bash
+
+docker compose build py-rocket > build_no_custom_R.log 2>&1
+
+docker compose up py-rocket
+
+# logs from docker compose up py-rocket are available via
+docker compose logs py-rocket
+```
+
+## py-rocket-geospatial v2.0
 
 This creates a base Python-R image with geospatial packages for Python and R. The Python environment is the Pangeo notebook environment + extra geospatial libraries (similar to CryoCloud). The R environment is Rocker geospatial plus a few other packages. The image also includes a linux Desktop with QGIS, CoastWatch Utilities, and Panoply.
 

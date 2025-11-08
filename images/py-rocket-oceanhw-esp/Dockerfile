@@ -1,17 +1,15 @@
 FROM ghcr.io/nmfs-opensci/py-rocket-base:2025.04.26
 
-LABEL org.opencontainers.image.maintainers="eli.holmes@noaa.gov"
-LABEL org.opencontainers.image.author="eli.holmes@noaa.gov"
+LABEL org.opencontainers.image.maintainers="emiliom@uw.edu"
+LABEL org.opencontainers.image.author="eli.holmes@noaa.gov, emiliom@uw.edu"
 LABEL org.opencontainers.image.source=https://github.com/nmfs-opensci/container-images/py-rocket-2
-LABEL org.opencontainers.image.description="Geospatial Python (3.12) and R (4.4.3) image with Desktop (QGIS, Panoply, CWUtils)"
+LABEL org.opencontainers.image.description="OceanHackWeek-en-Espan-ol Geospatial Python (3.12) and R (4.4.3) image with Desktop (QGIS, Panoply)"
 LABEL org.opencontainers.image.licenses=Apache2.0
-LABEL org.opencontainers.image.version=2025.04.26
+LABEL org.opencontainers.image.version=2025.11.06
 
 ENV PROJ_LIB=/srv/conda/envs/notebook/share/proj
 
 USER root
-# Install Zotero; must be run before apt since apt install zotero requires this script be run first
-RUN wget -qO- https://raw.githubusercontent.com/retorquere/zotero-deb/master/install.sh | bash
 
 COPY . /tmp2/
 RUN /pyrocket_scripts/install-conda-packages.sh /tmp2/environment.yml || echo "install-conda-packages.sh failed" || true
@@ -31,24 +29,21 @@ RUN echo '.libPaths("/usr/local/lib/R/site-library")' > /etc/littler.r && \
     /rocker_scripts/install_geospatial.sh && \
     rm /etc/littler.r /tmp/rprofile.site
   
-# Install cwutils
-RUN cd /tmp && \
-    wget https://www.star.nesdis.noaa.gov/socd/coastwatch/cwf/cwutils-4_0_0_198-linux-x86_64.tar.gz && \
-    tar -zxf cwutils-4_0_0_198-linux-x86_64.tar.gz && \
-    rm -rf cwutils-4_0_0_198-linux-x86_64.tar.gz
-ENV PATH=${PATH}:/tmp/cwutils_4.0.0.198/bin
-ENV MANPATH=${MANPATH}:/tmp/cwutils_4.0.0.198/doc/man
-ENV INSTALL4J ADD VM PARAMS=-Dsun.java2d.uiScale=2.0
-
 # Install panoply
+# 11/6/2025 16:00 PST
+# 0.336 Connecting to www.giss.nasa.gov (www.giss.nasa.gov)|129.164.141.233|:443... failed: Connection refused.
+# 0.428 Connecting to www.giss.nasa.gov (www.giss.nasa.gov)|2001:4d0:2310:151::233|:443... failed: Network is unreachable.
+# 11/8/2025: Uploaded latest Panoply tgz to Emilio's UW website, temporarily, as a stopgap
+ENV PANOPLY_VERSION=5.7.1
 RUN cd /tmp && \
-  wget --user-agent="Mozilla/5.0" https://www.giss.nasa.gov/tools/panoply/download/PanoplyJ-5.6.0.tgz && \
-  tar -zxf PanoplyJ-5.6.0.tgz && \
-  rm -rf PanoplyJ-5.6.0.tgz
+  # wget --user-agent="Mozilla/5.0" https://www.giss.nasa.gov/tools/panoply/download/PanoplyJ-${PANOPLY_VERSION}.tgz && \
+  wget --user-agent="Mozilla/5.0" http://staff.washington.edu/emiliom/out/PanoplyJ-${PANOPLY_VERSION}.tgz && \
+  tar -zxf PanoplyJ-${PANOPLY_VERSION}.tgz && \
+  rm -rf PanoplyJ-${PANOPLY_VERSION}.tgz
 ENV PATH=${PATH}:/tmp/PanoplyJ
 
 # Install tools for working with Google Cloud Buckets
-RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg && apt-get update -y && apt-get install google-cloud-cli -y
+# RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg && apt-get update -y && apt-get install google-cloud-cli -y
 
 USER ${NB_USER}
 WORKDIR ${HOME}
