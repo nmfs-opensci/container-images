@@ -1,5 +1,5 @@
-name: py-rocket-geospatial 
-# 2024-11-01
+name: py-rocket-oceanhackweek 
+# 2025-11-09
 channels:
   - conda-forge
   - nodefaults
@@ -11,15 +11,17 @@ dependencies:
   - hypothesis # needed by numpy testing tools
   - networkx
   - numba # high-performance numerics
+  - numbagg
   - numpy
+  - opt_einsum
   - pandas
   - scikit-image
   - scikit-learn
   - scipy
   - statsmodels
   - pymannkendall # non-parametric Mann-Kendall trend analysis
-  - sympy
   - xarray>=2024.05.0
+  - cf_xarray
 
   # Visualization packages
   - bokeh
@@ -32,14 +34,16 @@ dependencies:
   - leafmap
   - lonboard
   - matplotlib
+  - basemap
+  - basemap-data
   - plotly
   - seaborn # statistical plotting with matplotlib
   - cmocean # colormaps for ocean
+  - palettable
   - imageio # helps writing image files
   - apng # create animation from multiple png
   - holoviews
   - graphviz
-  - bqplot # 2-D visualization system
   - regionmask # create masks of (geo)spatial regions
   - contextily # base maps
 
@@ -48,7 +52,6 @@ dependencies:
 
   # Geospatial data packages
   - geopandas>=0.14.4
-  - pygmt
   - rasterio
   - rioxarray
   - rasterstats # summarize geospatial raster datasets based on vector geometries
@@ -100,9 +103,9 @@ dependencies:
   - dask>=2023.12.1
   - dask-labextension
   - dask-geopandas
-  - coiled
 
   # Other useful generic python packages
+  - pip
   - pillow # Python imaging library, useful for many image-related tasks
   - pytest
   - pytest-cov
@@ -110,11 +113,24 @@ dependencies:
   - flake8
   - tqdm # progress bars, with notebook support
   - joblib # lightweight pipelining in Python
+  - papermill
+  - tldr
+  - zip # installs zip terminal command; not a Python package per se?
+
+  # Jupyter Lab language packs for Spanish and Portuguese
+  - jupyterlab-language-pack-es-es
+  - jupyterlab-language-pack-pt-br
 
   # Packages specific to climate and ocean data work
   - esmpy
   - xmip
   - spectral # pure Python module for processing hyperspectral image data
+  - argopy
+  - gsw
+  - seawater
+  - parcels
+  # Package last updated 2024-11, so maybe best not to install it unless truly needed
+  # - pyeddytracker
 
   # Desktop tools
   - qgis 
