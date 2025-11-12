@@ -22,32 +22,22 @@ list.of.packages <- c("parsedate", "reshape2", "gridGraphics", "PBSmapping",
                       "date", "cmocean", "plotdap", "rerddapXtracto")
 install.packages(list.of.packages, repos=repo)
 
-# From OceanHackWeek R image
+
+# -------  OceanHackWeek R image customizations ------- 
+
 # TODO: Group into high-level (eg, sfnetworks, oce, robis) vs low-level and narrow (eg, akima, mda)
 list.of.packages_ohw <- c(
-    "plot.matrix", "isdparser", "geonames", "readHAC", "noaa",
+    "plot.matrix", "isdparser", "geonames", "readHAC", 
     "greybox", "sfnetworks", "smooth", "oce", "ocedata",
     "akima", "ape", "biomod2", "caret", "caTools", "CircStats", "corrplot", "cowplot", 
     "dismo", "doParallel", "earth", "fields", "forecast", "ggspatial", "glmnet", "hexbin",
     "kableExtra", "latticeExtra", "lmtest", "mapplots", "marmap", "matrixStats", "mda", "metR", 
-    "palmerpenguins", "plotly", "rastervis", "robis", "rosm", "tseries", "tsibble", "udunits2", "urca", "vioplot"
+    "palmerpenguins", "plotly", "rasterVis", "robis", "rosm", "tseries", "tsibble", "udunits2", "urca", "vioplot"
 )
 install.packages(list.of.packages_ohw, repos=repo)
 
-# TODO: Should newer packages be installed *without* "repos=repo"? Or with a newer repo version?
 
-# TODO: Looks like "r-rnoaa" referred to the "noaa" package, https://cran.r-project.org/package=noaa
-# But "noaa" didn't install (11/9)  either, even though it's actively maintained (vers 1.0, 2025-05-14)
-# Could it be that it's just not in "repo"?
-
-# TODO: rastervis was not installed (11/9)
-# It was last updated on 2025-09-01
-
-# TODO: rgdal was not installed (11/9)
-# Should we install "gdalraster"?
-
-
-# Should they include upgrade=FALSE?
+# TODO: Should they include upgrade=FALSE?
 remotes::install_github("hvillalo/echogram")
 remotes::install_github("hvillalo/periods")
 remotes::install_github("hvillalo/satin")

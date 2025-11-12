@@ -38,16 +38,16 @@ RUN echo '.libPaths("/usr/local/lib/R/site-library")' > /etc/littler.r && \
 # 0.336 Connecting to www.giss.nasa.gov (www.giss.nasa.gov)|129.164.141.233|:443... failed: Connection refused.
 # 0.428 Connecting to www.giss.nasa.gov (www.giss.nasa.gov)|2001:4d0:2310:151::233|:443... failed: Network is unreachable.
 # 11/8/2025: Uploaded latest Panoply tgz to Emilio's UW website, temporarily, as a stopgap
-# ENV PANOPLY_VERSION=5.7.1
-# RUN cd /tmp && \
-#   # wget --user-agent="Mozilla/5.0" https://www.giss.nasa.gov/tools/panoply/download/PanoplyJ-${PANOPLY_VERSION}.tgz && \
-#   wget --user-agent="Mozilla/5.0" http://staff.washington.edu/emiliom/out/PanoplyJ-${PANOPLY_VERSION}.tgz && \
-#   tar -zxf PanoplyJ-${PANOPLY_VERSION}.tgz && \
-#   rm -rf PanoplyJ-${PANOPLY_VERSION}.tgz
-# ENV PATH=${PATH}:/tmp/PanoplyJ
+ENV PANOPLY_VERSION=5.7.1
+RUN cd /tmp && \
+  # wget --user-agent="Mozilla/5.0" https://www.giss.nasa.gov/tools/panoply/download/PanoplyJ-${PANOPLY_VERSION}.tgz && \
+  wget --user-agent="Mozilla/5.0" http://staff.washington.edu/emiliom/out/PanoplyJ-${PANOPLY_VERSION}.tgz && \
+  tar -zxf PanoplyJ-${PANOPLY_VERSION}.tgz && \
+  rm -rf PanoplyJ-${PANOPLY_VERSION}.tgz
+ENV PATH=${PATH}:/tmp/PanoplyJ
 
 # Install tools for working with Google Cloud Buckets
-# RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg && apt-get update -y && apt-get install google-cloud-cli -y
+RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg && apt-get update -y && apt-get install google-cloud-cli -y
 
 USER ${NB_USER}
 WORKDIR ${HOME}

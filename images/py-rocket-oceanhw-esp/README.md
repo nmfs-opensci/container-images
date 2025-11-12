@@ -1,6 +1,12 @@
 # README
 
-## Emilio's notes on new Docker image
+## py-rocket-oceanhw-esp
+
+Python-R image for OceanHackWeek-en-Español, https://intercoonecta.github.io. Based on customizations of the `py-rocket-geospatial-2` image.
+
+### Emilio's notes on new Docker image
+
+**I'll clean this up soon**
 
 ```bash
 
@@ -22,11 +28,9 @@ docker rm a68304072b28
 docker rmi 0b148c9c27c9
 docker tag a65b2f13b739 py-rocket-oceanhw-esp:r-custom-3
 docker rmi py-rocket-oceanhw-esp:latest
-
-
 ```
 
-## py-rocket-geospatial v2.0
+### From py-rocket-geospatial v2.0 README
 
 This creates a base Python-R image with geospatial packages for Python and R. The Python environment is the Pangeo notebook environment + extra geospatial libraries (similar to CryoCloud). The R environment is Rocker geospatial plus a few other packages. The image also includes a linux Desktop with QGIS, CoastWatch Utilities, and Panoply.
 
