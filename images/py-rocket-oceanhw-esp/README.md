@@ -1,15 +1,29 @@
 # README
 
-## Emilio's notes on new image
+## Emilio's notes on new Docker image
 
 ```bash
 
 docker compose build py-rocket > build_no_custom_R.log 2>&1
 
+docker compose build py-rocket > build_logs/build_custom-R-pckgs.log 2>&1
+
 docker compose up py-rocket
 
 # logs from docker compose up py-rocket are available via
 docker compose logs py-rocket
+
+
+# view and rm containers
+docker ps -a
+docker rm a68304072b28
+
+# rename and remove images
+docker rmi 0b148c9c27c9
+docker tag a65b2f13b739 py-rocket-oceanhw-esp:r-custom-3
+docker rmi py-rocket-oceanhw-esp:latest
+
+
 ```
 
 ## py-rocket-geospatial v2.0
