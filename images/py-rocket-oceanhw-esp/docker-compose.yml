@@ -1,0 +1,8 @@
+services:
+  py-rocket:
+    build: .
+    image: py-rocket-oceanhw-esp
+    # container_name: py-rocket-oceanhw-esp
+    command: jupyter lab --port=8080 --ip=0.0.0.0
+    ports:
+      - "8080:8080"
