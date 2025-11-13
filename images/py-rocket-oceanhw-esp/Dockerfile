@@ -5,16 +5,15 @@ LABEL org.opencontainers.image.author="eli.holmes@noaa.gov, emiliom@uw.edu"
 LABEL org.opencontainers.image.source=https://github.com/nmfs-opensci/container-images/py-rocket-2
 LABEL org.opencontainers.image.description="OceanHackWeek-en-Espan-ol Geospatial Python (3.12) and R (4.4.3) image with Desktop (QGIS, Panoply)"
 LABEL org.opencontainers.image.licenses=Apache2.0
-LABEL org.opencontainers.image.version=2025.11.09
+LABEL org.opencontainers.image.version=2025.11.13
 
 ENV PROJ_LIB=/srv/conda/envs/notebook/share/proj
 
 USER root
 
 COPY . /tmp2/
-RUN /pyrocket_scripts/install-apt-packages.sh /tmp2/apt.txt || echo "install-apt-packages.sh failed" || true
 RUN /pyrocket_scripts/install-conda-packages.sh /tmp2/environment.yml || echo "install-conda-packages.sh failed" || true
-RUN /pyrocket_scripts/install-r-packages.sh /tmp2/install.R || echo "install-r-package.sh failed" || true
+RUN /pyrocket_scripts/install-apt-packages.sh /tmp2/apt.txt || echo "install-apt-packages.sh failed" || true
 RUN /pyrocket_scripts/install-desktop.sh /tmp2/Desktop|| echo "setup-desktop.sh failed" || true
 RUN rm -rf /tmp2
 
@@ -30,8 +29,10 @@ RUN echo '.libPaths("/usr/local/lib/R/site-library")' > /etc/littler.r && \
     rm /etc/littler.r /tmp/rprofile.site
 
 
-# --- 11/10/25: Commented out the two steps below while refining the R environment,
-# to slim down the image build time
+COPY . /tmp2/
+RUN /pyrocket_scripts/install-r-packages.sh /tmp2/install.R || echo "install-r-package.sh failed" || true
+RUN rm -rf /tmp2
+
 
 # Install panoply
 # 11/6/2025 16:00 PST

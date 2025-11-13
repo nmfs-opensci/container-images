@@ -1,10 +1,2 @@
 # for qgis
 libgl1-mesa-glx
-
-# for install-r-packages.sh errors
-libudunits2-dev
-libgdal-dev
-libgeos-dev
-libproj-dev
-libtbb-dev
-libnetcdf-dev
