@@ -33,7 +33,9 @@ list.of.packages_ohw <- c(
 )
 install.packages(list.of.packages_ohw, repos=repo)
 
-# TODO: Should they include upgrade=FALSE? eeh: only if you do not want to upgrade they are already installed
+# TODO: Should they include upgrade=FALSE?
+# upgrade default "always", which means that dependencies will be upgraded.
+# So without upgrade=FALSE, some of the dependencies might be upgraded.
 remotes::install_github("hvillalo/echogram")
 remotes::install_github("hvillalo/periods")
 remotes::install_github("hvillalo/satin")
