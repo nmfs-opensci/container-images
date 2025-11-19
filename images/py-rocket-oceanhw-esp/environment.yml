@@ -1,5 +1,5 @@
 name: py-rocket-oceanhackweek 
-# 2025-11-09
+# 2025-11-19
 channels:
   - conda-forge
   - nodefaults
@@ -64,6 +64,7 @@ dependencies:
   - h5py
   - h5netcdf
   - nco
+  - pynco # python style access to the NetCDF Operators (NCO)
   - pooch
   - zarr
   - kerchunk
@@ -72,7 +73,7 @@ dependencies:
   - h5coro # reading HDF5 data stored in S3
   - hdf5plugin # provides HDF5 compression filters
   - lxml # processing XML and HTML
-  - pynco # python style access to the NetCDF Operators (NCO)
+  - osmnx # Access and manipulate OSM data
 
   # Cloud access tools and libraries
   - awscli
@@ -86,15 +87,16 @@ dependencies:
   # Access datasets exposed via intake catalogs
   - intake
   - intake-esm>=2023.7.7
-  - intake-stac==0.4.0
-  - intake-xarray==0.6.1
+  # 2025-11-19: intake-stac hasn't been meaninfully updated since 2022-05
+  # - intake-stac==0.4.0
+  # 2025-11-19: intake-xarray 0.6.1 is from 2022-08, and there are newer releases
+  - intake-xarray>=0.6.1
   - gcsfs>=2023.5.0
   - certifi # Root Certificates for validating the trustworthiness of SSL certificates.
 
   # Specific cloud access libraries
   - copernicusmarine # get data from copernicus
   - earthaccess>=0.11.0 # get data from nasa earth access
-  - pydap # OPeNDAP implementation
   - erddapy # connect to erddap servers
   - ecmwflibs # wraps some of European Centre for Medium-Range Weather Forecasts libraries
   - harmony-py
@@ -124,10 +126,11 @@ dependencies:
   # Packages specific to climate and ocean data work
   - esmpy
   - xmip
-  - spectral # pure Python module for processing hyperspectral image data
+  - python-cdo
   - argopy
   - gsw
   - seawater
+  - echopype
   - parcels
   # Package last updated 2024-11, so maybe best not to install it unless truly needed
   # - pyeddytracker
