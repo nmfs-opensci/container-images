@@ -124,16 +124,17 @@ dependencies:
   - jupyterlab-language-pack-pt-br
 
   # Packages specific to climate and ocean data work
-  - esmpy
-  - xmip
-  - python-cdo
   - argopy
-  - gsw
-  - seawater
   - echopype
+  - eofs
+  - esmpy
+  - gsw
+  - oceans
   - parcels
-  # Package last updated 2024-11, so maybe best not to install it unless truly needed
-  # - pyeddytracker
+  - pyco2sys
+  - python-cdo
+  - seawater
+  - xmip
 
   # Desktop tools
   - qgis 
@@ -147,3 +148,5 @@ dependencies:
     - xq # Apply XPath expressions to XML
     - jupyterlab-quarto
     - google-cloud-storage
+    # Last release on 2022-10, but the github repo is being actively updated
+    # - git+https://github.com/AntSimi/py-eddy-tracker.git
