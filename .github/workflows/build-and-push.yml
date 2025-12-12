@@ -15,7 +15,7 @@ on:
       - 'images/echopype/**'
       - 'images/coastwatch/**'
       - 'images/py-rocket-oceanhw-esp/**'
-      - 'images/openscapes/**
+      - 'images/openscapes/**'
       - 'draft_images/coastwatch-qgis/**'
       - 'draft_images/test/**'
 
