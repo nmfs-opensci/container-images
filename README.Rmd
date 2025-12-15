@@ -20,19 +20,24 @@ table_line <- function(i){
 #    desc <- readLines(fil, warn=FALSE)
     desc <- parse_dockerfile(fil)
   }
-  branch <- system(paste0("git show-ref refs/heads/", i, " ignore.stdout = TRUE"))
+  branch <- system(paste0("git show-ref refs/remotes/origin/", i, " ignore.stdout = TRUE"))
   binder_button <- ""
   if(branch == 0) binder_button <- paste0("[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/nmfs-opensci/container-images/", i, ")")
   devfil <- paste0(".devcontainer/",i,"/devcontainer.json")
   devcon_button <- ""
   if(file.exists(devfil)) devcon_button <- paste0("[![Button GCS]](https://codespaces.new/nmfs-opensci/container-images?devcontainer_path=.devcontainer/", i, "/devcontainer.json)")
-  cat("| [", i, "](https://github.com/nmfs-opensci/container-images/pkgs/container/container-images%2F", i, ") <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci/container-images%2F", i,"/size?color=%2344cc11&tag=latest&label=image+size&trim=) <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci%2Fcontainer-images/", i, "/latest_tag?color=%2344cc11&ignore=latest&label=version&trim=) | ", desc, "<br/> <small>ghcr.io/nmfs-opensci/container-images/", i, ":latest</small> | ", devcon_button, " <br/> ", binder_button, " |  [dockerfile](https://github.com/nmfs-opensci/container-images/tree/main/images/", i, "/Dockerfile) <br/> [directory](https://github.com/nmfs-opensci/container-images/tree/main/images/", i, ") |\n", sep="")
+  cat("| [", i, "](https://github.com/nmfs-opensci/container-images/pkgs/container/container-images%2F", i, ")  | ", desc, "<br/> <small>ghcr.io/nmfs-opensci/container-images/", i, ":latest</small> | ", devcon_button, " <br/> ", binder_button, " |  [dockerfile](https://github.com/nmfs-opensci/container-images/tree/main/images/", i, "/Dockerfile) <br/> [directory](https://github.com/nmfs-opensci/container-images/tree/main/images/", i, ") |\n", sep="")
 }
 ```
 
+<!--
+# broken at the moment
+<br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci/container-images%2F", i,"/size?color=%2344cc11&tag=latest&label=image+size&trim=) <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci%2Fcontainer-images/", i, "/latest_tag?color=%2344cc11&ignore=latest&label=version&trim=)
+-->
+
 | Image      | Description  | Open  | info  |
 |-----------|---------------------------|----------------|-----------|
-|   [py-rocket-base](https://github.com/nmfs-opensci/py-rocket-base/pkgs/container/py-rocket-base) <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci/py-rocket-base/size?color=%2344cc11&tag=latest&label=image+size&trim=) <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci/py-rocket-base/latest_tag?color=%2344cc11&ignore=latest&label=version&trim=)     |    Use as the base Python-R image   |   [Documentation](https://nmfs-opensci.github.io/py-rocket-base/)   |   [repo](https://github.com/nmfs-opensci/py-rocket-base)   |
+|   [py-rocket-base](https://github.com/nmfs-opensci/py-rocket-base/pkgs/container/py-rocket-base) <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci/py-rocket-base/size?color=%2344cc11&tag=latest&label=image+size&trim=) <br/> ![](https://ghcr-badge.egpl.dev/nmfs-opensci/py-rocket-base/latest_tag?color=%2344cc11&ignore=latest&label=version&trim=)     |    Use as the base Python-R image <br> <small>ghcr.io/nmfs-opensci/py-rocket-base:2025.04.26</small> |   [Documentation](https://nmfs-opensci.github.io/py-rocket-base/)   |   [repo](https://github.com/nmfs-opensci/py-rocket-base)   |
 ```{r results='asis', echo=FALSE}
 imgs <- c("py-rocket-geospatial-2")
 for(i in imgs) table_line(i)
@@ -113,7 +118,7 @@ If your JupyterHub has this option:
 -   Click on the 'Bring your own image' radio button at bottom
 -   Paste in url to your image (or any other image)
 -   You will find the urls in the right nav bar under 'Packages'
--   Example `ghcr.io/nmfs-opensci/jupyter-base-notebook:latest`
+-   Example `FROM ghcr.io/nmfs-opensci/container-images/py-rocket-geospatial-2:latest`
 
 ## Run with a JupyterHub
 
@@ -149,7 +154,7 @@ Add this to the call:
 ```
 so you call will look like:
 ```
-docker run -p 8888:8888 --cap-add SYS_PTRACE --security-opt seccomp=unconfined ghcr.io/nmfs-opensci/container-images/py-rocket-geospatial:latest
+docker run -p 8888:8888 --cap-add SYS_PTRACE --security-opt seccomp=unconfined ghcr.io/nmfs-opensci/container-images/py-rocket-geospatial-2:latest
 ```
 Note we had trouble getting this to work on an Mac with Apple chips. You can test if it is going to work by running this Python code and seeing if `you can see if `DCAP_VIRTUALIO` is listed:
 ```
@@ -162,7 +167,7 @@ nc.GetMetadata().keys()
 
 Create a file called `Dockerfile` and put in the base of your GitHub repository or in a folder called `binder` or `.binder`. Into that file put the following line (replacing the image url to match your desired image).
 ```
-FROM ghcr.io/nmfs-opensci/container-images/py-rocket-geospatial:latest
+FROM ghcr.io/nmfs-opensci/container-images/py-rocket-geospatial-2:latest
 ```
 
 Then go to <https://mybinder.org> and paste in the url to your GitHub repo or alternatively go to the following url directly:
@@ -172,13 +177,12 @@ https://mybinder.org/v2/gh/<username or org>/<reponame>
 
 ## With Codespaces
 
+In the table, you can click on Launch Codespace to launch an image in GitHub Codespaces. If the launch reports an error, use Cmd/Cntl-Shift-P and select Rebuild. You should see a pop-up to ask you to launch JupyterLab in a browser, but if not open a terminal, click Ports, and click on the browser link for JupyterLab.
+
 See the folders in the `.devcontainer` folder and create a `.devcontainer/devcontainer.json` file in your own repo by copying one of `devcontainer.json` file. They all use the same template with just the top lines changed. Note that the folder `.devcontainer/codespace` is also required. If you change the line that starts up Jupyter Lab (at the bottom of the devcontainer.json file, do not use port 8888 or else RStudio will not launch. 
 
 The Codespaces code is based on: <https://github.com/MichaelAkridge-NOAA/Open-Science-Codespaces>
 
-## GitPod -- like Codespaces
-
-Work in progress. Approach is similar to Codespaces.
 
 ## Run on Google Colab
 
