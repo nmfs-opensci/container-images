@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=CWUtils
+GenericName=CoastWatch Data Analysis Tool
+Icon=cdat
+TryExec=cdat
+Exec=cdat %F
+Terminal=false
+StartupNotify=false
+Categories=Qt;Education;Science;Geography;
+Keywords=map;globe;

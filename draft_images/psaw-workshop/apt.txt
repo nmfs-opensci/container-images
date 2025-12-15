@@ -1,0 +1,6 @@
+# for qgis
+libgl1-mesa-glx
+
+# for zotero
+zotero
+libpci-dev

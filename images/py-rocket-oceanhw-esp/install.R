@@ -14,11 +14,12 @@ if (grepl("^/home", install_lib)) {
 install.packages(c("rstac", "quarto", "aws.s3", "reticulate", "gdalcubes", "rnaturalearth", "rnaturalearthdata"), repos=repo)
 
 # CRAN version is out of date
-devtools::install_github("boettiger-lab/earthdatalogin", upgrade=FALSE)
+devtools::install_github("boettiger-lab/earthdatalogin")
 
 # CoastWatch required
 list.of.packages <- c("parsedate", "reshape2", "gridGraphics", "PBSmapping", "date", "cmocean", "plotdap", "rerddapXtracto")
 install.packages(list.of.packages, repos=repo)
+
 
 # -------  OceanHackWeek R image customizations ------- 
 
@@ -33,7 +34,6 @@ list.of.packages_ohw <- c(
 )
 install.packages(list.of.packages_ohw, repos=repo)
 
-# TODO: Should they include upgrade=FALSE? eeh: yes to prevent the dependencies from upgrading.
 remotes::install_github("hvillalo/echogram", upgrade=FALSE)
 remotes::install_github("hvillalo/periods", upgrade=FALSE)
 remotes::install_github("hvillalo/satin", upgrade=FALSE)

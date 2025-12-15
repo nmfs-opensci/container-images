@@ -71,6 +71,7 @@ runs:
         # Build the Docker image with both tags
         docker build ${{ env.dir }} \
           -f ${{ env.dir }}/Dockerfile \
+          --build-arg GITHUB_PAT=${{ inputs.github_token }} \
           --tag ghcr.io/${{ github.repository_owner }}/${{ env.name }}:${{ env.tag }} \
           --tag ghcr.io/${{ github.repository_owner }}/${{ env.name }}:latest
         

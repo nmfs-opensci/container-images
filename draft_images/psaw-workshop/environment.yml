@@ -1,0 +1,59 @@
+name: psaw-workshop
+# 2024-11-01
+channels:
+  - conda-forge
+  - nodefaults
+
+dependencies:
+  # Core scientific python stack
+  - cython # optimization, C API access
+  - flox # optimization, xarray operations
+  - hypothesis # needed by numpy testing tools
+  - networkx
+  - numba # high-performance numerics
+  - numpy
+  - pandas
+  - scikit-image
+  - scikit-learn
+  - scipy
+  - statsmodels
+  - pymannkendall # non-parametric Mann-Kendall trend analysis
+  - sympy
+  - xarray>=2024.05.0
+
+  # Visualization packages
+  - matplotlib
+  - plotly
+  - seaborn # statistical plotting with matplotlib
+  - cmocean # colormaps for ocean
+
+  # Geospatial data packages
+  - geopandas>=0.14.4
+  - pygmt
+  - rasterio
+  - rioxarray
+  - rasterstats # summarize geospatial raster datasets based on vector geometries
+  - pyresample # resampling geospatial image data
+  - shapely # manipulation and analysis of planar geometric objects
+  - pyproj
+  - datashader
+
+  # Cloud access tools and libraries
+  - gcsfs>=2023.5.0
+  - certifi # Root Certificates for validating the trustworthiness of SSL certificates.
+
+  # Other useful generic python packages
+  - pillow # Python imaging library, useful for many image-related tasks
+  - pytest
+  - pytest-cov
+  - pep8
+  - flake8
+  - tqdm # progress bars, with notebook support
+  - joblib # lightweight pipelining in Python
+  
+  # Quarto is installed via R installation in py-rocket-base, but let's grab a more up-to-date version here.
+  - quarto>=1.7.34
+  - pip:
+    - xq # Apply XPath expressions to XML
+    - jupyterlab-quarto
+    - google-cloud-storage

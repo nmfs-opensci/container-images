@@ -1,15 +1,24 @@
-FROM ghcr.io/nmfs-opensci/py-rocket-base:2025.04.17
+FROM ghcr.io/nmfs-opensci/py-rocket-base:2025.04.26
 
 LABEL org.opencontainers.image.maintainers="eli.holmes@noaa.gov"
 LABEL org.opencontainers.image.author="eli.holmes@noaa.gov"
 LABEL org.opencontainers.image.source=ghcr.io/nmfs-opensci/py-rocket-base
 LABEL org.opencontainers.image.description="asar: run asar stock assessment reports."
 LABEL org.opencontainers.image.licenses=Apache2.0
-LABEL org.opencontainers.image.version=2025.04.17
+LABEL org.opencontainers.image.version=2025.05.23
+
+ARG GITHUB_PAT
+ENV GITHUB_PAT=${GITHUB_PAT}
 
 USER root
+# Needed for pdftools
+RUN apt-get update && apt-get install -y \
+    libpoppler-cpp-dev \
+    libpoppler-private-dev \
+    && rm -rf /var/lib/apt/lists/*
+    
 COPY . /tmp2/
-RUN /pyrocket_scripts/install-r-packages.sh /tmp2/install.R || echo "install-r-package.sh failed" || true
+RUN /pyrocket_scripts/install-r-packages.sh /tmp2/install.R || (echo "ERROR: install-r-packages.sh failed" && exit 1)
 RUN rm -rf /tmp2
 
 RUN echo '{ "ServerApp": { "default_url": "/rstudio" } }' \
@@ -20,10 +29,23 @@ RUN echo '{ "ServerApp": { "default_url": "/rstudio" } }' \
 # Set up TeX Live repo and install required packages
 USER root
 
-# Ensure tlmgr uses system mode
+# Install extra TeX Live packages not included by default
+# Ensure tlmgr uses system mode and full path is available
 RUN unset TEXMFHOME && \
     PATH=/usr/local/texlive/bin/linux:$PATH && \
+    echo "Installing texlive collections and extra packages..." && \
+    tlmgr install collection-latexrecommended collection-latexextra && \
     tlmgr install \
+        pdfcol \
+        tcolorbox \
+        eurosym \
+        upquote \
+        adjustbox \
+        titling \
+        enumitem \
+        ulem \
+        soul \
+        rsfs \
         lualatex-math \
         hyphenat \
         pdfcomment \
@@ -35,7 +57,10 @@ RUN unset TEXMFHOME && \
         wrapfig \
         draftwatermark \
         luatexbase \
-        selnolig
+        selnolig \
+        lastpage \
+        tagpdf \
+        luamml
 
 # Install DejaVu Sans Font       
 RUN apt-get update && \

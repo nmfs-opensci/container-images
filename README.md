@@ -180,7 +180,7 @@ If your JupyterHub has this option:
 - Click on the ‘Bring your own image’ radio button at bottom
 - Paste in url to your image (or any other image)
 - You will find the urls in the right nav bar under ‘Packages’
-- Example `ghcr.io/nmfs-opensci/jupyter-base-notebook:latest`
+- Example `ghcr.io/nmfs-opensci/container-images/py-rocket-geospatial-2:latest`
 
 ## Run with a JupyterHub
 
@@ -219,7 +219,7 @@ Add this to the call:
 
 so you call will look like:
 
-    docker run -p 8888:8888 --cap-add SYS_PTRACE --security-opt seccomp=unconfined ghcr.io/nmfs-opensci/container-images/py-rocket-geospatial:latest
+    docker run -p 8888:8888 --cap-add SYS_PTRACE --security-opt seccomp=unconfined ghcr.io/nmfs-opensci/container-images/py-rocket-geospatial-2:latest
 
 Note we had trouble getting this to work on an Mac with Apple chips. You
 can test if it is going to work by running this Python code and seeing
@@ -236,7 +236,7 @@ repository or in a folder called `binder` or `.binder`. Into that file
 put the following line (replacing the image url to match your desired
 image).
 
-    FROM ghcr.io/nmfs-opensci/container-images/py-rocket-geospatial:latest
+    FROM ghcr.io/nmfs-opensci/container-images/py-rocket-geospatial-2:latest
 
 Then go to <https://mybinder.org> and paste in the url to your GitHub
 repo or alternatively go to the following url directly:
