@@ -40,7 +40,7 @@ for(i in imgs) table_line(i)
 |         |       |      |     |
 |   **Specialized**      |   Images for specific analyses    |      |     |
 ```{r results='asis', echo=FALSE}
-imgs <- c("asar", "py-geospatial", "r-geospatial", "r-geospatial-sdm", "arcgis", "coastwatch", "vast", "aomlomics-jh", "py-rocket-geospatial", "py-rocket-geospatial-qgis")
+imgs <- c("asar", "py-geospatial", "r-geospatial", "r-geospatial-sdm", "arcgis", "coastwatch", "vast", "aomlomics-jh", "py-rocket-geospatial", "py-rocket-geospatial-qgis", "py-rocket-test")
 for(i in imgs) table_line(i)
 ```
 | **Community**   | Images from other Docker Stacks    |       |        |
