@@ -19,7 +19,8 @@ dependencies:
   - statsmodels
   - pymannkendall # non-parametric Mann-Kendall trend analysis
   - sympy
-  - xarray>=2024.05.0
+  - xarray>=2024.10
+  - xarray-datatree
 
   # Visualization packages
   - bokeh
@@ -44,10 +45,10 @@ dependencies:
   - contextily # base maps
 
   # Machine Learning packages
-  - py-xgboost~=2.1.1=cpu*
+  - xgboost
 
   # Geospatial data packages
-  - geopandas>=0.14.4
+  - geopandas
   - pygmt
   - rasterio
   - rioxarray
@@ -58,21 +59,25 @@ dependencies:
   - datashader
 
   # File formats and file management, download, dataset caching
+  - fsspec>=2023.05
   - h5py
   - h5netcdf
   - nco
   - pooch
   - zarr
   - kerchunk
+  - virtualizarr
   - rechunker
   - cftime # for decoding time units and variable values in a netCDF file
   - h5coro # reading HDF5 data stored in S3
   - hdf5plugin # provides HDF5 compression filters
   - lxml # processing XML and HTML
   - pynco # python style access to the NetCDF Operators (NCO)
+  - duckdb
+  - fastparquet
+  - polars
 
   # Cloud access tools and libraries
-  - awscli
   - awscliv2
   - boto3
   - s3fs>=2023.6.0
@@ -82,32 +87,35 @@ dependencies:
   - stackstac
   # Access datasets exposed via intake catalogs
   - intake
+  - intake-xarray
+  - intake-erddap
   - intake-esm>=2023.7.7
   - intake-stac==0.4.0
-  - intake-xarray==0.6.1
   - gcsfs>=2023.5.0
+  - google-cloud-storage
+  - adlfs # Azure blob storage
   - certifi # Root Certificates for validating the trustworthiness of SSL certificates.
 
   # Specific cloud access libraries
-  - copernicusmarine # get data from copernicus
-  - earthaccess>=0.11.0 # get data from nasa earth access
+  - copernicusmarine>=2.1.1 # get data from copernicus
+  - earthaccess>=0.14.0 # get data from nasa earth access
   - pydap # OPeNDAP implementation
   - erddapy # connect to erddap servers
   - ecmwflibs # wraps some of European Centre for Medium-Range Weather Forecasts libraries
   - harmony-py
 
   # Distributed computing
-  - dask>=2023.12.1
+  - dask>=2024.10
   - dask-labextension
   - dask-geopandas
+  - dask-gateway
   - coiled
 
   # Other useful generic python packages
   - pillow # Python imaging library, useful for many image-related tasks
   - pytest
   - pytest-cov
-  - pep8
-  - flake8
+  - ruff
   - tqdm # progress bars, with notebook support
   - joblib # lightweight pipelining in Python
 
@@ -123,8 +131,8 @@ dependencies:
   - ocl-icd-system
   
   # Quarto is installed via R installation in py-rocket-base
-  # - quarto==1.5.57
+  # - quarto==1.7.34
   - pip:
     - xq # Apply XPath expressions to XML
     - jupyterlab-quarto
-    - google-cloud-storage
+    
