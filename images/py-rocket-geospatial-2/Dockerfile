@@ -1,11 +1,11 @@
-FROM ghcr.io/nmfs-opensci/py-rocket-base:2025.04.26
+FROM ghcr.io/nmfs-opensci/py-rocket-base:2025.12.23
 
 LABEL org.opencontainers.image.maintainers="eli.holmes@noaa.gov"
 LABEL org.opencontainers.image.author="eli.holmes@noaa.gov"
 LABEL org.opencontainers.image.source=https://github.com/nmfs-opensci/container-images/py-rocket-2
-LABEL org.opencontainers.image.description="Geospatial Python (3.12) and R (4.4.3) image with Desktop (QGIS, Panoply, CWUtils)"
+LABEL org.opencontainers.image.description="Geospatial Python (3.12) and R (4.5.1) image with Desktop (QGIS, Panoply, CWUtils)"
 LABEL org.opencontainers.image.licenses=Apache2.0
-LABEL org.opencontainers.image.version=2025.04.26
+LABEL org.opencontainers.image.version=2025.12.23
 
 ENV PROJ_LIB=/srv/conda/envs/notebook/share/proj
 
@@ -42,9 +42,9 @@ ENV INSTALL4J ADD VM PARAMS=-Dsun.java2d.uiScale=2.0
 
 # Install panoply
 RUN cd /tmp && \
-  wget --user-agent="Mozilla/5.0" https://www.giss.nasa.gov/tools/panoply/download/PanoplyJ-5.6.0.tgz && \
-  tar -zxf PanoplyJ-5.6.0.tgz && \
-  rm -rf PanoplyJ-5.6.0.tgz
+  wget --user-agent="Mozilla/5.0" https://www.giss.nasa.gov/tools/panoply/download/PanoplyJ-5.8.1.tgz && \
+  tar -zxf PanoplyJ-5.8.1.tgz && \
+  rm -rf PanoplyJ-5.8.1.tgz
 ENV PATH=${PATH}:/tmp/PanoplyJ
 
 # Install tools for working with Google Cloud Buckets
