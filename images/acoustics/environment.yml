@@ -1,0 +1,13 @@
+name: echopype
+channels:
+  - conda-forge
+  - nodefaults
+
+dependencies:
+  - cmocean
+  - echopype
+  
+  - pip:
+    - spheroidalwavefunctions
+    - echosms
+
