@@ -1,9 +1,10 @@
-name: echopype
+name: acoustics
 channels:
   - conda-forge
   - nodefaults
 
 dependencies:
+  - pip
   - pip:
     - spheroidalwavefunctions
     - echosms
