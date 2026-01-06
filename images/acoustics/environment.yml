@@ -4,10 +4,9 @@ channels:
   - nodefaults
 
 dependencies:
-  - cmocean
-  - echopype
-  
   - pip:
     - spheroidalwavefunctions
     - echosms
+    - fastapi[standard]
+    - stream_zip
 
