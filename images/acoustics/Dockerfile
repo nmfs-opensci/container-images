@@ -12,11 +12,13 @@ COPY . /tmp/
 RUN /pyrocket_scripts/install-conda-packages.sh /tmp/environment.yml || (echo "install-conda-packages.sh failed" && exit 1)
 RUN rm -rf /tmp/*
 
+WORKDIR /
 RUN git clone https://github.com/gavinmacaulay/data_store_testing.git && \
-    cd data_store_testing && \
+    cd /data_store_testing && \
     wget https://echosms-datastore.syd1.cdn.digitaloceanspaces.com/echosms_datastore_final.zip && \
     unzip echosms_datastore_final.zip -d echosms_datastore_final && \
-    rm echosms_datastore_final.zip
+    rm echosms_datastore_final.zip && \
+    chown -R ${NB_USER}:staff /data_store_testing
 
 USER ${NB_USER}
 WORKDIR ${HOME}
