@@ -1,5 +1,6 @@
 # for qgis
-libgl1-mesa-glx
+libgl1
+libglx-mesa0
 
 # for zotero
 zotero
