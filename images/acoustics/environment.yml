@@ -4,10 +4,10 @@ channels:
   - nodefaults
 
 dependencies:
+  - pyworms
   - pip
   - pip:
-    - spheroidalwavefunctions
+    - orjson
     - echosms
     - fastapi[standard]
     - stream_zip
-
