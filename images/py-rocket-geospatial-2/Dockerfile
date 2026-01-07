@@ -13,12 +13,12 @@ USER root
 # Install Zotero; must be run before apt since apt install zotero requires this script be run first
 RUN wget -qO- https://raw.githubusercontent.com/retorquere/zotero-deb/master/install.sh | bash
 
-COPY . /tmp2/
-RUN /pyrocket_scripts/install-conda-packages.sh /tmp2/environment.yml || echo "install-conda-packages.sh failed" || true
-RUN /pyrocket_scripts/install-r-packages.sh /tmp2/install.R || echo "install-r-package.sh failed" || true
-RUN /pyrocket_scripts/install-apt-packages.sh /tmp2/apt.txt || echo "install-apt-packages.sh failed" || true
-RUN /pyrocket_scripts/install-desktop.sh /tmp2/Desktop|| echo "setup-desktop.sh failed" || true
-RUN rm -rf /tmp2
+COPY . /tmp/
+RUN /pyrocket_scripts/install-conda-packages.sh /tmp/environment.yml || (echo "install-conda-packages.sh failed" && exit 1)
+RUN /pyrocket_scripts/install-r-packages.sh /tmp/install.R || (echo "install-r-package.sh failed" && exit 1)
+RUN /pyrocket_scripts/install-apt-packages.sh /tmp/apt.txt || (echo "install-apt-packages.sh failed" && exit 1)
+RUN /pyrocket_scripts/install-desktop.sh /tmp/Desktop|| (echo "setup-desktop.sh failed" && exit 1)
+RUN rm -rf /tmp/*
 
 USER root
 # install the geospatial libraries and R spatial; the rocket script are part of py-rocket-base
