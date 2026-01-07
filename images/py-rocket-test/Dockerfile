@@ -14,10 +14,10 @@ USER root
 RUN wget -qO- https://raw.githubusercontent.com/retorquere/zotero-deb/master/install.sh | bash
 
 COPY . /tmp/
-RUN /pyrocket_scripts/install-conda-packages.sh /tmp2/environment.yml || echo "install-conda-packages.sh failed" || true
-RUN /pyrocket_scripts/install-r-packages.sh /tmp2/install.R || echo "install-r-package.sh failed" || true
-RUN /pyrocket_scripts/install-apt-packages.sh /tmp2/apt.txt || echo "install-apt-packages.sh failed" || true
-RUN /pyrocket_scripts/install-desktop.sh /tmp2/Desktop|| echo "setup-desktop.sh failed" || true
+RUN /pyrocket_scripts/install-conda-packages.sh /tmp/environment.yml || echo "install-conda-packages.sh failed" || true
+RUN /pyrocket_scripts/install-r-packages.sh /tmp/install.R || echo "install-r-package.sh failed" || true
+RUN /pyrocket_scripts/install-apt-packages.sh /tmp/apt.txt || echo "install-apt-packages.sh failed" || true
+RUN /pyrocket_scripts/install-desktop.sh /tmp/Desktop|| echo "setup-desktop.sh failed" || true
 RUN rm -rf /tmp/*
 RUN /pyrocket_scripts/install-geospatial-r.sh || (echo "install-geospatial-r.sh failed" >&2 && exit 1)
 
