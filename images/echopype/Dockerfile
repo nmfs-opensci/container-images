@@ -8,9 +8,9 @@ LABEL org.opencontainers.image.licenses=Apache2.0
 
 USER root
 
-COPY . /tmp2/
+COPY . /tmp/
 RUN /pyrocket_scripts/install-conda-packages.sh /tmp2/environment.yml || echo "install-conda-packages.sh failed" || true
-RUN rm -rf /tmp2
+RUN rm -rf /tmp/*
 
 USER ${NB_USER}
 WORKDIR ${HOME}
