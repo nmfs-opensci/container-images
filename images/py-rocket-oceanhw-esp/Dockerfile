@@ -11,11 +11,12 @@ ENV PROJ_LIB=/srv/conda/envs/notebook/share/proj
 
 USER root
 
-COPY . /tmp2/
+# install-conda changes to jovyan as user. If there are any pip installs in the env.yaml, mamba needs write access. /tmp is writeable
+COPY . /tmp/
 RUN /pyrocket_scripts/install-conda-packages.sh /tmp2/environment.yml || echo "install-conda-packages.sh failed" || true
 RUN /pyrocket_scripts/install-apt-packages.sh /tmp2/apt.txt || echo "install-apt-packages.sh failed" || true
 RUN /pyrocket_scripts/install-desktop.sh /tmp2/Desktop|| echo "setup-desktop.sh failed" || true
-RUN rm -rf /tmp2
+RUN rm -rf /tmp/*
 
 USER root
 # install the geospatial libraries and R spatial; the rocket script are part of py-rocket-base
