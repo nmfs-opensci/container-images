@@ -8,9 +8,9 @@ LABEL org.opencontainers.image.licenses=Apache2.0
 
 USER root
 
-COPY . /tmp/acoustics-build/
+COPY . /tmp/
 RUN /pyrocket_scripts/install-conda-packages.sh /tmp/acoustics-build/environment.yml || (echo "install-conda-packages.sh failed" && exit 1)
-RUN rm -rf /tmp/acoustics-build
+RUN rm -rf /tmp/*
 
 RUN git clone https://github.com/gavinmacaulay/data_store_testing.git && \
     cd data_store_testing && \
