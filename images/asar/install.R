@@ -31,7 +31,7 @@ safe_install <- function(pkg) {
 
 # Install GitHub packages
 safe_install("r4ss/r4ss")
-safe_install("nmfs-ost/nmfspalette")
+# safe_install("nmfs-ost/nmfspalette")
 safe_install("nmfs-ost/asar")
 safe_install("nmfs-ost/stockplotr")
 
