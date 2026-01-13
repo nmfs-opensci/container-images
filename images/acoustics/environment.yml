@@ -11,3 +11,5 @@ dependencies:
     - echosms
     - fastapi[standard]
     - stream_zip
+    - rtoml
+    - jsonschema_rs
