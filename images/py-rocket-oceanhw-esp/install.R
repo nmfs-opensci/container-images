@@ -1,9 +1,9 @@
 #! /usr/local/bin/Rscript
 # install R dependencies
 
-# to match rocker/verse:4.4 used in py-rocker-base
+# to match rocker/verse:4.5 used in py-rocket-base
 # look up the CRAN env set in the Dockerfile used
-repo <- "https://p3m.dev/cran/__linux__/jammy/2025-04-10"
+repo <- "https://p3m.dev/cran/__linux__/noble/2025-10-30"
 
 # Check if the first library path is inside /home
 install_lib <- .libPaths()[1]
