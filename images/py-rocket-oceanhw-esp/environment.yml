@@ -146,7 +146,7 @@ dependencies:
   # - quarto==1.5.57
   - pip:
     - xq # Apply XPath expressions to XML
-    - jupyterlab-quarto
+    # - jupyterlab-quarto # already in py-rocket-base
     - google-cloud-storage
     # Last release on 2022-10, but the github repo is being actively updated
     # - git+https://github.com/AntSimi/py-eddy-tracker.git
