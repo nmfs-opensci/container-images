@@ -134,5 +134,4 @@ dependencies:
   # - quarto==1.7.34
   - pip:
     - xq # Apply XPath expressions to XML
-    - jupyterlab-quarto
     
