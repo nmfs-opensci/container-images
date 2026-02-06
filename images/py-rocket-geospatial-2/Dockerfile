@@ -1,11 +1,11 @@
-FROM ghcr.io/nmfs-opensci/py-rocket-base:2026.01.25
+FROM ghcr.io/nmfs-opensci/py-rocket-base:2026.02.05
 
 LABEL org.opencontainers.image.maintainers="eli.holmes@noaa.gov"
 LABEL org.opencontainers.image.author="eli.holmes@noaa.gov"
 LABEL org.opencontainers.image.source=https://github.com/nmfs-opensci/container-images/py-rocket-2
 LABEL org.opencontainers.image.description="Geospatial Python (3.12) and R (4.5.1) image with Desktop (QGIS, Panoply, CWUtils)"
 LABEL org.opencontainers.image.licenses=Apache2.0
-LABEL org.opencontainers.image.version=2026.01.25
+LABEL org.opencontainers.image.version=2026.02.05
 
 ENV PROJ_LIB=/srv/conda/envs/notebook/share/proj
 
@@ -21,7 +21,7 @@ RUN /pyrocket_scripts/install-desktop.sh /tmp/Desktop|| (echo "setup-desktop.sh 
 RUN rm -rf /tmp/*
 
 USER root
-# install the geospatial libraries and R spatial; the rocket script are part of py-rocket-base
+# install the geospatial libraries and R spatial; the rocker scripts are part of py-rocket-base
 # need to ensure that it installs to the site-library (that user can control) and with a clean PATH
 # Ensure packages go to site-library whether installed via R, Rscript, or littler (r)
 RUN echo '.libPaths("/usr/local/lib/R/site-library")' > /etc/littler.r && \
@@ -42,9 +42,9 @@ ENV INSTALL4J ADD VM PARAMS=-Dsun.java2d.uiScale=2.0
 
 # Install panoply
 RUN cd /tmp && \
-  wget --user-agent="Mozilla/5.0" https://www.giss.nasa.gov/tools/panoply/download/PanoplyJ-5.8.1.tgz && \
-  tar -zxf PanoplyJ-5.8.1.tgz && \
-  rm -rf PanoplyJ-5.8.1.tgz
+  wget --user-agent="Mozilla/5.0" https://www.giss.nasa.gov/tools/panoply/download/PanoplyJ-5.9.0.tgz && \
+  tar -zxf PanoplyJ-5.9.0.tgz && \
+  rm -rf PanoplyJ-5.9.0.tgz
 ENV PATH=${PATH}:/tmp/PanoplyJ
 
 # Install tools for working with Google Cloud Buckets
