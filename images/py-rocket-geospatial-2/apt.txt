@@ -1,7 +1,3 @@
 # for qgis. unbuntu 24.04 removed libgl1-mesa-glx
 libgl1
 libglx-mesa0
-
-# for zotero
-zotero
-libpci-dev
