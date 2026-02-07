@@ -1,0 +1,107 @@
+name: update conda lockfile (py-rocket-geospatial-2)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - images/py-rocket-geospatial-2/environment.yml
+      - images/py-rocket-geospatial-2/Dockerfile
+      - .github/workflows/update-conda-lock-geospatial-2.yaml
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: install conda-lock with micromamba
+        uses: mamba-org/setup-micromamba@main
+        with:
+          environment-name: locker
+          create-args: conda-lock
+          cache-environment: true
+
+      - name: extract base image from Dockerfile
+        shell: bash
+        run: |
+          set -euo pipefail
+          DOCKERFILE="images/py-rocket-geospatial-2/Dockerfile"
+
+          base_image=$(grep -E '^FROM[[:space:]]+ghcr\.io/nmfs-opensci/py-rocket-base' "$DOCKERFILE" | head -n 1 | awk '{print $2}')
+          if [[ -z "${base_image}" ]]; then
+            echo "ERROR: could not find base image FROM line in $DOCKERFILE"
+            exit 1
+          fi
+
+          echo "base_image=${base_image}" >> "$GITHUB_ENV"
+          echo "Using base_image=${base_image}"
+
+      - name: login to ghcr (to pull base image)
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: pull base image and extract /srv/repo/environment.yml
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          docker pull "${base_image}"
+
+          cid=$(docker create "${base_image}")
+          # ensure cleanup
+          trap 'docker rm -f "$cid" >/dev/null 2>&1 || true' EXIT
+
+          docker cp "${cid}:/srv/repo/environment.yml" /tmp/py-rocket-base.environment.yml
+
+          echo "Extracted base environment.yml (first 25 lines):"
+          head -n 25 /tmp/py-rocket-base.environment.yml
+
+          test -s /tmp/py-rocket-base.environment.yml
+
+      - name: run conda-lock (base + geospatial) to explicit linux-64 lock
+        shell: bash -el {0}
+        run: |
+          set -euo pipefail
+
+          conda-lock lock --mamba \
+            --file /tmp/py-rocket-base.environment.yml \
+            --file images/py-rocket-geospatial-2/environment.yml \
+            --platform linux-64 \
+            --kind explicit \
+            --filename-template conda-{platform}.lock
+
+          test -s conda-linux-64.lock
+          echo "Generated conda-linux-64.lock"
+          head -n 10 conda-linux-64.lock
+
+      - name: move lockfile into image directory
+        shell: bash
+        run: |
+          set -euo pipefail
+          mv -f conda-linux-64.lock images/py-rocket-geospatial-2/conda-linux-64.lock
+          ls -lh images/py-rocket-geospatial-2/conda-linux-64.lock
+
+      - name: commit changes to tracked files
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          git add images/py-rocket-geospatial-2/conda-linux-64.lock
+
+          if [[ $(git ls-files --modified) ]]; then
+            git config --global user.name 'actions-bot'
+            git config --global user.email '58130806+actions-bot@users.noreply.github.com'
+            git commit --all --message "[bot] update conda lock (py-rocket-geospatial-2)"
+            git push
+          fi
