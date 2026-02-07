@@ -74,7 +74,13 @@ jobs:
         run: |
           set -euo pipefail
 
-          conda-lock lock --mamba \
+          micromamba --version
+          conda-lock --version
+
+          conda-lock lock \
+            --conda micromamba \
+            --micromamba \
+            --no-mamba \
             --file /tmp/py-rocket-base.environment.yml \
             --file images/py-rocket-geospatial-2/environment.yml \
             --platform linux-64 \
