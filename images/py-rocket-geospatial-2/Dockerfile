@@ -1,4 +1,4 @@
-FROM ghcr.io/nmfs-opensci/py-rocket-base:2026.02.07
+FROM ghcr.io/nmfs-opensci/py-rocket-base:810f226
 
 LABEL org.opencontainers.image.maintainers="eli.holmes@noaa.gov"
 LABEL org.opencontainers.image.author="eli.holmes@noaa.gov"
@@ -22,7 +22,6 @@ RUN /pyrocket_scripts/install-conda-packages.sh /tmp/env-viz.yml || (echo "insta
 RUN /pyrocket_scripts/install-conda-packages.sh /tmp/env-qgis.yml || (echo "install env-qgis failed" && exit 1)
 RUN /pyrocket_scripts/install-apt-packages.sh /tmp/apt.txt || (echo "install-apt-packages.sh failed" && exit 1)
 RUN /pyrocket_scripts/install-desktop.sh /tmp/Desktop|| (echo "setup-desktop.sh failed" && exit 1)
-RUN rm -rf /tmp/*
 
 USER root
 # install the geospatial libraries and R spatial; the rocket script are part of py-rocket-base
@@ -38,7 +37,6 @@ RUN echo '.libPaths("/usr/local/lib/R/site-library")' > /etc/littler.r && \
 # Any packages that have gdal dependency should be install after install_geospatial.sh is run
 COPY . /tmp/
 RUN /pyrocket_scripts/install-r-packages.sh /tmp/install.R || (echo "install-r-package.sh failed" && exit 1)
-RUN rm -rf /tmp
 
 # Install cwutils
 RUN cd /tmp && \
@@ -58,6 +56,9 @@ ENV PATH=${PATH}:/tmp/PanoplyJ
 
 # Install tools for working with Google Cloud Buckets
 RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg && apt-get update -y && apt-get install google-cloud-cli -y
+
+# Clear out files put in /tmp
+RUN rm -rf /tmp/*
 
 USER ${NB_USER}
 WORKDIR ${HOME}
