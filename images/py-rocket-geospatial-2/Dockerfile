@@ -20,13 +20,12 @@ RUN /pyrocket_scripts/install-conda-packages.sh /tmp/env-core2.yml || (echo "ins
 RUN /pyrocket_scripts/install-conda-packages.sh /tmp/env-geo.yml || (echo "install env-geo failed" && exit 1)
 RUN /pyrocket_scripts/install-conda-packages.sh /tmp/env-viz.yml || (echo "install env-viz failed" && exit 1)
 RUN /pyrocket_scripts/install-conda-packages.sh /tmp/env-qgis.yml || (echo "install env-qgis failed" && exit 1)
-RUN /pyrocket_scripts/install-r-packages.sh /tmp/install.R || (echo "install-r-package.sh failed" && exit 1)
 RUN /pyrocket_scripts/install-apt-packages.sh /tmp/apt.txt || (echo "install-apt-packages.sh failed" && exit 1)
 RUN /pyrocket_scripts/install-desktop.sh /tmp/Desktop|| (echo "setup-desktop.sh failed" && exit 1)
 RUN rm -rf /tmp/*
 
 USER root
-# install the geospatial libraries and R spatial; the rocker scripts are part of py-rocket-base
+# install the geospatial libraries and R spatial; the rocket script are part of py-rocket-base
 # need to ensure that it installs to the site-library (that user can control) and with a clean PATH
 # Ensure packages go to site-library whether installed via R, Rscript, or littler (r)
 RUN echo '.libPaths("/usr/local/lib/R/site-library")' > /etc/littler.r && \
@@ -35,7 +34,12 @@ RUN echo '.libPaths("/usr/local/lib/R/site-library")' > /etc/littler.r && \
     PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
     /rocker_scripts/install_geospatial.sh && \
     rm /etc/littler.r /tmp/rprofile.site
-  
+
+# Any packages that have gdal dependency should be install after install_geospatial.sh is run
+COPY . /tmp/
+RUN /pyrocket_scripts/install-r-packages.sh /tmp/install.R || (echo "install-r-package.sh failed" && exit 1)
+RUN rm -rf /tmp
+
 # Install cwutils
 RUN cd /tmp && \
     wget https://www.star.nesdis.noaa.gov/socd/coastwatch/cwf/cwutils-4_0_0_198-linux-x86_64.tar.gz && \
