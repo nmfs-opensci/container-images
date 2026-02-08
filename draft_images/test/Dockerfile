@@ -22,7 +22,7 @@ RUN echo '.libPaths("/usr/local/lib/R/site-library")' > /etc/littler.r && \
 
 # Any packages that have gdal dependency should be install after install_geospatial.sh is run
 COPY . /tmp/
-RUN /pyrocket_scripts/install-r-packages.sh /tmp2/install.R || echo "install-r-package.sh failed" || true
+RUN /pyrocket_scripts/install-r-packages.sh /tmp/install.R || echo "install-r-package.sh failed" || true
 RUN rm -rf /tmp
   
 USER ${NB_USER}
