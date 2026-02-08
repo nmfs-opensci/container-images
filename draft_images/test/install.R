@@ -5,6 +5,9 @@
 # look up the CRAN env set in the Dockerfile used
 repo <- "https://p3m.dev/cran/__linux__/noble/2025-10-30"
 
+# make sure binaries used
+options(pkgType = "binary")
+
 # Check if the first library path is inside /home
 install_lib <- .libPaths()[1]
 if (grepl("^/home", install_lib)) {
@@ -14,7 +17,6 @@ if (grepl("^/home", install_lib)) {
 install.packages(c("rstac", "quarto", "aws.s3", "reticulate", "gdalcubes", "rnaturalearth"), repos=repo)
 install.packages("rnaturalearthdata", repos=repo)
 
-remotes::install_github('r-tmap/tmap', upgrade=FALSE)
 # CRAN version is out of date
 devtools::install_github("boettiger-lab/earthdatalogin")
 
