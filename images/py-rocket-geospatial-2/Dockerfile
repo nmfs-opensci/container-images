@@ -14,7 +14,12 @@ USER root
 RUN wget -qO- https://raw.githubusercontent.com/retorquere/zotero-deb/master/install.sh | bash
 
 COPY . /tmp/
-RUN /pyrocket_scripts/install-conda-packages.sh /tmp/environment.yml || (echo "install-conda-packages.sh failed" && exit 1)
+# Update conda env sequentially to prevent hairy solve
+RUN /pyrocket_scripts/install-conda-packages.sh /tmp/env-core1.yml || (echo "install-conda-packages.sh failed" && exit 1)
+RUN /pyrocket_scripts/install-conda-packages.sh /tmp/env-core2.yml || (echo "install-conda-packages.sh failed" && exit 1)
+RUN /pyrocket_scripts/install-conda-packages.sh /tmp/env-geo.yml || (echo "install-conda-packages.sh failed" && exit 1)
+RUN /pyrocket_scripts/install-conda-packages.sh /tmp/env-viz.yml || (echo "install-conda-packages.sh failed" && exit 1)
+RUN /pyrocket_scripts/install-conda-packages.sh /tmp/env-qgis.yml || (echo "install-conda-packages.sh failed" && exit 1)
 RUN /pyrocket_scripts/install-r-packages.sh /tmp/install.R || (echo "install-r-package.sh failed" && exit 1)
 RUN /pyrocket_scripts/install-apt-packages.sh /tmp/apt.txt || (echo "install-apt-packages.sh failed" && exit 1)
 RUN /pyrocket_scripts/install-desktop.sh /tmp/Desktop|| (echo "setup-desktop.sh failed" && exit 1)
