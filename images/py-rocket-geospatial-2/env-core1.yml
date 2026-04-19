@@ -1,0 +1,36 @@
+name: py-rocket-geospatial
+channels:
+  - conda-forge
+  - nodefaults
+
+dependencies:
+  # Core scientific python stack
+  - cython # optimization, C API access
+  - flox # optimization, xarray operations
+  - hypothesis # needed by numpy testing tools
+  - networkx
+  - numba # high-performance numerics
+  - numpy
+  - pandas
+  - scikit-image
+  - scikit-learn
+  - scipy
+  - statsmodels
+  - pymannkendall # non-parametric Mann-Kendall trend analysis
+  - sympy
+  - xarray>=2024.10
+  - xarray-datatree
+
+  # Machine Learning packages
+  - py-xgboost~=2.1.1=cpu*
+
+  # Distributed computing
+  # dask and dask-gateway come in via py-rocket-base via pangeo-notebook-feedstock
+  #- dask
+  #- dask-labextension
+  #- dask-gateway
+  - coiled
+  - dask-geopandas
+
+
+

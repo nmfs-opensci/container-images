@@ -1,0 +1,9 @@
+name: py-rocket-geospatial
+channels:
+  - conda-forge
+  - nodefaults
+
+dependencies:
+  # Desktop tools
+  - qgis~=3.40.0
+  - pyopencl

@@ -1,0 +1,24 @@
+name: py-rocket-geospatial
+channels:
+  - conda-forge
+  - nodefaults
+
+dependencies:
+  # Geospatial data packages
+  - geopandas
+  - pygmt
+  - rasterio
+  - rioxarray
+  - rasterstats # summarize geospatial raster datasets based on vector geometries
+  - pyresample # resampling geospatial image data
+  - shapely # manipulation and analysis of planar geometric objects
+  - pyproj
+  - datashader
+
+  # Mapping helpers and basemaps
+  - contextily
+  - regionmask
+  - cartopy
+
+  # utils
+  - esmpy # regridding utility

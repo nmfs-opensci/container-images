@@ -1,0 +1,30 @@
+name: py-rocket-geospatial
+channels:
+  - conda-forge
+  - nodefaults
+
+dependencies:
+  # Visualization packages
+  - bokeh
+  - cartopy # geospatial plotting with matplotlib
+  - geemap
+  - geoviews
+  - hvplot
+  - ipyleaflet
+  - ipympl # This enables matplotlib interaction with jupyter widgets
+  - leafmap
+  - lonboard
+  - matplotlib
+  - plotly
+  - seaborn # statistical plotting with matplotlib
+  - cmocean # colormaps for ocean
+  - imageio # helps writing image files
+  - apng # create animation from multiple png
+  - holoviews
+  - graphviz
+  - bqplot # 2-D visualization system
+  - regionmask # create masks of (geo)spatial regions
+  - contextily # base maps
+  - spectral # functions for hyperspectral imagery
+
+

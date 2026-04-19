@@ -13,3 +13,5 @@ dependencies:
     - stream_zip
     - jmespath
     - tomli_w
+    - rtoml
+    - jsonschema_rs
