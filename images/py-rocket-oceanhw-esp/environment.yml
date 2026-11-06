@@ -1,5 +1,5 @@
 name: py-rocket-oceanhackweek 
-# 2025-11-19
+# 2026-11-4
 channels:
   - conda-forge
   - nodefaults
@@ -8,19 +8,16 @@ dependencies:
   # Core scientific python stack
   - cython # optimization, C API access
   - flox # optimization, xarray operations
-  - hypothesis # needed by numpy testing tools
   - networkx
   - numba # high-performance numerics
   - numbagg
   - numpy
-  - opt_einsum
   - pandas
   - scikit-image
   - scikit-learn
   - scipy
   - statsmodels
-  - pymannkendall # non-parametric Mann-Kendall trend analysis
-  - xarray>=2024.05.0
+  - xarray
   - cf_xarray
 
   # Visualization packages
@@ -32,7 +29,6 @@ dependencies:
   - ipyleaflet
   - ipympl # This enables matplotlib interaction with jupyter widgets
   - leafmap
-  - lonboard
   - matplotlib
   - basemap
   - basemap-data
@@ -47,11 +43,8 @@ dependencies:
   - regionmask # create masks of (geo)spatial regions
   - contextily # base maps
 
-  # Machine Learning packages
-  - py-xgboost~=2.1.1=cpu*
-
   # Geospatial data packages
-  - geopandas>=0.14.4
+  - geopandas
   - rasterio
   - rioxarray
   - rasterstats # summarize geospatial raster datasets based on vector geometries
@@ -66,8 +59,10 @@ dependencies:
   - nco
   - pynco # python style access to the NetCDF Operators (NCO)
   - pooch
-  - zarr<3
+  # 2026-11-3: Remove zarr<3 pinning
+  - zarr
   - kerchunk
+  # 2026-11-3: conda package last updated 2025-05
   - rechunker
   - cftime # for decoding time units and variable values in a netCDF file
   - h5coro # reading HDF5 data stored in S3
@@ -77,46 +72,36 @@ dependencies:
 
   # Cloud access tools and libraries
   - awscli
-  - awscliv2
   - boto3
-  - s3fs>=2023.6.0
+  - s3fs
   # handle login and similar details for accessing earthdata protected data
   # Access datasets exposed via STAC
   - pystac-client
-  - stackstac
   # Access datasets exposed via intake catalogs
   - intake
-  - intake-esm>=2023.7.7
-  # 2025-11-19: intake-stac hasn't been meaninfully updated since 2022-05
-  # - intake-stac==0.4.0
-  # 2025-11-19: intake-xarray 0.6.1 is from 2022-08, and there are newer releases
-  - intake-xarray>=0.6.1
-  - gcsfs>=2023.5.0
+  - gcsfs
+  - google-cloud-storage
   - certifi # Root Certificates for validating the trustworthiness of SSL certificates.
 
   # Specific cloud access libraries
   - copernicusmarine # get data from copernicus
-  - earthaccess>=0.11.0 # get data from nasa earth access
+  - earthaccess # get data from nasa earth access
   - erddapy # connect to erddap servers
-  - ecmwflibs # wraps some of European Centre for Medium-Range Weather Forecasts libraries
   - harmony-py
 
   # Distributed computing
-  - dask>=2023.12.1
-  - dask-labextension
+  # 2026-11-3: dask is probably unnecessary, since it must be present in the pangeo-notebook package
+  - dask
+  # 2026-11-3: conda package last updated 2025-06
   - dask-geopandas
 
   # Other useful generic python packages
-  - pip
-  - pillow # Python imaging library, useful for many image-related tasks
-  - pytest
-  - pytest-cov
-  - pep8
-  - flake8
-  - tqdm # progress bars, with notebook support
   - joblib # lightweight pipelining in Python
   - papermill
+  - pillow # Python imaging library, useful for many image-related tasks
   - tldr
+  - tqdm # progress bars, with notebook support
+  - xq # Apply XPath expressions to XML.
   - zip # installs zip terminal command; not a Python package per se?
 
   # Jupyter Lab language packs for Spanish and Portuguese
@@ -126,27 +111,17 @@ dependencies:
   # Packages specific to climate and ocean data work
   - argopy
   - echopype
-  - eofs
   - esmpy
   - gsw
   - oceans
   - parcels
-  - pyco2sys
   - python-cdo
   - seawater
-  - xmip
 
   # Desktop tools
   - qgis 
   - pyopencl  # Maybe needed for qgis? https://github.com/conda-forge/qgis-feedstock/issues/263
-  # Resolves warning "No ICDs were found": https://github.com/CryoInTheCloud/hub-image/issues/50
-  - ocl-icd-system
   
-  # Quarto is installed via R installation in py-rocket-base
-  # - quarto==1.5.57
-  - pip:
-    - xq # Apply XPath expressions to XML
-    # - jupyterlab-quarto # already in py-rocket-base
-    - google-cloud-storage
+  # - pip:
     # Last release on 2022-10, but the github repo is being actively updated
     # - git+https://github.com/AntSimi/py-eddy-tracker.git

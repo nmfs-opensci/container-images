@@ -1,11 +1,11 @@
-FROM ghcr.io/nmfs-opensci/py-rocket-base:2025.12.22
+FROM ghcr.io/nmfs-opensci/py-rocket-base:2026.02.12
 
 LABEL org.opencontainers.image.maintainers="emiliom@uw.edu"
 LABEL org.opencontainers.image.author="eli.holmes@noaa.gov, emiliom@uw.edu"
 LABEL org.opencontainers.image.source=https://github.com/nmfs-opensci/container-images/py-rocket-2
-LABEL org.opencontainers.image.description="OceanHackWeek-en-Espan-ol Geospatial Python (3.12) and R (4.4.3) image with Desktop (QGIS, Panoply)"
+LABEL org.opencontainers.image.description="OceanHackWeek-en-Espan-ol Geospatial Python (3.11) and R (4.5.1) image with Desktop (QGIS, Panoply)"
 LABEL org.opencontainers.image.licenses=Apache2.0
-LABEL org.opencontainers.image.version=2026.01.13
+LABEL org.opencontainers.image.version=2026.11.05
 
 ENV PROJ_LIB=/srv/conda/envs/notebook/share/proj
 
@@ -14,6 +14,8 @@ USER root
 # install-conda changes to jovyan as user. If there are any pip installs in the env.yaml, mamba needs write access. /tmp is writeable
 COPY . /tmp/
 RUN /pyrocket_scripts/install-conda-packages.sh /tmp/environment.yml || echo "install-conda-packages.sh failed" || true
+
+# Install apt packages and desktop components
 RUN /pyrocket_scripts/install-apt-packages.sh /tmp/apt.txt || echo "install-apt-packages.sh failed" || true
 RUN /pyrocket_scripts/install-desktop.sh /tmp/Desktop|| echo "setup-desktop.sh failed" || true
 RUN rm -rf /tmp/*
@@ -29,27 +31,33 @@ RUN echo '.libPaths("/usr/local/lib/R/site-library")' > /etc/littler.r && \
     /rocker_scripts/install_geospatial.sh && \
     rm /etc/littler.r /tmp/rprofile.site
 
-
 COPY . /tmp/
 RUN /pyrocket_scripts/install-r-packages.sh /tmp/install.R || echo "install-r-package.sh failed" || true
 RUN rm -rf /tmp/*
 
 
-# Install panoply
+# Install Panoply
+# 11/5/2026: Uploaded latest Panoply tgz (5.10.3) to Emilio's UW website, temporarily, as a stopgap
+#   www.giss.nasa.gov/tools/panoply/download/ is unstable and often yields an error
 # 11/6/2025 16:00 PST
 # 0.336 Connecting to www.giss.nasa.gov (www.giss.nasa.gov)|129.164.141.233|:443... failed: Connection refused.
 # 0.428 Connecting to www.giss.nasa.gov (www.giss.nasa.gov)|2001:4d0:2310:151::233|:443... failed: Network is unreachable.
-# 11/8/2025: Uploaded latest Panoply tgz to Emilio's UW website, temporarily, as a stopgap
-ENV PANOPLY_VERSION=5.8.1
+ENV PANOPLY_VERSION=5.10.3
+ENV PANOPLY_DOWNLOAD_DIR_URL=http://staff.washington.edu/emiliom/out
+# ENV PANOPLY_DOWNLOAD_DIR_URL=https://www.giss.nasa.gov/tools/panoply/download
 RUN cd /tmp && \
-  wget --user-agent="Mozilla/5.0" https://www.giss.nasa.gov/tools/panoply/download/PanoplyJ-${PANOPLY_VERSION}.tgz && \
-  # wget --user-agent="Mozilla/5.0" http://staff.washington.edu/emiliom/out/PanoplyJ-${PANOPLY_VERSION}.tgz && \
+  wget --user-agent="Mozilla/5.0" ${PANOPLY_DOWNLOAD_DIR_URL}/PanoplyJ-${PANOPLY_VERSION}.tgz && \
   tar -zxf PanoplyJ-${PANOPLY_VERSION}.tgz && \
   rm -rf PanoplyJ-${PANOPLY_VERSION}.tgz
 ENV PATH=${PATH}:/tmp/PanoplyJ
 
 # Install tools for working with Google Cloud Buckets
 RUN echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list && curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg && apt-get update -y && apt-get install google-cloud-cli -y
+
+# Install opencode.ai
+RUN cd /tmp && \
+  curl -fsSL https://opencode.ai/v2/install | bash || echo "opencod.ai install failed" || true
+
 
 USER ${NB_USER}
 WORKDIR ${HOME}
