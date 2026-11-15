@@ -59,8 +59,8 @@ RUN cd /tmp && \
   wget --user-agent="Mozilla/5.0" https://opencode.ai/update/api/latest/cli/opencode/opencode-linux-x64.tar.gz && \
   tar -zxf opencode-linux-x64.tar.gz && \
   rm -rf opencode-linux-x64.tar.gz && \
-  mkdir /tmp/opencode && \
-  mv opencode /tmp/opencode/opencode
+  mkdir /tmp/opencodeai && \
+  mv opencode /tmp/opencodeai/
 ENV PATH=${PATH}:/tmp/opencode
 # RUN cd /tmp && \
 #   curl -fsSL https://opencode.ai/v2/install | bash || echo "opencod.ai install failed" || true
