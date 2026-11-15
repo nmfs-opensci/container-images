@@ -23,6 +23,7 @@ install.packages(list.of.packages, repos=repo)
 
 # -------  OceanHackWeek R image customizations ------- 
 
+# CRAN packages
 # TODO: Group into high-level (eg, sfnetworks, oce, robis) vs low-level and narrow (eg, akima, mda)
 list.of.packages_ohw <- c(
     "plot.matrix", "isdparser", "geonames", "readHAC", 
@@ -30,12 +31,22 @@ list.of.packages_ohw <- c(
     "akima", "ape", "biomod2", "caret", "caTools", "CircStats", "corrplot", "cowplot", 
     "dismo", "doParallel", "earth", "fields", "forecast", "ggspatial", "glmnet", "hexbin",
     "kableExtra", "latticeExtra", "lmtest", "mapplots", "marmap", "matrixStats", "mda", "metR", 
-    "palmerpenguins", "plotly", "rasterVis", "robis", "rosm", "tseries", "tsibble", "udunits2", "urca", "vioplot"
+    "palmerpenguins", "plotly", "rasterVis", "robis", "rosm", "tseries", "tsibble", "udunits2", "urca", "vioplot",
+    # For DataGFW
+    "ggthemes",
+    # For Stable Isotopes
+    "MixSIAR"
 )
 install.packages(list.of.packages_ohw, repos=repo)
+
+# GitHub packages
 
 remotes::install_github("hvillalo/echogram", upgrade=FALSE)
 remotes::install_github("hvillalo/periods", upgrade=FALSE)
 remotes::install_github("hvillalo/satin", upgrade=FALSE)
 remotes::install_github("hadley/emo", upgrade=FALSE)
 remotes::install_github("JorGarMol/VoCC", upgrade=FALSE)
+# For DataGFW
+remotes::install_github("GlobalFishingWatch/gfwr", upgrade=FALSE)
+# For Stable Isotopes
+devtools::install_github("clquezada/tRophicPosition", upgrade=FALSE)
