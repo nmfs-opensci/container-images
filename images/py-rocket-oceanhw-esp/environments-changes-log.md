@@ -6,11 +6,11 @@
 
 ### Removed unnecessary (old) `>=` pinning
 
-dask, earthaccess, gcsfs, geopandas, s3fs, xarray, 
+2026-11-4. dask, earthaccess, gcsfs, geopandas, s3fs, xarray, 
 
 ### Removed `<` pinning, may need testing
 
-zarr<3,
+2026-11-4. zarr<3
 
 ### Removed packages
 
@@ -49,6 +49,16 @@ zarr<3,
 - xmip # Remove, conda package last updated 2024-01
 ```
 
+
+## R
+
+### Packages added
+
+2026-11-14. ggthemes, GlobalFishingWatch/gfwr, MixSIAR, clquezada/tRophicPosition
+
+
 ## Other (not Python or R)
+
+2026-11-14. Chaned opencode.ai installation to .tar.gz
 
 2026-11-05. Added opencode.ai terminal program. Updated Panoply to the latest version, and to be sourced from Emilio's website because the NASA GISS website continues to be unreliable
