@@ -35,7 +35,7 @@ list.of.packages_ohw <- c(
     # For DataGFW
     "ggthemes",
     # For Stable Isotopes
-    "MixSIAR"
+    "ggpubr", "MCMCvis", "MixSIAR"
 )
 install.packages(list.of.packages_ohw, repos=repo)
 

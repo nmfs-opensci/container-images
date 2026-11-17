@@ -1,3 +1,4 @@
 # for qgis
 libgl1
 libglx-mesa0
+jags
