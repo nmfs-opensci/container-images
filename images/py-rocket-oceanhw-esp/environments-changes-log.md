@@ -54,11 +54,12 @@
 
 ### Packages added
 
-2026-11-14. ggthemes, GlobalFishingWatch/gfwr, MixSIAR, clquezada/tRophicPosition
+- 2026-11-16. ggpubr, MCMCvis
+- 2026-11-14. ggthemes, GlobalFishingWatch/gfwr, MixSIAR, clquezada/tRophicPosition
 
 
 ## Other (not Python or R)
 
-2026-11-14. Chaned opencode.ai installation to .tar.gz
-
-2026-11-05. Added opencode.ai terminal program. Updated Panoply to the latest version, and to be sourced from Emilio's website because the NASA GISS website continues to be unreliable
+- 2026-11-16. JAGS 4.3 apt package, to handle installation problem in rjags R package and tRophicPosition
+- 2026-11-14. Changed opencode.ai installation to .tar.gz
+- 2026-11-05. Added opencode.ai terminal program. Updated Panoply to the latest version, and to be sourced from Emilio's website because the NASA GISS website continues to be unreliable
