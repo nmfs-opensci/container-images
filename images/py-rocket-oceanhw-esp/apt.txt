@@ -1,4 +1,5 @@
 # for qgis
 libgl1
 libglx-mesa0
+# JAGS 4.3 for the R package rjags
 jags

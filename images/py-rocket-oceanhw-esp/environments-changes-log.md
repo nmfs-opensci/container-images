@@ -2,7 +2,8 @@
 
 ## Python
 
-2026-11-4. Removed or unpinned several packages in `environment.yml`. Also moved `xq` and `google-cloud-storage` from pip to conda installs
+- 2026-11-18. Added `eofs` back. It was used in a OHWe25 hackaton tutorial, and in a OHWe26 project
+- 2026-11-4. Removed or unpinned several packages in `environment.yml`. Also moved `xq` and `google-cloud-storage` from pip to conda installs
 
 ### Removed unnecessary (old) `>=` pinning
 

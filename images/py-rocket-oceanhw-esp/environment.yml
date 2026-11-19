@@ -111,6 +111,7 @@ dependencies:
   # Packages specific to climate and ocean data work
   - argopy
   - echopype
+  - eofs
   - esmpy
   - gsw
   - oceans
